@@ -17,7 +17,7 @@ void Player::Init()
 	//SpriteRender-------------------------------------------------
 	this->SetPivot(Pivot::Center);
 	PlayerSpriteRenderer* spriteRenderer = new PlayerSpriteRenderer(this, 1);
-	wstring wCharacterPath = L"Image/Character/$vivi.bmp";
+	wstring wCharacterPath = L"Image/Character/$vivi.png";
 	spriteRenderer->SetImage(wCharacterPath.c_str());
 	
 	SetSize(200, 100);

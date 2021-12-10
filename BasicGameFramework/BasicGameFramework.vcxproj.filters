@@ -118,13 +118,9 @@
     <ClInclude Include="Component\TextComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="ImageHelper.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\TilemapToolScene.h">
       <Filter>Scene\MapEditor</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h" />
     <ClInclude Include="Manager\ImageManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -133,6 +129,15 @@
     </ClInclude>
     <ClInclude Include="Util\AboutTile.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Sprite.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\SampleSprite.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\TileSelectComponent.h">
+      <Filter>Component\TilemapToolScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,12 +217,20 @@
     <ClCompile Include="Scene\TilemapToolScene.cpp">
       <Filter>Scene\MapEditor</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Manager\ImageManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerSpriteRenderer.cpp">
       <Filter>Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Sprite.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\SampleSprite.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\TileSelectComponent.cpp">
+      <Filter>Component\TilemapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

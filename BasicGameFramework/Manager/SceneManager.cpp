@@ -2,8 +2,11 @@
 
 #include "../Scene/TempScene.h"
 #include "../Scene/TitleScene.h"
+#include "../Scene/TilemapToolScene.h"
 
 #include "SceneManager.h"
+#include "ImageManager.h"
+#include <d2d1.h>
 
 SceneManager::~SceneManager() noexcept
 {
@@ -21,8 +24,9 @@ void SceneManager::Init()
 {
 	_scenes[L"Title"] = new TitleScene();
 	_scenes[L"Temp"] = new TempScene();
+	_scenes[L"TilemapTool"] = new TilemapToolScene();
 
-	_currentScene = _scenes[L"Title"];
+	_currentScene = _scenes[L"TilemapTool"];
 	_currentScene->Init();
 }
 
@@ -33,7 +37,10 @@ void SceneManager::Update()
 
 void SceneManager::Render(HDC hdc)
 {
+	ImageManager::GetInstance()->GetRenderTarget()->BeginDraw();
+	ImageManager::GetInstance()->GetRenderTarget()->Clear(D2D1::ColorF(D2D1::ColorF::WhiteSmoke));
 	_currentScene->Render(hdc);
+	ImageManager::GetInstance()->GetRenderTarget()->EndDraw();
 }
 
 void SceneManager::Release()

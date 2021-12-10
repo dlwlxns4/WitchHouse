@@ -6,7 +6,6 @@
 #include "Manager/ImageManager.h"
 
 
-
 //--------------------------d2d
 
 #include <d2d1.h>
@@ -16,6 +15,8 @@
 // 전처리문
 
 #pragma comment(lib, "D2D1.lib")
+
+#include "Util/Sprite.h"
 
 
 ID2D1SolidColorBrush* pBrush = nullptr;
@@ -90,32 +91,7 @@ bool Game::Init(HINSTANCE hInst)
 	CoInitialize(nullptr);
 	CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pImagingFactory));
 
-	IWICFormatConverter* pConverter = nullptr;
-	IWICBitmapDecoder* pImageDecoder = nullptr;
-	IWICBitmapFrameDecode* pFrameDecode = nullptr;
 
-
-	pImagingFactory->CreateDecoderFromFilename(TEXT("Image/Character/$vivi.png"),
-		nullptr,
-		GENERIC_READ,
-		WICDecodeMetadataCacheOnDemand,
-		&pImageDecoder);
-
-	pImageDecoder->GetFrame(0, &pFrameDecode);
-
-	pImagingFactory->CreateFormatConverter(&pConverter);
-	pConverter->Initialize(pFrameDecode,
-		GUID_WICPixelFormat32bppPBGRA,
-		WICBitmapDitherTypeNone,
-		nullptr,
-		0.0f,
-		WICBitmapPaletteTypeCustom);
-
-	pRenderTarget->CreateBitmapFromWicBitmap(pConverter, nullptr, &pBitmap);
-
-	pConverter->Release();
-	pImageDecoder->Release();
-	pFrameDecode->Release();
 
 	//--------------------------d2d
 
@@ -201,14 +177,15 @@ void Game::render()
 {
 
 
-	PatBlt(_backDC, 0, 0, _res.Width, _res.Height, WHITENESS);
+	//PatBlt(_backDC, 0, 0, _res.Width, _res.Height, WHITENESS);
+	//pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(100, 100, 0, 1), &pBrush);
+
 	SceneManager::GetInstance()->Render(_backDC);
 
 
-	BitBlt(_hDC, 0, 0, _res.Width, _res.Height,
-		_backDC, 0, 0, SRCCOPY);
-	
-
+	//BitBlt(_hDC, 0, 0, _res.Width, _res.Height,
+	//	_backDC, 0, 0, SRCCOPY);
+	//
 
 	////---------------d2d
 	//pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(100, 100, 0, 1), &pBrush);

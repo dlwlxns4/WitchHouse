@@ -5,16 +5,21 @@
 #include "../stdafx.h"
 
 class Image;
+class Sprite;
+class IWICImagingFactory;
+class ID2D1HwndRenderTarget;
 class ImageManager : public Singleton<ImageManager>
 {
 private:
-	unordered_map<wstring, Image*> mapImages;
+	unordered_map<wstring, Image*> mapImages = {};
+	unordered_map<wstring, Sprite*> sprites = {};
 
-
+	vector<wstring> spritesName = {};
+	
 	HWND		_hWnd = {};
 	HINSTANCE	_hInstance = {};
-	struct IWICImagingFactory* pImagingFactory = nullptr;
-	struct ID2D1HwndRenderTarget* pRenderTarget = nullptr;
+	IWICImagingFactory* pImagingFactory = nullptr;
+	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
 
 public:
 	ImageManager() noexcept = default;
@@ -23,7 +28,8 @@ public:
 	void Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pImagingFactory, ID2D1HwndRenderTarget* pRenderTarget);
 	void Release();
 
-
+	Sprite* AddSprite(const wchar_t* fileName);
+	Sprite* FindSprite(const wchar_t* fileName);
 
 	Image* AddImage(const wchar_t* fileName, int width, int height,
 		bool isTrans = false, COLORREF transColor = NULL);	// 사용할 이미지를 등록하는 기능
@@ -37,5 +43,8 @@ public:
 	HWND GethWnd() { return _hWnd; }
 	HINSTANCE GethInstance() { return _hInstance; }
 	void DeleteImage(const char* fileName);	// 사용이 종료된 이미지를 등록 해제하는 기능
+	IWICImagingFactory* GetImageingFactory() { return pImagingFactory; }
+	ID2D1HwndRenderTarget* GetRenderTarget() { return pRenderTarget; }
+	wstring GetSpriteName(int index) { return spritesName[index]; }
 };
 

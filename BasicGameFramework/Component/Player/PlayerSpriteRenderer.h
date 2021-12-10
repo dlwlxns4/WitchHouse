@@ -3,7 +3,7 @@
 #include "../Component.h"
 
 
-class Image;
+class Sprite;
 class PlayerSpriteRenderer : public Component
 {
 
@@ -20,5 +20,5 @@ private:
 	enum class Direction { Down = 0, Left = 1, Right = 2, Up = 3 };
 	
 	Direction		dir;
-	Image*			img;
+	Sprite*			sprite;
 };
