@@ -1,0 +1,211 @@
+#include "Image.h"
+#include "Manager/ImageManager.h"
+
+
+#pragma comment(lib, "msimg32.lib")
+
+
+
+
+
+HRESULT Image::Init(const wchar_t* fileName, int width, int height, int maxFrameX, int maxFrameY, bool isTrans, COLORREF transColor)
+{
+	HDC hdc = GetDC(ImageManager::GetInstance()->GethWnd());
+
+	imageInfo = new IMAGE_INFO;
+	imageInfo->width = width;
+	imageInfo->height = height;
+	imageInfo->loadType = ImageLoadType::File;
+	imageInfo->hBitmap = (HBITMAP)LoadImage(ImageManager::GetInstance()->GethInstance(), fileName, IMAGE_BITMAP, width, height,
+		LR_LOADFROMFILE);
+	imageInfo->hMemDc = CreateCompatibleDC(hdc);	// 새로 생성된 DC 
+											// 기본적으로 Bitmap에 연결되어 있다.
+	imageInfo->hOldBit =
+		(HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
+
+	ReleaseDC(ImageManager::GetInstance()->GethWnd(), hdc);
+
+	this->isTransparent = isTrans;
+	this->transColor = transColor;
+
+	imageInfo->maxFrameX = maxFrameX;
+	imageInfo->maxFrameY = maxFrameY;
+	imageInfo->currFrameX = 0;
+	imageInfo->currFrameY = 0;
+	imageInfo->frameWidth = width / maxFrameX;
+	imageInfo->frameHeight = height / maxFrameY;
+
+	if (imageInfo->hBitmap == NULL)
+	{
+		Release();
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
+
+
+void Image::Release()
+{
+	if (imageInfo)
+	{
+		SelectObject(imageInfo->hMemDc, imageInfo->hOldBit);
+		DeleteObject(imageInfo->hBitmap);
+		DeleteDC(imageInfo->hMemDc);
+
+		delete imageInfo;
+		imageInfo = nullptr;
+	}
+}
+
+void Image::Render(HDC hdc)
+{
+	BitBlt(hdc,				// 복사 목적지 DC
+		0,					// 복사될 비트맵의 시작 위치 x
+		0,					// 복사될 비트맵의 시작 위치 y
+		imageInfo->width,	// 원본 복사할 가로 크기
+		imageInfo->height,	// 원본 복사할 세로 크기
+		imageInfo->hMemDc,	// 원본 DC
+		0,					// 원본 비트맵 복사 시작 위치 x
+		0,					// 원본 비트맵 복사 시작 위치 y
+		SRCCOPY);			// 복사 옵션
+}
+
+void Image::Render(HDC hdc, int destX, int destY)
+{
+	if (isTransparent)
+	{
+		GdiTransparentBlt(
+			hdc,
+			destX - (imageInfo->width / 2),
+			destY - (imageInfo->height / 2),
+			imageInfo->width, imageInfo->height,
+
+			imageInfo->hMemDc,
+			0, 0,
+			imageInfo->width, imageInfo->height,
+			transColor
+		);
+	}
+	else
+	{
+		BitBlt(hdc,				// 복사 목적지 DC
+			destX - (imageInfo->width / 2),				// 복사될 비트맵의 시작 위치 x
+			destY - (imageInfo->height / 2),			// 복사될 비트맵의 시작 위치 y
+			imageInfo->width,	// 원본 복사할 가로 크기
+			imageInfo->height,	// 원본 복사할 세로 크기
+			imageInfo->hMemDc,	// 원본 DC
+			0,					// 원본 비트맵 복사 시작 위치 x
+			0,					// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, float scale/* = 1.0f*/)
+{
+	// frameX : 0, frameY : 0 => 시작 (68 * 0, 0) 얼마나 복사할건가 (68, 104)
+	// frameX : 1, frameY : 0 => 시작 (68 * 1, 0)  (68, 104)
+	// frameX : 2, frameY : 0 => 시작 (68 * 2, 0)  (68, 104)
+	// frameX : 3, frameY : 0 => 시작 (68 * 3, 0)  (68, 104)
+
+	if (isTransparent)
+	{
+		GdiTransparentBlt(
+			hdc,
+			destX - (imageInfo->frameWidth / 2),
+			destY - (imageInfo->frameHeight / 2),
+			(int)(imageInfo->frameWidth * scale),
+			(int)(imageInfo->frameHeight * scale),	// 전체 프레임 수
+			imageInfo->hMemDc,
+			imageInfo->frameWidth * frameX,
+			imageInfo->frameHeight * frameY,
+			imageInfo->frameWidth, imageInfo->frameHeight,
+			transColor
+		);
+	}
+	else
+	{
+		BitBlt(hdc,				// 복사 목적지 DC
+			destX - (imageInfo->frameWidth / 2),		// 복사될 비트맵의 시작 위치 x
+			destY - (imageInfo->frameHeight / 2),		// 복사될 비트맵의 시작 위치 y
+			imageInfo->frameWidth,	// 원본 복사할 가로 크기
+			imageInfo->frameHeight,	// 원본 복사할 세로 크기
+			imageInfo->hMemDc,	// 원본 DC
+			imageInfo->frameWidth * frameX,				// 원본 비트맵 복사 시작 위치 x
+			imageInfo->frameHeight * frameY,			// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::Render(HDC hdc, int destX, int destY, int imageSizeX, int imageSizeY, int startPosX, int startPosY, int sizeX, int sizeY)
+{
+
+	if (isTransparent)
+	{
+		GdiTransparentBlt(
+			hdc,
+			destX,				//이미지를 출력할 위치
+			destY,
+			imageSizeX,						//출력할 이미지의 너비 높이
+			imageSizeY,
+			imageInfo->hMemDc,
+			startPosX, //										//가져올 이미지의 시작지점
+			startPosY, //
+			sizeX,							// 원본 이미지로부터 해당크기만큼 잘라낼 이미지의 너비 높이
+			sizeY,
+			transColor
+		);
+	}
+	else
+	{
+		BitBlt(hdc,				// 복사 목적지 DC
+			destX - (imageInfo->frameWidth / 2),		// 복사될 비트맵의 시작 위치 x
+			destY - (imageInfo->frameHeight / 2),		// 복사될 비트맵의 시작 위치 y
+			imageInfo->frameWidth,	// 원본 복사할 가로 크기
+			imageInfo->frameHeight,	// 원본 복사할 세로 크기
+			imageInfo->hMemDc,	// 원본 DC
+			imageInfo->frameWidth,				// 원본 비트맵 복사 시작 위치 x
+			imageInfo->frameHeight,			// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::Render(HDC hdc, int destX, int destY, int startPosX, int startPosY, int sizeX, int sizeY, BLENDFUNCTION ftn)
+{
+
+	AlphaBlend(
+		hdc,
+		destX,				//이미지를 출력할 위치
+		destY,
+		(int)(imageInfo->frameWidth),						//출력할 이미지의 너비 높이
+		(int)(imageInfo->frameHeight),
+		imageInfo->hMemDc,
+		startPosX, //										//가져올 이미지의 시작지점
+		startPosY, //
+		sizeX,							// 원본 이미지로부터 해당크기만큼 잘라낼 이미지의 너비 높이
+		sizeY,
+		ftn
+	);
+}
+
+void Image::Render(HDC hdc, int destX, int destY, int startPosX, int startPosY, int imageSizeX, int imageSizeY, int sizeX, int sizeY, BLENDFUNCTION ftn)
+{
+
+	AlphaBlend(
+		hdc,
+		destX,				//이미지를 출력할 위치
+		destY,
+		imageSizeX,						//출력할 이미지의 너비 높이
+		imageSizeY,
+		imageInfo->hMemDc,
+		startPosX, //										//가져올 이미지의 시작지점
+		startPosY, //
+		sizeX,							// 원본 이미지로부터 해당크기만큼 잘라낼 이미지의 너비 높이
+		sizeY,
+		ftn
+	);
+}
+
+
+
