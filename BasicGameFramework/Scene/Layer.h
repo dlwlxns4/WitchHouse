@@ -12,6 +12,7 @@ class Layer final : IBehaviour
 {
 public:
 	Layer(Scene* scene, const std::wstring& tag, INT32 zOrder);
+	Layer(const std::wstring& tag, INT32 zOrder);
 	virtual ~Layer();
 
 	virtual void		Init() override;

@@ -139,6 +139,24 @@
     <ClInclude Include="Component\TileSelectComponent.h">
       <Filter>Component\TilemapToolScene</Filter>
     </ClInclude>
+    <ClInclude Include="Component\MapFrameComponent.h">
+      <Filter>Component\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapFrame.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MapData.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SpriteRenderer.h">
+      <Filter>Component\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ParallaxObj.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TileObj.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -231,6 +249,24 @@
     </ClCompile>
     <ClCompile Include="Component\TileSelectComponent.cpp">
       <Filter>Component\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MapFrameComponent.cpp">
+      <Filter>Component\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapFrame.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MapData.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SpriteRenderer.cpp">
+      <Filter>Component\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ParallaxObj.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TileObj.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

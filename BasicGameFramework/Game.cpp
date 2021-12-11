@@ -11,15 +11,22 @@
 #include <d2d1.h>
 // imaingFactory 생성을 위한 include
 #include <wincodec.h>
+#include <dwrite.h>
 
 // 전처리문
 
 #pragma comment(lib, "D2D1.lib")
+#pragma comment(lib, "Dwrite")
 
 #include "Util/Sprite.h"
 
 
-ID2D1SolidColorBrush* pBrush = nullptr;
+#ifdef UNICODE
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+#else
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#endif
+
 ID2D1Factory* pFactory = nullptr;
 ID2D1Bitmap* pBitmap = nullptr;
 //-------------------------------------------------d2
@@ -92,13 +99,29 @@ bool Game::Init(HINSTANCE hInst)
 	CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pImagingFactory));
 
 
+	HRESULT hr =DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(&pDWriteFactory)
+	);
+
+	pDWriteFactory->CreateTextFormat(
+		L"휴먼나무",                // Font family name.
+		NULL,                       // Font collection (NULL sets it to use the system font collection).
+		DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		20.0f,
+		L"en-us",
+		&pTextFormat
+	);
 
 	//--------------------------d2d
 
 
 	Input::Init(_hWnd);
 
-	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget);
+	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget, pBrush, pTextFormat);
 	SceneManager::GetInstance()->Init();
 
 	return true;
@@ -175,49 +198,5 @@ void Game::update()
 
 void Game::render()
 {
-
-
-	//PatBlt(_backDC, 0, 0, _res.Width, _res.Height, WHITENESS);
-	//pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(100, 100, 0, 1), &pBrush);
-
 	SceneManager::GetInstance()->Render(_backDC);
-
-
-	//BitBlt(_hDC, 0, 0, _res.Width, _res.Height,
-	//	_backDC, 0, 0, SRCCOPY);
-	//
-
-	////---------------d2d
-	//pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(100, 100, 0, 1), &pBrush);
-	//pRenderTarget->BeginDraw();
-
-	//pRenderTarget->DrawRectangle(D2D1::RectF(100, 100, 200, 200), pBrush, 10);
-
-
-	//if (pBitmap)
-	//{
-	//	D2D1_SIZE_F imageSize = pBitmap->GetSize();
-	//	int frameX = 3;
-	//	int frameY = 4;
-	//	D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(imageSize.width / frameX, imageSize.height / frameY);
-	//	static int curFrameX = 0;
-	//	++curFrameX;
-
-	//	if (curFrameX >= frameX) { curFrameX = 0; }
-	//	
-	//	int curFrameY = 0;
-
-
-	//	pRenderTarget->DrawBitmap(pBitmap,
-	//		D2D1::RectF(50, 50, 50+imageOneFrameSize.width,  50+imageOneFrameSize.height), 1,
-	//		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
-	//		D2D1::RectF(curFrameX * imageOneFrameSize.width, curFrameY * imageOneFrameSize.height,
-	//			(curFrameX + 1) * imageOneFrameSize.width, (curFrameY + 1) * imageOneFrameSize.height));
-
-
-	//	//---------------d2d
-
-	//}
-	//pRenderTarget->EndDraw();
-
 }

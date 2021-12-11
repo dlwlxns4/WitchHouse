@@ -15,6 +15,8 @@ class GameObject abstract : IBehaviour
 {
 public:
 	GameObject(Scene* scene, Layer* layer, const std::wstring& tag);
+	GameObject(Layer* layer, const std::wstring& tag);
+	GameObject(const std::wstring& tag);
 	virtual ~GameObject() noexcept;
 
 	virtual void	Init() override;

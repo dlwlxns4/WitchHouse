@@ -5,7 +5,7 @@
 #include <d2d1.h>			
 #include <wincodec.h>
 
-
+#include <dwrite.h>
 
 #include "../Util/Sprite.h"
 
@@ -19,14 +19,17 @@ ImageManager::~ImageManager() noexcept
 	Release();
 }
 
-void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pImagingFactory, ID2D1HwndRenderTarget* pRenderTarget)
+void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pImagingFactory, ID2D1HwndRenderTarget* pRenderTarget, ID2D1SolidColorBrush* pBrush, IDWriteTextFormat* pTextFormat)
 {	
 	this->_hWnd = hWnd;
 	this->_hInstance = hInstance;
 	this->pImagingFactory = pImagingFactory;
 	this->pRenderTarget = pRenderTarget;
+	this->pTextFormat = pTextFormat;
 
-	
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0, 0, 0, 1), &pBrush);
+	this->pBrush = pBrush;
+
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
 	

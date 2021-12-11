@@ -8,6 +8,8 @@ class Image;
 class Sprite;
 class IWICImagingFactory;
 class ID2D1HwndRenderTarget;
+class ID2D1SolidColorBrush;
+class IDWriteTextFormat;
 class ImageManager : public Singleton<ImageManager>
 {
 private:
@@ -20,12 +22,13 @@ private:
 	HINSTANCE	_hInstance = {};
 	IWICImagingFactory* pImagingFactory = nullptr;
 	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
-
+	ID2D1SolidColorBrush* pBrush = nullptr;
+	IDWriteTextFormat* pTextFormat = nullptr;
 public:
 	ImageManager() noexcept = default;
 	~ImageManager() noexcept;
 
-	void Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pImagingFactory, ID2D1HwndRenderTarget* pRenderTarget);
+	void Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pImagingFactory, ID2D1HwndRenderTarget* pRenderTarget, ID2D1SolidColorBrush* pBrush, IDWriteTextFormat* pTextFormat);
 	void Release();
 
 	Sprite* AddSprite(const wchar_t* fileName);
@@ -45,6 +48,10 @@ public:
 	void DeleteImage(const char* fileName);	// 사용이 종료된 이미지를 등록 해제하는 기능
 	IWICImagingFactory* GetImageingFactory() { return pImagingFactory; }
 	ID2D1HwndRenderTarget* GetRenderTarget() { return pRenderTarget; }
+	ID2D1SolidColorBrush* GetBrush() { return pBrush; }
+	IDWriteTextFormat* GetTextFormat() { return pTextFormat; }
+	
 	wstring GetSpriteName(int index) { return spritesName[index]; }
+	int GetSpritesNameVecSize() { return spritesName.size(); }
 };
 

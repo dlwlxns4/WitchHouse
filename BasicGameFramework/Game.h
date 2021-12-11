@@ -4,6 +4,9 @@
 
 class ID2D1HwndRenderTarget;
 class IWICImagingFactory;
+class ID2D1SolidColorBrush;
+class IDWriteFactory;
+class IDWriteTextFormat;
 class Game
 {
 	enum { MAX_LOADSTRING = 100 };
@@ -32,11 +35,12 @@ private:
 	HBITMAP				_backBitmap = {};
 
 
-	Resolution			_res = { 1280, 720 };
+	Resolution			_res = { 1440, 720 };
 
-
+	ID2D1SolidColorBrush* pBrush = nullptr;
 	IWICImagingFactory* pImagingFactory = nullptr;
 	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
-
+	IDWriteFactory* pDWriteFactory = nullptr;
+	IDWriteTextFormat* pTextFormat = nullptr;
 };
 

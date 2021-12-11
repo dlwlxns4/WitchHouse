@@ -118,7 +118,6 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
@@ -127,7 +126,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <DelayLoadDLLs>opencv_world330d.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,9 +157,11 @@
     <ClInclude Include="Component\Component.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Component\MapFrameComponent.h" />
     <ClInclude Include="Component\Player\PlayerMovement.h" />
     <ClInclude Include="Component\Player\PlayerSpriteRenderer.h" />
     <ClInclude Include="Component\RectComponent.h" />
+    <ClInclude Include="Component\SpriteRenderer.h" />
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TileSelectComponent.h" />
     <ClInclude Include="framework.h" />
@@ -172,10 +172,14 @@
     <ClInclude Include="Object\GameObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Object\MapData.h" />
+    <ClInclude Include="Object\MapFrame.h" />
     <ClInclude Include="Object\Obstacle.h" />
+    <ClInclude Include="Object\ParallaxObj.h" />
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\SampleSprite.h" />
     <ClInclude Include="Object\Text.h" />
+    <ClInclude Include="Object\TileObj.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Layer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -203,9 +207,11 @@
     <ClCompile Include="Component\Component.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Component\MapFrameComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMovement.cpp" />
     <ClCompile Include="Component\Player\PlayerSpriteRenderer.cpp" />
     <ClCompile Include="Component\RectComponent.cpp" />
+    <ClCompile Include="Component\SpriteRenderer.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -214,10 +220,14 @@
     <ClCompile Include="Object\GameObject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Object\MapData.cpp" />
+    <ClCompile Include="Object\MapFrame.cpp" />
     <ClCompile Include="Object\Obstacle.cpp" />
+    <ClCompile Include="Object\ParallaxObj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\SampleSprite.cpp" />
     <ClCompile Include="Object\Text.cpp" />
+    <ClCompile Include="Object\TileObj.cpp" />
     <ClCompile Include="Scene\Layer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>

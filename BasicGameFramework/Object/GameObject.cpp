@@ -13,6 +13,20 @@ GameObject::GameObject(Scene* scene, Layer* layer, const wstring& tag)
 	_layer->AddObject(this);
 }
 
+GameObject::GameObject(Layer* layer, const wstring& tag)
+	:
+	_layer{ layer },
+	_tag{ tag }
+{
+	_layer->AddObject(this);
+}
+
+GameObject::GameObject(const std::wstring& tag)
+	:
+	_tag{ tag }
+{
+}
+
 GameObject::~GameObject() noexcept
 {
 	for (auto& comp : _components)

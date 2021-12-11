@@ -13,6 +13,13 @@ Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	_scene->AddLayer(this);
 }
 
+Layer::Layer(const std::wstring& tag, INT32 zOrder)
+	:
+	_tag{ tag },
+	_zOrder{ zOrder }
+{
+}
+
 Layer::~Layer()
 {
 	for (auto& obj : _objects)

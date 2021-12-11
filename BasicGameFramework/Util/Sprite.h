@@ -12,6 +12,8 @@ private:
 public:
 	void Init(const wchar_t* fileName);
 	void Render(int posX, int posY, int currFrameX, int currFrameY);
+	void Render(int posX, int posY, int currFrameX, int currFrameY, int sizeX, int sizeY);
+	void Render(float startPosX, float startPosY, int posX, int posY, bool isTile);
 	void Render(int posX, int posY);
 	void Update(); 
 	void Release();

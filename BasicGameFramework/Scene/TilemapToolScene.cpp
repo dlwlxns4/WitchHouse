@@ -2,6 +2,8 @@
 
 #include "Layer.h"
 #include "../Object/SampleSprite.h"
+#include "../Object/MapFrame.h"
+#include "../Object/MapData.h"
 
 void TilemapToolScene::Init()
 {
@@ -9,6 +11,9 @@ void TilemapToolScene::Init()
 
 	SampleSprite* sampleSprite = new SampleSprite(this, mainLayer, L"sampleImage");
 	sampleSprite->SetPosition(0,0);
+
+	MapFrame* mapFrame = new MapFrame(this, mainLayer, L"mapFrame");
+	
 
 	Scene::Init();
 }
