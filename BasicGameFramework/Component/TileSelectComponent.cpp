@@ -26,6 +26,8 @@
 
 #include "../Object/Player.h"
 
+#include "../Manager/GameManager.h"
+
 void TileSelectComponent::Update()
 {
 	if (Input::GetButtonDown('1'))
@@ -217,13 +219,16 @@ void TileSelectComponent::Render(HDC hdc)
 
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 {
+	POINTFLOAT* camera = (GameManager::GetInstance()->GetCameraPos());
+
+
 	if (tileType == TileType::tileObj)
 	{
 		if (mapData.size() != 0)
 		{
-			for (int i = downPos.first; i <= upPos.first; ++i)
+			for (int i = downPos.first+camera->x; i <= upPos.first+ camera->x; ++i)
 			{
-				for (int j = downPos.second; j <= upPos.second; ++j)
+				for (int j = downPos.second+ camera->y; j <= upPos.second+ camera->y; ++j)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
@@ -241,7 +246,7 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 			cout << mouseIndexX << " " << mouseIndexY << endl;
 			Player* player = new Player(mapData[currLayer-1], L"Player");
 			player->Init();
-			player->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
+			player->SetPosition((mouseIndexX + camera->x) * TILE_SIZE, (mouseIndexY+ camera->y) * TILE_SIZE);
 		}
 	}
 }

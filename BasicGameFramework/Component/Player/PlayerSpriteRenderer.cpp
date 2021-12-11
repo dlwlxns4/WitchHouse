@@ -10,7 +10,7 @@ void PlayerSpriteRenderer::Render(HDC hdc)
 {
 	sprite->PlayerRender(_owner->GetPosition().x, 
 		_owner->GetPosition().y-16,
-		0,
+		frontFeet,
 		(int)dir
 	);
 }
@@ -28,4 +28,9 @@ void PlayerSpriteRenderer::SetDirection(int dir)
 Direction PlayerSpriteRenderer::GetDirection()
 {
 	return dir;
+}
+
+void PlayerSpriteRenderer::SetFeet(int feet)
+{
+	frontFeet = feet;
 }

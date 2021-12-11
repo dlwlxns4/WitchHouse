@@ -18,8 +18,11 @@ public:
 	void SetImage(const wchar_t* filePath);
 	void SetDirection(int dir);
 	Direction GetDirection();
+	void SetFeet(int feet);
+	void SetAlternateWalk() { frontFeet = frontFeet == 0 ? 0 : 2; }
 private:
 
+	int frontFeet = 0;
 	Direction		dir;
 	Sprite* sprite;
 };

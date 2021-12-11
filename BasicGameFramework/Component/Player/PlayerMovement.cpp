@@ -19,7 +19,6 @@
 void PlayerMovement::Update()
 {
 	POINT pos = _owner->GetPosition();
-	POINTFLOAT* camera = (GameManager::GetInstance()->GetCameraPos());
 
 	if (GameManager::GetInstance()->GetState() == State::None)
 	{
@@ -27,32 +26,30 @@ void PlayerMovement::Update()
 		{
 			GameManager::GetInstance()->SetState(State::Move);
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(UP_DIR);
-			(camera->y)++;
 		}
 		if (Input::GetButton(VK_DOWN))
 		{
 			GameManager::GetInstance()->SetState(State::Move);
 
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(DOWN_DIR);
-
 		}
 		if (Input::GetButton(VK_LEFT))
 		{
 			GameManager::GetInstance()->SetState(State::Move);
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(LEFT_DIR);
-
 		}
 		if (Input::GetButton(VK_RIGHT))
 		{
 			GameManager::GetInstance()->SetState(State::Move);
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(RIGHT_DIR);
-
 		}
 	}
 
 	if (GameManager::GetInstance()->GetState() == State::Move)
 	{
 		Direction dir = _owner->GetComponent<PlayerSpriteRenderer>()->GetDirection();
+		POINTFLOAT* camera = (GameManager::GetInstance()->GetCameraPos());
+
 		int dx[] = { 0,-1,1,0 };
 		int dy[] = { 1,-0,0,-1 };
 
@@ -60,13 +57,22 @@ void PlayerMovement::Update()
 		//static_cast<LONG>(_speed * Timer::GetDeltaTime());
 		pos.x += dx[(int)dir] * 4;
 		pos.y += dy[(int)dir] * 4;
+		camera->x += dx[(int)dir] * 0.125;
+		camera->y += dy[(int)dir] * 0.125;
 		_owner->SetPosition(pos);
 		std::cout << pos.x << " " << pos.y << "\n";
 		moveDistance += 4;
+		if (moveDistance >= 16)
+		{
+			_owner->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
+		}
+
 		if (moveDistance >= 32)
 		{
 			moveDistance = 0;
 			GameManager::GetInstance()->SetState(State::None);
+			_owner->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
+
 		}
 
 	}
