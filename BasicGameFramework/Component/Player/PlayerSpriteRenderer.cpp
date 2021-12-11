@@ -8,8 +8,8 @@
 
 void PlayerSpriteRenderer::Render(HDC hdc)
 {
-	sprite->Render(_owner->GetRenderPos().x, 
-		_owner->GetRenderPos().y, 
+	sprite->PlayerRender(_owner->GetPosition().x, 
+		_owner->GetPosition().y-16,
 		0,
 		(int)dir
 	);
@@ -23,4 +23,9 @@ void PlayerSpriteRenderer::SetImage(const wchar_t* filePath)
 void PlayerSpriteRenderer::SetDirection(int dir)
 {
 	this->dir = (Direction)dir; 
+}
+
+Direction PlayerSpriteRenderer::GetDirection()
+{
+	return dir;
 }

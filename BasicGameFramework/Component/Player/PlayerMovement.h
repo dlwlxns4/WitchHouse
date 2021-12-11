@@ -15,4 +15,6 @@ public:
 	float			GetSpeed() const noexcept;
 private:
 	float			_speed;
+	int moveDistance = 0;
+
 };

@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 
+enum class Direction { Down = 0, Left = 1, Right = 2, Up = 3 };
 
 class Sprite;
 class PlayerSpriteRenderer : public Component
@@ -16,9 +17,9 @@ public:
 
 	void SetImage(const wchar_t* filePath);
 	void SetDirection(int dir);
+	Direction GetDirection();
 private:
-	enum class Direction { Down = 0, Left = 1, Right = 2, Up = 3 };
-	
+
 	Direction		dir;
-	Sprite*			sprite;
+	Sprite* sprite;
 };

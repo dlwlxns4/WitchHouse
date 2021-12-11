@@ -8,6 +8,8 @@
 #include "../Component/Player/PlayerMovement.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
 
+
+#include <iostream>
 void Player::Init()
 {
 	//MoveMent-----------------------------------------------------
@@ -21,4 +23,9 @@ void Player::Init()
 	spriteRenderer->SetImage(wCharacterPath.c_str());
 	
 	SetSize(200, 100);
+}
+
+void Player::Update()
+{
+	GameObject::Update();
 }

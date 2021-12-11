@@ -16,7 +16,8 @@ private:
 	enum class TileType
 	{
 		tileObj=0,
-		parallaxObj=1
+		parallaxObj=1,
+		PlayerObj=2
 	};
 
 	using Component::Component;
@@ -42,5 +43,7 @@ private:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
+
+	void SetObject(int mouseIndexX, int mouseIndexY);
 
 };

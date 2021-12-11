@@ -167,6 +167,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IBehaviour.h" />
+    <ClInclude Include="Manager\GameManager.h" />
     <ClInclude Include="Manager\ImageManager.h" />
     <ClInclude Include="Manager\SceneManager.h" />
     <ClInclude Include="Object\GameObject.h">
@@ -193,6 +194,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Util\AboutTile.h" />
+    <ClInclude Include="Util\Camera.h" />
     <ClInclude Include="Util\Input.h" />
     <ClInclude Include="Util\Macro.h" />
     <ClInclude Include="Util\Pivot.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Manager\GameManager.cpp" />
     <ClCompile Include="Manager\ImageManager.cpp" />
     <ClCompile Include="Manager\SceneManager.cpp" />
     <ClCompile Include="Object\GameObject.cpp">

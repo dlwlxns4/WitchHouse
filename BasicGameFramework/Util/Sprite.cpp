@@ -3,7 +3,7 @@
 #include <d2d1.h>
 #include <wincodec.h>
 #include "../Manager/ImageManager.h"
-
+#include "../Manager/GameManager.h"
 
 void Sprite::Init(const wchar_t* fileName)
 {
@@ -42,19 +42,53 @@ void Sprite::Init(const wchar_t* fileName)
 
 }
 
+void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY)
+{
+	if (pBitmap)
+	{
+
+		D2D1_SIZE_F imageSize = pBitmap->GetSize();
+		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 48);
+
+
+
+		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
+			D2D1::RectF(
+				(float)posX ,
+				(float)posY ,
+				posX + imageOneFrameSize.width ,
+				posY + imageOneFrameSize.height
+			),
+			1,
+			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+			D2D1::RectF(currFrameX * imageOneFrameSize.width, currFrameY * imageOneFrameSize.height,
+				(currFrameX + 1) * imageOneFrameSize.width, (currFrameY + 1) * imageOneFrameSize.height));
+
+
+		//---------------d2d
+
+	}
+}
+
 void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY)
 {
 	if (pBitmap)
 	{
 
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
-		int frameX = 3;
-		int frameY = 4;
-		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 32);
+		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 48);
+
+		POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
-			D2D1::RectF((float)posX, (float)posY, posX + imageOneFrameSize.width, posY + imageOneFrameSize.height), 1,
+			D2D1::RectF(
+				(float)posX - 32 * cameraPos->x,
+				(float)posY - 32 * cameraPos->y,
+				posX + imageOneFrameSize.width - 32 * cameraPos->x,
+				posY + imageOneFrameSize.height - 32 * cameraPos->y
+				),
+			1,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 			D2D1::RectF(currFrameX * imageOneFrameSize.width, currFrameY * imageOneFrameSize.height,
 				(currFrameX + 1) * imageOneFrameSize.width, (currFrameY + 1) * imageOneFrameSize.height));
@@ -71,16 +105,14 @@ void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY, int size
 	{
 
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
-		int frameX = 3;
-		int frameY = 4;
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 32);
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
-			D2D1::RectF((float)posX, (float)posY, posX + imageOneFrameSize.width*3, posY + imageOneFrameSize.height*3), 1,
+			D2D1::RectF((float)posX, (float)posY, posX + imageOneFrameSize.width * 3, posY + imageOneFrameSize.height * 3), 1,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 			D2D1::RectF(currFrameX * imageOneFrameSize.width, currFrameY * imageOneFrameSize.height,
-				(currFrameX + sizeX+1) * imageOneFrameSize.width, (currFrameY + sizeY+1) * imageOneFrameSize.height));
+				(currFrameX + sizeX + 1) * imageOneFrameSize.width, (currFrameY + sizeY + 1) * imageOneFrameSize.height));
 
 
 		//---------------d2d
@@ -99,9 +131,13 @@ void Sprite::Render(float startPosX, float startPosY, int posX, int posY, bool i
 
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 32);
 
-
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
-			D2D1::RectF(startPosX, startPosY, startPosX+imageSize.width , startPosY+imageSize.height), 1);
+			D2D1::RectF(
+				startPosX,
+				startPosY,
+				startPosX + imageSize.width,
+				startPosY + imageSize.height),
+			1);
 
 		//---------------d2d
 

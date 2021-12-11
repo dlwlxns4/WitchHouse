@@ -8,6 +8,5 @@ class ParallaxObj : public GameObject
 	virtual ~ParallaxObj() noexcept = default;
 
 	virtual void Init() override;
-	void AddComponent();
 
 };

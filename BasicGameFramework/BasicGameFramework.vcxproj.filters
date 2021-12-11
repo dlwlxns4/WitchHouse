@@ -157,6 +157,12 @@
     <ClInclude Include="Object\TileObj.h">
       <Filter>Object\TilemapToolScene</Filter>
     </ClInclude>
+    <ClInclude Include="Util\Camera.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -267,6 +273,9 @@
     </ClCompile>
     <ClCompile Include="Object\TileObj.cpp">
       <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\GameManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

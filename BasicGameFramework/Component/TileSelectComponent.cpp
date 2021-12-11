@@ -24,6 +24,8 @@
 #include "../Object/Text.h"
 #include "TextComponent.h"
 
+#include "../Object/Player.h"
+
 void TileSelectComponent::Update()
 {
 	if (Input::GetButtonDown('1'))
@@ -149,23 +151,11 @@ void TileSelectComponent::Update()
 		int mouseIndexX = (mousePos.x - mainArea.left) / 32;
 		int mouseIndexY = mousePos.y / 32;
 
-		cout << mouseIndexX << " " << mouseIndexY << endl;
 		if (Input::GetButtonDown(VK_LBUTTON))
 		{
-			if (mapData.size() != 0)
-			{
-				for (int i = downPos.first; i <= upPos.first; ++i)
-				{
-					for (int j = downPos.second; j <= upPos.second; ++j)
-					{
-						TileObj* tileObj = new TileObj(mapData[currLayer-1], L"Tile");
-						SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-						spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i, j);
-						tileObj->SetPosition((mouseIndexX + (i-downPos.first)) * TILE_SIZE, (mouseIndexY + (j-downPos.second)) * TILE_SIZE);
 
-					}
-				}
-			}
+			SetObject(mouseIndexX, mouseIndexY);
+			
 		}
 		else if (Input::GetButton(VK_RBUTTON))
 		{
@@ -173,7 +163,10 @@ void TileSelectComponent::Update()
 			
 		}
 	}
-
+	for (auto map : mapData)
+	{
+		map->Update();
+	}
 
 }
 
@@ -220,4 +213,35 @@ void TileSelectComponent::Render(HDC hdc)
 	tileTypeTxt->Render(hdc);
 	currLayerTxt->Render(hdc);
 
+}
+
+void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
+{
+	if (tileType == TileType::tileObj)
+	{
+		if (mapData.size() != 0)
+		{
+			for (int i = downPos.first; i <= upPos.first; ++i)
+			{
+				for (int j = downPos.second; j <= upPos.second; ++j)
+				{
+					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
+					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
+					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i, j);
+					tileObj->SetPosition((mouseIndexX + (i - downPos.first)) * TILE_SIZE, (mouseIndexY + (j - downPos.second)) * TILE_SIZE);
+
+				}
+			}
+		}
+	}
+	else if (tileType == TileType::parallaxObj)
+	{
+		if (mapData.size() != 0)
+		{
+			cout << mouseIndexX << " " << mouseIndexY << endl;
+			Player* player = new Player(mapData[currLayer-1], L"Player");
+			player->Init();
+			player->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
+		}
+	}
 }
