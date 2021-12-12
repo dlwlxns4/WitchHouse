@@ -9,6 +9,9 @@
 
 #include "../Util/Sprite.h"
 
+#include "../Util/AboutTile.h"
+
+#include "GameManager.h"
 #define PLAYER_SIZE_X 32
 #define PLAYER_SIZE_Y 48
 
@@ -98,6 +101,32 @@ Sprite* ImageManager::FindSprite(const wchar_t* fileName)
 		return nullptr;
 	}
 	return it->second;
+}
+
+void ImageManager::DrawColliderRect(int posX, int posY)
+{
+	POINTFLOAT* camera = GameManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - TILE_SIZE * camera->x;
+	int right = (posX+1) * TILE_SIZE - TILE_SIZE * camera->x;
+	int top = posY * TILE_SIZE - TILE_SIZE * camera->y;
+	int bottom = (posY+1) * TILE_SIZE - TILE_SIZE * camera->y;
+	
+	if ( left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >=0 && bottom<=TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				ImageManager::GetInstance()->GetBrush(), 10.0f
+			);
+		}
+	}
 }
 
 //Image* ImageManager::AddImage(const wchar_t* fileName, int width, int height, int maxFrameX, int maxFrameY, bool isTrans, COLORREF transColor)

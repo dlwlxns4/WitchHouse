@@ -11,6 +11,8 @@
 #include "../../Manager/GameManager.h"
 #include "../../Manager/PhysicsManager.h"
 #include <iostream>
+#include "../../Util/AboutTile.h"
+
 
 #define DOWN_DIR	0
 #define LEFT_DIR	1
@@ -23,30 +25,44 @@ void PlayerMovement::Update()
 
 	if (GameManager::GetInstance()->GetState() == State::None)
 	{
-		
 		if (Input::GetButton(VK_UP))
 		{
-			GameManager::GetInstance()->SetState(State::Move);
-			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(UP_DIR);
-			if ( PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / 32, _owner->GetPosition().y / 32) )
+			if (PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / TILE_SIZE, _owner->GetPosition().y / TILE_SIZE - 1) == false)
 			{
-				cout << "@" << "\n";
+				GameManager::GetInstance()->SetState(State::Move);
+				prevPosX = _owner->GetPosition().x / TILE_SIZE;
+				prevPosY = _owner->GetPosition().y / TILE_SIZE;
 			}
+			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(UP_DIR);
 		}
-		if (Input::GetButton(VK_DOWN))
+		else if (Input::GetButton(VK_DOWN))
 		{
-			GameManager::GetInstance()->SetState(State::Move);
-
+			if (PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / TILE_SIZE, _owner->GetPosition().y / TILE_SIZE + 1) == false)
+			{
+				GameManager::GetInstance()->SetState(State::Move);
+				prevPosX = _owner->GetPosition().x / TILE_SIZE;
+				prevPosY = _owner->GetPosition().y / TILE_SIZE;
+			}
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(DOWN_DIR);
 		}
-		if (Input::GetButton(VK_LEFT))
+		else if (Input::GetButton(VK_LEFT))
 		{
-			GameManager::GetInstance()->SetState(State::Move);
+			if (PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / TILE_SIZE - 1, _owner->GetPosition().y / TILE_SIZE) == false)
+			{
+				GameManager::GetInstance()->SetState(State::Move);
+				prevPosX = _owner->GetPosition().x / TILE_SIZE;
+				prevPosY = _owner->GetPosition().y / TILE_SIZE;
+			}
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(LEFT_DIR);
 		}
-		if (Input::GetButton(VK_RIGHT))
+		else if (Input::GetButton(VK_RIGHT))
 		{
-			GameManager::GetInstance()->SetState(State::Move);
+			if (PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / TILE_SIZE + 1, _owner->GetPosition().y / TILE_SIZE) == false)
+			{
+				GameManager::GetInstance()->SetState(State::Move);
+				prevPosX = _owner->GetPosition().x / TILE_SIZE;
+				prevPosY = _owner->GetPosition().y / TILE_SIZE;
+			}
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(RIGHT_DIR);
 		}
 	}
@@ -79,9 +95,9 @@ void PlayerMovement::Update()
 			moveDistance = 0;
 			GameManager::GetInstance()->SetState(State::None);
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
-
 		}
 
+		PhysicsManager::GetInstance()->RePosCollider(prevPosX, prevPosY, (int)dir);
 	}
 }
 

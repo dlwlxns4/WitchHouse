@@ -16,5 +16,6 @@ public:
 private:
 	float			_speed;
 	int moveDistance = 0;
-
+	int prevPosX = 0;
+	int prevPosY = 0;
 };

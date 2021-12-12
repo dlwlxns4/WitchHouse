@@ -53,5 +53,6 @@ public:
 	
 	wstring GetSpriteName(int index) { return spritesName[index]; }
 	int GetSpritesNameVecSize() { return spritesName.size(); }
+	void DrawColliderRect(int posX, int posY);
 };
 

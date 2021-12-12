@@ -16,7 +16,8 @@ private:
 	{
 		tileObj=0,
 		PlayerObj=1,
-		parallaxObj=2
+		parallaxObj=2,
+		Collider=3
 	};
 
 	using Component::Component;
@@ -38,6 +39,8 @@ private:
 	Text* tileTypeTxt;
 	Text* currLayerTxt;
 	int currLayer = -1;
+
+	bool isShowCollider = false;
 
 public:
 

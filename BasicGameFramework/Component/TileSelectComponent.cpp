@@ -87,12 +87,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : ParallaxObj";
 			}
+			else if ((int)tileType == 3)
+			{
+				txt = L"TileType : Collider";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 2)
+		if ((int)tileType < 3)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -108,6 +112,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 2)
 			{
 				txt = L"TileType : ParallaxObj";
+			}
+			else if ((int)tileType == 3)
+			{
+				txt = L"TileType : Collider";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -201,6 +209,13 @@ void TileSelectComponent::Update()
 		cameraPos->x++;
 	}
 
+
+	//Show Collider
+	if (Input::GetButtonDown(VK_SPACE))
+	{
+		isShowCollider = isShowCollider == false ? true : false;
+	}
+
 	//맵 데이터 업데이트
 	for (auto map : mapData)
 	{
@@ -213,11 +228,11 @@ void TileSelectComponent::Init()
 	const wstring str = L"titleText";
 
 
-	tileTypeTxt = new Text(  str);
+	tileTypeTxt = new Text(str);
 	tileTypeTxt->SetPosition(20, TILE_SIZE * MAP_SIZE_Y);
 	TextComponent* txtComponent = new TextComponent(tileTypeTxt, 1);
 	txtComponent->SetText(L"TileType : tileObj");
-	
+
 
 	currLayerTxt = new Text(L"currLayerText");
 	currLayerTxt->SetPosition(20, TILE_SIZE * (MAP_SIZE_Y + 1));
@@ -249,9 +264,20 @@ void TileSelectComponent::Render(HDC hdc)
 		map->Render(hdc);
 	}
 
+
+
+	if (isShowCollider)
+	{
+		unordered_set<pair<int, int>, pair_hash>* collision = PhysicsManager::GetInstance()->GetCollisionObj();
+		for (auto pos : *collision)
+		{
+			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
+		}
+
+	}
+
 	tileTypeTxt->Render(hdc);
 	currLayerTxt->Render(hdc);
-
 }
 
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
@@ -269,10 +295,10 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i-camera->x, j-camera->y);
+					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i - camera->x, j - camera->y);
 					tileObj->SetPosition(
-						(mouseIndexX + (i - downPos.first-camera->x)) * TILE_SIZE,
-						(mouseIndexY + (j - downPos.second-camera->y)) * TILE_SIZE
+						(mouseIndexX + (i - downPos.first - camera->x)) * TILE_SIZE,
+						(mouseIndexY + (j - downPos.second - camera->y)) * TILE_SIZE
 					);
 				}
 			}
@@ -285,8 +311,8 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 			Player* player = new Player(mapData[currLayer - 1], L"Player");
 			player->Init();
 			player->SetPosition(
-				(mouseIndexX) * TILE_SIZE, 
-				(mouseIndexY) * TILE_SIZE
+				(mouseIndexX)*TILE_SIZE,
+				(mouseIndexY)*TILE_SIZE
 			);
 			PhysicsManager::GetInstance()->SetCollision(mouseIndexX, mouseIndexY);
 		}
@@ -298,8 +324,11 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 			ParallaxObj* parallaxObj = new ParallaxObj(mapData[currLayer - 1], L"Parallax");
 			ParallaxSpriteRenderer* paralaxSpriteRenderer = new ParallaxSpriteRenderer(parallaxObj, 1);
 			paralaxSpriteRenderer->SetSprite(L"Image/Parallax/001-Fog01.png");
-
 		}
+	}
+	else if (tileType == TileType::Collider)
+	{
+		PhysicsManager::GetInstance()->SetCollision(mouseIndexX, mouseIndexY);
 	}
 }
 
