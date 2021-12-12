@@ -8,5 +8,4 @@ public:
 	using GameObject::GameObject;
 	virtual ~Text() noexcept = default;
 
-	virtual void Init() override;
 };

@@ -8,5 +8,5 @@ class TileObj : public GameObject
 	virtual ~TileObj() noexcept = default;
 
 	virtual void Init() override;
-
+	virtual void Render(HDC hdc)override;
 };

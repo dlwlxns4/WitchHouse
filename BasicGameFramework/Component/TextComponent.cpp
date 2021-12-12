@@ -27,6 +27,7 @@ void TextComponent::Render(HDC hdc)
 	);
 }
 
+
 void TextComponent::SetText(const std::wstring& text) noexcept
 {
 	_text = text;

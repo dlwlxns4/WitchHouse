@@ -21,6 +21,7 @@ public:
 	virtual void		Release() override;
 
 	const Scene*		GetScene() const noexcept;
+	Scene* GetScene()  noexcept;
 	std::wstring		GetTag() const noexcept;
 	INT32				GetZOrder() const noexcept;
 

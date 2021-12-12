@@ -3,14 +3,14 @@
 #include "Component.h"
 
 class Sprite;
-class SpriteRenderer : public Component
+class ParallaxSpriteRenderer : public Component
 {
 	using Component::Component;
-	virtual ~SpriteRenderer() noexcept = default;
+	virtual ~ParallaxSpriteRenderer() noexcept = default;
 
 
 	virtual void Render(HDC hdc) override;
-
+	virtual void Update() override;
 
 public:
 	void SetSprite(const wchar_t* fileName, int frameX, int frameY);
@@ -22,4 +22,7 @@ private:
 	int frameY = 0;
 	int sizeX = 0;
 	int sizeY = 0;
+	int renderPosX=0;
+	int renderPosY=0;
+	int renderDelayTime = 0;
 };

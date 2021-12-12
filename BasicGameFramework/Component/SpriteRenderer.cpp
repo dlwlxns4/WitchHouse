@@ -11,7 +11,6 @@ void SpriteRenderer::Render(HDC hdc)
 		frameX,
 		frameY
 	);
-
 }
 
 void SpriteRenderer::SetSprite(const wchar_t* fileName, int frameX, int frameY)

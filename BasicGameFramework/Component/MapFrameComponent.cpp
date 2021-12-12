@@ -12,9 +12,10 @@ void MapFrameComponent::Render(HDC hdc)
 	{
 		for (int j = 0; j < MAP_SIZE_X; ++j)
 		{
+
 			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
 				D2D1::RectF(j*TILE_SIZE, i*TILE_SIZE, (j+1)*TILE_SIZE, (i+1)*TILE_SIZE),
-				ImageManager::GetInstance()->GetBrush());
+				ImageManager::GetInstance()->GetBrush(), 1.0f);
 		}
 	}
 

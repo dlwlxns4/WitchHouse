@@ -27,7 +27,6 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	this->pRenderTarget = pRenderTarget;
 	this->pTextFormat = pTextFormat;
 
-	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0, 0, 0, 1), &pBrush);
 	this->pBrush = pBrush;
 
 	//-------------Character
@@ -57,6 +56,11 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/TileD.png");
 	spritesName.push_back(L"Image/Tile/TileE.png");
 	spritesName.push_back(L"Image/Tile/yukab034d.png");
+
+
+	//-------------------Parallax
+
+	AddSprite(L"Image/Parallax/001-Fog01.png");
 								 
 }
 

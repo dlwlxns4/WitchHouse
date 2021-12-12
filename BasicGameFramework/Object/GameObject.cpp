@@ -4,6 +4,10 @@
 
 #include "GameObject.h"
 
+#include <iterator>
+
+#include <iostream>
+
 GameObject::GameObject(Scene* scene, Layer* layer, const wstring& tag)
 	:
 	_scene{ scene },
@@ -29,6 +33,18 @@ GameObject::GameObject(const std::wstring& tag)
 
 GameObject::~GameObject() noexcept
 {
+
+	/*Component* pTemp = nullptr;
+	for (auto it = _components.begin(); it != _components.end(); )
+	{
+		pTemp = (*it);
+		it = _components.erase(it);
+
+		delete pTemp;
+	}
+	
+	cout << _components.size();
+	*/
 	for (auto& comp : _components)
 	{
 		delete comp;
@@ -37,6 +53,7 @@ GameObject::~GameObject() noexcept
 	_components.clear();
 	_layer = nullptr;
 	_scene = nullptr;
+
 }
 
 void GameObject::Init()
@@ -58,6 +75,7 @@ void GameObject::Update()
 
 void GameObject::Render(HDC hdc)
 {
+	
 	for (Component* comp : _components)
 	{
 		comp->Render(hdc);

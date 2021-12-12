@@ -10,8 +10,6 @@
 
 #include "../Scene/Layer.h"
 
-#define WIN_SIZE_X 1440
-#define WIN_SIZE_Y 720
 
 #include <iostream>
 
@@ -27,6 +25,15 @@
 #include "../Object/Player.h"
 
 #include "../Manager/GameManager.h"
+#include "../Component/ParallaxSpriteRenderer.h"
+#include "../Object/ParallaxObj.h"
+#include "../Manager/PhysicsManager.h"
+
+
+TileSelectComponent::~TileSelectComponent()
+{
+	Release();
+}
 
 void TileSelectComponent::Update()
 {
@@ -76,12 +83,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : PlayerObj";
 			}
+			else if ((int)tileType == 2)
+			{
+				txt = L"TileType : ParallaxObj";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 1)
+		if ((int)tileType < 2)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -93,6 +104,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 1)
 			{
 				txt = L"TileType : PlayerObj";
+			}
+			else if ((int)tileType == 2)
+			{
+				txt = L"TileType : ParallaxObj";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -110,7 +125,7 @@ void TileSelectComponent::Update()
 	}
 	else if (Input::GetButtonDown('R'))
 	{
-		if (currLayer < mapData.size() )
+		if (currLayer < mapData.size())
 		{
 			currLayer++;
 			wstring txt = L"CurrLayer : " + to_wstring(currLayer) + L" MaxLayer : " + to_wstring(mapData.size());
@@ -146,53 +161,75 @@ void TileSelectComponent::Update()
 		mapData.push_back(new Layer(L"layer" + to_wstring(mapData.size()), mapData.size()));
 	}
 
+	POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
 
 	RECT mainArea = { 0,0,TILE_SIZE * MAP_SIZE_X, TILE_SIZE * MAP_SIZE_Y };
 	if (PtInRect(&mainArea, mousePos))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32;
-		int mouseIndexY = mousePos.y / 32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
+		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
 
 		if (Input::GetButtonDown(VK_LBUTTON))
 		{
-
 			SetObject(mouseIndexX, mouseIndexY);
-			
+
 		}
 		else if (Input::GetButton(VK_RBUTTON))
 		{
 			mapData[currLayer - 1]->RemoveObject(L"Tile");
-			
+
 		}
 	}
+
+
+	//MoveCamera
+	if (Input::GetButton('W'))
+	{
+		cameraPos->y--;
+	}
+	else if (Input::GetButton('S'))
+	{
+		cameraPos->y++;
+
+	}
+	else if (Input::GetButton('A'))
+	{
+		cameraPos->x--;
+	}
+	else if (Input::GetButton('D'))
+	{
+		cameraPos->x++;
+	}
+
+	//맵 데이터 업데이트
 	for (auto map : mapData)
 	{
 		map->Update();
 	}
-
 }
 
 void TileSelectComponent::Init()
 {
+	const wstring str = L"titleText";
 
-	tileTypeTxt = new Text(L"tileText");
+
+	tileTypeTxt = new Text(  str);
 	tileTypeTxt->SetPosition(20, TILE_SIZE * MAP_SIZE_Y);
 	TextComponent* txtComponent = new TextComponent(tileTypeTxt, 1);
 	txtComponent->SetText(L"TileType : tileObj");
-	tileTypeTxt->AddComponent(txtComponent);
+	
 
 	currLayerTxt = new Text(L"currLayerText");
 	currLayerTxt->SetPosition(20, TILE_SIZE * (MAP_SIZE_Y + 1));
 	TextComponent* txtComponent2 = new TextComponent(currLayerTxt, 1);
 	txtComponent2->SetText(L"CurrLayer : -1 MaxLayer : -1");
-	currLayerTxt->AddComponent(txtComponent2);
 }
 
 void TileSelectComponent::Render(HDC hdc)
 {
 	sprite->Render(
-		WIN_SIZE_X - sprite->GetWidth() + 16,
-		16,
+		WIN_SIZE_X - sprite->GetWidth(),
+		0,
 		0,
 		0,
 		true
@@ -226,27 +263,55 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		if (mapData.size() != 0)
 		{
-			for (int i = downPos.first+camera->x; i <= upPos.first+ camera->x; ++i)
+			for (int i = downPos.first + camera->x; i <= upPos.first + camera->x; ++i)
 			{
-				for (int j = downPos.second+ camera->y; j <= upPos.second+ camera->y; ++j)
+				for (int j = downPos.second + camera->y; j <= upPos.second + camera->y; ++j)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i, j);
-					tileObj->SetPosition((mouseIndexX + (i - downPos.first)) * TILE_SIZE, (mouseIndexY + (j - downPos.second)) * TILE_SIZE);
-
+					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i-camera->x, j-camera->y);
+					tileObj->SetPosition(
+						(mouseIndexX + (i - downPos.first-camera->x)) * TILE_SIZE,
+						(mouseIndexY + (j - downPos.second-camera->y)) * TILE_SIZE
+					);
 				}
 			}
+		}
+	}
+	else if (tileType == TileType::PlayerObj)
+	{
+		if (mapData.size() != 0)
+		{
+			Player* player = new Player(mapData[currLayer - 1], L"Player");
+			player->Init();
+			player->SetPosition(
+				(mouseIndexX) * TILE_SIZE, 
+				(mouseIndexY) * TILE_SIZE
+			);
+			PhysicsManager::GetInstance()->SetCollision(mouseIndexX, mouseIndexY);
 		}
 	}
 	else if (tileType == TileType::parallaxObj)
 	{
 		if (mapData.size() != 0)
 		{
-			cout << mouseIndexX << " " << mouseIndexY << endl;
-			Player* player = new Player(mapData[currLayer-1], L"Player");
-			player->Init();
-			player->SetPosition((mouseIndexX + camera->x) * TILE_SIZE, (mouseIndexY+ camera->y) * TILE_SIZE);
+			ParallaxObj* parallaxObj = new ParallaxObj(mapData[currLayer - 1], L"Parallax");
+			ParallaxSpriteRenderer* paralaxSpriteRenderer = new ParallaxSpriteRenderer(parallaxObj, 1);
+			paralaxSpriteRenderer->SetSprite(L"Image/Parallax/001-Fog01.png");
+
 		}
 	}
+}
+
+void TileSelectComponent::Release()
+{
+	delete tileTypeTxt;
+
+	delete currLayerTxt;
+
+	for (auto layer : mapData)
+	{
+		delete layer;
+	}
+
 }

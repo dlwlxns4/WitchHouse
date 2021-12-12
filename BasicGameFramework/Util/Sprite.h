@@ -16,6 +16,7 @@ public:
 	void Render(int posX, int posY, int currFrameX, int currFrameY, int sizeX, int sizeY);
 	void Render(float startPosX, float startPosY, int posX, int posY, bool isTile);
 	void Render(int posX, int posY);
+	void LoopRender(int posX, int posY, int renderPosX, int renderPosY);
 	void Update(); 
 	void Release();
 

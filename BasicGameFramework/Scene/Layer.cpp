@@ -68,6 +68,11 @@ const Scene* Layer::GetScene() const noexcept
 	return _scene;
 }
 
+Scene* Layer::GetScene() noexcept
+{
+	return _scene;
+}
+
 std::wstring Layer::GetTag() const noexcept
 {
 	return _tag;

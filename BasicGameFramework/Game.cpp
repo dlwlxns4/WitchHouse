@@ -90,6 +90,8 @@ bool Game::Init(HINSTANCE hInst)
 	//-------------------------d2d
 	D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &pFactory);
 
+	GetClientRect(_hWnd, &cr);
+
 	pFactory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(),
 		D2D1::HwndRenderTargetProperties(_hWnd, D2D1::SizeU(cr.right - cr.left, cr.bottom - cr.top)),
 		&pRenderTarget
@@ -98,6 +100,7 @@ bool Game::Init(HINSTANCE hInst)
 	CoInitialize(nullptr);
 	CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pImagingFactory));
 
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0, 0, 0, 1), &pBrush);
 
 	HRESULT hr =DWriteCreateFactory(
 		DWRITE_FACTORY_TYPE_SHARED,
@@ -117,7 +120,7 @@ bool Game::Init(HINSTANCE hInst)
 	);
 
 	//--------------------------d2d
-
+	//_CrtSetBreakAlloc(312);
 
 	Input::Init(_hWnd);
 

@@ -10,18 +10,17 @@ class Layer;
 class Text;
 class TileSelectComponent : public Component
 {
-public:
 
 private:
 	enum class TileType
 	{
 		tileObj=0,
-		parallaxObj=1,
-		PlayerObj=2
+		PlayerObj=1,
+		parallaxObj=2
 	};
 
 	using Component::Component;
-	virtual ~TileSelectComponent() noexcept = default;
+	virtual ~TileSelectComponent();
 
 	class Sprite* sprite = ImageManager::GetInstance()->FindSprite(ImageManager::GetInstance()->GetSpriteName(0).c_str());
 	RECT spriteRect = {};
@@ -40,9 +39,12 @@ private:
 	Text* currLayerTxt;
 	int currLayer = -1;
 
+public:
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
+	virtual void Release() override;
 
 	void SetObject(int mouseIndexX, int mouseIndexY);
 

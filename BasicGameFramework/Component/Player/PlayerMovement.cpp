@@ -9,6 +9,7 @@
 #include "PlayerSpriteRenderer.h"
 
 #include "../../Manager/GameManager.h"
+#include "../../Manager/PhysicsManager.h"
 #include <iostream>
 
 #define DOWN_DIR	0
@@ -22,10 +23,15 @@ void PlayerMovement::Update()
 
 	if (GameManager::GetInstance()->GetState() == State::None)
 	{
+		
 		if (Input::GetButton(VK_UP))
 		{
 			GameManager::GetInstance()->SetState(State::Move);
 			_owner->GetComponent<PlayerSpriteRenderer>()->SetDirection(UP_DIR);
+			if ( PhysicsManager::GetInstance()->IsCollide(_owner->GetPosition().x / 32, _owner->GetPosition().y / 32) )
+			{
+				cout << "@" << "\n";
+			}
 		}
 		if (Input::GetButton(VK_DOWN))
 		{
@@ -57,10 +63,11 @@ void PlayerMovement::Update()
 		//static_cast<LONG>(_speed * Timer::GetDeltaTime());
 		pos.x += dx[(int)dir] * 4;
 		pos.y += dy[(int)dir] * 4;
-		camera->x += dx[(int)dir] * 0.125;
-		camera->y += dy[(int)dir] * 0.125;
+
+		camera->x += dx[(int)dir] * 0.125f;
+		camera->y += dy[(int)dir] * 0.125f;
+
 		_owner->SetPosition(pos);
-		std::cout << pos.x << " " << pos.y << "\n";
 		moveDistance += 4;
 		if (moveDistance >= 16)
 		{
