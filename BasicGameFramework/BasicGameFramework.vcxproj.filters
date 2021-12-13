@@ -169,6 +169,15 @@
     <ClInclude Include="Manager\PhysicsManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Manager\TalkManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TriggerObj.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerAction.h">
+      <Filter>Component\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -288,6 +297,15 @@
     </ClCompile>
     <ClCompile Include="Manager\PhysicsManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\TalkManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TriggerObj.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerAction.cpp">
+      <Filter>Component\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

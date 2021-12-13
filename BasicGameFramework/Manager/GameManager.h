@@ -6,7 +6,7 @@
 
 #include "../Util/Singleton.h"
 
-enum class State{ None=0, Move=1};
+enum class State{ None=0, Move=1, Chat=2};
 
 class GameManager : public Singleton<GameManager>
 {

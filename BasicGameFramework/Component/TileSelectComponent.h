@@ -14,10 +14,11 @@ class TileSelectComponent : public Component
 private:
 	enum class TileType
 	{
-		tileObj=0,
-		PlayerObj=1,
-		parallaxObj=2,
-		Collider=3
+		tileObj = 0,
+		PlayerObj = 1,
+		parallaxObj = 2,
+		Collider = 3,
+		Trigger = 4
 	};
 
 	using Component::Component;
@@ -36,8 +37,9 @@ private:
 
 	TileType tileType = TileType::tileObj;
 
-	Text* tileTypeTxt;
-	Text* currLayerTxt;
+	Text* tileTypeTxt = nullptr;
+	Text* currLayerTxt = nullptr;
+	Text* triggerPosTxt= nullptr;
 	int currLayer = -1;
 
 	bool isShowCollider = false;

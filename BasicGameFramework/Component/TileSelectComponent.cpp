@@ -91,12 +91,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Collider";
 			}
+			else if ((int)tileType == 4)
+			{
+				txt = L"TileType : Trigger";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 3)
+		if ((int)tileType < 4)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -116,6 +120,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 3)
 			{
 				txt = L"TileType : Collider";
+			}
+			else if ((int)tileType == 4)
+			{
+				txt = L"TileType : Trigger";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -166,7 +174,7 @@ void TileSelectComponent::Update()
 		currLayer = 1;
 		wstring txt = L"CurrLayer : " + to_wstring(currLayer) + L" MaxLayer : " + to_wstring(mapData.size() + 1);
 		currLayerTxt->GetComponent< TextComponent>()->SetText(txt);
-		mapData.push_back(new Layer(L"layer" + to_wstring(mapData.size()), mapData.size()));
+		mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
 	}
 
 	POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
@@ -184,8 +192,10 @@ void TileSelectComponent::Update()
 		}
 		else if (Input::GetButton(VK_RBUTTON))
 		{
-			mapData[currLayer - 1]->RemoveObject(L"Tile");
-
+			if (tileType == TileType::Trigger)
+			{
+				PhysicsManager::GetInstance()->RemoveTrigger(mouseIndexX, mouseIndexY);
+			}
 		}
 	}
 
@@ -221,6 +231,33 @@ void TileSelectComponent::Update()
 	{
 		map->Update();
 	}
+
+
+	//select TriggerTile
+	if (Input::GetButtonDown('F'))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
+		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		PhysicsManager::GetInstance()->addId_1(mouseIndexX, mouseIndexY);
+	}
+	else if (Input::GetButtonDown('G'))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
+		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		PhysicsManager::GetInstance()->addId_10(mouseIndexX, mouseIndexY);
+	}
+	else if (Input::GetButtonDown('V'))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
+		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		PhysicsManager::GetInstance()->addId_100(mouseIndexX, mouseIndexY);
+	}
+	else if (Input::GetButtonDown('B'))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
+		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		PhysicsManager::GetInstance()->addId_1000(mouseIndexX, mouseIndexY);
+	}
 }
 
 void TileSelectComponent::Init()
@@ -238,6 +275,11 @@ void TileSelectComponent::Init()
 	currLayerTxt->SetPosition(20, TILE_SIZE * (MAP_SIZE_Y + 1));
 	TextComponent* txtComponent2 = new TextComponent(currLayerTxt, 1);
 	txtComponent2->SetText(L"CurrLayer : -1 MaxLayer : -1");
+
+	triggerPosTxt = new Text(L"SelectTriggerTile");
+	triggerPosTxt->SetPosition(20, TILE_SIZE * (MAP_SIZE_Y + 2));
+	TextComponent* txtComponent3 = new TextComponent(triggerPosTxt, 1);
+	txtComponent3->SetText(L"SelectTriggerTile : x: -1 y: -1");
 }
 
 void TileSelectComponent::Render(HDC hdc)
@@ -273,11 +315,20 @@ void TileSelectComponent::Render(HDC hdc)
 		{
 			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
 		}
+		unordered_map<int, unordered_map<int, int>>* trigger = PhysicsManager::GetInstance()->GetTriggerObj();
+		for (auto it : *trigger)
+		{
+			for (auto itt : it.second)
+			{	
+				ImageManager::GetInstance()->DrawColliderRectRed(it.first, itt.first, itt.second);
+			}
+		}
 
 	}
 
 	tileTypeTxt->Render(hdc);
 	currLayerTxt->Render(hdc);
+	triggerPosTxt->Render(hdc);
 }
 
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
@@ -330,6 +381,10 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		PhysicsManager::GetInstance()->SetCollision(mouseIndexX, mouseIndexY);
 	}
+	else if (tileType == TileType::Trigger)
+	{
+		PhysicsManager::GetInstance()->SetTrigger(mouseIndexX, mouseIndexY);
+	}
 }
 
 void TileSelectComponent::Release()
@@ -337,6 +392,8 @@ void TileSelectComponent::Release()
 	delete tileTypeTxt;
 
 	delete currLayerTxt;
+
+	delete triggerPosTxt;
 
 	for (auto layer : mapData)
 	{

@@ -34,7 +34,7 @@ GameObject::GameObject(const std::wstring& tag)
 GameObject::~GameObject() noexcept
 {
 
-	/*Component* pTemp = nullptr;
+	Component* pTemp = nullptr;
 	for (auto it = _components.begin(); it != _components.end(); )
 	{
 		pTemp = (*it);
@@ -43,13 +43,12 @@ GameObject::~GameObject() noexcept
 		delete pTemp;
 	}
 	
-	cout << _components.size();
-	*/
-	for (auto& comp : _components)
-	{
-		delete comp;
-		comp = nullptr;
-	}
+	
+	//for (auto& comp : _components)
+	//{
+	//	delete comp;
+	//	comp = nullptr;
+	//}
 	_components.clear();
 	_layer = nullptr;
 	_scene = nullptr;

@@ -159,6 +159,7 @@
     </ClInclude>
     <ClInclude Include="Component\MapFrameComponent.h" />
     <ClInclude Include="Component\ParallaxSpriteRenderer.h" />
+    <ClInclude Include="Component\Player\PlayerAction.h" />
     <ClInclude Include="Component\Player\PlayerMovement.h" />
     <ClInclude Include="Component\Player\PlayerSpriteRenderer.h" />
     <ClInclude Include="Component\RectComponent.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Manager\ImageManager.h" />
     <ClInclude Include="Manager\PhysicsManager.h" />
     <ClInclude Include="Manager\SceneManager.h" />
+    <ClInclude Include="Manager\TalkManager.h" />
     <ClInclude Include="Object\GameObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -183,6 +185,7 @@
     <ClInclude Include="Object\SampleSprite.h" />
     <ClInclude Include="Object\Text.h" />
     <ClInclude Include="Object\TileObj.h" />
+    <ClInclude Include="Object\TriggerObj.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Layer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -213,6 +216,7 @@
     </ClCompile>
     <ClCompile Include="Component\MapFrameComponent.cpp" />
     <ClCompile Include="Component\ParallaxSpriteRenderer.cpp" />
+    <ClCompile Include="Component\Player\PlayerAction.cpp" />
     <ClCompile Include="Component\Player\PlayerMovement.cpp" />
     <ClCompile Include="Component\Player\PlayerSpriteRenderer.cpp" />
     <ClCompile Include="Component\RectComponent.cpp" />
@@ -224,6 +228,7 @@
     <ClCompile Include="Manager\ImageManager.cpp" />
     <ClCompile Include="Manager\PhysicsManager.cpp" />
     <ClCompile Include="Manager\SceneManager.cpp" />
+    <ClCompile Include="Manager\TalkManager.cpp" />
     <ClCompile Include="Object\GameObject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -235,6 +240,7 @@
     <ClCompile Include="Object\SampleSprite.cpp" />
     <ClCompile Include="Object\Text.cpp" />
     <ClCompile Include="Object\TileObj.cpp" />
+    <ClCompile Include="Object\TriggerObj.cpp" />
     <ClCompile Include="Scene\Layer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>

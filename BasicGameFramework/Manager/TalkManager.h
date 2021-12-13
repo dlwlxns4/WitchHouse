@@ -14,4 +14,5 @@ private:
 
 public:
 	void Init();
+	string GetTalkData(int referenceId);
 };

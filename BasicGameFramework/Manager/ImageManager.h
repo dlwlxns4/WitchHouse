@@ -23,6 +23,7 @@ private:
 	IWICImagingFactory* pImagingFactory = nullptr;
 	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
 	ID2D1SolidColorBrush* pBrush = nullptr;
+	ID2D1SolidColorBrush* pBrushRed = nullptr;
 	IDWriteTextFormat* pTextFormat = nullptr;
 public:
 	ImageManager() noexcept = default;
@@ -33,6 +34,8 @@ public:
 
 	Sprite* AddSprite(const wchar_t* fileName);
 	Sprite* FindSprite(const wchar_t* fileName);
+
+	void DrawColliderRectRed(int posX, int posY, int id);
 
 	Image* AddImage(const wchar_t* fileName, int width, int height,
 		bool isTrans = false, COLORREF transColor = NULL);	// 사용할 이미지를 등록하는 기능

@@ -4,6 +4,7 @@
 #include "Util/Timer.h"
 #include "Manager/SceneManager.h"
 #include "Manager/ImageManager.h"
+#include "Manager/TalkManager.h"
 
 
 //--------------------------d2d
@@ -114,7 +115,7 @@ bool Game::Init(HINSTANCE hInst)
 		DWRITE_FONT_WEIGHT_REGULAR,
 		DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL,
-		20.0f,
+		15.0f,
 		L"en-us",
 		&pTextFormat
 	);
@@ -124,6 +125,7 @@ bool Game::Init(HINSTANCE hInst)
 
 	Input::Init(_hWnd);
 
+	TalkManager::GetInstance()->Init();
 	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget, pBrush, pTextFormat);
 	SceneManager::GetInstance()->Init();
 

@@ -7,7 +7,7 @@
 
 #include "../Component/Player/PlayerMovement.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
-
+#include "../Component/Player/PlayerAction.h"
 
 #include <iostream>
 void Player::Init()
@@ -22,6 +22,10 @@ void Player::Init()
 	wstring wCharacterPath = L"Image/Character/$vivi.png";
 	spriteRenderer->SetImage(wCharacterPath.c_str());
 	
+
+	//Action---------------------
+	PlayerAction* action = new PlayerAction(this, 1);
+
 	SetSize(200, 100);
 }
 

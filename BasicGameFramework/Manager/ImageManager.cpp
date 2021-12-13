@@ -32,6 +32,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 
 	this->pBrush = pBrush;
 
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(220, 0, 0, 1), &pBrushRed);
+
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
 	
@@ -123,7 +125,46 @@ void ImageManager::DrawColliderRect(int posX, int posY)
 					right,
 					bottom
 				),
-				ImageManager::GetInstance()->GetBrush(), 10.0f
+				pBrush, 10.0f
+			);
+		}
+	}
+}
+
+void ImageManager::DrawColliderRectRed(int posX, int posY, int id)
+{
+	POINTFLOAT* camera = GameManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - TILE_SIZE * camera->x +2;
+	int right = (posX + 1) * TILE_SIZE - TILE_SIZE * camera->x -2;
+	int top = posY * TILE_SIZE - TILE_SIZE * camera->y +2;
+	int bottom = (posY + 1) * TILE_SIZE - TILE_SIZE * camera->y -2;
+
+	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >= 0 && bottom <= TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				pBrushRed, 10.0f
+			);
+
+			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+				to_wstring(id).c_str(),
+				to_wstring(id).size(),
+				ImageManager::GetInstance()->GetTextFormat(),
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				), 
+				ImageManager::GetInstance()->GetBrush()
 			);
 		}
 	}
