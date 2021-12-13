@@ -35,6 +35,15 @@
     <Filter Include="Scene\MapEditor">
       <UniqueIdentifier>{c18a0894-0e6c-421a-9b11-d4cef558e111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\UILayer">
+      <UniqueIdentifier>{61ee71e6-5b9f-4c90-8b14-654702ccd960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{646b705c-b77e-4c3b-a21d-83c70159522c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\UI">
+      <UniqueIdentifier>{ae4b5574-d0f4-4e8b-b46e-a2ab4013a364}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -178,6 +187,24 @@
     <ClInclude Include="Component\Player\PlayerAction.h">
       <Filter>Component\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\UILayer.h">
+      <Filter>Scene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ChatPanel.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\UIManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SlateRenderer.h">
+      <Filter>Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\UserInfoComponent.h">
+      <Filter>Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InvenComponent.h">
+      <Filter>Component\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -306,6 +333,24 @@
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerAction.cpp">
       <Filter>Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\UILayer.cpp">
+      <Filter>Scene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ChatPanel.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\UIManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SlateRenderer.cpp">
+      <Filter>Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\UserInfoComponent.cpp">
+      <Filter>Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\InvenComponent.cpp">
+      <Filter>Component\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

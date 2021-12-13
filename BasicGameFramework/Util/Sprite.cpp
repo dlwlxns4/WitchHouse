@@ -105,6 +105,29 @@ void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY)
 	}
 }
 
+void Sprite::SlateRender(int posX, int posY,int slatePos)
+{
+	if (pBitmap)
+	{
+
+		D2D1_SIZE_F imageSize = pBitmap->GetSize();
+
+		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
+			D2D1::RectF(
+				(float)posX,
+				(float)posY-slatePos,
+				posX + imageSize.width,
+				posY + slatePos
+			),
+			1
+			);
+
+
+		//---------------d2d
+
+	}
+}
+
 void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY, int sizeX, int sizeY)
 {
 	if (pBitmap)
@@ -154,6 +177,62 @@ void Sprite::Render(float startPosX, float startPosY, int posX, int posY, bool i
 				startPosX + imageSize.width,
 				startPosY + imageSize.height),
 			1);
+
+		//---------------d2d
+
+	}
+}
+
+void Sprite::Render(float startPosX, float startPosY,float opacity, int currFrameX, int currFrameY, int maxFrameX, int maxFrameY)
+{
+	if (pBitmap)
+	{
+
+
+		
+		D2D1_SIZE_F imageSize = pBitmap->GetSize();
+
+		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(imageSize.width/ maxFrameX, imageSize.height / maxFrameY);
+
+
+		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
+			D2D1::RectF(
+				(float)startPosX,
+				(float)startPosY,
+				startPosX + imageOneFrameSize.width,
+				startPosY + imageOneFrameSize.height),
+			opacity,
+			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+			D2D1::RectF(
+				currFrameX * imageOneFrameSize.width, 
+				currFrameY * imageOneFrameSize.height,
+				(currFrameX + 1) * imageOneFrameSize.width, 
+				(currFrameY + 1) * imageOneFrameSize.height)
+		);
+
+
+		//---------------d2d
+
+	}
+}
+
+void Sprite::Render(int posX, int posY, float opacity)
+{
+	if (pBitmap)
+	{
+
+		D2D1_SIZE_F imageSize = pBitmap->GetSize();
+
+		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
+			D2D1::RectF(
+				(float)posX,
+				(float)posY,
+				posX + imageSize.width,
+				posY + imageSize.height
+			),
+			opacity
+		);
+
 
 		//---------------d2d
 

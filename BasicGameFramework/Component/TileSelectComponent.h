@@ -8,6 +8,7 @@
 
 class Layer;
 class Text;
+class ChatPanel;
 class TileSelectComponent : public Component
 {
 
@@ -40,6 +41,7 @@ private:
 	Text* tileTypeTxt = nullptr;
 	Text* currLayerTxt = nullptr;
 	Text* triggerPosTxt= nullptr;
+
 	int currLayer = -1;
 
 	bool isShowCollider = false;

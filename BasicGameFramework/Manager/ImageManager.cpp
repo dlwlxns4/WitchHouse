@@ -66,6 +66,16 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	//-------------------Parallax
 
 	AddSprite(L"Image/Parallax/001-Fog01.png");
+
+	//------------------UI
+	AddSprite(L"Image/UI/ChatPanel.png");
+	AddSprite(L"Image/UI/UserInfo_1.png");
+	AddSprite(L"Image/UI/UserInfo_2.png");
+	AddSprite(L"Image/UI/InventoryPanel.png");
+	AddSprite(L"Image/UI/ItemInfoPanel.png");
+	AddSprite(L"Image/UI/HealthBar.png");
+	AddSprite(L"Image/UI/viviface.png");
+
 								 
 }
 

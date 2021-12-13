@@ -1,13 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
+class Sprite;
 class ChatPanel : public GameObject
 {
+public:
 	using GameObject::GameObject;
 
 	virtual ~ChatPanel() noexcept = default;
 
 	virtual void Init() override;
-	virtual void Update() override;
-	virtual void Render(HDC hdc)override;
+
+private:
+	int slatePosY = 0;
 };

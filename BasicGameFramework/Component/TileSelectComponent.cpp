@@ -30,6 +30,8 @@
 #include "../Manager/PhysicsManager.h"
 
 
+#include "../Object/ChatPanel.h"
+
 TileSelectComponent::~TileSelectComponent()
 {
 	Release();
@@ -257,6 +259,12 @@ void TileSelectComponent::Update()
 		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
 		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
 		PhysicsManager::GetInstance()->addId_1000(mouseIndexX, mouseIndexY);
+	}
+
+	if (Input::GetButtonDown('U'))
+	{
+		ChatPanel* chatPanel = new ChatPanel(mapData[mapData.size()-1], L"UI");
+		chatPanel->Init();
 	}
 }
 

@@ -21,17 +21,23 @@ void PlayerAction::Update()
 		int posX = _owner->GetPosition().x / 32 + dx[dir];
 		int posY = _owner->GetPosition().y / 32 + dy[dir];
 
-		int id = PhysicsManager::GetInstance()->GetTriggerId(posX, posY);
-		
-		DoChaating(id);
+		if (GameManager::GetInstance()->GetState() == State::None)
+		{
+			GameManager::GetInstance()->SetState(State::Chat);
+			int id = PhysicsManager::GetInstance()->GetTriggerId(posX, posY);
+			DoChaating(id);
+		}
+
 	}
 }
 
 void PlayerAction::DoChaating(int id)
 {
-	
-	string text = TalkManager::GetInstance()->GetTalkData(id);
-	cout << text << endl;
-	
+
+	if (id != 0)
+	{
+		string text = TalkManager::GetInstance()->GetTalkData(id);
+		cout << text << endl;
+	}
 }
 

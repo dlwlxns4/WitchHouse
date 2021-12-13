@@ -6,13 +6,20 @@
 
 #include "../Util/Singleton.h"
 
-enum class State{ None=0, Move=1, Chat=2};
+enum class State
+{
+	None = 0,
+	Move = 1,
+	Chat = 2,
+	UserInfo = 3
+};
 
 class GameManager : public Singleton<GameManager>
 {
 private:
 	POINTFLOAT cameraPos = {};
 	State state = State::None;
+
 
 public:
 	POINTFLOAT* GetCameraPos() { return &cameraPos; }
