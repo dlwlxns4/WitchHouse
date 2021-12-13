@@ -11,8 +11,6 @@ using namespace std;
 class UIManager : public Singleton<UIManager>
 {
 public:
-
-
+	void SetTalkData(vector<string> data);
 private:
-	
 };

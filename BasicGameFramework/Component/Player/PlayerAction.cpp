@@ -9,6 +9,7 @@
 #include "../../Manager/PhysicsManager.h"
 #include "../../Manager/GameManager.h"
 #include "../../Manager/TalkManager.h"
+#include "../../Manager/UIManager.h"
 
 #include "PlayerSpriteRenderer.h"
 void PlayerAction::Update()
@@ -36,8 +37,8 @@ void PlayerAction::DoChaating(int id)
 
 	if (id != 0)
 	{
-		string text = TalkManager::GetInstance()->GetTalkData(id);
-		cout << text << endl;
+		TalkManager::GetInstance()->SaveTalkData(id);
+		
 	}
 }
 

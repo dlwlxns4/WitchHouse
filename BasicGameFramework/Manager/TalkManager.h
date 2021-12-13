@@ -10,9 +10,12 @@ using namespace std;
 class TalkManager : public Singleton<TalkManager>
 {
 private:
-	unordered_map<int, vector<string>> talkData = {};
+	unordered_map<int, vector<wstring>> talkData = {};
+	vector<wstring> vecTalkData = {};
 
 public:
 	void Init();
-	string GetTalkData(int referenceId);
+	void SaveTalkData(int referenceId);
+	vector<wstring> GetVecTalkData();
+	vector<wstring> GetTalkData(int referenceId);
 };

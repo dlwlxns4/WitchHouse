@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include <string>
 
 class Sprite;
 class SlateRenderer : public Component
@@ -21,4 +22,9 @@ private:
 	int slatePos = 0;
 	bool isOpen = false;
 	bool isClose = false;
+	bool isTalk = false;
+
+	std::wstring chatEffect = {};
+	int strIndex = 0;
+	int vecIndex = 0;
 };
