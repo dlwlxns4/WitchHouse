@@ -190,13 +190,13 @@
     <ClInclude Include="Scene\UILayer.h">
       <Filter>Scene\UILayer</Filter>
     </ClInclude>
-    <ClInclude Include="Object\ChatPanel.h">
+    <ClInclude Include="Object\UIObj.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
     <ClInclude Include="Manager\UIManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Component\SlateRenderer.h">
+    <ClInclude Include="Component\ChatRenderer.h">
       <Filter>Component\UI</Filter>
     </ClInclude>
     <ClInclude Include="Component\UserInfoComponent.h">
@@ -204,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Component\InvenComponent.h">
       <Filter>Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\RecourceId.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,13 +340,13 @@
     <ClCompile Include="Scene\UILayer.cpp">
       <Filter>Scene\UILayer</Filter>
     </ClCompile>
-    <ClCompile Include="Object\ChatPanel.cpp">
+    <ClCompile Include="Object\UIObj.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="Manager\UIManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Component\SlateRenderer.cpp">
+    <ClCompile Include="Component\ChatRenderer.cpp">
       <Filter>Component\UI</Filter>
     </ClCompile>
     <ClCompile Include="Component\UserInfoComponent.cpp">

@@ -33,6 +33,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	this->pBrush = pBrush;
 
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(220, 0, 0, 1), &pBrushRed);
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255, 255, 255, 1), &pBrushWhite);
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(132/255.0f, 272/255.0f, 255/255.0f, 1), &pBrushBlue);
 
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
@@ -75,6 +77,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/ItemInfoPanel.png");
 	AddSprite(L"Image/UI/HealthBar.png");
 	AddSprite(L"Image/UI/viviface.png");
+	AddSprite(L"Image/UI/OpacityPanel.png");
+	AddSprite(L"Image/UI/SelectPanel_01.png");
 
 								 
 }

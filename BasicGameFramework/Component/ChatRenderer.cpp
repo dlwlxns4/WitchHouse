@@ -1,4 +1,4 @@
-#include "SlateRenderer.h"
+#include "ChatRenderer.h"
 
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
@@ -13,13 +13,17 @@
 #include <dwrite.h>
 
 #include <iostream>
-void SlateRenderer::Init()
+
+#include <atlconv.h>
+
+
+void ChatRenderer::Init()
 {
 	Component::Init();
 	slatePos = 0;
 }
 
-void SlateRenderer::Update()
+void ChatRenderer::Update()
 {
 	if (GameManager::GetInstance()->GetState() == State::Chat && slatePos < sprite->GetHeight() / 2 && isOpen == false)
 	{
@@ -49,7 +53,8 @@ void SlateRenderer::Update()
 	}
 }
 
-void SlateRenderer::Render(HDC hdc)
+
+void ChatRenderer::Render(HDC hdc)
 {
 
 	if (GameManager::GetInstance()->GetState() == State::Chat)
@@ -65,30 +70,32 @@ void SlateRenderer::Render(HDC hdc)
 			if (data[vecIndex] != chatEffect)
 			{
 				chatEffect += data[vecIndex][strIndex++];
-				cout << chatEffect.c_str() << endl;
 			}
 		}
 		D2D1_RECT_F layoutRect = D2D1::RectF(
-			10, 320, 534, 406
+			10, 310, 534, 406
 		);
+
+
+
 		ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(chatEffect.c_str(), chatEffect.size(),
 			ImageManager::GetInstance()->GetTextFormat(),
 			layoutRect,
-			ImageManager::GetInstance()->GetBrush());
+			ImageManager::GetInstance()->GetBrushWhite());
 	}
 }
 
-void SlateRenderer::SetSprite(const wchar_t* fileName)
+void ChatRenderer::SetSprite(const wchar_t* fileName)
 {
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
 }
 
-void SlateRenderer::SetSlatePos(int pos)
+void ChatRenderer::SetSlatePos(int pos)
 {
 	slatePos = pos;
 }
 
-int SlateRenderer::GetSlatePos(int pos)
+int ChatRenderer::GetSlatePos(int pos)
 {
 	return 0;
 }

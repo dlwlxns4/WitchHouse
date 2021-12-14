@@ -24,6 +24,8 @@ private:
 	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
 	ID2D1SolidColorBrush* pBrush = nullptr;
 	ID2D1SolidColorBrush* pBrushRed = nullptr;
+	ID2D1SolidColorBrush* pBrushWhite = nullptr;
+	ID2D1SolidColorBrush* pBrushBlue = nullptr;
 	IDWriteTextFormat* pTextFormat = nullptr;
 public:
 	ImageManager() noexcept = default;
@@ -52,6 +54,8 @@ public:
 	IWICImagingFactory* GetImageingFactory() { return pImagingFactory; }
 	ID2D1HwndRenderTarget* GetRenderTarget() { return pRenderTarget; }
 	ID2D1SolidColorBrush* GetBrush() { return pBrush; }
+	ID2D1SolidColorBrush* GetBrushWhite() { return pBrushWhite; }
+	ID2D1SolidColorBrush* GetBrushBlue() { return pBrushBlue; }
 	IDWriteTextFormat* GetTextFormat() { return pTextFormat; }
 	
 	wstring GetSpriteName(int index) { return spritesName[index]; }

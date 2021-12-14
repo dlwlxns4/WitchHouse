@@ -4,11 +4,11 @@
 #include <string>
 
 class Sprite;
-class SlateRenderer : public Component
+class ChatRenderer : public Component
 {
 public:
 	using Component::Component;
-	virtual ~SlateRenderer() noexcept = default;
+	virtual ~ChatRenderer() noexcept = default;
 
 	virtual void Init()override;
 	virtual void Update() override;

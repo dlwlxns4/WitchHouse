@@ -2,12 +2,12 @@
 #include "GameObject.h"
 
 class Sprite;
-class ChatPanel : public GameObject
+class UIObj : public GameObject
 {
 public:
 	using GameObject::GameObject;
 
-	virtual ~ChatPanel() noexcept = default;
+	virtual ~UIObj() noexcept = default;
 
 	virtual void Init() override;
 

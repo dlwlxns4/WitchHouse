@@ -30,7 +30,7 @@
 #include "../Manager/PhysicsManager.h"
 
 
-#include "../Object/ChatPanel.h"
+#include "../Object/UIObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -263,7 +263,7 @@ void TileSelectComponent::Update()
 
 	if (Input::GetButtonDown('U'))
 	{
-		ChatPanel* chatPanel = new ChatPanel(mapData[mapData.size()-1], L"UI");
+		UIObj* chatPanel = new UIObj(mapData[mapData.size()-1], L"UI");
 		chatPanel->Init();
 	}
 }
