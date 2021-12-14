@@ -6,8 +6,8 @@
 
 struct Resolution
 {
-	INT32	Width;
-	INT32	Height;
+	int	Width;
+	int	Height;
 };
 
 struct FPOINT
@@ -18,6 +18,6 @@ struct FPOINT
 
 struct Size
 {
-	INT32	Width;
-	INT32	Height;
+	int	Width;
+	int	Height;
 };

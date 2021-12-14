@@ -30,12 +30,16 @@
 #include "../Manager/PhysicsManager.h"
 
 
+#include <fstream>
+#include <istream>
+
 #include "../Object/UIObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
 	Release();
 }
+
 
 void TileSelectComponent::Update()
 {
@@ -266,6 +270,15 @@ void TileSelectComponent::Update()
 		UIObj* chatPanel = new UIObj(mapData[mapData.size()-1], L"UI");
 		chatPanel->Init();
 	}
+
+	if (Input::GetButtonDown('K'))
+	{
+		Save();
+	}
+	if (Input::GetButtonDown('L'))
+	{
+		Load();
+	}
 }
 
 void TileSelectComponent::Init()
@@ -354,7 +367,8 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-					spriteRenderer->SetSprite(ImageManager::GetInstance()->GetSpriteName(sampleIndex).c_str(), i - camera->x, j - camera->y);
+					spriteRenderer->SetSprite(sampleIndex, i - camera->x, j - camera->y);
+
 					tileObj->SetPosition(
 						(mouseIndexX + (i - downPos.first - camera->x)) * TILE_SIZE,
 						(mouseIndexY + (j - downPos.second - camera->y)) * TILE_SIZE
@@ -408,4 +422,62 @@ void TileSelectComponent::Release()
 		delete layer;
 	}
 
+}
+
+void TileSelectComponent::Save(int saveIndex)
+{
+	string filePath = "Save/MapData" + to_string(saveIndex) + ".txt";
+
+	ofstream writeFile(filePath.data());
+
+	if (writeFile.is_open())
+	{
+		writeFile << mapData.size() << endl;
+		for (size_t i = 0; i < mapData.size(); ++i)
+		{
+			writeFile << *(mapData[i]) << endl;
+			writeFile << -1 << endl;
+		}
+	}
+
+	writeFile << *PhysicsManager::GetInstance();
+
+	cout << "세이브 완료" << endl;
+	writeFile.close();
+}
+
+void TileSelectComponent::Load(int loadIndex)
+{
+	string filePath = "Save/MapData" + to_string(loadIndex) + ".txt";
+
+	ifstream openFile(filePath.data());
+
+	int maxLayer = 0;
+	if (openFile.is_open())
+	{
+		openFile >> maxLayer;
+		
+		for (auto layer : mapData)
+		{
+			delete layer;
+		}
+
+		mapData.clear();
+		mapData.reserve(maxLayer);
+
+		currLayer = 1;
+
+		for (int i = 0; i < maxLayer; ++i)
+		{
+			mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
+
+			openFile >> *(mapData[i]);
+		}
+	}
+	openFile >> *PhysicsManager::GetInstance();
+
+	wstring txt = L"CurrLayer : " + to_wstring(currLayer) + L" MaxLayer : " + to_wstring(mapData.size());
+	currLayerTxt->GetComponent< TextComponent>()->SetText(txt);
+	cout << "Load완료" << endl;
+	openFile.close();
 }

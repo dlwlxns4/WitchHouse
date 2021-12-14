@@ -7,6 +7,7 @@
 #include "../Util/Type.h"
 #include "../IBehaviour.h"
 
+
 class Scene;
 class Layer;
 class Component;
@@ -63,6 +64,12 @@ public:
 	Pivot			GetPivot() const noexcept;
 	Scene*			GetScene() noexcept;
 	Layer*			GetLayer() noexcept;
+	
+	virtual void Write(std::ostream& os) const;
+	virtual void Read(std::istream& is);
+	friend std::ostream& operator<<(std::ostream& os, const GameObject& obj);
+	friend std::istream& operator>>(std::istream& is, GameObject& obj);
+
 private:
 	POINT						_position = {};
 	Size						_size = {};
@@ -72,3 +79,5 @@ private:
 	std::wstring				_tag = L"";
 	std::vector<Component*>		_components;
 };
+
+

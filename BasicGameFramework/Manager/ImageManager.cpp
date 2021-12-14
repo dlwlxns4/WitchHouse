@@ -64,10 +64,11 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/TileE.png");
 	spritesName.push_back(L"Image/Tile/yukab034d.png");
 
-
+	
 	//-------------------Parallax
-
 	AddSprite(L"Image/Parallax/001-Fog01.png");
+
+	parallaxName.push_back(L"Image/Parallax/001-Fog01.png");
 
 	//------------------UI
 	AddSprite(L"Image/UI/ChatPanel.png");

@@ -13,9 +13,42 @@ void SpriteRenderer::Render(HDC hdc)
 	);
 }
 
+
+void SpriteRenderer::Write(std::ostream& os) const
+{
+	os << 100 << "\t";
+	Component::Write(os);
+	os << spriteindex << "\t";
+	os << frameX << "\t";
+	os << frameY << "\t";
+	os << sizeX << "\t";
+	os << sizeY << "\t";
+}
+
+void SpriteRenderer::Read(istream& is)
+{
+	Component::Read(is);
+	is >> spriteindex
+		>> frameX
+		>> frameY
+		>> sizeX
+		>> sizeY;
+	cout << spriteindex << endl;
+	SetSprite(spriteindex, frameX, frameY);
+}
+
 void SpriteRenderer::SetSprite(const wchar_t* fileName, int frameX, int frameY)
 {
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
+	this->frameX = frameX;
+	this->frameY = frameY;
+}
+
+void SpriteRenderer::SetSprite(int spriteindex, int frameX, int frameY)
+{
+	wstring path = ImageManager::GetInstance()->GetSpriteName(spriteindex);
+	sprite = ImageManager::GetInstance()->FindSprite(path.c_str());
+	this->spriteindex = spriteindex;
 	this->frameX = frameX;
 	this->frameY = frameY;
 }

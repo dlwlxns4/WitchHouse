@@ -17,7 +17,8 @@ private:
 	unordered_map<wstring, Sprite*> sprites = {};
 
 	vector<wstring> spritesName = {};
-	
+	vector<wstring> parallaxName = {};
+
 	HWND		_hWnd = {};
 	HINSTANCE	_hInstance = {};
 	IWICImagingFactory* pImagingFactory = nullptr;

@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "../IBehaviour.h"
-
+#include <iostream>+
 class Scene;
 class GameObject;
 
@@ -21,15 +21,23 @@ public:
 	virtual void		Release() override;
 
 	const Scene*		GetScene() const noexcept;
-	Scene* GetScene()  noexcept;
+	Scene* GetScene()   noexcept;
 	std::wstring		GetTag() const noexcept;
 	INT32				GetZOrder() const noexcept;
 
 	void				AddObject(GameObject* obj);
-	void				RemoveObject(const std::wstring& tag);
+	void				RemoveObject(const std::wstring& tag);	
+
+	virtual void Write(std::ostream& os) const;
+	virtual void Read(std::istream& is);
+	friend std::ostream&		operator<<(std::ostream& os, const Layer& layer);
+	friend std::istream&		operator>>(std::istream& is, Layer& layer);
+
 private:
 	Scene*							_scene;
-	INT32							_zOrder;
+	int								_zOrder;
 	std::wstring					_tag = L"";
 	std::vector<GameObject*>		_objects;
+	
 };
+

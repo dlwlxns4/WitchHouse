@@ -4,6 +4,8 @@
 #include "../Util/AboutTile.h"
 #include "../Manager/GameManager.h"
 
+#include <iostream>
+
 void TileObj::Init()
 {
 }
@@ -18,4 +20,10 @@ void TileObj::Render(HDC hdc)
 			GameObject::Render(hdc);
 		}
 	}
+}
+
+void TileObj::Write(std::ostream& os) const
+{
+	os << 1 << "\t";
+	GameObject::Write(os);
 }

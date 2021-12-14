@@ -4,6 +4,10 @@
 #include "../stdafx.h"
 #include "../Object/GameObject.h"
 
+#include "../Object/TileObj.h"
+#include "../Object/ParallaxObj.h"
+
+
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
 	_scene(scene),
@@ -95,4 +99,53 @@ void Layer::RemoveObject(const wstring& tag)
 		{
 			return obj->GetTag() == tag;
 		});
+}
+
+void Layer::Write(std::ostream& os) const
+{
+	os << this->_zOrder << "\t";
+}
+
+void Layer::Read(std::istream& is)
+{
+	is >> this->_zOrder;
+}
+
+std::ostream& operator<<(std::ostream& os, const Layer& layer)
+{
+	layer.Write(os);
+
+	for (size_t i = 0; i < layer._objects.size(); ++i)
+	{
+		os << *(layer._objects[i]) << endl;
+	}
+
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, Layer& layer)
+{
+	layer.Read(is);
+
+	int objType = 0;
+	do
+	{
+		is >> objType;
+		switch (objType)
+		{
+			case 1:
+			{
+				TileObj* tile = new TileObj(&layer, L"Tile");
+				tile->Read(is);
+				break;
+			}
+			case 2:
+			{
+				ParallaxObj* parallax = new ParallaxObj(&layer, L"Parallax");
+				parallax->Read(is);
+				break;
+			}
+		}
+	} while (objType != -1);
+	return is;
 }

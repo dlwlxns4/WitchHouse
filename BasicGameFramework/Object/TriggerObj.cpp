@@ -1,9 +1,7 @@
 #include "TriggerObj.h"
+#include "../Component/SpriteRenderer.h"
 
 void TriggerObj::Init()
 {
-}
 
-void TriggerObj::Render(HDC hdc)
-{
 }

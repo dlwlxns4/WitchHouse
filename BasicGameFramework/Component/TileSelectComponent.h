@@ -55,4 +55,6 @@ public:
 
 	void SetObject(int mouseIndexX, int mouseIndexY);
 
+	void Save(int saveIndex=0);
+	void Load(int loadIndex=0);
 };

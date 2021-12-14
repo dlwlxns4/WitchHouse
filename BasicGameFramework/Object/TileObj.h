@@ -9,4 +9,6 @@ class TileObj : public GameObject
 
 	virtual void Init() override;
 	virtual void Render(HDC hdc)override;
+
+	virtual void Write(std::ostream& os)const override;
 };

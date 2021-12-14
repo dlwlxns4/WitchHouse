@@ -38,8 +38,43 @@ void ParallaxSpriteRenderer::SetSprite(const wchar_t* fileName, int frameX, int 
 	this->frameY = frameY;
 }
 
+void ParallaxSpriteRenderer::SetSprite()
+{
+	sprite = ImageManager::GetInstance()->FindSprite(L"Image/Parallax/001-Fog01.png");
+}
+
 void ParallaxSpriteRenderer::SetSprite(const wchar_t* fileName)
 {
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
 
+}
+
+void ParallaxSpriteRenderer::Write(std::ostream& os) const
+{
+	os << 101 << "\t";
+	Component::Write(os);
+	os << frameX			<<"\t";
+	os << frameY			<<"\t";
+	os << sizeX 			<<"\t";
+	os << sizeY 			<<"\t";
+	os << renderPosX 		<<"\t";
+	os << renderPosY 		<<"\t";
+	os << renderDelayTime 	<<"\t";
+	os << spriteIndex 		<<"\t";
+}
+
+void ParallaxSpriteRenderer::Read(std::istream& is)
+{
+	Component::Read(is);
+
+	is >> frameX
+		>> frameY
+		>> sizeX
+		>> sizeY
+		>> renderPosX
+		>> renderPosY
+		>> renderDelayTime
+		>> spriteIndex;
+
+	SetSprite();
 }

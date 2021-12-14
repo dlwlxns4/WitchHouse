@@ -8,6 +8,9 @@
 
 #include <iostream>
 
+#include "../Component/SpriteRenderer.h"
+#include "../Component/ParallaxSpriteRenderer.h"
+
 GameObject::GameObject(Scene* scene, Layer* layer, const wstring& tag)
 	:
 	_scene{ scene },
@@ -42,8 +45,8 @@ GameObject::~GameObject() noexcept
 
 		delete pTemp;
 	}
-	
-	
+
+
 	//for (auto& comp : _components)
 	//{
 	//	delete comp;
@@ -74,7 +77,7 @@ void GameObject::Update()
 
 void GameObject::Render(HDC hdc)
 {
-	
+
 	for (Component* comp : _components)
 	{
 		comp->Render(hdc);
@@ -202,7 +205,72 @@ Layer* GameObject::GetLayer() noexcept
 	return _layer;
 }
 
+void GameObject::Write(std::ostream& os) const
+{
+
+	os << _position.x << "\t";
+	os << _position.y << "\t";
+	os << _size.Height << "\t";
+	os << _size.Width << "\t";
+
+	os << _components.size() << "\t";
+	for (size_t i = 0; i < _components.size(); ++i)
+	{
+		os << *(_components[i]) << endl;
+	}
+}
+
+void GameObject::Read(std::istream& is)
+{
+	is >> _position.x
+		>> _position.y
+		>> _size.Height
+		>> _size.Width;
+
+	int compSize;
+	is >> compSize;
+
+	_components.reserve(compSize);
+	for (int i = 0; i < compSize; ++i)
+	{
+		int compType;
+		is >> compType;
+		switch (compType)
+		{
+		case 100:
+		{
+			SpriteRenderer* sr = new SpriteRenderer(this, 1);
+			sr->Read(is);
+			break;
+		}
+
+		case 101:
+		{
+			ParallaxSpriteRenderer* pr = new ParallaxSpriteRenderer(this, 1);
+			pr->Read(is);
+			break;
+		}
+		}
+
+
+	}
+}
+
 vector<Component*>& GameObject::GetComponents() noexcept
 {
 	return _components;
+}
+
+std::ostream& operator<<(std::ostream& os, const GameObject& obj)
+{
+	obj.Write(os);
+
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, GameObject& obj)
+{
+	obj.Read(is);
+
+	return is;
 }
