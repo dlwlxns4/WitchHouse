@@ -101,6 +101,18 @@ void Layer::RemoveObject(const wstring& tag)
 		});
 }
 
+void Layer::RemoveObject(POINT pos)
+{
+	for (auto it = _objects.begin(); it!=_objects.end(); ++it)
+	{
+		if ((*it)->GetPosition().x == pos.x && (*it)->GetPosition().y == pos.y)
+		{
+			_objects.erase(it);
+			break;
+		}
+	}
+}
+
 void Layer::Write(std::ostream& os) const
 {
 	os << this->_zOrder << "\t";

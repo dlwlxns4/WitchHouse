@@ -26,7 +26,9 @@ public:
 	INT32				GetZOrder() const noexcept;
 
 	void				AddObject(GameObject* obj);
-	void				RemoveObject(const std::wstring& tag);	
+	void				RemoveObject(const std::wstring& tag);
+	void				RemoveObject(POINT pos);
+
 
 	virtual void Write(std::ostream& os) const;
 	virtual void Read(std::istream& is);

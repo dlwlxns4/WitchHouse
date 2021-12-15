@@ -33,7 +33,6 @@ void SpriteRenderer::Read(istream& is)
 		>> frameY
 		>> sizeX
 		>> sizeY;
-	cout << spriteindex << endl;
 	SetSprite(spriteindex, frameX, frameY);
 }
 

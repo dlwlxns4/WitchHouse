@@ -198,6 +198,7 @@ void Game::processInput()
 void Game::update()
 {
 	SceneManager::GetInstance()->Update();
+
 }
 
 

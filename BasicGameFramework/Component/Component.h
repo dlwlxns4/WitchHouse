@@ -23,13 +23,16 @@ public:
 	virtual void		Write(std::ostream& os) const;
 	virtual void		Read(std::istream& is);
 
-	friend std::ostream& operator<<(std::ostream& os, const Component& comp);
-	friend std::istream& operator>>(std::istream& is, Component& comp);
+	friend				std::ostream& operator<<(std::ostream& os, const Component& comp);
+	friend				std::istream& operator>>(std::istream& is, Component& comp);
+	
+	bool				IsActive() const noexcept { return _isActive; }
+	bool				SetActive(bool isActive) { _isActive = isActive; }
 
 protected:
 	GameObject*			_owner = nullptr;
-
+	bool				_isActive = true;
 private:
-	int				_order = 100;
+	int					_order = 100;
 };
 

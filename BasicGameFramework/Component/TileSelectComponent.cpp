@@ -198,7 +198,11 @@ void TileSelectComponent::Update()
 		}
 		else if (Input::GetButton(VK_RBUTTON))
 		{
-			if (tileType == TileType::Trigger)
+			if (tileType == TileType::tileObj)
+			{
+				mapData[currLayer - 1]->RemoveObject(POINT{ mouseIndexX*TILE_SIZE, mouseIndexY*TILE_SIZE });
+			}
+			else if (tileType == TileType::Trigger)
 			{
 				PhysicsManager::GetInstance()->RemoveTrigger(mouseIndexX, mouseIndexY);
 			}
@@ -471,6 +475,12 @@ void TileSelectComponent::Load(int loadIndex)
 		{
 			mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
 
+			//플레이어 생성
+			//if (i == 1)
+			//{
+
+			//	mapData[i]->AddObject();
+			//}
 			openFile >> *(mapData[i]);
 		}
 	}

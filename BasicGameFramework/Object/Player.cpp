@@ -14,6 +14,7 @@ void Player::Init()
 {
 	//MoveMent-----------------------------------------------------
 	PlayerMovement* movement = new PlayerMovement(this, 1);
+	movement->Init();
 	movement->SetSpeed(0.2f);
 
 	//SpriteRender-------------------------------------------------
