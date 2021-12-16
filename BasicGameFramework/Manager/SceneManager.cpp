@@ -4,6 +4,7 @@
 #include "../Scene/TitleScene.h"
 #include "../Scene/TilemapToolScene.h"
 #include "../Scene/MainScene.h"
+#include "../Scene/TitleScene.h"
 
 #include "SceneManager.h"
 #include "ImageManager.h"
@@ -28,7 +29,7 @@ void SceneManager::Init()
 	_scenes[L"TilemapTool"] = new TilemapToolScene();
 	_scenes[L"Main"] = new MainScene();
 
-	_currentScene = _scenes[L"Main"];
+	_currentScene = _scenes[L"Title"];
 	_currentScene->Init();
 }
 

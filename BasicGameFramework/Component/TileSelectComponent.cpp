@@ -318,7 +318,7 @@ void TileSelectComponent::Render(HDC hdc)
 		0,
 		0,
 		0,
-		true
+		(bool)true
 	);
 
 	sprite->Render(

@@ -157,6 +157,8 @@
     <ClInclude Include="Component\Component.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Component\DesiredPosTextComp.h" />
+    <ClInclude Include="Component\FullSizeRenderer.h" />
     <ClInclude Include="Component\InvenComponent.h" />
     <ClInclude Include="Component\ChatRenderer.h" />
     <ClInclude Include="Component\MapFrameComponent.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Component\SpriteRenderer.h" />
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TileSelectComponent.h" />
+    <ClInclude Include="Component\TitleComp.h" />
     <ClInclude Include="Component\UserInfoComponent.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Manager\SceneManager.h" />
     <ClInclude Include="Manager\TalkManager.h" />
     <ClInclude Include="Manager\UIManager.h" />
+    <ClInclude Include="Object\TitleObj.h" />
     <ClInclude Include="Object\UIObj.h" />
     <ClInclude Include="Object\GameObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -223,6 +227,8 @@
     <ClCompile Include="Component\Component.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Component\DesiredPosTextComp.cpp" />
+    <ClCompile Include="Component\FullSizeRenderer.cpp" />
     <ClCompile Include="Component\InvenComponent.cpp" />
     <ClCompile Include="Component\ChatRenderer.cpp" />
     <ClCompile Include="Component\MapFrameComponent.cpp" />
@@ -234,6 +240,7 @@
     <ClCompile Include="Component\SpriteRenderer.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
+    <ClCompile Include="Component\TitleComp.cpp" />
     <ClCompile Include="Component\UserInfoComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Manager\CameraManager.cpp" />
@@ -243,6 +250,7 @@
     <ClCompile Include="Manager\SceneManager.cpp" />
     <ClCompile Include="Manager\TalkManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="Object\TitleObj.cpp" />
     <ClCompile Include="Object\UIObj.cpp" />
     <ClCompile Include="Object\GameObject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

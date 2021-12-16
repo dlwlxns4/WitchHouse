@@ -240,6 +240,28 @@ void Sprite::Render(int posX, int posY, float opacity)
 	}
 }
 
+void Sprite::SizeRender(int posX, int posY, int sizeX, int sizeY, float opacity)
+{
+	if (pBitmap)
+	{
+
+
+		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
+			D2D1::RectF(
+				(float)posX,
+				(float)posY,
+				posX + sizeX,
+				posY + sizeY
+			),
+			opacity
+		);
+
+
+		//---------------d2d
+
+	}
+}
+
 void Sprite::LoopRender(int posX, int posY, int renderPosX, int renderPosY)
 {
 	if (pBitmap)
@@ -288,6 +310,7 @@ void Sprite::LoopRender(int posX, int posY, int renderPosX, int renderPosY)
 
 	}
 }
+
 
 void Sprite::Release()
 {

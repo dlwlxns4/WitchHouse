@@ -1,17 +1,20 @@
 #include "TitleScene.h"
 
-#include "../Object/Text.h"
 
 #include "../Util/Input.h"
 
 #include "../Manager/SceneManager.h"
 
+#include "../Object/TitleObj.h"
+
+#include "../Scene/Layer.h"
 void TitleScene::Init()
 {
-	Layer* ui = FindLayer(L"UI");
+	Layer* main = new Layer(this, L"Main", 1);
 
-	Text* tempTxt = new Text(this, ui, L"Temp Text");
-	tempTxt->SetPosition(500, 500);
+	TitleObj* titleObj = new TitleObj(this, main, L"Title");
+	titleObj->SetPosition(0, 0);
+
 
 	Scene::Init();
 }

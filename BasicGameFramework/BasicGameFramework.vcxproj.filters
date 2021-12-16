@@ -44,6 +44,12 @@
     <Filter Include="Component\UI">
       <UniqueIdentifier>{ae4b5574-d0f4-4e8b-b46e-a2ab4013a364}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\TitleScene">
+      <UniqueIdentifier>{2528b90e-fd7f-4b2b-9915-4e912a6ae1cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TitleScene">
+      <UniqueIdentifier>{c561ed67-f836-4b7f-b04d-8f11682e71fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -214,6 +220,18 @@
     <ClInclude Include="Scene\MainScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Object\TitleObj.h">
+      <Filter>Object\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\FullSizeRenderer.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\DesiredPosTextComp.h">
+      <Filter>Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\TitleComp.h">
+      <Filter>Component\TitleScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -366,6 +384,18 @@
     </ClCompile>
     <ClCompile Include="Scene\MainScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TitleObj.cpp">
+      <Filter>Object\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\FullSizeRenderer.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\DesiredPosTextComp.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\TitleComp.cpp">
+      <Filter>Component\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
