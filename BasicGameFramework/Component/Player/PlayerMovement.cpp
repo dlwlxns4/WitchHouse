@@ -33,7 +33,7 @@ void PlayerMovement::Init()
 	InitialAction* initialAction = new InitialAction(this->_owner);
 	actions[2] = initialAction;
 
-	_actionSterategy = actions[1];
+	_actionSterategy = actions[0];
 }
 
 void PlayerMovement::Update()
@@ -114,26 +114,25 @@ void InputAction::DoAction()
 	if (GameManager::GetInstance()->GetState() == State::Move)
 	{
 		Direction dir = _obj->GetComponent<PlayerSpriteRenderer>()->GetDirection();
-		POINTFLOAT* camera = (CameraManager::GetInstance()->GetCameraPos());
+		POINT* camera = (CameraManager::GetInstance()->GetCameraPos());
 
 		int dx[] = { 0,-1,1,0 };
 		int dy[] = { 1,-0,0,-1 };
 
-		//static_cast<LONG>(_speed * Timer::GetDeltaTime());
-		//static_cast<LONG>(_speed * Timer::GetDeltaTime());
-		pos.x += dx[(int)dir] * 4;
-		pos.y += dy[(int)dir] * 4;
 
-		float tmpCameraPosX = camera->x + dx[(int)dir] * 0.125f;
-		float tmpCameraPosY = camera->y + dy[(int)dir] * 0.125f;
+
+		int tmpCameraPosX = camera->x + dx[(int)dir] * 1;
+		int tmpCameraPosY = camera->y + dy[(int)dir] * 1;
 
 		if (CameraManager::GetInstance()->CheckOutOfTile(tmpCameraPosX, tmpCameraPosY) == false)
 		{
-				camera->x += dx[(int)dir] * 0.125f;
-				camera->y += dy[(int)dir] * 0.125f;
+			camera->x += dx[(int)dir] * 4;
+			camera->y += dy[(int)dir] * 4;
 		}
+		pos.x += dx[(int)dir] * 4;
+		pos.y += dy[(int)dir] * 4;
 
-
+		cout << pos.y << endl;
 
 		_obj->SetPosition(pos);
 		moveDistance += 4;
@@ -150,5 +149,46 @@ void InputAction::DoAction()
 		}
 
 		PhysicsManager::GetInstance()->RePosCollider(prevPosX, prevPosY, (int)dir);
+	}
+}
+
+void InitialAction::DoAction()
+{
+#define LEFT 2
+#define RIGHT 0
+#define FRONT 1
+
+	motionDelay++;
+	if (motionDelay > 22)
+	{
+		int frameX = _obj->GetComponent<PlayerSpriteRenderer>()->GetFrameX();
+
+		if (isMotionFinish)
+		{
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetState(PlayerSpriteState::Move);
+			_obj->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Input);
+		}
+
+		if (frameX == FRONT && isFront)
+		{
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetFrameX(LEFT);
+			isFront = false;
+		}
+		else if (frameX == LEFT && isFront == false)
+		{
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetFrameX(FRONT);
+		}
+		else if (frameX == 1 && isFront == false)
+		{
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetFrameX(RIGHT);
+			isFront = false;
+		}
+		else
+		{
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetFrameX(FRONT);
+			isFront = true;
+			isMotionFinish = true;
+		}
+		motionDelay = 0;
 	}
 }

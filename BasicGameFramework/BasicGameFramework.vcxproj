@@ -179,9 +179,11 @@
     <ClInclude Include="Manager\GameManager.h" />
     <ClInclude Include="Manager\ImageManager.h" />
     <ClInclude Include="Manager\PhysicsManager.h" />
+    <ClInclude Include="Manager\QuestManager.h" />
     <ClInclude Include="Manager\SceneManager.h" />
     <ClInclude Include="Manager\TalkManager.h" />
     <ClInclude Include="Manager\UIManager.h" />
+    <ClInclude Include="Object\BackPanel.h" />
     <ClInclude Include="Object\TitleObj.h" />
     <ClInclude Include="Object\UIObj.h" />
     <ClInclude Include="Object\GameObject.h">
@@ -247,9 +249,11 @@
     <ClCompile Include="Manager\GameManager.cpp" />
     <ClCompile Include="Manager\ImageManager.cpp" />
     <ClCompile Include="Manager\PhysicsManager.cpp" />
+    <ClCompile Include="Manager\QuestManager.cpp" />
     <ClCompile Include="Manager\SceneManager.cpp" />
     <ClCompile Include="Manager\TalkManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="Object\BackPanel.cpp" />
     <ClCompile Include="Object\TitleObj.cpp" />
     <ClCompile Include="Object\UIObj.cpp" />
     <ClCompile Include="Object\GameObject.cpp">

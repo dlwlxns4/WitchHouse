@@ -53,7 +53,7 @@ class IActionable abstract
 public:
 	IActionable(GameObject* _owner)
 		: _obj{ _owner }
-	{
+	{ 
 	}
 	virtual ~IActionable() = default;
 
@@ -66,8 +66,8 @@ protected:
 class NullAction : public IActionable
 {
 public:
-	using IActionable::IActionable;
-	virtual ~NullAction() = default;
+	using		IActionable::IActionable;
+	virtual		~NullAction() = default;
 
 	void DoAction() override
 	{
@@ -78,25 +78,29 @@ public:
 class InputAction : public IActionable
 {
 public:
-	using IActionable::IActionable;
-	virtual ~InputAction() = default;
+	using		IActionable::IActionable;
+	virtual		~InputAction() = default;
 
-	void DoAction();
+	void		DoAction();
 
 private:
-	int prevPosX = 0;
-	int prevPosY = 0;
-	int	moveDistance = 0;
+	int			prevPosX = 0;
+	int			prevPosY = 0;
+	int			moveDistance = 0;
 
 };
 
 class InitialAction : public IActionable
 {
 public:
-	using IActionable::IActionable;
-	virtual ~InitialAction() = default;
-	void DoAction()
-	{
-		//
-	}
+	using		IActionable::IActionable;
+	virtual		~InitialAction() = default;
+	
+	void		DoAction();
+
+private:
+	int			motionDelay = 0;
+	int			motionCount = 0;
+	bool		isFront = true;
+	bool		isMotionFinish = false;
 };

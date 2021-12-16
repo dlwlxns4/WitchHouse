@@ -183,7 +183,7 @@ void TileSelectComponent::Update()
 		mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
 	}
 
-	POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
+	POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 	RECT mainArea = { 0,0,TILE_SIZE * MAP_SIZE_X, TILE_SIZE * MAP_SIZE_Y };
 	if (PtInRect(&mainArea, mousePos))
@@ -362,24 +362,24 @@ void TileSelectComponent::Render(HDC hdc)
 
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 {
-	POINTFLOAT* camera = (CameraManager::GetInstance()->GetCameraPos());
+	POINT* camera = (CameraManager::GetInstance()->GetCameraPos());
 
 
 	if (tileType == TileType::tileObj)
 	{
 		if (mapData.size() != 0)
 		{
-			for (int i = downPos.first + camera->x; i <= upPos.first + camera->x; ++i)
+			for (int i = downPos.first + camera->x / TILE_SIZE; i <= upPos.first + camera->x / TILE_SIZE; ++i)
 			{
-				for (int j = downPos.second + camera->y; j <= upPos.second + camera->y; ++j)
+				for (int j = downPos.second + camera->y / TILE_SIZE; j <= upPos.second + camera->y / TILE_SIZE; ++j)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
 					spriteRenderer->SetSprite(sampleIndex, i - camera->x, j - camera->y);
 
 					tileObj->SetPosition(
-						(mouseIndexX + (i - downPos.first - camera->x)) * TILE_SIZE,
-						(mouseIndexY + (j - downPos.second - camera->y)) * TILE_SIZE
+						(mouseIndexX + (i - downPos.first - camera->x/TILE_SIZE)) * TILE_SIZE,
+						(mouseIndexY + (j - downPos.second - camera->y / TILE_SIZE)) * TILE_SIZE
 					);
 				}
 			}

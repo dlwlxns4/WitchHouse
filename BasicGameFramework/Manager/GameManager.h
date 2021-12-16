@@ -5,7 +5,9 @@
 #include <unordered_map>
 
 #include "../Util/Singleton.h"
-
+#include "../Component/Player/PlayerMovement.h"
+#include "../Component/Player/PlayerSpriteRenderer.h"
+class Player;
 enum class State
 {
 	None = 0,
@@ -17,14 +19,13 @@ enum class State
 class GameManager : public Singleton<GameManager>
 {
 private:
-	POINTFLOAT cameraPos = {};
 	State state = State::None;
 
 	int currScene = 0;
 	POINT playerPos = { 9*32,9*32 };
+	Player* player;
 
 public:
-	POINTFLOAT* GetCameraPos() { return &cameraPos; }
 	State GetState() { return state; };
 	
 	void SetState(State st) { state = st; }
@@ -32,5 +33,8 @@ public:
 	
 	int GetCurrScene() { return currScene; }
 	POINT GetPlayerPos() { return playerPos; }
+	void SetPlayer(Player* player);
+	void SetPlayerAction(PlayerActionState actionState);
+	void SetPlayerSprite(PlayerSpriteState spriteState);
 };
 

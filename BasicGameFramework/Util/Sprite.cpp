@@ -55,15 +55,15 @@ void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY)
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 48);
 
-		POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
+		POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
 			D2D1::RectF(
-				(float)posX - 32 * cameraPos->x,
-				(float)posY - 32 * cameraPos->y,
-				posX + imageOneFrameSize.width - 32 * cameraPos->x,
-				posY + imageOneFrameSize.height - 32 * cameraPos->y
+				(float)posX - cameraPos->x,
+				(float)posY - cameraPos->y,
+				posX + imageOneFrameSize.width -  cameraPos->x,
+				posY + imageOneFrameSize.height -  cameraPos->y
 			),
 			1,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
@@ -85,15 +85,15 @@ void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY)
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 32);
 
-		POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
+		POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
 			D2D1::RectF(
-				(float)posX - 32 * cameraPos->x,
-				(float)posY - 32 * cameraPos->y,
-				posX + imageOneFrameSize.width - 32 * cameraPos->x,
-				posY + imageOneFrameSize.height - 32 * cameraPos->y
+				(float)posX -  cameraPos->x,
+				(float)posY -  cameraPos->y,
+				posX + imageOneFrameSize.width -  cameraPos->x,
+				posY + imageOneFrameSize.height -  cameraPos->y
 			),
 			1,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
@@ -244,8 +244,6 @@ void Sprite::SizeRender(int posX, int posY, int sizeX, int sizeY, float opacity)
 {
 	if (pBitmap)
 	{
-
-
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
 			D2D1::RectF(
 				(float)posX,

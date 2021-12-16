@@ -1,6 +1,9 @@
 #include "CameraManager.h"
 #include "../Util/AboutTile.h"
 
+#include "../Manager/GameManager.h"
+#include "../Component/Player/PlayerMovement.h"
+
 void CameraManager::SetCameraMinX(int x)
 {
 	if (x < minPosX)
@@ -33,12 +36,38 @@ void CameraManager::SetCameraMaxY(int y)
 	}
 }
 
-bool CameraManager::CheckOutOfTile(float x, float y)
+bool CameraManager::CheckOutOfTile(int x, int y)
 {
-	if (x < minPosX || x > maxPosX-1-MAP_SIZE_X)
+	if (x/32 < minPosX-1 || x/32 > (maxPosX-1)-MAP_SIZE_X)
 		return true;
-	if (y < minPosY || y > maxPosY+1-MAP_SIZE_Y)
+	if (y/32 < minPosY-1 || y/32 > (maxPosY)-MAP_SIZE_Y)
 		return true;
 
 	return false;
+}
+
+void CameraManager::Init()
+{
+	cameraPos.x = 32;
+	cameraPos.y = -96;
+}
+
+void CameraManager::Update()
+{
+	const int* currQuest = QuestManager::GetInstance()->GetQuestPtr();
+	if (*currQuest == 0)
+	{
+		cameraDelay++;
+		if (cameraDelay >= 3)
+		{
+			cameraDelay = 0;
+			cameraPos.y += 1;
+		}
+		if (cameraPos.y >= 96)
+		{
+			QuestManager::GetInstance()->NextQuest();
+			GameManager::GetInstance()->SetPlayerSprite(PlayerSpriteState::Init);
+			GameManager::GetInstance()->SetPlayerAction(PlayerActionState::Initial);
+		}
+	}
 }

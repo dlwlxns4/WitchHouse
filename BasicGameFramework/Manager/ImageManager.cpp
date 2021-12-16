@@ -126,12 +126,12 @@ Sprite* ImageManager::FindSprite(const wchar_t* fileName)
 
 void ImageManager::DrawColliderRect(int posX, int posY)
 {
-	POINTFLOAT* camera = CameraManager::GetInstance()->GetCameraPos();
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
 
-	int left = posX * TILE_SIZE - TILE_SIZE * camera->x;
-	int right = (posX+1) * TILE_SIZE - TILE_SIZE * camera->x;
-	int top = posY * TILE_SIZE - TILE_SIZE * camera->y;
-	int bottom = (posY+1) * TILE_SIZE - TILE_SIZE * camera->y;
+	int left = posX * TILE_SIZE - TILE_SIZE * (camera->x / TILE_SIZE);
+	int right = (posX+1) * TILE_SIZE - TILE_SIZE * (camera->x / TILE_SIZE);
+	int top = posY * TILE_SIZE - TILE_SIZE * (camera->y / TILE_SIZE);
+	int bottom = (posY+1) * TILE_SIZE - TILE_SIZE * (camera->y / TILE_SIZE);
 	
 	if ( left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
 	{
@@ -152,12 +152,12 @@ void ImageManager::DrawColliderRect(int posX, int posY)
 
 void ImageManager::DrawColliderRectRed(int posX, int posY, int id)
 {
-	POINTFLOAT* camera = CameraManager::GetInstance()->GetCameraPos();
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
 
-	int left = posX * TILE_SIZE - TILE_SIZE * camera->x +2;
-	int right = (posX + 1) * TILE_SIZE - TILE_SIZE * camera->x -2;
-	int top = posY * TILE_SIZE - TILE_SIZE * camera->y +2;
-	int bottom = (posY + 1) * TILE_SIZE - TILE_SIZE * camera->y -2;
+	int left = posX * TILE_SIZE - camera->x +2;
+	int right = (posX + 1) * TILE_SIZE -  camera->x -2;
+	int top = posY * TILE_SIZE -  camera->y +2;
+	int bottom = (posY + 1) * TILE_SIZE -  camera->y -2;
 
 	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
 	{

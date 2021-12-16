@@ -6,11 +6,15 @@
 #include "../Manager/ImageManager.h"
 #include "../Object/Player.h"
 #include "../Object/UIObj.h"
+#include "../Object/BackPanel.h"
 void MainScene::Init()
 {
 	
 	_layers = this->GetLayer();
 	Load(GameManager::GetInstance()->GetCurrScene());
+
+	BackPanel* backPanel = new BackPanel(this, (*_layers)[(*_layers).size()-1], L"BackPanel");
+	backPanel->Init();
 }
 
 void MainScene::Update()
@@ -78,6 +82,7 @@ void MainScene::Load(int loadIndex)
 			{
 				Player* player = new Player(this, (*_layers)[i], L"Player");
 				player->Init();
+				GameManager::GetInstance()->SetPlayer(player);
 
 				POINT playerPos = GameManager::GetInstance()->GetPlayerPos();
 				player->SetPosition(playerPos);

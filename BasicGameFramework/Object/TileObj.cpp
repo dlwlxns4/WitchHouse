@@ -13,10 +13,10 @@ void TileObj::Init()
 
 void TileObj::Render(HDC hdc)
 {
-	POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
-	if (this->GetPosition().x >= TILE_SIZE * (cameraPos->x-1)  && this->GetPosition().x < TILE_SIZE * MAP_SIZE_X + TILE_SIZE * cameraPos->x)
+	POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
+	if (this->GetPosition().x >= TILE_SIZE * (cameraPos->x / TILE_SIZE -1)  && this->GetPosition().x < TILE_SIZE * MAP_SIZE_X + TILE_SIZE * cameraPos->x / TILE_SIZE)
 	{
-		if (this->GetPosition().y >= TILE_SIZE * (cameraPos->y-1) && this->GetPosition().y < TILE_SIZE * MAP_SIZE_Y + TILE_SIZE * cameraPos->y)
+		if (this->GetPosition().y >= TILE_SIZE * (cameraPos->y / TILE_SIZE -1) && this->GetPosition().y < TILE_SIZE * MAP_SIZE_Y + TILE_SIZE * cameraPos->y / TILE_SIZE)
 		{
 			GameObject::Render(hdc);
 		}

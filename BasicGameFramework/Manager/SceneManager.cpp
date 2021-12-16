@@ -76,3 +76,9 @@ void SceneManager::ChangeScene()
 		_nextScene = nullptr;
 	}
 }
+
+bool SceneManager::IsMainScene()
+{
+	if (_currentScene == _scenes[L"Main"])
+		return true;
+}
