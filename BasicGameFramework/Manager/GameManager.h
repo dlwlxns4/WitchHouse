@@ -20,9 +20,17 @@ private:
 	POINTFLOAT cameraPos = {};
 	State state = State::None;
 
+	int currScene = 0;
+	POINT playerPos = { 9*32,9*32 };
 
 public:
 	POINTFLOAT* GetCameraPos() { return &cameraPos; }
 	State GetState() { return state; };
+	
 	void SetState(State st) { state = st; }
+	
+	
+	int GetCurrScene() { return currScene; }
+	POINT GetPlayerPos() { return playerPos; }
 };
+

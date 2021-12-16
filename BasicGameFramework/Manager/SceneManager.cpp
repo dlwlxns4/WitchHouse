@@ -3,6 +3,7 @@
 #include "../Scene/TempScene.h"
 #include "../Scene/TitleScene.h"
 #include "../Scene/TilemapToolScene.h"
+#include "../Scene/MainScene.h"
 
 #include "SceneManager.h"
 #include "ImageManager.h"
@@ -25,8 +26,9 @@ void SceneManager::Init()
 	_scenes[L"Title"] = new TitleScene();
 	_scenes[L"Temp"] = new TempScene();
 	_scenes[L"TilemapTool"] = new TilemapToolScene();
+	_scenes[L"Main"] = new MainScene();
 
-	_currentScene = _scenes[L"TilemapTool"];
+	_currentScene = _scenes[L"Main"];
 	_currentScene->Init();
 }
 

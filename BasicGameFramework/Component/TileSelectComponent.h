@@ -19,7 +19,8 @@ private:
 		PlayerObj = 1,
 		parallaxObj = 2,
 		Collider = 3,
-		Trigger = 4
+		Trigger = 4,
+		Portal = 5
 	};
 
 	using Component::Component;

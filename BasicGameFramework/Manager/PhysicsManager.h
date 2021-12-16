@@ -28,8 +28,9 @@ class PhysicsManager : public Singleton<PhysicsManager>
 {
 private:
 	unordered_set<pair<int, int>, pair_hash> collisionObj = {};
+	unordered_map<int, unordered_map<int, int>> chatObj;		//ÁÂÇ¥, referenceId
 
-	unordered_map<int, unordered_map<int, int>> triggerObj;		//ÁÂÇ¥, referenceId
+
 
 	virtual void Write(std::ostream& os) const;
 	virtual void Read(std::istream& is);
@@ -56,13 +57,13 @@ public:
 
 	void SetTrigger(int posX, int posY);
 	int GetTriggerId(int posX, int posY);
-	unordered_map<int, unordered_map<int,int>>* GetTriggerObj() { return &triggerObj; }
+	unordered_map<int, unordered_map<int,int>>* GetTriggerObj() { return &chatObj; }
 	void RePosTrigger(int posX, int posY, int dir);
 	void RemoveTrigger(int posX, int posY) 
 	{
-		auto it = triggerObj.find(posX);
+		auto it = chatObj.find(posX);
 
-		if (it == triggerObj.end())
+		if (it == chatObj.end())
 			return;
 		
 		it->second.erase(posY);

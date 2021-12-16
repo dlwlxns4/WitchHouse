@@ -6,11 +6,11 @@
 #include "../../Util/AboutTile.h"
 #include <array>
 
-#include "../../Manager/GameManager.h"
 #include "../../Manager/PhysicsManager.h"
 
 #include "../../Util/Input.h"
 #include "../../Object/GameObject.h"
+
 
 #define DOWN_DIR	0
 #define LEFT_DIR	1
@@ -81,86 +81,7 @@ public:
 	using IActionable::IActionable;
 	virtual ~InputAction() = default;
 
-	void DoAction()
-	{
-		POINT pos = _obj->GetPosition();
-
-		if (GameManager::GetInstance()->GetState() == State::None)
-		{
-			if (Input::GetButton(VK_UP))
-			{
-				if (PhysicsManager::GetInstance()->IsCollide(_obj->GetPosition().x / TILE_SIZE, _obj->GetPosition().y / TILE_SIZE - 1) == false)
-				{
-					GameManager::GetInstance()->SetState(State::Move);
-					prevPosX = _obj->GetPosition().x / TILE_SIZE;
-					prevPosY = _obj->GetPosition().y / TILE_SIZE;
-				}
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetDirection(UP_DIR);
-			}
-			else if (Input::GetButton(VK_DOWN))
-			{
-				if (PhysicsManager::GetInstance()->IsCollide(_obj->GetPosition().x / TILE_SIZE, _obj->GetPosition().y / TILE_SIZE + 1) == false)
-				{
-					GameManager::GetInstance()->SetState(State::Move);
-					prevPosX = _obj->GetPosition().x / TILE_SIZE;
-					prevPosY = _obj->GetPosition().y / TILE_SIZE;
-				}
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetDirection(DOWN_DIR);
-			}
-			else if (Input::GetButton(VK_LEFT))
-			{
-				if (PhysicsManager::GetInstance()->IsCollide(_obj->GetPosition().x / TILE_SIZE - 1, _obj->GetPosition().y / TILE_SIZE) == false)
-				{
-					GameManager::GetInstance()->SetState(State::Move);
-					prevPosX = _obj->GetPosition().x / TILE_SIZE;
-					prevPosY = _obj->GetPosition().y / TILE_SIZE;
-				}
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetDirection(LEFT_DIR);
-			}
-			else if (Input::GetButton(VK_RIGHT))
-			{
-				if (PhysicsManager::GetInstance()->IsCollide(_obj->GetPosition().x / TILE_SIZE + 1, _obj->GetPosition().y / TILE_SIZE) == false)
-				{
-					GameManager::GetInstance()->SetState(State::Move);
-					prevPosX = _obj->GetPosition().x / TILE_SIZE;
-					prevPosY = _obj->GetPosition().y / TILE_SIZE;
-				}
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetDirection(RIGHT_DIR);
-			}
-		}
-		if (GameManager::GetInstance()->GetState() == State::Move)
-		{
-			Direction dir = _obj->GetComponent<PlayerSpriteRenderer>()->GetDirection();
-			POINTFLOAT* camera = (GameManager::GetInstance()->GetCameraPos());
-
-			int dx[] = { 0,-1,1,0 };
-			int dy[] = { 1,-0,0,-1 };
-
-			//static_cast<LONG>(_speed * Timer::GetDeltaTime());
-			//static_cast<LONG>(_speed * Timer::GetDeltaTime());
-			pos.x += dx[(int)dir] * 4;
-			pos.y += dy[(int)dir] * 4;
-
-			camera->x += dx[(int)dir] * 0.125f;
-			camera->y += dy[(int)dir] * 0.125f;
-
-			_obj->SetPosition(pos);
-			moveDistance += 4;
-			if (moveDistance >= 16)
-			{
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
-			}
-
-			if (moveDistance >= 32)
-			{
-				moveDistance = 0;
-				GameManager::GetInstance()->SetState(State::None);
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
-			}
-
-			PhysicsManager::GetInstance()->RePosCollider(prevPosX, prevPosY, (int)dir);
-		}
-	}
+	void DoAction();
 
 private:
 	int prevPosX = 0;

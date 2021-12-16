@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include "../Manager/CameraManager.h"
+
 #include "../Component/SpriteRenderer.h"
 #include "../Component/ParallaxSpriteRenderer.h"
 
@@ -251,9 +253,11 @@ void GameObject::Read(std::istream& is)
 			break;
 		}
 		}
-
-
 	}
+	CameraManager::GetInstance()->SetCameraMaxX(_position.x/32);
+	CameraManager::GetInstance()->SetCameraMaxY(_position.y/32);
+	CameraManager::GetInstance()->SetCameraMinX(_position.x/32);
+	CameraManager::GetInstance()->SetCameraMinY(_position.y/32);
 }
 
 vector<Component*>& GameObject::GetComponents() noexcept

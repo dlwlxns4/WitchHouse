@@ -23,40 +23,40 @@ bool PhysicsManager::IsCollide(int posX, int posY)
 
 void PhysicsManager::addId_1(int posX, int posY)
 {
-	triggerObj[posX][posY] += 1;
+	chatObj[posX][posY] += 1;
 }
 
 void PhysicsManager::addId_10(int posX, int posY)
 {
-	triggerObj[posX][posY] += 10;
+	chatObj[posX][posY] += 10;
 
 }
 
 void PhysicsManager::addId_100(int posX, int posY)
 {
-	triggerObj[posX][posY] += 100;
+	chatObj[posX][posY] += 100;
 }
 
 void PhysicsManager::addId_1000(int posX, int posY)
 {
-	triggerObj[posX][posY] += 1000;
+	chatObj[posX][posY] += 1000;
 
 }
 
 void PhysicsManager::SetTrigger(int posX, int posY)
 {
-	triggerObj[posX][posY] = 0;
+	chatObj[posX][posY] = 0;
 }
 
 int PhysicsManager::GetTriggerId(int posX, int posY)
 {
 	int id = 0;
 	
-	auto it = triggerObj.find(posX);
+	auto it = chatObj.find(posX);
 	
 	
 
-	if (it != triggerObj.end())
+	if (it != chatObj.end())
 	{
 		auto itt = it->second.find(posY);
 		if (itt != it->second.end())
@@ -85,7 +85,7 @@ void PhysicsManager::Write(std::ostream& os) const
 {
 	
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
-	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->triggerObj);
+	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->chatObj);
 	
 	os << collisionTmp->size() << "\t";
 	for (auto it : *collisionTmp)
@@ -109,7 +109,7 @@ void PhysicsManager::Write(std::ostream& os) const
 void PhysicsManager::Read(std::istream& is)
 {
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
-	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->triggerObj);
+	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->chatObj);
 
 	int collisionSize;
 	is >> collisionSize;

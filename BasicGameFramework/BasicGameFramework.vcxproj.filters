@@ -208,6 +208,12 @@
     <ClInclude Include="Util\RecourceId.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="Manager\CameraManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\MainScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -354,6 +360,12 @@
     </ClCompile>
     <ClCompile Include="Component\InvenComponent.cpp">
       <Filter>Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\CameraManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\MainScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

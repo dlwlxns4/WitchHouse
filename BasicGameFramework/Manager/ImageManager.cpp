@@ -12,6 +12,8 @@
 #include "../Util/AboutTile.h"
 
 #include "GameManager.h"
+
+#include "../Manager/CameraManager.h"
 #define PLAYER_SIZE_X 32
 #define PLAYER_SIZE_Y 48
 
@@ -35,6 +37,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(220, 0, 0, 1), &pBrushRed);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255, 255, 255, 1), &pBrushWhite);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(132/255.0f, 272/255.0f, 255/255.0f, 1), &pBrushBlue);
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 1), &pBrushOrange);
 
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
@@ -122,7 +125,7 @@ Sprite* ImageManager::FindSprite(const wchar_t* fileName)
 
 void ImageManager::DrawColliderRect(int posX, int posY)
 {
-	POINTFLOAT* camera = GameManager::GetInstance()->GetCameraPos();
+	POINTFLOAT* camera = CameraManager::GetInstance()->GetCameraPos();
 
 	int left = posX * TILE_SIZE - TILE_SIZE * camera->x;
 	int right = (posX+1) * TILE_SIZE - TILE_SIZE * camera->x;
@@ -148,7 +151,7 @@ void ImageManager::DrawColliderRect(int posX, int posY)
 
 void ImageManager::DrawColliderRectRed(int posX, int posY, int id)
 {
-	POINTFLOAT* camera = GameManager::GetInstance()->GetCameraPos();
+	POINTFLOAT* camera = CameraManager::GetInstance()->GetCameraPos();
 
 	int left = posX * TILE_SIZE - TILE_SIZE * camera->x +2;
 	int right = (posX + 1) * TILE_SIZE - TILE_SIZE * camera->x -2;

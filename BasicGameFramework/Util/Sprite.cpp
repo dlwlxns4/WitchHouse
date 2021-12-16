@@ -5,6 +5,7 @@
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
 
+#include "../Manager/CameraManager.h"
 #include "../Util/AboutTile.h"
 
 #include <iostream>
@@ -54,7 +55,7 @@ void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY)
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 48);
 
-		POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
+		POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
@@ -84,7 +85,7 @@ void Sprite::Render(int posX, int posY, int currFrameX, int currFrameY)
 		D2D1_SIZE_F imageSize = pBitmap->GetSize();
 		D2D1_SIZE_F imageOneFrameSize = D2D1::SizeF(32, 32);
 
-		POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
+		POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 
 		ImageManager::GetInstance()->GetRenderTarget()->DrawBitmap(pBitmap,
@@ -255,7 +256,7 @@ void Sprite::LoopRender(int posX, int posY, int renderPosX, int renderPosY)
 				posX + TILE_SIZE * MAP_SIZE_X ,
 				posY + TILE_SIZE * MAP_SIZE_Y
 			),
-			0.3,
+			0.2,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 			D2D1::RectF(
 				renderPosX,
@@ -271,7 +272,7 @@ void Sprite::LoopRender(int posX, int posY, int renderPosX, int renderPosY)
 				posX + TILE_SIZE * MAP_SIZE_X,
 				posY + TILE_SIZE * MAP_SIZE_Y
 			),
-			0.3,
+			0.2,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 			D2D1::RectF(
 				renderPosX,

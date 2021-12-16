@@ -28,7 +28,7 @@
 #include "../Component/ParallaxSpriteRenderer.h"
 #include "../Object/ParallaxObj.h"
 #include "../Manager/PhysicsManager.h"
-
+#include "../Manager/CameraManager.h"
 
 #include <fstream>
 #include <istream>
@@ -183,7 +183,7 @@ void TileSelectComponent::Update()
 		mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
 	}
 
-	POINTFLOAT* cameraPos = GameManager::GetInstance()->GetCameraPos();
+	POINTFLOAT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 
 	RECT mainArea = { 0,0,TILE_SIZE * MAP_SIZE_X, TILE_SIZE * MAP_SIZE_Y };
 	if (PtInRect(&mainArea, mousePos))
@@ -205,6 +205,10 @@ void TileSelectComponent::Update()
 			else if (tileType == TileType::Trigger)
 			{
 				PhysicsManager::GetInstance()->RemoveTrigger(mouseIndexX, mouseIndexY);
+			}
+			else if (tileType == TileType::Collider)
+			{
+				PhysicsManager::GetInstance()->RemoveCollider(mouseIndexX, mouseIndexY);
 			}
 		}
 	}
@@ -358,7 +362,7 @@ void TileSelectComponent::Render(HDC hdc)
 
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 {
-	POINTFLOAT* camera = (GameManager::GetInstance()->GetCameraPos());
+	POINTFLOAT* camera = (CameraManager::GetInstance()->GetCameraPos());
 
 
 	if (tileType == TileType::tileObj)

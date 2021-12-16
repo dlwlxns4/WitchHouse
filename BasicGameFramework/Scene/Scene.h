@@ -21,6 +21,8 @@ public:
 	void				AddLayer(Layer* layer);
 	void				RemoveLayer(const std::wstring& tag);
 	Layer*				FindLayer(const std::wstring& tag);
+
+	std::vector<Layer*>* GetLayer() { return &_layers; }
 private:
-	std::vector<Layer*>		_layers;
+	std::vector<Layer*>	_layers;
 };

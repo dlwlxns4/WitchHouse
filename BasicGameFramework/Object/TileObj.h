@@ -11,4 +11,6 @@ class TileObj : public GameObject
 	virtual void Render(HDC hdc)override;
 
 	virtual void Write(std::ostream& os)const override;
+
+	virtual void OnTrigger() override;
 };

@@ -10,4 +10,6 @@ struct IBehaviour
 	virtual void		Update() { }
 	virtual void		Render(HDC hdc) { }
 	virtual void		Release() { }
+
+	virtual void		OnTrigger() {}
 };

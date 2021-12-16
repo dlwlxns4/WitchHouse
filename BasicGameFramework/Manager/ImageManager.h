@@ -27,6 +27,8 @@ private:
 	ID2D1SolidColorBrush* pBrushRed = nullptr;
 	ID2D1SolidColorBrush* pBrushWhite = nullptr;
 	ID2D1SolidColorBrush* pBrushBlue = nullptr;
+	ID2D1SolidColorBrush* pBrushOrange = nullptr;
+
 	IDWriteTextFormat* pTextFormat = nullptr;
 public:
 	ImageManager() noexcept = default;
@@ -57,6 +59,7 @@ public:
 	ID2D1SolidColorBrush* GetBrush() { return pBrush; }
 	ID2D1SolidColorBrush* GetBrushWhite() { return pBrushWhite; }
 	ID2D1SolidColorBrush* GetBrushBlue() { return pBrushBlue; }
+	ID2D1SolidColorBrush* GetBrushOrange() { return pBrushOrange; }
 	IDWriteTextFormat* GetTextFormat() { return pTextFormat; }
 	
 	wstring GetSpriteName(int index) { return spritesName[index]; }
