@@ -16,25 +16,38 @@ enum class State
 	UserInfo = 3
 };
 
+struct mapData
+{
+	int sceneNum;
+	int charaterPosX;
+	int characterPosY;
+};
+
 class GameManager : public Singleton<GameManager>
 {
-private:
-	State state = State::None;
-
-	int currScene = 0;
-	POINT playerPos = { 9*32,9*32 };
-	Player* player;
-
 public:
 	State GetState() { return state; };
 	
 	void SetState(State st) { state = st; }
 	
+	void Init();
 	
 	int GetCurrScene() { return currScene; }
 	POINT GetPlayerPos() { return playerPos; }
 	void SetPlayer(Player* player);
 	void SetPlayerAction(PlayerActionState actionState);
 	void SetPlayerSprite(PlayerSpriteState spriteState);
+
+	void GenerateMapData();
+
+private:
+	State state = State::None;
+
+	int currScene = 0;
+	POINT playerPos = { 9*32,9*32 };
+	Player* player = nullptr;
+	vector<mapData> mapDatas;
+
 };
+
 

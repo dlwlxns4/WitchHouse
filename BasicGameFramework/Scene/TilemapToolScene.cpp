@@ -9,10 +9,11 @@ void TilemapToolScene::Init()
 {
 	Layer* mainLayer = new Layer(this, L"main", 1);
 
+	MapFrame* mapFrame = new MapFrame(this, mainLayer, L"mapFrame");
+
 	SampleSprite* sampleSprite = new SampleSprite(this, mainLayer, L"sampleImage");
 	sampleSprite->SetPosition(0,0);
 
-	MapFrame* mapFrame = new MapFrame(this, mainLayer, L"mapFrame");
 	
 
 	Scene::Init();

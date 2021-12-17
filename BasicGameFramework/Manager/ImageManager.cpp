@@ -189,6 +189,45 @@ void ImageManager::DrawColliderRectRed(int posX, int posY, int id)
 	}
 }
 
+void ImageManager::DrawColliderRectBlue(int posX, int posY, int num)
+{
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - camera->x + 2;
+	int right = (posX + 1) * TILE_SIZE - camera->x - 2;
+	int top = posY * TILE_SIZE - camera->y + 2;
+	int bottom = (posY + 1) * TILE_SIZE - camera->y - 2;
+
+	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >= 0 && bottom <= TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				pBrushBlue, 10.0f
+			);
+
+			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+				to_wstring(num).c_str(),
+				to_wstring(num).size(),
+				ImageManager::GetInstance()->GetTextFormat(),
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				ImageManager::GetInstance()->GetBrush()
+			);
+		}
+	}
+}
+
 //Image* ImageManager::AddImage(const wchar_t* fileName, int width, int height, int maxFrameX, int maxFrameY, bool isTrans, COLORREF transColor)
 //{
 //	if (FindImage(fileName))

@@ -121,18 +121,20 @@ void InputAction::DoAction()
 
 
 
-		int tmpCameraPosX = camera->x + dx[(int)dir] * 1;
-		int tmpCameraPosY = camera->y + dy[(int)dir] * 1;
+		int tmpCameraPosX = camera->x + dx[(int)dir] * 32;
+		int tmpCameraPosY = camera->y + dy[(int)dir] * 32;
 
-		if (CameraManager::GetInstance()->CheckOutOfTile(tmpCameraPosX, tmpCameraPosY) == false)
+		if (CameraManager::GetInstance()->CheckOutOfTileX(tmpCameraPosX) == false)
 		{
 			camera->x += dx[(int)dir] * 4;
+		}
+		if (CameraManager::GetInstance()->CheckOutOfTileY(tmpCameraPosY) == false)
+		{
 			camera->y += dy[(int)dir] * 4;
 		}
+
 		pos.x += dx[(int)dir] * 4;
 		pos.y += dy[(int)dir] * 4;
-
-		cout << pos.y << endl;
 
 		_obj->SetPosition(pos);
 		moveDistance += 4;

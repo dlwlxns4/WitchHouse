@@ -25,14 +25,14 @@ void PlayerAction::Update()
 		if (GameManager::GetInstance()->GetState() == State::None)
 		{
 			GameManager::GetInstance()->SetState(State::Chat);
-			int id = PhysicsManager::GetInstance()->GetTriggerId(posX, posY);
-			DoChaating(id);
+			int id = PhysicsManager::GetInstance()->GetChatId(posX, posY);
+			DoChatting(id);
 		}
 
 	}
 }
 
-void PlayerAction::DoChaating(int id)
+void PlayerAction::DoChatting(int id)
 {
 
 	if (id != 0)

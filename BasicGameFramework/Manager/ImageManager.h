@@ -40,7 +40,6 @@ public:
 	Sprite* AddSprite(const wchar_t* fileName);
 	Sprite* FindSprite(const wchar_t* fileName);
 
-	void DrawColliderRectRed(int posX, int posY, int id);
 
 	Image* AddImage(const wchar_t* fileName, int width, int height,
 		bool isTrans = false, COLORREF transColor = NULL);	// 사용할 이미지를 등록하는 기능
@@ -65,5 +64,7 @@ public:
 	wstring GetSpriteName(int index) { return spritesName[index]; }
 	int GetSpritesNameVecSize() { return spritesName.size(); }
 	void DrawColliderRect(int posX, int posY);
+	void DrawColliderRectRed(int posX, int posY, int id);
+	void DrawColliderRectBlue(int posX, int posY, int num);
 };
 

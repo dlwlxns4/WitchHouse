@@ -18,7 +18,6 @@ public:
 	void SetCameraMaxX(int x);
 	void SetCameraMaxY(int y);
 
-	bool CheckOutOfTile(int x, int y);
 
 	bool CheckOutOfTileX(int x);
 	bool CheckOutOfTileY(int y);

@@ -24,13 +24,13 @@ struct pair_hash {
 	}
 };
 
+class GameObject;
 class PhysicsManager : public Singleton<PhysicsManager>
 {
 private:
 	unordered_set<pair<int, int>, pair_hash> collisionObj = {};
 	unordered_map<int, unordered_map<int, int>> chatObj;		//ÁÂÇ¥, referenceId
-
-
+	unordered_map<int, unordered_map<int, GameObject*>> triggerObj;
 
 	virtual void Write(std::ostream& os) const;
 	virtual void Read(std::istream& is);
@@ -43,30 +43,24 @@ public:
 
 	unordered_set<pair<int,int>, pair_hash>* GetCollisionObj() { return &collisionObj; }
 	void RemoveCollider(int posX, int posY) { collisionObj.erase({ posX, posY }); }
-	void RePosCollider(int posX, int posY, int dir)
-	{
-		int dx[] = { 0,-1,1,0 };
-		int dy[] = { 1,-0,0,-1 };
-		collisionObj.erase({ posX, posY });
-		collisionObj.insert({ posX + dx[dir], posY + dy[dir] });
-	}
+	void RePosCollider(int posX, int posY, int dir);
+
 	void addId_1(int posX, int posY);
 	void addId_10(int posX, int posY);
 	void addId_100(int posX, int posY);
 	void addId_1000(int posX, int posY);
 
-	void SetTrigger(int posX, int posY);
-	int GetTriggerId(int posX, int posY);
-	unordered_map<int, unordered_map<int,int>>* GetTriggerObj() { return &chatObj; }
-	void RePosTrigger(int posX, int posY, int dir);
-	void RemoveTrigger(int posX, int posY) 
-	{
-		auto it = chatObj.find(posX);
+	void SetChat(int posX, int posY);
+	int GetChatId(int posX, int posY);
+	unordered_map<int, unordered_map<int,int>>* GetChatObjs() { return &chatObj; }
+	void RemoveChat(int posX, int posY);
 
-		if (it == chatObj.end())
-			return;
-		
-		it->second.erase(posY);
 
-	}
+	unordered_map<int, unordered_map<int, GameObject*>>* GetTriggerObjs() { return &triggerObj; }
+
+	void SetTriggerObj(int posX, int posY, GameObject* obj);
+
+
+	GameObject* GetTriggerObj(int posX, int posY);
+	void RemoveTriggerObj(int posX, int posY);
 };

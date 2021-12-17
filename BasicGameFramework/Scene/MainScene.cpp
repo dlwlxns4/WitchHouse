@@ -36,7 +36,7 @@ void MainScene::Render(HDC hdc)
 		{
 			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
 		}
-		unordered_map<int, unordered_map<int, int>>* trigger = PhysicsManager::GetInstance()->GetTriggerObj();
+		unordered_map<int, unordered_map<int, int>>* trigger = PhysicsManager::GetInstance()->GetChatObjs();
 		for (auto it : *trigger)
 		{
 			for (auto itt : it.second)

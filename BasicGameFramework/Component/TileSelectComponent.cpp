@@ -4,7 +4,6 @@
 #include "../stdafx.h"
 
 #include "../Util/Sprite.h"
-#include "../Object/GameObject.h"
 
 #include "../Util/AboutTile.h"
 
@@ -13,27 +12,29 @@
 
 #include <iostream>
 
-#include "../Object/TileObj.h"
 #include "SpriteRenderer.h"
 
 #include <d2d1.h>
 
 
-#include "../Object/Text.h"
 #include "TextComponent.h"
 
-#include "../Object/Player.h"
 
-#include "../Manager/GameManager.h"
 #include "../Component/ParallaxSpriteRenderer.h"
-#include "../Object/ParallaxObj.h"
+#include "../Manager/GameManager.h"
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/CameraManager.h"
 
 #include <fstream>
 #include <istream>
 
+#include "../Object/GameObject.h"
+#include "../Object/ParallaxObj.h"
+#include "../Object/Player.h"
+#include "../Object/Text.h"
 #include "../Object/UIObj.h"
+#include "../Object/PortalObj.h"
+#include "../Object/TileObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -101,12 +102,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Trigger";
 			}
+			else if ((int)tileType == 5)
+			{
+				txt = L"TileType : Portal";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 4)
+		if ((int)tileType < 5)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -130,6 +135,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 4)
 			{
 				txt = L"TileType : Trigger";
+			}
+			else if ((int)tileType == 5)
+			{
+				txt = L"TileType : Portal";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -188,8 +197,8 @@ void TileSelectComponent::Update()
 	RECT mainArea = { 0,0,TILE_SIZE * MAP_SIZE_X, TILE_SIZE * MAP_SIZE_Y };
 	if (PtInRect(&mainArea, mousePos))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
-		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
 
 		if (Input::GetButtonDown(VK_LBUTTON))
 		{
@@ -204,7 +213,7 @@ void TileSelectComponent::Update()
 			}
 			else if (tileType == TileType::Trigger)
 			{
-				PhysicsManager::GetInstance()->RemoveTrigger(mouseIndexX, mouseIndexY);
+				PhysicsManager::GetInstance()->RemoveChat(mouseIndexX, mouseIndexY);
 			}
 			else if (tileType == TileType::Collider)
 			{
@@ -217,20 +226,20 @@ void TileSelectComponent::Update()
 	//MoveCamera
 	if (Input::GetButton('W'))
 	{
-		cameraPos->y--;
+		cameraPos->y-=32;
 	}
 	else if (Input::GetButton('S'))
 	{
-		cameraPos->y++;
+		cameraPos->y+=32;
 
 	}
 	else if (Input::GetButton('A'))
 	{
-		cameraPos->x--;
+		cameraPos->x-=32;
 	}
 	else if (Input::GetButton('D'))
 	{
-		cameraPos->x++;
+		cameraPos->x+=32;
 	}
 
 
@@ -250,26 +259,26 @@ void TileSelectComponent::Update()
 	//select TriggerTile
 	if (Input::GetButtonDown('F'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
-		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
 		PhysicsManager::GetInstance()->addId_1(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('G'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
-		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
 		PhysicsManager::GetInstance()->addId_10(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('V'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
-		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
 		PhysicsManager::GetInstance()->addId_100(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('B'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + (int)cameraPos->x;
-		int mouseIndexY = mousePos.y / 32 + (int)cameraPos->y;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
 		PhysicsManager::GetInstance()->addId_1000(mouseIndexX, mouseIndexY);
 	}
 
@@ -293,6 +302,9 @@ void TileSelectComponent::Init()
 {
 	const wstring str = L"titleText";
 
+	POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
+	cameraPos->x = 0;
+	cameraPos->y = 0;
 
 	tileTypeTxt = new Text(str);
 	tileTypeTxt->SetPosition(20, TILE_SIZE * MAP_SIZE_Y);
@@ -313,6 +325,7 @@ void TileSelectComponent::Init()
 
 void TileSelectComponent::Render(HDC hdc)
 {
+
 	sprite->Render(
 		WIN_SIZE_X - sprite->GetWidth(),
 		0,
@@ -344,12 +357,20 @@ void TileSelectComponent::Render(HDC hdc)
 		{
 			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
 		}
-		unordered_map<int, unordered_map<int, int>>* trigger = PhysicsManager::GetInstance()->GetTriggerObj();
-		for (auto it : *trigger)
+		unordered_map<int, unordered_map<int, int>>* chat = PhysicsManager::GetInstance()->GetChatObjs();
+		for (auto it : *chat)
 		{
 			for (auto itt : it.second)
 			{	
 				ImageManager::GetInstance()->DrawColliderRectRed(it.first, itt.first, itt.second);
+			}
+		}
+		unordered_map<int, unordered_map<int, GameObject*>>* trigger = PhysicsManager::GetInstance()->GetTriggerObjs();
+		for (auto it : *trigger)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
 			}
 		}
 
@@ -369,13 +390,13 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		if (mapData.size() != 0)
 		{
-			for (int i = downPos.first + camera->x / TILE_SIZE; i <= upPos.first + camera->x / TILE_SIZE; ++i)
+			for (int i = downPos.first + (camera->x / TILE_SIZE); i <= upPos.first + (camera->x / TILE_SIZE); ++i)
 			{
-				for (int j = downPos.second + camera->y / TILE_SIZE; j <= upPos.second + camera->y / TILE_SIZE; ++j)
+				for (int j = downPos.second + (camera->y / TILE_SIZE); j <= upPos.second + (camera->y / TILE_SIZE); ++j)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-					spriteRenderer->SetSprite(sampleIndex, i - camera->x, j - camera->y);
+					spriteRenderer->SetSprite(sampleIndex, i - camera->x/32, j - camera->y/32);
 
 					tileObj->SetPosition(
 						(mouseIndexX + (i - downPos.first - camera->x/TILE_SIZE)) * TILE_SIZE,
@@ -413,7 +434,12 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	}
 	else if (tileType == TileType::Trigger)
 	{
-		PhysicsManager::GetInstance()->SetTrigger(mouseIndexX, mouseIndexY);
+		PhysicsManager::GetInstance()->SetChat(mouseIndexX, mouseIndexY);
+	}
+	else if (tileType == TileType::Portal)
+	{
+		PortalObj* portal = new PortalObj(mapData[currLayer - 1], L"Portal");
+		PhysicsManager::GetInstance()->SetTriggerObj(mouseIndexX, mouseIndexY, portal);
 	}
 }
 

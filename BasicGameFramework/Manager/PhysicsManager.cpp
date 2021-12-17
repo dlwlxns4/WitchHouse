@@ -21,6 +21,14 @@ bool PhysicsManager::IsCollide(int posX, int posY)
 	}
 }
 
+void PhysicsManager::RePosCollider(int posX, int posY, int dir)
+{
+	int dx[] = { 0,-1,1,0 };
+	int dy[] = { 1,-0,0,-1 };
+	collisionObj.erase({ posX, posY });
+	collisionObj.insert({ posX + dx[dir], posY + dy[dir] });
+}
+
 void PhysicsManager::addId_1(int posX, int posY)
 {
 	chatObj[posX][posY] += 1;
@@ -43,18 +51,18 @@ void PhysicsManager::addId_1000(int posX, int posY)
 
 }
 
-void PhysicsManager::SetTrigger(int posX, int posY)
+void PhysicsManager::SetChat(int posX, int posY)
 {
 	chatObj[posX][posY] = 0;
 }
 
-int PhysicsManager::GetTriggerId(int posX, int posY)
+int PhysicsManager::GetChatId(int posX, int posY)
 {
 	int id = 0;
-	
+
 	auto it = chatObj.find(posX);
-	
-	
+
+
 
 	if (it != chatObj.end())
 	{
@@ -66,6 +74,39 @@ int PhysicsManager::GetTriggerId(int posX, int posY)
 	}
 	cout << id << endl;
 	return id;
+}
+
+void PhysicsManager::RemoveChat(int posX, int posY)
+{
+	auto it = chatObj.find(posX);
+
+	if (it == chatObj.end())
+		return;
+
+	it->second.erase(posY);
+}
+
+void PhysicsManager::SetTriggerObj(int posX, int posY, GameObject* obj)
+{
+	triggerObj[posX][posY] = obj;
+}
+
+GameObject* PhysicsManager::GetTriggerObj(int posX, int posY)
+{
+	if (triggerObj[posX].find(posY) == triggerObj[posX].end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return ((triggerObj[posX].find(posY))->second);
+	}
+
+}
+
+void PhysicsManager::RemoveTriggerObj(int posX, int posY)
+{
+
 }
 
 std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager)
@@ -83,10 +124,10 @@ std::istream& operator>>(std::istream& is, PhysicsManager& physicManager)
 
 void PhysicsManager::Write(std::ostream& os) const
 {
-	
+
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
 	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->chatObj);
-	
+
 	os << collisionTmp->size() << "\t";
 	for (auto it : *collisionTmp)
 	{

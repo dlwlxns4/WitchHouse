@@ -6,6 +6,7 @@
 #include "Manager/ImageManager.h"
 #include "Manager/TalkManager.h"
 #include "Manager/CameraManager.h"
+#include "Manager/GameManager.h"
 
 //--------------------------d2d
 
@@ -75,8 +76,8 @@ bool Game::Init(HINSTANCE hInst)
 	}
 
 
-	//RECT cr = { 0, 0, _res.Width, _res.Height };
-	RECT cr = { 0, 0, 32*17, 32*13 };
+	RECT cr = { 0, 0, _res.Width, _res.Height };
+	//RECT cr = { 0, 0, 32*17, 32*13 };
 	AdjustWindowRect(&cr, WS_OVERLAPPEDWINDOW, FALSE);
 	SetWindowPos(_hWnd, HWND_TOPMOST, 100, 100, cr.right - cr.left, cr.bottom - cr.top, SWP_NOMOVE | SWP_NOZORDER);
 
@@ -130,6 +131,7 @@ bool Game::Init(HINSTANCE hInst)
 	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget, pBrush, pTextFormat);
 	SceneManager::GetInstance()->Init();
 	CameraManager::GetInstance()->Init();
+	GameManager::GetInstance()->Init();
 
 	return true;
 }

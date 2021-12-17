@@ -238,6 +238,9 @@
     <ClInclude Include="Object\BackPanel.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Object\PortalObj.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -407,6 +410,9 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Object\BackPanel.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PortalObj.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

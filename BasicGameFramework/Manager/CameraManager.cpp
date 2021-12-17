@@ -36,11 +36,17 @@ void CameraManager::SetCameraMaxY(int y)
 	}
 }
 
-bool CameraManager::CheckOutOfTile(int x, int y)
+bool CameraManager::CheckOutOfTileX(int x)
 {
-	if (x/32 < minPosX-1 || x/32 > (maxPosX-1)-MAP_SIZE_X)
+	if (x / 32 <= minPosX - 1 || x / 32 > (maxPosX + 1) - MAP_SIZE_X)
 		return true;
-	if (y/32 < minPosY-1 || y/32 > (maxPosY)-MAP_SIZE_Y)
+
+	return false;
+}
+
+bool CameraManager::CheckOutOfTileY(int y)
+{
+	if (y / 32 <= minPosY - 1 || y / 32 > (maxPosY + 1) - MAP_SIZE_Y)
 		return true;
 
 	return false;
