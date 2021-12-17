@@ -25,6 +25,7 @@ public:
 	void				SetNextScene(const std::wstring& name);
 	void				ChangeScene();
 	bool				IsMainScene();
+	Scene*				GetCurrentScene();
 private:
 	Scene*							_currentScene = nullptr;
 	Scene*							_nextScene = nullptr;

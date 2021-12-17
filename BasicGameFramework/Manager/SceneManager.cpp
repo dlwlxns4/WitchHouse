@@ -29,7 +29,7 @@ void SceneManager::Init()
 	_scenes[L"TilemapTool"] = new TilemapToolScene();
 	_scenes[L"Main"] = new MainScene();
 
-	_currentScene = _scenes[L"TilemapTool"];
+	_currentScene = _scenes[L"Title"];
 	_currentScene->Init();
 }
 
@@ -81,4 +81,9 @@ bool SceneManager::IsMainScene()
 {
 	if (_currentScene == _scenes[L"Main"])
 		return true;
+}
+
+Scene* SceneManager::GetCurrentScene()
+{
+	return _currentScene;
 }

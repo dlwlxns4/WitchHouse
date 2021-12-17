@@ -24,6 +24,7 @@ public:
 	virtual void	Update() override;
 	virtual void	Render(HDC hdc) override;
 	virtual void	Release() override;
+	virtual void	OnTrigger() override;
 
 	void						AddComponent(Component* component);
 	void						RemoveComponent(Component* component);
@@ -65,6 +66,8 @@ public:
 	Scene*			GetScene() noexcept;
 	Layer*			GetLayer() noexcept;
 	
+	void			Clear();
+
 	virtual void Write(std::ostream& os) const;
 	virtual void Read(std::istream& is);
 	friend std::ostream& operator<<(std::ostream& os, const GameObject& obj);

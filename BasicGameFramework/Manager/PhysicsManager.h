@@ -3,6 +3,7 @@
 #include "../Util/Singleton.h"
 #include <unordered_set>
 #include <unordered_map>
+#include "../Object/PortalObj.h"
 
 using namespace std;
 
@@ -38,6 +39,8 @@ private:
 	friend std::istream& operator>>(std::istream& is, PhysicsManager& physicManager);
 
 public:
+	PhysicsManager() = default;
+	~PhysicsManager() = default;
 	void SetCollision(int posX, int posY);
 	bool IsCollide(int posX, int posY);
 
@@ -60,7 +63,9 @@ public:
 
 	void SetTriggerObj(int posX, int posY, GameObject* obj);
 
-
+	void addPortalNum(int posX, int posY);
 	GameObject* GetTriggerObj(int posX, int posY);
 	void RemoveTriggerObj(int posX, int posY);
+
+	void AllClear();
 };

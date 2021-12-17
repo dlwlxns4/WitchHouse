@@ -5,6 +5,8 @@
 class QuestManager : public Singleton<QuestManager>
 {
 public:
+	QuestManager() = default;
+	~QuestManager() = default;
 	void SetQuest(int quest);
 	void NextQuest();
 

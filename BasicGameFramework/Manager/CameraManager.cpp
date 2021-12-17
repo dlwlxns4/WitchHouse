@@ -71,9 +71,15 @@ void CameraManager::Update()
 		}
 		if (cameraPos.y >= 96)
 		{
+			cameraPos.y = 96;
+
 			QuestManager::GetInstance()->NextQuest();
 			GameManager::GetInstance()->SetPlayerSprite(PlayerSpriteState::Init);
 			GameManager::GetInstance()->SetPlayerAction(PlayerActionState::Initial);
+		}
+		if (Input::GetButtonDown('P'))
+		{
+			cameraPos.y = 96;
 		}
 	}
 }

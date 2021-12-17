@@ -11,7 +11,6 @@
 #include "../../Util/Input.h"
 #include "../../Object/GameObject.h"
 
-
 #define DOWN_DIR	0
 #define LEFT_DIR	1
 #define RIGHT_DIR	2
@@ -39,6 +38,8 @@ public:
 	void			SetActionStartegy(PlayerActionState action);
 	virtual void	Release() override;
 
+	//virtual void	OnTrigger() override;
+	void			TiggerHelper(int posX, int posY);
 private:
 	float			_speed;
 	int				prevPosX = 0;

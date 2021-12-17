@@ -14,6 +14,8 @@ private:
 	vector<wstring> vecTalkData = {};
 
 public:
+	TalkManager() = default;
+	~TalkManager() = default;
 	void Init();
 	void SaveTalkData(int referenceId);
 	vector<wstring> GetVecTalkData();

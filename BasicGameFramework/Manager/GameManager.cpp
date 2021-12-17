@@ -22,6 +22,11 @@ void GameManager::SetPlayerSprite(PlayerSpriteState spriteState)
 	player->GetComponent<PlayerSpriteRenderer>()->SetState(spriteState);
 }
 
+void GameManager::SetPlayerPos(POINT pos)
+{
+	player->SetPosition(pos);
+}
+
 void GameManager::GenerateMapData()
 {
 	mapDatas.push_back({ 0, 10, 10 });

@@ -26,6 +26,9 @@ struct mapData
 class GameManager : public Singleton<GameManager>
 {
 public:
+	GameManager() = default;
+	~GameManager() = default;
+
 	State GetState() { return state; };
 	
 	void SetState(State st) { state = st; }
@@ -37,6 +40,7 @@ public:
 	void SetPlayer(Player* player);
 	void SetPlayerAction(PlayerActionState actionState);
 	void SetPlayerSprite(PlayerSpriteState spriteState);
+	void SetPlayerPos(POINT pos);
 
 	void GenerateMapData();
 

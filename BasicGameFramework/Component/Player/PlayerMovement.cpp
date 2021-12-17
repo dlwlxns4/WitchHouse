@@ -64,6 +64,19 @@ void PlayerMovement::Release()
 	}
 }
 
+//void PlayerMovement::OnTrigger()
+//{
+//}
+
+void PlayerMovement::TiggerHelper(int posX, int posY)
+{
+	GameObject* trigger =PhysicsManager::GetInstance()->GetTriggerObj(posX, posY);
+	if (trigger != nullptr)
+	{
+		trigger->OnTrigger();
+	}
+}
+
 void InputAction::DoAction()
 {
 	POINT pos = _obj->GetPosition();
@@ -148,6 +161,7 @@ void InputAction::DoAction()
 			moveDistance = 0;
 			GameManager::GetInstance()->SetState(State::None);
 			_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
+			_obj->GetComponent<PlayerMovement>()->TiggerHelper(pos.x / 32, pos.y / 32);
 		}
 
 		PhysicsManager::GetInstance()->RePosCollider(prevPosX, prevPosY, (int)dir);

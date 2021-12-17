@@ -6,6 +6,7 @@
 
 #include "../Object/TileObj.h"
 #include "../Object/ParallaxObj.h"
+#include "../Object/PortalObj.h"
 
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
@@ -44,10 +45,19 @@ void Layer::Init()
 
 void Layer::Update()
 {
-	for (GameObject* _object : _objects)
+	for (int i = 0; i < _objects.size(); ++i)
 	{
-		_object->Update();
+		if (_objects.size() > 1000)
+		{
+			break;
+		}
+		_objects[i]->Update();
 	}
+
+	//for (GameObject* _object : _objects)
+	//{
+	//	_object->Update();
+	//}
 }
 
 
@@ -155,6 +165,13 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 			{
 				ParallaxObj* parallax = new ParallaxObj(&layer, L"Parallax");
 				parallax->Read(is);
+				break;
+			}
+			case 3:
+			{
+				cout << "@" << endl;
+				PortalObj* portal = new PortalObj(&layer, L"Portal");
+				portal->Read(is);
 				break;
 			}
 		}

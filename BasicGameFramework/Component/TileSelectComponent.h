@@ -47,6 +47,7 @@ private:
 
 	bool isShowCollider = false;
 
+	int num = 0;
 public:
 
 	virtual void Init() override;

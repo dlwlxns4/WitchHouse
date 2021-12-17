@@ -46,6 +46,7 @@ GameObject::~GameObject() noexcept
 		it = _components.erase(it);
 
 		delete pTemp;
+		pTemp = nullptr;
 	}
 
 
@@ -70,9 +71,9 @@ void GameObject::Init()
 
 void GameObject::Update()
 {
-	for (Component* comp : _components)
+	for (int i = 0; i < _components.size(); ++i)
 	{
-		comp->Update();
+		_components[i]->Update();
 	}
 }
 
@@ -82,7 +83,14 @@ void GameObject::Render(HDC hdc)
 
 	for (Component* comp : _components)
 	{
-		comp->Render(hdc);
+		try
+		{
+			comp->Render(hdc);
+		}
+		catch (exception e)
+		{
+
+		}
 	}
 }
 
@@ -92,6 +100,10 @@ void GameObject::Release()
 	{
 		comp->Release();
 	}
+}
+
+void GameObject::OnTrigger()
+{
 }
 
 void GameObject::AddComponent(Component* component)
@@ -207,6 +219,11 @@ Layer* GameObject::GetLayer() noexcept
 	return _layer;
 }
 
+void GameObject::Clear()
+{
+	_components.clear();
+}
+
 void GameObject::Write(std::ostream& os) const
 {
 
@@ -252,12 +269,14 @@ void GameObject::Read(std::istream& is)
 			pr->Read(is);
 			break;
 		}
+		default:
+			break;
 		}
 	}
-	CameraManager::GetInstance()->SetCameraMaxX(_position.x/32);
-	CameraManager::GetInstance()->SetCameraMaxY(_position.y/32);
-	CameraManager::GetInstance()->SetCameraMinX(_position.x/32);
-	CameraManager::GetInstance()->SetCameraMinY(_position.y/32);
+	CameraManager::GetInstance()->SetCameraMaxX(_position.x / 32);
+	CameraManager::GetInstance()->SetCameraMaxY(_position.y / 32);
+	CameraManager::GetInstance()->SetCameraMinX(_position.x / 32);
+	CameraManager::GetInstance()->SetCameraMinY(_position.y / 32);
 }
 
 vector<Component*>& GameObject::GetComponents() noexcept

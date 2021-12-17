@@ -5,7 +5,6 @@ class TriggerObj : public GameObject
 {
 public:
 	using GameObject::GameObject;
-
 	virtual ~TriggerObj() noexcept = default;
 
 	virtual void Init() override;

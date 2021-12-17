@@ -12,6 +12,9 @@
 class CameraManager : public Singleton<CameraManager>, IBehaviour
 {
 public:
+	CameraManager() = default;
+	~CameraManager() = default;
+
 	POINT* GetCameraPos() { return &cameraPos; }
 	void SetCameraMinX(int x);
 	void SetCameraMinY(int y);

@@ -91,6 +91,15 @@ void PhysicsManager::SetTriggerObj(int posX, int posY, GameObject* obj)
 	triggerObj[posX][posY] = obj;
 }
 
+void PhysicsManager::addPortalNum(int posX, int posY)
+{
+	PortalObj* portal = (PortalObj*)(triggerObj[posX][posY]);
+	if (portal != nullptr)
+	{
+		portal->AddNextMapNum();
+	}
+}
+
 GameObject* PhysicsManager::GetTriggerObj(int posX, int posY)
 {
 	if (triggerObj[posX].find(posY) == triggerObj[posX].end())
@@ -107,6 +116,23 @@ GameObject* PhysicsManager::GetTriggerObj(int posX, int posY)
 void PhysicsManager::RemoveTriggerObj(int posX, int posY)
 {
 
+}
+
+void PhysicsManager::AllClear()
+{
+	collisionObj.clear();
+	
+	for (auto it : chatObj)
+	{
+		it.second.clear();
+	}
+	chatObj.clear();
+
+	for (auto it : triggerObj)
+	{
+		it.second.clear();
+	}
+	triggerObj.clear();
 }
 
 std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager)
@@ -126,7 +152,7 @@ void PhysicsManager::Write(std::ostream& os) const
 {
 
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
-	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->chatObj);
+	unordered_map<int, unordered_map<int, int>>* chatTmp = &(PhysicsManager::GetInstance()->chatObj);
 
 	os << collisionTmp->size() << "\t";
 	for (auto it : *collisionTmp)
@@ -135,8 +161,8 @@ void PhysicsManager::Write(std::ostream& os) const
 		os << it.second << endl;
 	}
 
-	os << triggerTmp->size() << "\t";
-	for (auto it : *triggerTmp)
+	os << chatTmp->size() << "\t";
+	for (auto it : *chatTmp)
 	{
 		for (auto itt : it.second)
 		{
@@ -161,6 +187,7 @@ void PhysicsManager::Read(std::istream& is)
 			>> y;
 		collisionTmp->insert({ x,y });
 	}
+
 	int triggerSize;
 	is >> triggerSize;
 	for (int i = 0; i < triggerSize; ++i)

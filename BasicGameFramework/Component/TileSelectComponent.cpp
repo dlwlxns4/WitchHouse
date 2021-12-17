@@ -294,7 +294,14 @@ void TileSelectComponent::Update()
 	}
 	if (Input::GetButtonDown('L'))
 	{
-		Load();
+		Load(num++);
+	}
+
+	if (Input::GetButtonDown('Q'))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
+		PhysicsManager::GetInstance()->addPortalNum(mouseIndexX, mouseIndexY);
 	}
 }
 
@@ -381,6 +388,7 @@ void TileSelectComponent::Render(HDC hdc)
 	triggerPosTxt->Render(hdc);
 }
 
+
 void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 {
 	POINT* camera = (CameraManager::GetInstance()->GetCameraPos());
@@ -438,7 +446,9 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	}
 	else if (tileType == TileType::Portal)
 	{
-		PortalObj* portal = new PortalObj(mapData[currLayer - 1], L"Portal");
+		cout << "protal" << endl;
+		PortalObj* portal = new PortalObj(mapData[mapData.size() - 1], L"Portal");
+		portal->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
 		PhysicsManager::GetInstance()->SetTriggerObj(mouseIndexX, mouseIndexY, portal);
 	}
 }
@@ -487,6 +497,8 @@ void TileSelectComponent::Load(int loadIndex)
 	ifstream openFile(filePath.data());
 
 	int maxLayer = 0;
+
+
 	if (openFile.is_open())
 	{
 		openFile >> maxLayer;

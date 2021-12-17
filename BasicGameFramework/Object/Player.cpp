@@ -12,6 +12,8 @@
 #include <iostream>
 void Player::Init()
 {
+	this->Clear();
+
 	//MoveMent-----------------------------------------------------
 	PlayerMovement* movement = new PlayerMovement(this, 1);
 	movement->Init();
@@ -19,15 +21,14 @@ void Player::Init()
 
 	//SpriteRender-------------------------------------------------
 	this->SetPivot(Pivot::Center);
-	PlayerSpriteRenderer* spriteRenderer = new PlayerSpriteRenderer(this, 1);
+	PlayerSpriteRenderer* spriteRenderer = new PlayerSpriteRenderer(this, 2);
 	wstring wCharacterPath = L"Image/Character/$vivi.png";
 	spriteRenderer->SetImage(wCharacterPath.c_str());
 	
 
 	//Action---------------------
-	PlayerAction* action = new PlayerAction(this, 1);
+	PlayerAction* action = new PlayerAction(this, 3);
 
-	SetSize(200, 100);
 }
 
 void Player::Update()
