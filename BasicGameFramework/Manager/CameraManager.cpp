@@ -4,6 +4,11 @@
 #include "../Manager/GameManager.h"
 #include "../Component/Player/PlayerMovement.h"
 
+void CameraManager::SetCameraPos(POINT pos)
+{
+	cameraPos = pos;
+}
+
 void CameraManager::SetCameraMinX(int x)
 {
 	if (x < minPosX)
@@ -50,6 +55,14 @@ bool CameraManager::CheckOutOfTileY(int y)
 		return true;
 
 	return false;
+}
+
+void CameraManager::Clear()
+{
+	maxPosX = 0;
+	maxPosY = 0;
+	minPosX = 10000;
+	minPosY = 10000;
 }
 
 void CameraManager::Init()

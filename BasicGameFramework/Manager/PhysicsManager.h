@@ -63,8 +63,8 @@ public:
 
 	void SetTriggerObj(int posX, int posY, GameObject* obj);
 
-	void addPortalNum(int posX, int posY);
 	GameObject* GetTriggerObj(int posX, int posY);
+	void addPortalNum(int posX, int posY);
 	void RemoveTriggerObj(int posX, int posY);
 
 	void AllClear();

@@ -16,11 +16,18 @@ enum class State
 	UserInfo = 3
 };
 
-struct mapData
+struct playerData
 {
 	int sceneNum;
-	int charaterPosX;
+	int characterPosX;
 	int characterPosY;
+};
+
+struct cameraData
+{
+	int sceneNum;
+	int cameraPosX;
+	int cameraPosY;
 };
 
 class GameManager : public Singleton<GameManager>
@@ -35,14 +42,17 @@ public:
 	
 	void Init();
 	
-	int GetCurrScene() { return currScene; }
 	POINT GetPlayerPos() { return playerPos; }
+	int GetCurrScene() { return currScene; }
 	void SetPlayer(Player* player);
 	void SetPlayerAction(PlayerActionState actionState);
 	void SetPlayerSprite(PlayerSpriteState spriteState);
 	void SetPlayerPos(POINT pos);
 
-	void GenerateMapData();
+	void GeneratePlayerData();
+	void GenerateCameraData();
+	POINT GetCameraData(int mapNum);
+	POINT GetPlayerData(int mapNum);
 
 private:
 	State state = State::None;
@@ -50,7 +60,10 @@ private:
 	int currScene = 0;
 	POINT playerPos = { 9*32,9*32 };
 	Player* player = nullptr;
-	vector<mapData> mapDatas;
+
+
+	vector<playerData> playerDatas;
+	vector<cameraData> cameraDatas;
 
 };
 

@@ -4,6 +4,8 @@
 
 #include "../Manager/ImageManager.h"
 #include "../Manager/CameraManager.h"
+#include "../Manager/QuestManager.h"
+
 #include <iostream> //
 void BackPanel::Init()
 {
@@ -16,7 +18,7 @@ void BackPanel::Update()
 	{
 		if (isBright)
 		{
-			if (isFirst)
+			if (QuestManager::GetInstance()->GetQuest()==0)
 			{
 				POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 				if (cameraPos->y >= -32)
@@ -28,6 +30,24 @@ void BackPanel::Update()
 					isBright = false;
 					isActive = false;
 				}
+			}
+			else 
+			{
+				panelOpacity -= 0.05;
+				if (panelOpacity <= 0)
+				{
+					isBright = false;
+					isActive = false;
+				}
+			}
+		}
+		else
+		{
+			panelOpacity += 0.05;
+			if (panelOpacity >= 1)
+			{
+				isBright = true;
+				isActive = false;
 			}
 		}
 	}

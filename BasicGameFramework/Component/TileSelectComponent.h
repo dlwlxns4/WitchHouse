@@ -20,7 +20,9 @@ private:
 		parallaxObj = 2,
 		Collider = 3,
 		Trigger = 4,
-		Portal = 5
+		Portal = 5,
+		Item = 6,
+		Twinkle =7
 	};
 
 	using Component::Component;

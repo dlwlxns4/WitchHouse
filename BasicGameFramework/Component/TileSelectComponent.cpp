@@ -35,6 +35,7 @@
 #include "../Object/UIObj.h"
 #include "../Object/PortalObj.h"
 #include "../Object/TileObj.h"
+#include "../Object/TwinkleObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -106,12 +107,20 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Portal";
 			}
+			else if ((int)tileType == 6)
+			{
+				txt = L"TileType : Item";
+			}
+			else if ((int)tileType == 7)
+			{
+				txt = L"TileType : Twinkle";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 5)
+		if ((int)tileType < 7)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -139,6 +148,14 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 5)
 			{
 				txt = L"TileType : Portal";
+			}
+			else if ((int)tileType == 6)
+			{
+				txt = L"TileType : Item";
+			}
+			else if ((int)tileType == 7)
+			{
+				txt = L"TileType : Twinkle";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -197,8 +214,8 @@ void TileSelectComponent::Update()
 	RECT mainArea = { 0,0,TILE_SIZE * MAP_SIZE_X, TILE_SIZE * MAP_SIZE_Y };
 	if (PtInRect(&mainArea, mousePos))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
-		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 
 		if (Input::GetButtonDown(VK_LBUTTON))
 		{
@@ -209,7 +226,7 @@ void TileSelectComponent::Update()
 		{
 			if (tileType == TileType::tileObj)
 			{
-				mapData[currLayer - 1]->RemoveObject(POINT{ mouseIndexX*TILE_SIZE, mouseIndexY*TILE_SIZE });
+				mapData[currLayer - 1]->RemoveObject(POINT{ mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE });
 			}
 			else if (tileType == TileType::Trigger)
 			{
@@ -226,20 +243,20 @@ void TileSelectComponent::Update()
 	//MoveCamera
 	if (Input::GetButton('W'))
 	{
-		cameraPos->y-=32;
+		cameraPos->y -= 32;
 	}
 	else if (Input::GetButton('S'))
 	{
-		cameraPos->y+=32;
+		cameraPos->y += 32;
 
 	}
 	else if (Input::GetButton('A'))
 	{
-		cameraPos->x-=32;
+		cameraPos->x -= 32;
 	}
 	else if (Input::GetButton('D'))
 	{
-		cameraPos->x+=32;
+		cameraPos->x += 32;
 	}
 
 
@@ -259,32 +276,32 @@ void TileSelectComponent::Update()
 	//select TriggerTile
 	if (Input::GetButtonDown('F'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
-		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 		PhysicsManager::GetInstance()->addId_1(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('G'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
-		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 		PhysicsManager::GetInstance()->addId_10(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('V'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
-		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 		PhysicsManager::GetInstance()->addId_100(mouseIndexX, mouseIndexY);
 	}
 	else if (Input::GetButtonDown('B'))
 	{
-		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x/32;
-		int mouseIndexY = mousePos.y / 32 + cameraPos->y/32;
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 		PhysicsManager::GetInstance()->addId_1000(mouseIndexX, mouseIndexY);
 	}
 
 	if (Input::GetButtonDown('U'))
 	{
-		UIObj* chatPanel = new UIObj(mapData[mapData.size()-1], L"UI");
+		UIObj* chatPanel = new UIObj(mapData[mapData.size() - 1], L"UI");
 		chatPanel->Init();
 	}
 
@@ -368,7 +385,7 @@ void TileSelectComponent::Render(HDC hdc)
 		for (auto it : *chat)
 		{
 			for (auto itt : it.second)
-			{	
+			{
 				ImageManager::GetInstance()->DrawColliderRectRed(it.first, itt.first, itt.second);
 			}
 		}
@@ -404,10 +421,10 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 				{
 					TileObj* tileObj = new TileObj(mapData[currLayer - 1], L"Tile");
 					SpriteRenderer* spriteRenderer = new SpriteRenderer(tileObj, 1);
-					spriteRenderer->SetSprite(sampleIndex, i - camera->x/32, j - camera->y/32);
+					spriteRenderer->SetSprite(sampleIndex, i - camera->x / 32, j - camera->y / 32);
 
 					tileObj->SetPosition(
-						(mouseIndexX + (i - downPos.first - camera->x/TILE_SIZE)) * TILE_SIZE,
+						(mouseIndexX + (i - downPos.first - camera->x / TILE_SIZE)) * TILE_SIZE,
 						(mouseIndexY + (j - downPos.second - camera->y / TILE_SIZE)) * TILE_SIZE
 					);
 				}
@@ -451,6 +468,12 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 		portal->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
 		PhysicsManager::GetInstance()->SetTriggerObj(mouseIndexX, mouseIndexY, portal);
 	}
+	else if (tileType == TileType::Twinkle)
+	{
+		TwinkleObj* twinkle = new TwinkleObj(mapData[currLayer - 1], L"Twinkle");
+		twinkle->Init();
+		twinkle->SetPosition((mouseIndexX)*TILE_SIZE, (mouseIndexY)*TILE_SIZE);
+	}
 }
 
 void TileSelectComponent::Release()
@@ -470,7 +493,7 @@ void TileSelectComponent::Release()
 
 void TileSelectComponent::Save(int saveIndex)
 {
-	string filePath = "Save/MapData" + to_string(saveIndex) + ".txt";
+	string filePath = "Save/Tilemap/MapData" + to_string(saveIndex) + ".txt";
 
 	ofstream writeFile(filePath.data());
 
@@ -492,7 +515,7 @@ void TileSelectComponent::Save(int saveIndex)
 
 void TileSelectComponent::Load(int loadIndex)
 {
-	string filePath = "Save/MapData" + to_string(loadIndex) + ".txt";
+	string filePath = "Save/Tilemap/MapData" + to_string(loadIndex) + ".txt";
 
 	ifstream openFile(filePath.data());
 
@@ -502,7 +525,7 @@ void TileSelectComponent::Load(int loadIndex)
 	if (openFile.is_open())
 	{
 		openFile >> maxLayer;
-		
+
 		for (auto layer : mapData)
 		{
 			delete layer;

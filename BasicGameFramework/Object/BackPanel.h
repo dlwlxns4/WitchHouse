@@ -12,6 +12,9 @@ public:
 	virtual void Init() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Update() override;
+
+	void SetActive(bool active) { isActive = active; }
+	float GetPanelOpacity() { return panelOpacity; }
 private:
 	Sprite* backPanel= nullptr;
 

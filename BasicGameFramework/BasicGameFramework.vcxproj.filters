@@ -50,6 +50,9 @@
     <Filter Include="Object\TitleScene">
       <UniqueIdentifier>{c561ed67-f836-4b7f-b04d-8f11682e71fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{d35db598-5ef3-40af-be56-697f13b150eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -241,6 +244,15 @@
     <ClInclude Include="Object\PortalObj.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Manager\ItemManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Item.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TwinkleObj.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -414,6 +426,15 @@
     </ClCompile>
     <ClCompile Include="Object\PortalObj.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\ItemManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Item.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TwinkleObj.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

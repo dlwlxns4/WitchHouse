@@ -7,7 +7,7 @@
 #include "../Object/TileObj.h"
 #include "../Object/ParallaxObj.h"
 #include "../Object/PortalObj.h"
-
+#include "../Object/TwinkleObj.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -172,6 +172,13 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 				cout << "@" << endl;
 				PortalObj* portal = new PortalObj(&layer, L"Portal");
 				portal->Read(is);
+				break;
+			}
+			case 4:
+			{
+				TwinkleObj* twinkle = new TwinkleObj(&layer, L"Twinkle");
+				twinkle->Read(is);
+
 				break;
 			}
 		}

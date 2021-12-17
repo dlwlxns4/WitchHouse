@@ -85,7 +85,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/SelectPanel_01.png");
 	AddSprite(L"Image/UI/title.jpg");
 
-								 
+	//Particle
+	AddSprite(L"Image/Graphics/Twinkle.png");
 }
 
 void ImageManager::Release()

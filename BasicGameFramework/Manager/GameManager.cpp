@@ -4,7 +4,8 @@
 
 void GameManager::Init()
 {
-	GenerateMapData();
+	GeneratePlayerData();
+	GenerateCameraData();
 }
 
 void GameManager::SetPlayer(Player* player)
@@ -27,8 +28,34 @@ void GameManager::SetPlayerPos(POINT pos)
 	player->SetPosition(pos);
 }
 
-void GameManager::GenerateMapData()
+
+void GameManager::GenerateCameraData()
 {
-	mapDatas.push_back({ 0, 10, 10 });
-	mapDatas.push_back({ 1, 10, 10 });
+	cameraDatas.push_back({ 0, -128, 96 });
+	cameraDatas.push_back({ 1, 32, -96 });
+}
+
+POINT GameManager::GetCameraData(int mapNum)
+{
+	cameraData tmp = cameraDatas[mapNum];
+	int x = tmp.cameraPosX;
+	int y = tmp.cameraPosY;
+
+	return POINT({ x,y });
+}
+
+
+void GameManager::GeneratePlayerData()
+{
+	playerDatas.push_back({ 0, 4, 14 });
+	playerDatas.push_back({ 1, 9, -2 });
+}
+
+POINT GameManager::GetPlayerData(int mapNum)
+{
+	playerData tmp = playerDatas[mapNum];
+	int x = tmp.characterPosX;
+	int y = tmp.characterPosY;
+
+	return POINT({ x,y });
 }

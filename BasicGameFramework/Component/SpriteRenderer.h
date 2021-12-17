@@ -20,7 +20,8 @@ public:
 
 	void SetSprite(int sampleIndex, int frameX, int frameY);
 	void SetSprite(const wchar_t* fileName);
-
+	void SetFrameX(int x);
+	void SetFrameY(int y);
 private:
 	Sprite* sprite = nullptr;
 	int spriteindex = 0;

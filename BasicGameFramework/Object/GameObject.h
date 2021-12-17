@@ -20,11 +20,11 @@ public:
 	GameObject(const std::wstring& tag);
 	virtual ~GameObject() noexcept;
 
-	virtual void	Init() override;
-	virtual void	Update() override;
-	virtual void	Render(HDC hdc) override;
-	virtual void	Release() override;
-	virtual void	OnTrigger() override;
+	virtual void				Init() override;
+	virtual void				Update() override;
+	virtual void				Render(HDC hdc) override;
+	virtual void				Release() override;
+	virtual void				OnTrigger() override;
 
 	void						AddComponent(Component* component);
 	void						RemoveComponent(Component* component);

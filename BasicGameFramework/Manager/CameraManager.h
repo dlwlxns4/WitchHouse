@@ -15,6 +15,7 @@ public:
 	CameraManager() = default;
 	~CameraManager() = default;
 
+	void SetCameraPos(POINT pos);
 	POINT* GetCameraPos() { return &cameraPos; }
 	void SetCameraMinX(int x);
 	void SetCameraMinY(int y);
@@ -25,14 +26,16 @@ public:
 	bool CheckOutOfTileX(int x);
 	bool CheckOutOfTileY(int y);
 
+	void Clear();
+
 	virtual void Init() override;
 	virtual void Update() override;
 private:
 	POINT cameraPos = {};
 	int maxPosX = 0;
 	int maxPosY = 0;
-	int minPosX = 1000;
-	int minPosY = 1000;
+	int minPosX = 10000;
+	int minPosY = 10000;
 
 	int cameraDelay = 0;
 };
