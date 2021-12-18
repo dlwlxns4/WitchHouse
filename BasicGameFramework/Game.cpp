@@ -130,8 +130,9 @@ bool Game::Init(HINSTANCE hInst)
 
 	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget, pBrush, pTextFormat);
 	TalkManager::GetInstance()->Init();
-	SceneManager::GetInstance()->Init();
+	QuestManager::GetInstance()->Init();
 	CameraManager::GetInstance()->Init();
+	SceneManager::GetInstance()->Init();
 	GameManager::GetInstance()->Init();
 	ItemManager::GetInstance()->Init();
 

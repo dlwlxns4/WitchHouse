@@ -167,6 +167,7 @@
     <ClInclude Include="Component\Player\PlayerMovement.h" />
     <ClInclude Include="Component\Player\PlayerSpriteRenderer.h" />
     <ClInclude Include="Component\RectComponent.h" />
+    <ClInclude Include="Component\SizeAdjRenderer.h" />
     <ClInclude Include="Component\SpriteRenderer.h" />
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TileSelectComponent.h" />
@@ -183,8 +184,9 @@
     <ClInclude Include="Manager\QuestManager.h" />
     <ClInclude Include="Manager\SceneManager.h" />
     <ClInclude Include="Manager\TalkManager.h" />
-    <ClInclude Include="Manager\UIManager.h" />
+    <ClInclude Include="Object\AkariObj.h" />
     <ClInclude Include="Object\BackPanel.h" />
+    <ClInclude Include="Object\DoorObj.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemFactory.h" />
     <ClInclude Include="Object\PortalObj.h" />
@@ -244,6 +246,7 @@
     <ClCompile Include="Component\Player\PlayerMovement.cpp" />
     <ClCompile Include="Component\Player\PlayerSpriteRenderer.cpp" />
     <ClCompile Include="Component\RectComponent.cpp" />
+    <ClCompile Include="Component\SizeAdjRenderer.cpp" />
     <ClCompile Include="Component\SpriteRenderer.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
@@ -258,8 +261,9 @@
     <ClCompile Include="Manager\QuestManager.cpp" />
     <ClCompile Include="Manager\SceneManager.cpp" />
     <ClCompile Include="Manager\TalkManager.cpp" />
-    <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="Object\AkariObj.cpp" />
     <ClCompile Include="Object\BackPanel.cpp" />
+    <ClCompile Include="Object\DoorObj.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemFactory.cpp" />
     <ClCompile Include="Object\PortalObj.cpp" />

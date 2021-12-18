@@ -53,6 +53,9 @@
     <Filter Include="Object\Item">
       <UniqueIdentifier>{d35db598-5ef3-40af-be56-697f13b150eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Graphic">
+      <UniqueIdentifier>{d4692f53-809d-4d5e-b406-c4eb77b4c420}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -202,9 +205,6 @@
     <ClInclude Include="Object\UIObj.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\UIManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Component\ChatRenderer.h">
       <Filter>Component\UI</Filter>
     </ClInclude>
@@ -250,11 +250,20 @@
     <ClInclude Include="Object\Item.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Object\TwinkleObj.h">
-      <Filter>Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Object\ItemFactory.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\DoorObj.h">
+      <Filter>Object\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TwinkleObj.h">
+      <Filter>Object\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AkariObj.h">
+      <Filter>Object\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SizeAdjRenderer.h">
+      <Filter>Component\TilemapToolScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -391,9 +400,6 @@
     <ClCompile Include="Object\UIObj.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\UIManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Component\ChatRenderer.cpp">
       <Filter>Component\UI</Filter>
     </ClCompile>
@@ -436,11 +442,20 @@
     <ClCompile Include="Object\Item.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Object\TwinkleObj.cpp">
-      <Filter>Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Object\ItemFactory.cpp">
       <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\DoorObj.cpp">
+      <Filter>Object\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TwinkleObj.cpp">
+      <Filter>Object\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AkariObj.cpp">
+      <Filter>Object\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SizeAdjRenderer.cpp">
+      <Filter>Component\TilemapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

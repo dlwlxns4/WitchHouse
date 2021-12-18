@@ -18,7 +18,7 @@ void BackPanel::Update()
 	{
 		if (isBright)
 		{
-			if (QuestManager::GetInstance()->GetQuest()==0)
+			if (QuestManager::GetInstance()->GetQuest()==10)
 			{
 				POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 				if (cameraPos->y >= -32)

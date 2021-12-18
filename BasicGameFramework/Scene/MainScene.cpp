@@ -40,6 +40,7 @@ void MainScene::Update()
 
 		(*_layers).clear();
 		SceneManager::GetInstance()->SetNextScene(L"TilemapTool");
+		PhysicsManager::GetInstance()->AllClear();
 	}
 	if (Input::GetButtonDown('A'))
 	{
@@ -91,7 +92,6 @@ void MainScene::Render(HDC hdc)
 
 void MainScene::TransMap(int mapNum)
 {
-	//Load(mapNum);
 	loadFlag = true;
 	nextSceneNum = mapNum;
 	backPanel->SetActive(true);
@@ -139,7 +139,7 @@ void MainScene::Load(int loadIndex)
 				player->Init();
 				GameManager::GetInstance()->SetPlayer(player);
 
-				if (QuestManager::GetInstance()->GetQuest() == 0)
+				if (QuestManager::GetInstance()->GetQuest() == 10)
 				{
 					player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 					player->GetComponent<PlayerSpriteRenderer>()->SetState(PlayerSpriteState::Init);
@@ -150,8 +150,8 @@ void MainScene::Load(int loadIndex)
 					player->GetComponent<PlayerSpriteRenderer>()->SetState(PlayerSpriteState::Move);
 				}
 
-				POINT playerPos = GameManager::GetInstance()->GetPlayerPos();
-				player->SetPosition(playerPos);
+				//POINT playerPos = GameManager::GetInstance()->GetPlayerPos();
+				//player->SetPosition(playerPos);
 			}
 
 			openFile >> *((*_layers)[i]);
@@ -174,17 +174,19 @@ void MainScene::Load(int loadIndex)
 	
 
 
-	if (isFirst && QuestManager::GetInstance()->GetQuest() == 0)
+	if (isFirst && QuestManager::GetInstance()->GetQuest() == 10)
 	{
 		isFirst = false;
 		GameManager::GetInstance()->SetPlayerPos({ 9 * 32, 9 * 32 });
 	}
 	else
 	{
-		POINT nextPlayerPos = GameManager::GetInstance()->GetPlayerData(loadIndex);
-		POINT nextCameraPos = GameManager::GetInstance()->GetCameraData(loadIndex);
+		int prevScene = GameManager::GetInstance()->GetCurrScene();
+		POINT nextPlayerPos = GameManager::GetInstance()->GetPlayerData(prevScene, loadIndex);
+		POINT nextCameraPos = GameManager::GetInstance()->GetCameraData(prevScene, loadIndex);
 		CameraManager::GetInstance()->SetCameraPos({ nextCameraPos.x, nextCameraPos.y });
 		GameManager::GetInstance()->SetPlayerPos({ nextPlayerPos.x * 32, nextPlayerPos.y * 32 });
+		GameManager::GetInstance()->SetCurrScene(loadIndex);
 	}
 
 	openFile.close();

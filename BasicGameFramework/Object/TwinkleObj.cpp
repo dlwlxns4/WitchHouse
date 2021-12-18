@@ -4,7 +4,7 @@
 void TwinkleObj::Init()
 {
 	renderer = new SpriteRenderer(this, 1);
-	renderer->SetSprite(L"Image/Graphics/Twinkle.png");
+	renderer->SetSprite(L"Image/Graphics/Obj/Twinkle.png");
 }
 
 void TwinkleObj::Update()
@@ -32,7 +32,7 @@ void TwinkleObj::Read(std::istream& is)
 {
 	GameObject::Read(is);
 
-	this->GetComponent<SpriteRenderer>()->SetSprite(L"Image/Graphics/Twinkle.png");
 	this->renderer = this->GetComponent<SpriteRenderer>();
+	renderer->SetSprite(L"Image/Graphics/Obj/Twinkle.png");
 }
 

@@ -22,7 +22,8 @@ private:
 		Trigger = 4,
 		Portal = 5,
 		Item = 6,
-		Twinkle =7
+		Twinkle =7,
+		Akari = 8
 	};
 
 	using Component::Component;

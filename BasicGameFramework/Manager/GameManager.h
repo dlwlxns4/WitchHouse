@@ -18,6 +18,7 @@ enum class State
 
 struct playerData
 {
+	int prevSceneNum;
 	int sceneNum;
 	int characterPosX;
 	int characterPosY;
@@ -25,6 +26,7 @@ struct playerData
 
 struct cameraData
 {
+	int prevSceneNum;
 	int sceneNum;
 	int cameraPosX;
 	int cameraPosY;
@@ -43,7 +45,8 @@ public:
 	void Init();
 	
 	POINT GetPlayerPos() { return playerPos; }
-	int GetCurrScene() { return currScene; }
+	int	 GetCurrScene() { return currScene; }
+	void SetCurrScene(int scene) { currScene = scene; }
 	void SetPlayer(Player* player);
 	void SetPlayerAction(PlayerActionState actionState);
 	void SetPlayerSprite(PlayerSpriteState spriteState);
@@ -51,8 +54,8 @@ public:
 
 	void GeneratePlayerData();
 	void GenerateCameraData();
-	POINT GetCameraData(int mapNum);
-	POINT GetPlayerData(int mapNum);
+	POINT GetPlayerData(int prevScene, int mapNum);
+	POINT GetCameraData(int prevScene, int mapNum);
 	GameObject* GetPlayer() { return player; };
 
 private:
@@ -62,10 +65,8 @@ private:
 	POINT playerPos = { 9*32,9*32 };
 	GameObject* player = nullptr;
 
-
-	vector<playerData> playerDatas;
-	vector<cameraData> cameraDatas;
-
+	unordered_map<int, unordered_map<int, POINT>> playerPosData;
+	unordered_map<int, unordered_map<int, POINT>> cameraPosData;
 };
 
 

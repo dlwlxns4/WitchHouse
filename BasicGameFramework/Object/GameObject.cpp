@@ -12,6 +12,7 @@
 
 #include "../Component/SpriteRenderer.h"
 #include "../Component/ParallaxSpriteRenderer.h"
+#include "../Component/SizeAdjRenderer.h"
 
 GameObject::GameObject(Scene* scene, Layer* layer, const wstring& tag)
 	:
@@ -267,6 +268,11 @@ void GameObject::Read(std::istream& is)
 			ParallaxSpriteRenderer* pr = new ParallaxSpriteRenderer(this, 1);
 			pr->Read(is);
 			break;
+		}
+		case 102:
+		{
+			SizeAdjRenderer* adj = new SizeAdjRenderer(this, 1);
+			adj->Read(is);
 		}
 		default:
 			break;

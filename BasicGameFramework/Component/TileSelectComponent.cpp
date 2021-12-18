@@ -36,6 +36,7 @@
 #include "../Object/PortalObj.h"
 #include "../Object/TileObj.h"
 #include "../Object/TwinkleObj.h"
+#include "../Object/AkariObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -115,12 +116,17 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Twinkle";
 			}
+			else if ((int)tileType == 8)
+			{
+				txt = L"TileType : Akari";
+			}
+
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 7)
+		if ((int)tileType < 8)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -156,6 +162,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 7)
 			{
 				txt = L"TileType : Twinkle";
+			}
+			else if ((int)tileType == 8)
+			{
+				txt = L"TileType : Akari";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -486,6 +496,12 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 		twinkle->Init();
 		twinkle->SetPosition((mouseIndexX)*TILE_SIZE, (mouseIndexY)*TILE_SIZE);
 	}
+	else if (tileType == TileType::Akari)
+	{
+		AkariObj* akari = new AkariObj(mapData[currLayer - 1], L"Akari");
+		akari->Init();
+		akari->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
+	}
 }
 
 void TileSelectComponent::Release()
@@ -517,9 +533,9 @@ void TileSelectComponent::Save(int saveIndex)
 			writeFile << *(mapData[i]) << endl;
 			writeFile << -1 << endl;
 		}
+		writeFile << *PhysicsManager::GetInstance();
 	}
 
-	writeFile << *PhysicsManager::GetInstance();
 
 	cout << "세이브 완료" << endl;
 	writeFile.close();
@@ -552,16 +568,11 @@ void TileSelectComponent::Load(int loadIndex)
 		{
 			mapData.push_back(new Layer(L"layer" + to_wstring((int)mapData.size()), (int)mapData.size()));
 
-			//플레이어 생성
-			//if (i == 1)
-			//{
-
-			//	mapData[i]->AddObject();
-			//}
 			openFile >> *(mapData[i]);
 		}
+
+		openFile >> *PhysicsManager::GetInstance();
 	}
-	openFile >> *PhysicsManager::GetInstance();
 
 	wstring txt = L"CurrLayer : " + to_wstring(currLayer) + L" MaxLayer : " + to_wstring(mapData.size());
 	currLayerTxt->GetComponent< TextComponent>()->SetText(txt);

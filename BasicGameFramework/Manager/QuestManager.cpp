@@ -19,3 +19,8 @@ int* QuestManager::GetQuestPtr()
 {
 	return &currQuest;
 }
+
+void QuestManager::Init()
+{
+	currQuest = 10;
+}

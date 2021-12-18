@@ -73,8 +73,8 @@ void CameraManager::Init()
 
 void CameraManager::Update()
 {
-	const int* currQuest = QuestManager::GetInstance()->GetQuestPtr();
-	if (*currQuest == 10)
+	const int currQuest = QuestManager::GetInstance()->GetQuest();
+	if (currQuest == 10)
 	{
 		cameraDelay++;
 		if (cameraDelay >= 3)

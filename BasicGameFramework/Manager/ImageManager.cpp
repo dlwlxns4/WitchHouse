@@ -54,7 +54,17 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Tile/TileC.png");
 	AddSprite(L"Image/Tile/TileD.png");
 	AddSprite(L"Image/Tile/TileE.png");
+	AddSprite(L"Image/Tile/tileHouse.png");
 	AddSprite(L"Image/Tile/yukab034d.png");
+	AddSprite(L"Image/Tile/!$object11.png");
+	AddSprite(L"Image/Tile/!$object12.png");
+	AddSprite(L"Image/Tile/!$wall_eye.png");
+	AddSprite(L"Image/Tile/!$wall2.png");
+	AddSprite(L"Image/Tile/!$wall3.png");
+	AddSprite(L"Image/Tile/!$wall4L.png");
+	AddSprite(L"Image/Tile/!$wall4L2.png");
+	AddSprite(L"Image/Tile/!$wall5.png");
+	AddSprite(L"Image/Tile/TileEdge.png");
 
 	spritesName.push_back(L"Image/Tile/TileA1.png");
 	spritesName.push_back(L"Image/Tile/TileA2.png");
@@ -66,6 +76,16 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/TileD.png");
 	spritesName.push_back(L"Image/Tile/TileE.png");
 	spritesName.push_back(L"Image/Tile/yukab034d.png");
+	spritesName.push_back(L"Image/Tile/tileHouse.png");
+	spritesName.push_back(L"Image/Tile/!$object11.png");
+	spritesName.push_back(L"Image/Tile/!$object12.png");
+	spritesName.push_back(L"Image/Tile/!$wall_eye.png");
+	spritesName.push_back(L"Image/Tile/!$wall2.png");
+	spritesName.push_back(L"Image/Tile/!$wall3.png");
+	spritesName.push_back(L"Image/Tile/!$wall4L.png");
+	spritesName.push_back(L"Image/Tile/!$wall4L2.png");
+	spritesName.push_back(L"Image/Tile/!$wall5.png");
+	spritesName.push_back(L"Image/Tile/TileEdge.png");
 
 	
 	//-------------------Parallax
@@ -87,7 +107,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/title.jpg");
 
 	//Particle
-	AddSprite(L"Image/Graphics/Twinkle.png");
+	AddSprite(L"Image/Graphics/Obj/Twinkle.png");
+	AddSprite(L"Image/Graphics/Obj/Akari.png");
 }
 
 void ImageManager::Release()

@@ -8,6 +8,7 @@
 #include "../Object/ParallaxObj.h"
 #include "../Object/PortalObj.h"
 #include "../Object/TwinkleObj.h"
+#include "../Object/AkariObj.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -47,10 +48,6 @@ void Layer::Update()
 {
 	for (int i = 0; i < _objects.size(); ++i)
 	{
-		if (_objects.size() > 1000)
-		{
-			break;
-		}
 		_objects[i]->Update();
 	}
 
@@ -169,7 +166,6 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 			}
 			case 3:
 			{
-				cout << "@" << endl;
 				PortalObj* portal = new PortalObj(&layer, L"Portal");
 				portal->Read(is);
 				break;
@@ -180,6 +176,11 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 				twinkle->Read(is);
 
 				break;
+			}
+			case 5:
+			{
+				AkariObj* akari = new AkariObj(&layer, L"TAkari");
+				akari->Read(is);
 			}
 		}
 	} while (objType != -1);
