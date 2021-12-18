@@ -14,7 +14,6 @@
 
 #include <iostream>
 
-#include <atlconv.h>
 
 
 void ChatRenderer::Init()
@@ -43,8 +42,8 @@ void ChatRenderer::Update()
 		if (slatePos <= 0)
 		{
 			isOpen = false;
-			chatEffect.clear();
 			isClose = false;
+			chatEffect.clear();
 			slatePos = 0;
 			vecIndex = 0;
 			strIndex = 0;

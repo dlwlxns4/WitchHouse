@@ -7,6 +7,7 @@
 #include "Manager/TalkManager.h"
 #include "Manager/CameraManager.h"
 #include "Manager/GameManager.h"
+#include "Manager/ItemManager.h"
 
 //--------------------------d2d
 
@@ -127,11 +128,12 @@ bool Game::Init(HINSTANCE hInst)
 
 	Input::Init(_hWnd);
 
-	TalkManager::GetInstance()->Init();
 	ImageManager::GetInstance()->Init(_hWnd, _hInst, pImagingFactory, pRenderTarget, pBrush, pTextFormat);
+	TalkManager::GetInstance()->Init();
 	SceneManager::GetInstance()->Init();
 	CameraManager::GetInstance()->Init();
 	GameManager::GetInstance()->Init();
+	ItemManager::GetInstance()->Init();
 
 	return true;
 }

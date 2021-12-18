@@ -53,13 +53,14 @@ public:
 	void GenerateCameraData();
 	POINT GetCameraData(int mapNum);
 	POINT GetPlayerData(int mapNum);
+	GameObject* GetPlayer() { return player; };
 
 private:
 	State state = State::None;
 
 	int currScene = 0;
 	POINT playerPos = { 9*32,9*32 };
-	Player* player = nullptr;
+	GameObject* player = nullptr;
 
 
 	vector<playerData> playerDatas;

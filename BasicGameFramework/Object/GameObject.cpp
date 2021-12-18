@@ -73,7 +73,10 @@ void GameObject::Update()
 {
 	for (int i = 0; i < _components.size(); ++i)
 	{
-		_components[i]->Update();
+		if (_components[i]->IsActive())
+		{
+			_components[i]->Update();
+		}
 	}
 }
 
@@ -83,13 +86,9 @@ void GameObject::Render(HDC hdc)
 
 	for (Component* comp : _components)
 	{
-		try
+		if (comp->IsActive())
 		{
 			comp->Render(hdc);
-		}
-		catch (exception e)
-		{
-
 		}
 	}
 }

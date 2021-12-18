@@ -397,6 +397,14 @@ void TileSelectComponent::Render(HDC hdc)
 				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
 			}
 		}
+		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
+		for (auto it : *item)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectOrange(it.first, itt.first, itt.second);
+			}
+		}
 
 	}
 
@@ -468,6 +476,10 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 		portal->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
 		PhysicsManager::GetInstance()->SetTriggerObj(mouseIndexX, mouseIndexY, portal);
 	}
+	else if (tileType == TileType::Item)
+	{
+		PhysicsManager::GetInstance()->SetItem(mouseIndexX, mouseIndexY);
+	}
 	else if (tileType == TileType::Twinkle)
 	{
 		TwinkleObj* twinkle = new TwinkleObj(mapData[currLayer - 1], L"Twinkle");
@@ -521,9 +533,9 @@ void TileSelectComponent::Load(int loadIndex)
 
 	int maxLayer = 0;
 
-
 	if (openFile.is_open())
 	{
+		PhysicsManager::GetInstance()->AllClear();
 		openFile >> maxLayer;
 
 		for (auto layer : mapData)

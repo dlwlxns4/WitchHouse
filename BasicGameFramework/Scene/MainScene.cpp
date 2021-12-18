@@ -33,6 +33,12 @@ void MainScene::Update()
 
 	if (Input::GetButtonDown('O'))
 	{
+		for (auto layer : *_layers)
+		{
+			delete layer;
+		}
+
+		(*_layers).clear();
 		SceneManager::GetInstance()->SetNextScene(L"TilemapTool");
 	}
 	if (Input::GetButtonDown('A'))

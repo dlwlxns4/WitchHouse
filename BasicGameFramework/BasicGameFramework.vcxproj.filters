@@ -253,6 +253,9 @@
     <ClInclude Include="Object\TwinkleObj.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Object\ItemFactory.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -434,6 +437,9 @@
       <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Object\TwinkleObj.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ItemFactory.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>

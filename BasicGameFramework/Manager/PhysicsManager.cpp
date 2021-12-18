@@ -59,12 +59,53 @@ void PhysicsManager::SetChat(int posX, int posY)
 int PhysicsManager::GetChatId(int posX, int posY)
 {
 	int id = 0;
-
 	auto it = chatObj.find(posX);
 
-
-
 	if (it != chatObj.end())
+	{
+		auto itt = it->second.find(posY);
+		if (itt != it->second.end())
+		{
+			id = itt->second;
+		}
+	}
+	cout << id << endl;
+	return id;
+}
+
+void PhysicsManager::SetItem(int posX, int posY)
+{
+
+	auto it = itemObj.find(posX);
+	if (it != itemObj.end())
+	{
+		auto itt = it->second.find(posY);
+		if (itt != it->second.end())
+		{
+			(*itt).second++;
+			return;
+		}
+	}
+
+	itemObj[posX][posY] = 0;
+}
+
+void PhysicsManager::RemoveItem(int posX, int posY)
+{
+	auto it = itemObj.find(posX);
+
+	if (it == itemObj.end())
+		return;
+
+	it->second.erase(posY);
+}
+
+INT PhysicsManager::GetItemId(int posX, int posY)
+{
+	int id = 0;
+	auto it = chatObj.find(posX);
+
+	if (it != itemObj.end())
 	{
 		auto itt = it->second.find(posY);
 		if (itt != it->second.end())
@@ -153,6 +194,7 @@ void PhysicsManager::Write(std::ostream& os) const
 
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
 	unordered_map<int, unordered_map<int, int>>* chatTmp = &(PhysicsManager::GetInstance()->chatObj);
+	unordered_map<int, unordered_map<int, int>>* itemTmp = &(PhysicsManager::GetInstance()->itemObj);
 
 	os << collisionTmp->size() << "\t";
 	for (auto it : *collisionTmp)
@@ -171,12 +213,24 @@ void PhysicsManager::Write(std::ostream& os) const
 			os << itt.second << endl;
 		}
 	}
+
+	os << itemTmp->size() << "\t";
+	for (auto it : *itemTmp)
+	{
+		for (auto itt : it.second)
+		{
+			os << it.first << "\t";
+			os << itt.first << "\t";
+			os << itt.second << endl;
+		}
+	}
 }
 
 void PhysicsManager::Read(std::istream& is)
 {
 	unordered_set<pair<int, int>, pair_hash>* collisionTmp = &(PhysicsManager::GetInstance()->collisionObj);
 	unordered_map<int, unordered_map<int, int>>* triggerTmp = &(PhysicsManager::GetInstance()->chatObj);
+	unordered_map<int, unordered_map<int, int>>* itemTmp = &(PhysicsManager::GetInstance()->itemObj);
 
 	int collisionSize;
 	is >> collisionSize;
@@ -197,5 +251,16 @@ void PhysicsManager::Read(std::istream& is)
 			>> y
 			>> id;
 		(*triggerTmp)[x][y] = id;
+	}
+
+	int itemSize;
+	is >> itemSize;
+	for (int i = 0; i < itemSize; ++i)
+	{
+		int x, y, id;
+		is >> x
+			>> y
+			>> id;
+		(*itemTmp)[x][y] = id;
 	}
 }

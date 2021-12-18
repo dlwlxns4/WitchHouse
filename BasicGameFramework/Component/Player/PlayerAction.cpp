@@ -25,20 +25,20 @@ void PlayerAction::Update()
 		if (GameManager::GetInstance()->GetState() == State::None)
 		{
 			GameManager::GetInstance()->SetState(State::Chat);
-			int id = PhysicsManager::GetInstance()->GetChatId(posX, posY);
-			DoChatting(id);
+			int chatId = PhysicsManager::GetInstance()->GetChatId(posX, posY);
+			int itemid = PhysicsManager::GetInstance()->GetItemId(posX, posY);
+			DoChatting(chatId, itemid);
 		}
 
 	}
 }
 
-void PlayerAction::DoChatting(int id)
+void PlayerAction::DoChatting(int chatId, int itemid)
 {
 
-	if (id != 0)
+	if (chatId != 0)
 	{
-		TalkManager::GetInstance()->SaveTalkData(id);
-		
+		TalkManager::GetInstance()->SaveTalkData(chatId);
 	}
 }
 

@@ -1,54 +1,150 @@
 #include "InvenComponent.h"
 
-
+#include "../Manager/ItemManager.h"
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
 #include "../Util/Sprite.h"
-#include "../Object/GameObject.h"
-
 #include "../Util/AboutTile.h"
 
+#include "../Object/GameObject.h"
+#include "../Component/UserInfoComponent.h"
+
+#include <d2d1.h>
+#include <dwrite.h>
 
 void InvenComponent::Update()
 {
 	if (Input::GetButtonDown('X'))
 	{
-		if (GameManager::GetInstance()->GetState() == State::None)
-		{
-			GameManager::GetInstance()->SetState(State::UserInfo);
-		}
-		else if (GameManager::GetInstance()->GetState() == State::UserInfo)
-		{
-			GameManager::GetInstance()->SetState(State::None);
-			panelOpacity = 0;
-		}
-
+		SetActive(false);
+		_owner->GetComponent<UserInfoComponent>()->SetActive(true);
+		panelOpacity = 0;
 	}
-	if (GameManager::GetInstance()->GetState() == State::UserInfo && isShow)
+	else if (Input::GetButtonDown('Z'))
+	{
+		ItemManager::GetInstance()->UseItem(selectInvenItem);
+	}
+
+	if (panelOpacity <= 1)
 	{
 		panelOpacity += 0.1f;
 	}
+
+	if (Input::GetButtonDown(VK_LEFT))
+	{
+		if (selectInvenItem - 1 > 0)
+		{
+			selectInvenItem--;
+		}
+	}
+	else if (Input::GetButtonDown(VK_RIGHT))
+	{
+		if (selectInvenItem + 1 < 4 && selectInvenItem + 1 < ItemManager::GetInstance()->GetInventorySize())
+		{
+			selectInvenItem++;
+		}
+	}
+	else if (Input::GetButtonDown(VK_UP))
+	{
+		if (selectInvenItem - 2 > 0)
+		{
+			selectInvenItem -= 2;
+		}
+	}
+	else if (Input::GetButtonDown(VK_DOWN))
+	{
+		if (selectInvenItem + 2 < 4 && selectInvenItem + 2 < ItemManager::GetInstance()->GetInventorySize())
+		{
+			selectInvenItem += 2;
+		}
+	}
+
+
+	if (isDecrease == true)
+	{
+		selectPanelOpacity -= 0.05;
+		if (selectPanelOpacity <= 0.5f)
+		{
+			isDecrease = false;
+		}
+	}
+	else
+	{
+		selectPanelOpacity += 0.05f;
+		if (selectPanelOpacity >= 1.0f)
+		{
+			isDecrease = true;
+		}
+	}
+
 }
 
 void InvenComponent::Render(HDC hdc)
 {
-	if (GameManager::GetInstance()->GetState() == State::UserInfo && isShow)
-	{
-		upPanel->Render(_owner->GetPosition().x,
-			_owner->GetPosition().y - TILE_SIZE * 2, panelOpacity);
 
-		downPanel->Render(_owner->GetPosition().x + TILE_SIZE * 5 + TILE_SIZE / 2,
-			_owner->GetPosition().y - TILE_SIZE * 2, panelOpacity);
-	}
+	upPanel->Render(_owner->GetPosition().x,
+		_owner->GetPosition().y - TILE_SIZE * 2 - TILE_SIZE * 9, panelOpacity);
+
+	downPanel->Render(_owner->GetPosition().x,
+		_owner->GetPosition().y - TILE_SIZE * 2, panelOpacity);
+
+	selectPanel->Render(_owner->GetPosition().x + TILE_SIZE / 2, _owner->GetPosition().y - TILE_SIZE * 1.5, selectPanelOpacity);
+
+	PrintString();
 }
 
-void InvenComponent::SetSprite(const wchar_t* leftfileName, const wchar_t* rightFileName)
+void InvenComponent::SetSprite(const wchar_t* downFileName, const wchar_t* upFileName, const wchar_t* selectPanelFileName)
 {
-	upPanel = ImageManager::GetInstance()->FindSprite(leftfileName);
-	downPanel = ImageManager::GetInstance()->FindSprite(rightFileName);
+	upPanel = ImageManager::GetInstance()->FindSprite(upFileName);
+	downPanel = ImageManager::GetInstance()->FindSprite(downFileName);
+	selectPanel = ImageManager::GetInstance()->FindSprite(selectPanelFileName);
 }
 
 void InvenComponent::SetIsShow(bool isShow)
 {
 	this->isShow = isShow;
+}
+
+void InvenComponent::PrintString()
+{
+	wstring printStr = L"";
+	for (int i = 0; i < ItemManager::GetInstance()->GetInventorySize(); ++i)
+	{
+		printStr = ItemManager::GetInstance()->GetItemName(i);
+		ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+			printStr.c_str(), printStr.size(),
+			ImageManager::GetInstance()->GetTextFormat(),
+			D2D1::RectF(_owner->GetPosition().x + TILE_SIZE / 2 + 6,
+				_owner->GetPosition().y - TILE_SIZE * 1.5 + 6,
+				_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE * 6,
+				_owner->GetPosition().y - TILE_SIZE * 1.5 + TILE_SIZE
+			),
+			ImageManager::GetInstance()->GetBrushWhite()
+		);
+
+		printStr = L": " + to_wstring(ItemManager::GetInstance()->GetItemCount(i));
+		ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+			printStr.c_str(), printStr.size(),
+			ImageManager::GetInstance()->GetTextFormat(),
+			D2D1::RectF(_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*10,
+				_owner->GetPosition().y - TILE_SIZE * 1.5 + 6,
+				_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*6,
+				_owner->GetPosition().y - TILE_SIZE * 1.5 + TILE_SIZE
+			),
+			ImageManager::GetInstance()->GetBrushWhite()
+		);
+
+	}
+
+	printStr = ItemManager::GetInstance()->GetitemInfo(selectInvenItem);
+	ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+		printStr.c_str(), printStr.size(),
+		ImageManager::GetInstance()->GetTextFormat(),
+		D2D1::RectF(_owner->GetPosition().x + TILE_SIZE/2,
+			_owner->GetPosition().y - TILE_SIZE * 2 - TILE_SIZE * 8.5 + 8,
+			_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*MAP_SIZE_X,
+			_owner->GetPosition().y - TILE_SIZE * 1.5 + TILE_SIZE
+		),
+		ImageManager::GetInstance()->GetBrushWhite()
+	);
 }

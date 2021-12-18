@@ -83,6 +83,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/viviface.png");
 	AddSprite(L"Image/UI/OpacityPanel.png");
 	AddSprite(L"Image/UI/SelectPanel_01.png");
+	AddSprite(L"Image/UI/SelectPanel_02.png");
 	AddSprite(L"Image/UI/title.jpg");
 
 	//Particle
@@ -229,39 +230,41 @@ void ImageManager::DrawColliderRectBlue(int posX, int posY, int num)
 	}
 }
 
-//Image* ImageManager::AddImage(const wchar_t* fileName, int width, int height, int maxFrameX, int maxFrameY, bool isTrans, COLORREF transColor)
-//{
-//	if (FindImage(fileName))
-//	{
-//		return nullptr;
-//	}
-//
-//	Image* img = new Image;
-//	if (FAILED(img->Init(fileName, width, height, maxFrameX,
-//		maxFrameY, isTrans, transColor)))
-//	{
-//		SAFE_RELEASE(img);
-//		return nullptr;
-//	}
-//
-//	mapImages.insert(make_pair(fileName, img));
-//	cout << fileName << "의 이미지가 추가되었습니다." << endl;
-//
-//	return img;
-//}
-//
-//Image* ImageManager::FindImage(const wchar_t* fileName)
-//{
-//	unordered_map<wstring, Image*>::iterator it = mapImages.find(fileName);
-//	if (it == mapImages.end())
-//	{
-//		cout << fileName << "을 찾지못하였습니다" << endl;
-//		return nullptr;
-//	}
-//
-//	return it->second;
-//}
-//
-//void ImageManager::DeleteImage(const char* fileName)
-//{
-//}
+void ImageManager::DrawColliderRectOrange(int posX, int posY, int id)
+{
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - camera->x + 2;
+	int right = (posX + 1) * TILE_SIZE - camera->x - 2;
+	int top = posY * TILE_SIZE - camera->y + 2;
+	int bottom = (posY + 1) * TILE_SIZE - camera->y - 2;
+
+	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >= 0 && bottom <= TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				pBrushOrange, 10.0f
+			);
+
+			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+				to_wstring(id).c_str(),
+				to_wstring(id).size(),
+				ImageManager::GetInstance()->GetTextFormat(),
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				ImageManager::GetInstance()->GetBrush()
+			);
+		}
+	}
+}

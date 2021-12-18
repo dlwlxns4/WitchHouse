@@ -51,7 +51,7 @@ void Component::Read(std::istream& is)
 std::ostream& operator<<(std::ostream& os, const Component& comp)
 {
 	comp.Write(os);
-
+	
 	return os;
 }
 

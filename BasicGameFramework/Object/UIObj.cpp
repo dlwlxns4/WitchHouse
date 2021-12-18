@@ -1,6 +1,7 @@
 #include "UIObj.h"
 #include "../Component/ChatRenderer.h"
 #include "../Component/UserInfoComponent.h"
+#include "../Component/InvenComponent.h"
 
 #include "../Util/Input.h"
 #include "../Manager/GameManager.h"
@@ -17,5 +18,9 @@ void UIObj::Init()
 
 	UserInfoComponent* userInfo = new UserInfoComponent(this, 2);
 	userInfo->SetSprite(L"Image/UI/UserInfo_1.png", L"Image/UI/UserInfo_2.png");
+
+	InvenComponent* inven = new InvenComponent(this, 3);
+	inven->SetActive(false);
+	inven->SetSprite(L"Image/UI/InventoryPanel.png", L"Image/UI/ItemInfoPanel.png", L"Image/UI/SelectPanel_02.png");
 }
 

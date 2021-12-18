@@ -16,20 +16,20 @@ private:
 	unordered_map<wstring, Image*> mapImages = {};
 	unordered_map<wstring, Sprite*> sprites = {};
 
-	vector<wstring> spritesName = {};
-	vector<wstring> parallaxName = {};
+	vector<wstring>			spritesName = {};
+	vector<wstring>			parallaxName = {};
 
-	HWND		_hWnd = {};
-	HINSTANCE	_hInstance = {};
-	IWICImagingFactory* pImagingFactory = nullptr;
-	ID2D1HwndRenderTarget* pRenderTarget = nullptr;
-	ID2D1SolidColorBrush* pBrush = nullptr;
-	ID2D1SolidColorBrush* pBrushRed = nullptr;
-	ID2D1SolidColorBrush* pBrushWhite = nullptr;
-	ID2D1SolidColorBrush* pBrushBlue = nullptr;
-	ID2D1SolidColorBrush* pBrushOrange = nullptr;
+	HWND					_hWnd = {};
+	HINSTANCE				_hInstance = {};
+	IWICImagingFactory*		pImagingFactory = nullptr;
+	ID2D1HwndRenderTarget*	pRenderTarget = nullptr;
+	ID2D1SolidColorBrush*	pBrush = nullptr;
+	ID2D1SolidColorBrush*	pBrushRed = nullptr;
+	ID2D1SolidColorBrush*	pBrushWhite = nullptr;
+	ID2D1SolidColorBrush*	pBrushBlue = nullptr;
+	ID2D1SolidColorBrush*	pBrushOrange = nullptr;
 
-	IDWriteTextFormat* pTextFormat = nullptr;
+	IDWriteTextFormat*		pTextFormat = nullptr;
 public:
 	ImageManager() noexcept = default;
 	~ImageManager() noexcept;
@@ -41,18 +41,9 @@ public:
 	Sprite* FindSprite(const wchar_t* fileName);
 
 
-	Image* AddImage(const wchar_t* fileName, int width, int height,
-		bool isTrans = false, COLORREF transColor = NULL);	// 사용할 이미지를 등록하는 기능
-
-	Image* AddImage(const wchar_t* fileName, int width, int height,
-		int maxFrameX, int maxFrameY,
-		bool isTrans = false, COLORREF transColor = NULL);
-
-	Image* FindImage(const wchar_t* fileName);	// 등록된 이미지 중에 필요한 이미지를 찾는 기능
 
 	HWND GethWnd() { return _hWnd; }
 	HINSTANCE GethInstance() { return _hInstance; }
-	void DeleteImage(const char* fileName);	// 사용이 종료된 이미지를 등록 해제하는 기능
 	IWICImagingFactory* GetImageingFactory() { return pImagingFactory; }
 	ID2D1HwndRenderTarget* GetRenderTarget() { return pRenderTarget; }
 	ID2D1SolidColorBrush* GetBrush() { return pBrush; }
@@ -66,5 +57,6 @@ public:
 	void DrawColliderRect(int posX, int posY);
 	void DrawColliderRectRed(int posX, int posY, int id);
 	void DrawColliderRectBlue(int posX, int posY, int num);
+	void DrawColliderRectOrange(int posX, int posY, int id);
 };
 

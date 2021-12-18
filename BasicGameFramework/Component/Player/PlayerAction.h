@@ -9,6 +9,7 @@ public:
 	virtual ~PlayerAction() noexcept = default;
 
 	virtual void	Update() override;
+	void DoChatting(int chatId, int itemid);
 	void DoChatting(int id);
 private:
 	

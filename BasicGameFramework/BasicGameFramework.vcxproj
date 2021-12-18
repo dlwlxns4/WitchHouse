@@ -186,6 +186,7 @@
     <ClInclude Include="Manager\UIManager.h" />
     <ClInclude Include="Object\BackPanel.h" />
     <ClInclude Include="Object\Item.h" />
+    <ClInclude Include="Object\ItemFactory.h" />
     <ClInclude Include="Object\PortalObj.h" />
     <ClInclude Include="Object\TitleObj.h" />
     <ClInclude Include="Object\TwinkleObj.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Manager\UIManager.cpp" />
     <ClCompile Include="Object\BackPanel.cpp" />
     <ClCompile Include="Object\Item.cpp" />
+    <ClCompile Include="Object\ItemFactory.cpp" />
     <ClCompile Include="Object\PortalObj.cpp" />
     <ClCompile Include="Object\TitleObj.cpp" />
     <ClCompile Include="Object\TwinkleObj.cpp" />

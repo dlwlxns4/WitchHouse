@@ -3,9 +3,12 @@
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
 #include "../Util/Sprite.h"
+#include "../Util/AboutTile.h"
+
+#include "../Component/InvenComponent.h"
+
 #include "../Object/GameObject.h"
 
-#include "../Util/AboutTile.h"
 
 #include <d2d1.h>
 #include <dwrite.h>
@@ -73,6 +76,15 @@ void UserInfoComponent::Update()
 			if (selectState == SelectUI::Load)
 			{
 				selectState = SelectUI::Inven;
+			}
+		}
+
+		if (Input::GetButtonDown('Z'))
+		{
+			if (selectState == SelectUI::Inven)
+			{
+				_owner->GetComponent<InvenComponent>()->SetActive(true);
+				this->SetActive(false);
 			}
 		}
 

@@ -13,5 +13,5 @@ public:
 	int GetQuest();
 	int* GetQuestPtr();
 private:
-	int currQuest=0;
+	int currQuest=10;
 };

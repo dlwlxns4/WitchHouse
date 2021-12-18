@@ -27,9 +27,7 @@ private:
 	Sprite* rightPanel = nullptr;
 	Sprite* portrait = nullptr;
 	Sprite* healthBar = nullptr;
-
 	Sprite* selectPanel = nullptr;
-
 	Sprite* opacityPanel = nullptr;
 
 	float panelOpacity = 0;
