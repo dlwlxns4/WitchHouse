@@ -9,6 +9,7 @@
 #include "../Object/PortalObj.h"
 #include "../Object/TwinkleObj.h"
 #include "../Object/AkariObj.h"
+#include "../Object/QuestObj.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -181,6 +182,13 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 			{
 				AkariObj* akari = new AkariObj(&layer, L"TAkari");
 				akari->Read(is);
+				break;
+			}
+			case 6:
+			{
+				QuestObj* quest = new QuestObj(&layer, L"Quest");
+				quest->Read(is);
+				break;
 			}
 		}
 	} while (objType != -1);

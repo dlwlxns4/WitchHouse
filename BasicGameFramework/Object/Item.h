@@ -12,6 +12,7 @@ public:
 
 	virtual void		Init() = 0;
 
+	void				SetOwner(GameObject* owner);
 	virtual void		UseItem() = 0;
 	void				AddCount() { count++; };
 	int					GetId() { return id; }

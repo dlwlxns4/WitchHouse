@@ -38,6 +38,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255, 255, 255, 1), &pBrushWhite);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(132/255.0f, 272/255.0f, 255/255.0f, 1), &pBrushBlue);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 1), &pBrushOrange);
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(139 / 255.0f, 0 / 255.0f, 255 / 255.0f, 1), &pBrushPurple);
 
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
@@ -169,6 +170,45 @@ void ImageManager::DrawColliderRect(int posX, int posY)
 					bottom
 				),
 				pBrush, 10.0f
+			);
+		}
+	}
+}
+
+void ImageManager::DrawColliderRectPurple(int posX, int posY, int id)
+{
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - camera->x + 2;
+	int right = (posX + 1) * TILE_SIZE - camera->x - 2;
+	int top = posY * TILE_SIZE - camera->y + 2;
+	int bottom = (posY + 1) * TILE_SIZE - camera->y - 2;
+
+	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >= 0 && bottom <= TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				pBrushPurple, 10.0f
+			);
+
+			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+				to_wstring(id).c_str(),
+				to_wstring(id).size(),
+				ImageManager::GetInstance()->GetTextFormat(),
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				ImageManager::GetInstance()->GetBrush()
 			);
 		}
 	}

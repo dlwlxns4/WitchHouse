@@ -244,9 +244,6 @@
     <ClInclude Include="Object\BackPanel.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Object\PortalObj.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Manager\ItemManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -276,6 +273,12 @@
     </ClInclude>
     <ClInclude Include="Object\TrapObj.h">
       <Filter>Object\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\QuestObj.h">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PortalObj.h">
+      <Filter>Object\TilemapToolScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -442,9 +445,6 @@
     <ClCompile Include="Object\BackPanel.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Object\PortalObj.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Manager\ItemManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -474,6 +474,12 @@
     </ClCompile>
     <ClCompile Include="Object\TrapObj.cpp">
       <Filter>Object\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\QuestObj.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PortalObj.cpp">
+      <Filter>Object\TilemapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

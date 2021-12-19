@@ -6,9 +6,12 @@
 #include "../Manager/ImageManager.h"
 #include "../Manager/SceneManager.h"
 #include "../Manager/CameraManager.h"
+#include "../Manager/QuestManager.h"
+#include "../Manager/ItemManager.h"
 #include "../Object/Player.h"
 #include "../Object/UIObj.h"
 #include "../Object/BackPanel.h"
+#include "../Object/QuestObj.h"
 #define MAP1_CAMERA_X -96
 #define MAP1_CAMERA_Y 96
 
@@ -91,6 +94,7 @@ void MainScene::Load(int loadIndex)
 	{
 		PhysicsManager::GetInstance()->AllClear();
 		CameraManager::GetInstance()->Clear();
+		QuestManager::GetInstance()->Clear();
 		cout << " ¿­¸²" << endl;
 		openFile >> maxLayer;
 
@@ -125,6 +129,7 @@ void MainScene::Load(int loadIndex)
 					player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Input);
 					player->GetComponent<PlayerSpriteRenderer>()->SetState(PlayerSpriteState::Move);
 				}
+				ItemManager::GetInstance()->SetOwner(player);
 
 				//POINT playerPos = GameManager::GetInstance()->GetPlayerPos();
 				//player->SetPosition(playerPos);
@@ -166,6 +171,7 @@ void MainScene::Load(int loadIndex)
 		GameManager::GetInstance()->SetCurrScene(loadIndex);
 	}
 
+
 	openFile.close();
 
 }
@@ -201,6 +207,14 @@ void MainScene::Debug()
 			for (auto itt : it.second)
 			{
 				ImageManager::GetInstance()->DrawColliderRectOrange(it.first, itt.first, itt.second);
+			}
+		}
+		unordered_map<int, unordered_map<int, GameObject*>>* quest = QuestManager::GetInstance()->GetQuestObjMap();
+		for (auto it : *quest)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectPurple(it.first, itt.first, ((QuestObj*)((itt.second)))->GetId());
 			}
 		}
 

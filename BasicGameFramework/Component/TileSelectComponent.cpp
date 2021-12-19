@@ -37,6 +37,7 @@
 #include "../Object/TileObj.h"
 #include "../Object/TwinkleObj.h"
 #include "../Object/AkariObj.h"
+#include "../Object/QuestObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -120,13 +121,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Akari";
 			}
-
+			else if ((int)tileType == 9)
+			{
+				txt = L"TileType : Quest";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 8)
+		if ((int)tileType < 9)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -166,6 +170,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 8)
 			{
 				txt = L"TileType : Akari";
+			}
+			else if ((int)tileType == 9)
+			{
+				txt = L"TileType : Quest";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -330,6 +338,13 @@ void TileSelectComponent::Update()
 		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
 		PhysicsManager::GetInstance()->addPortalNum(mouseIndexX, mouseIndexY);
 	}
+
+	if (Input::GetButtonDown(VK_LSHIFT))
+	{
+		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
+		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
+		QuestManager::GetInstance()->AddQuestId(mouseIndexX, mouseIndexY);
+	}
 }
 
 void TileSelectComponent::Init()
@@ -370,11 +385,12 @@ void TileSelectComponent::Render(HDC hdc)
 
 	sprite->Render(
 		0,
-		WIN_SIZE_Y - 96,
+		WIN_SIZE_Y - 128,
 		downPos.first,
 		downPos.second,
 		upPos.first - downPos.first,
-		upPos.second - downPos.second
+		upPos.second - downPos.second,
+		true
 	);
 
 	for (auto map : mapData)
@@ -413,6 +429,15 @@ void TileSelectComponent::Render(HDC hdc)
 			for (auto itt : it.second)
 			{
 				ImageManager::GetInstance()->DrawColliderRectOrange(it.first, itt.first, itt.second);
+			}
+		}
+
+		unordered_map<int, unordered_map<int, GameObject*>>* quest = QuestManager::GetInstance()->GetQuestObjMap();
+		for (auto it : *quest)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectPurple(it.first, itt.first, ((QuestObj*)((itt.second)))->GetId());
 			}
 		}
 
@@ -483,7 +508,6 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		cout << "protal" << endl;
 		PortalObj* portal = new PortalObj(mapData[mapData.size() - 1], L"Portal");
-		portal->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
 		PhysicsManager::GetInstance()->SetTriggerObj(mouseIndexX, mouseIndexY, portal);
 	}
 	else if (tileType == TileType::Item)
@@ -501,6 +525,31 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 		AkariObj* akari = new AkariObj(mapData[currLayer - 1], L"Akari");
 		akari->Init();
 		akari->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
+	}
+	else if (tileType == TileType::Quest)
+	{
+		if (mapData.size() != 0)
+		{
+			for (int i = downPos.first + (camera->x / TILE_SIZE); i <= upPos.first + (camera->x / TILE_SIZE); ++i)
+			{
+				for (int j = downPos.second + (camera->y / TILE_SIZE); j <= upPos.second + (camera->y / TILE_SIZE); ++j)
+				{
+					QuestObj* quest = new QuestObj(mapData[currLayer - 1], L"Quest");
+					quest->Init();
+					quest->SetSprite(sampleIndex, i - camera->x / 32, j - camera->y / 32);
+
+					int posX = (mouseIndexX + (i - downPos.first - camera->x / TILE_SIZE)) * TILE_SIZE;
+					int posY = (mouseIndexY + (j - downPos.second - camera->y / TILE_SIZE)) * TILE_SIZE;
+
+					quest->SetPosition(
+						posX,
+						posY
+					);
+				
+					QuestManager::GetInstance()->SetQuestObj(posX/32, posY/32, quest);
+				}
+			}
+		}
 	}
 }
 

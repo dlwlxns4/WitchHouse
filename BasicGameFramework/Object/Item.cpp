@@ -1,11 +1,18 @@
 #include "Item.h"
 #include "../Manager/SceneManager.h"
-
+#include "../Manager/PhysicsManager.h"
+#include "../Manager/QuestManager.h"
+#include "../Component/Player/PlayerSpriteRenderer.h"
 
 #include <iostream>
 Item::Item(GameObject* owner)
 	: _owner{ owner }
 {
+}
+
+void Item::SetOwner(GameObject* owner)
+{
+	_owner = owner;
 }
 
 
@@ -43,5 +50,24 @@ void Scissors::Init()
 
 void Scissors::UseItem()
 {
+	int dx[] = { 0,-1,1,0 };
+	int dy[] = { 1,-0,0,-1 };
+
+	int dir = (int)(_owner->GetComponent<PlayerSpriteRenderer>()->GetDirection());
+	
+	int posX = _owner->GetPosition().x / 32 + dx[dir];
+	int posY = _owner->GetPosition().y / 32 + dy[dir];
+
+	if (QuestManager::GetInstance()->GetQuestObjId(posX, posY) == 0)
+	{
+		if (PhysicsManager::GetInstance()->GetCollider( posX, posY ) )
+		{
+			PhysicsManager::GetInstance()->RemoveCollider(posX, posY);
+		}
+		
+		QuestManager::GetInstance()->SetOffQuestObj(0);
+	}
+
+	
 	cout << _owner->GetPosition().x << " " << _owner->GetPosition().y << endl;
 }

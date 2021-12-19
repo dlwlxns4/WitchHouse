@@ -23,7 +23,8 @@ private:
 		Portal = 5,
 		Item = 6,
 		Twinkle =7,
-		Akari = 8
+		Akari = 8,
+		Quest =9
 	};
 
 	using Component::Component;

@@ -23,6 +23,7 @@ public:
 	int		GetItemCount(int index);
 	int		GetCurrFindItem();
 	void	SetCurrFindItem(int id);
+	void	SetOwner(GameObject* owner);
 
 	const vector<Item*>&	GetInventory() const;
 	int						GetInventorySize();

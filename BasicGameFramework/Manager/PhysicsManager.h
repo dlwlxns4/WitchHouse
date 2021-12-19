@@ -51,7 +51,7 @@ public:
 	unordered_set<pair<int,int>, pair_hash>* GetCollisionObj() { return &collisionObj; }
 	void RemoveCollider(int posX, int posY) { collisionObj.erase({ posX, posY }); }
 	void RePosCollider(int posX, int posY, int dir);
-
+	bool GetCollider(int posX, int posY);
 
 	//Chat
 	unordered_map<int, unordered_map<int,int>>* GetChatObjs() { return &chatObj; }

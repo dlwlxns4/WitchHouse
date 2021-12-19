@@ -30,7 +30,6 @@ void InvenComponent::Update()
 		panelOpacity += 0.1f;
 	}
 
-	cout << selectInvenItem << endl;
 	if (Input::GetButtonDown(VK_LEFT))
 	{
 		if (selectInvenItem  > 0)

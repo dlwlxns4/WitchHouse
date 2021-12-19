@@ -29,6 +29,15 @@ void PhysicsManager::RePosCollider(int posX, int posY, int dir)
 	collisionObj.insert({ posX + dx[dir], posY + dy[dir] });
 }
 
+bool PhysicsManager::GetCollider(int posX, int posY)
+{
+	if (collisionObj.find({ posX,posY }) != collisionObj.end())
+	{
+		return true;
+	}
+	return false;
+}
+
 void PhysicsManager::addId_1(int posX, int posY)
 {
 	chatObj[posX][posY] += 1;
@@ -173,6 +182,13 @@ void PhysicsManager::AllClear()
 		it.second.clear();
 	}
 	triggerObj.clear();
+
+	for (auto it : itemObj)
+	{
+		it.second.clear();
+	}
+	itemObj.clear();
+	
 }
 
 std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager)

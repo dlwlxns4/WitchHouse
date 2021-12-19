@@ -15,6 +15,7 @@ void ItemManager::Init()
 
 void ItemManager::UseItem(int index)
 {
+	inventory[index]->UseItem();
 }
 
 void ItemManager::AddItem(int id)
@@ -62,6 +63,14 @@ int ItemManager::GetItemCount(int index)
 void ItemManager::SetCurrFindItem(int id)
 {
 	currFindItem = id;
+}
+
+void ItemManager::SetOwner(GameObject* owner)
+{
+	for (int i = 0; i < inventory.size(); ++i)
+	{
+		inventory[i]->SetOwner(owner);
+	}
 }
 
 int ItemManager::GetCurrFindItem()
