@@ -14,6 +14,7 @@
 
 void InvenComponent::Update()
 {
+
 	if (Input::GetButtonDown('X'))
 	{
 		SetActive(false);
@@ -32,14 +33,14 @@ void InvenComponent::Update()
 
 	if (Input::GetButtonDown(VK_LEFT))
 	{
-		if (selectInvenItem  > 0)
+		if (selectInvenItem > 0)
 		{
 			selectInvenItem--;
 		}
 	}
 	else if (Input::GetButtonDown(VK_RIGHT))
 	{
-		if (selectInvenItem < ItemManager::GetInstance()->GetInventorySize()-1)
+		if (selectInvenItem < ItemManager::GetInstance()->GetInventorySize() - 1)
 		{
 			selectInvenItem++;
 		}
@@ -53,7 +54,7 @@ void InvenComponent::Update()
 	}
 	else if (Input::GetButtonDown(VK_DOWN))
 	{
-		if (selectInvenItem + 2 < ItemManager::GetInstance()->GetInventorySize()-1)
+		if (selectInvenItem + 2 < ItemManager::GetInstance()->GetInventorySize() - 1)
 		{
 			selectInvenItem += 2;
 		}
@@ -77,6 +78,7 @@ void InvenComponent::Update()
 		}
 	}
 
+
 }
 
 void InvenComponent::Render(HDC hdc)
@@ -89,8 +91,8 @@ void InvenComponent::Render(HDC hdc)
 		_owner->GetPosition().y - TILE_SIZE * 2, panelOpacity);
 
 	selectPanel->Render(
-		_owner->GetPosition().x + TILE_SIZE / 2 + (selectInvenItem%2) * TILE_SIZE*8, 
-		_owner->GetPosition().y - TILE_SIZE * 1.5 +(selectInvenItem/2) * TILE_SIZE, 
+		_owner->GetPosition().x + TILE_SIZE / 2 + (selectInvenItem % 2) * TILE_SIZE * 8,
+		_owner->GetPosition().y - TILE_SIZE * 1.5 + (selectInvenItem / 2) * TILE_SIZE,
 		selectPanelOpacity);
 
 	PrintString();
@@ -129,9 +131,9 @@ void InvenComponent::PrintString()
 		ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
 			printStr.c_str(), printStr.size(),
 			ImageManager::GetInstance()->GetTextFormat(),
-			D2D1::RectF(_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*10 + (i%2)*TILE_SIZE*8,
-				_owner->GetPosition().y - TILE_SIZE * 1.5 + 6 + (i/2)*TILE_SIZE,
-				_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*6 + (i % 2) * TILE_SIZE * 8,
+			D2D1::RectF(_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE * 10 + (i % 2) * TILE_SIZE * 8,
+				_owner->GetPosition().y - TILE_SIZE * 1.5 + 6 + (i / 2) * TILE_SIZE,
+				_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE * 6 + (i % 2) * TILE_SIZE * 8,
 				_owner->GetPosition().y - TILE_SIZE * 1.5 + TILE_SIZE + (i / 2) * TILE_SIZE
 			),
 			ImageManager::GetInstance()->GetBrushWhite()
@@ -143,11 +145,19 @@ void InvenComponent::PrintString()
 	ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
 		printStr.c_str(), printStr.size(),
 		ImageManager::GetInstance()->GetTextFormat(),
-		D2D1::RectF(_owner->GetPosition().x + TILE_SIZE/2,
+		D2D1::RectF(_owner->GetPosition().x + TILE_SIZE / 2,
 			_owner->GetPosition().y - TILE_SIZE * 2 - TILE_SIZE * 8.5 + 8,
-			_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE*MAP_SIZE_X,
+			_owner->GetPosition().x + TILE_SIZE / 2 + TILE_SIZE * MAP_SIZE_X,
 			_owner->GetPosition().y - TILE_SIZE * 1.5 + TILE_SIZE
 		),
 		ImageManager::GetInstance()->GetBrushWhite()
 	);
+}
+
+void InvenComponent::Clear()
+{
+	SetActive(false);
+	_owner->GetComponent<UserInfoComponent>()->SetActive(true);
+	panelOpacity = 0;
+	selectInvenItem = 0;
 }

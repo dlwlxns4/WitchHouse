@@ -28,6 +28,8 @@ public:
 
 	//---
 	bool GetIsItem();
+	void SetIsItem(bool isItem);
+	void SetVecTalkTad(vector<wstring> data);
 private:
 	unordered_map<int, vector<wstring>> talkData = {};
 	unordered_map<int, vector<wstring>> itemTalkData = {};

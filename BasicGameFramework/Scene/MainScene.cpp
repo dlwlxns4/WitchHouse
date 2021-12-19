@@ -149,6 +149,7 @@ void MainScene::Load(int loadIndex)
 		//UI
 		UIObj* ui = new UIObj(this, (*_layers)[(*_layers).size() - 1], L"UI");
 		ui->Init();
+		GameManager::GetInstance()->SetUIObj(ui);
 
 		//OpaityBackPanel
 		backPanel = new BackPanel(this, (*_layers)[(*_layers).size() - 1], L"BackPanel");

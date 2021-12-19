@@ -8,6 +8,7 @@
 #include "../Component/Player/PlayerMovement.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
 class Player;
+class UIObj;
 enum class State
 {
 	None = 0,
@@ -54,6 +55,10 @@ public:
 
 	void GeneratePlayerData();
 	void GenerateCameraData();
+
+	void SetUIObj(GameObject* ui);
+	GameObject* GetUIObj();
+
 	POINT GetPlayerData(int prevScene, int mapNum);
 	POINT GetCameraData(int prevScene, int mapNum);
 	GameObject* GetPlayer() { return player; };
@@ -64,6 +69,7 @@ private:
 	int currScene = 0;
 	POINT playerPos = { 9*32,9*32 };
 	GameObject* player = nullptr;
+	GameObject* UIObj = nullptr;
 
 	unordered_map<int, unordered_map<int, POINT>> playerPosData;
 	unordered_map<int, unordered_map<int, POINT>> cameraPosData;

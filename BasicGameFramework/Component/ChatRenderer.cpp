@@ -40,10 +40,23 @@ void ChatRenderer::Update()
 	{
 		if (TalkManager::GetInstance()->GetIsItem() == false)
 		{
-			if (isOpen && Input::GetButtonDown('Z'))
+			if (data.size() - 1 == vecIndex)
 			{
-				isTalk = false;
-				isClose = true;
+				if (isOpen && Input::GetButtonDown('Z'))
+				{
+					isTalk = false;
+					isClose = true;
+				}
+			}
+			else
+			{
+				if (Input::GetButtonDown('Z'))
+				{
+					vecIndex++;
+					chatEffect.clear();
+					talkIndexStr.clear();
+					strIndex = 0;
+				}
 			}
 		}
 		else

@@ -37,6 +37,16 @@ void GameManager::GenerateCameraData()
 	cameraPosData[2][0] = { 0,0 };
 }
 
+void GameManager::SetUIObj(GameObject* ui)
+{
+	UIObj = ui;
+}
+
+GameObject* GameManager::GetUIObj()
+{
+	return UIObj;
+}
+
 POINT GameManager::GetCameraData(int prevScene, int mapNum)
 {
 	POINT tmp = cameraPosData[prevScene][mapNum];

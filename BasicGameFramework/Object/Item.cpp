@@ -2,7 +2,12 @@
 #include "../Manager/SceneManager.h"
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/QuestManager.h"
+#include "../Manager/TalkManager.h"
+#include "../Manager/GameManager.h"
+
+#include "../Component/InvenComponent.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
+#include "../Component/UserInfoComponent.h"
 #include "../Scene/MainScene.h"
 
 #include <iostream>
@@ -67,9 +72,14 @@ void Scissors::UseItem()
 			PhysicsManager::GetInstance()->RemoveCollider(posX, posY);
 		}
 		
+		vector<wstring> data = { L"지나갈수 있게 됐다.", L"정원의 가위는 부서져 버렸다."};
+		TalkManager::GetInstance()->SetIsItem(false);
+		TalkManager::GetInstance()->SetVecTalkTad(data);
+		GameManager::GetInstance()->SetState(State::Chat);
+
+		GameObject* ui =GameManager::GetInstance()->GetUIObj();
+		ui->GetComponent<InvenComponent>()->Clear();
+
 		QuestManager::GetInstance()->SetOffQuestObj(0);
 	}
-
-	
-	cout << _owner->GetPosition().x << " " << _owner->GetPosition().y << endl;
 }

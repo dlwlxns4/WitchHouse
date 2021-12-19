@@ -72,3 +72,13 @@ bool TalkManager::GetIsItem()
 {
 	return isItem;
 }
+
+void TalkManager::SetIsItem(bool isItem)
+{
+	this->isItem = isItem;
+}
+
+void TalkManager::SetVecTalkTad(vector<wstring> data)
+{
+	vecTalkData = data;
+}

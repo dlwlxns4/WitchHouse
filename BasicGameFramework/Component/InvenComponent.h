@@ -15,7 +15,8 @@ public:
 	void			SetSprite(const wchar_t* leftfileName, const wchar_t* rightFileName,
 					const wchar_t* selectPanelFileName);
 	void			SetIsShow(bool isShow);
-	void PrintString();
+	void			PrintString();
+	void			Clear();
 private:
 	Sprite* upPanel				= nullptr;
 	Sprite* downPanel			= nullptr;
