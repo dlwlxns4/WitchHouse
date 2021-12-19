@@ -22,6 +22,7 @@ public:
 
 
 	void					Debug();
+	void					SetActiveBackPanelFlag(bool isActive);
 private:
 	std::vector<Layer*>*	_layers;
 	int						num = 0;
@@ -30,6 +31,7 @@ private:
 	int						nextSceneNum = 0;
 	bool					loadFlag = false;
 	bool					isFirst = true;
+	bool					backPaenlActiveFlag = false;
 
 	BackPanel*				backPanel = nullptr;
 };

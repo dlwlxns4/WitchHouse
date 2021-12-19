@@ -18,7 +18,7 @@ void BackPanel::Update()
 	{
 		if (isBright)
 		{
-			if (QuestManager::GetInstance()->GetQuest()==10)
+			if (QuestManager::GetInstance()->GetQuest() == 10)
 			{
 				POINT* cameraPos = CameraManager::GetInstance()->GetCameraPos();
 				if (cameraPos->y >= -32)
@@ -31,7 +31,7 @@ void BackPanel::Update()
 					isActive = false;
 				}
 			}
-			else 
+			else
 			{
 				panelOpacity -= 0.05;
 				if (panelOpacity <= 0)
@@ -46,6 +46,34 @@ void BackPanel::Update()
 			panelOpacity += 0.05;
 			if (panelOpacity >= 1)
 			{
+
+				isBright = true;
+				isActive = false;
+			}
+		}
+	}
+
+	if (isItemEffect)
+	{
+		if (isBright == false)
+		{
+			panelOpacity += 0.1;
+			if (panelOpacity >= 1)
+			{
+				rotationDelay++;
+				if (rotationDelay >= 50)
+				{
+					panelOpacity = 1.0f;
+					isBright = true;
+				}
+			}
+		}
+		else
+		{
+			panelOpacity -= 0.1;
+			if (panelOpacity <= 0)
+			{
+				isItemEffect = false;
 				isBright = true;
 				isActive = false;
 			}
@@ -61,6 +89,11 @@ void BackPanel::Render(HDC hdc)
 		{
 			backPanel->SizeRender(0, 0, 32 * 17, 32 * 13, panelOpacity);
 		}
+	}
+
+	if (isItemEffect)
+	{
+		backPanel->SizeRender(0, 0, 32 * 17, 32 * 13, panelOpacity);
 	}
 }
 

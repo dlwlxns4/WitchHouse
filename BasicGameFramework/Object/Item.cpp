@@ -3,6 +3,7 @@
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/QuestManager.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
+#include "../Scene/MainScene.h"
 
 #include <iostream>
 Item::Item(GameObject* owner)
@@ -60,6 +61,7 @@ void Scissors::UseItem()
 
 	if (QuestManager::GetInstance()->GetQuestObjId(posX, posY) == 0)
 	{
+		((MainScene*)(SceneManager::GetInstance()->GetCurrentScene()))->SetActiveBackPanelFlag(true);
 		if (PhysicsManager::GetInstance()->GetCollider( posX, posY ) )
 		{
 			PhysicsManager::GetInstance()->RemoveCollider(posX, posY);

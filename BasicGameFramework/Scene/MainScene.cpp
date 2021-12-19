@@ -52,19 +52,27 @@ void MainScene::Update()
 
 
 
-		if (loadFlag == true)
-		{
-			loadFlag = false;
-			Load(nextSceneNum);
-		}
-	
+	if (loadFlag == true)
+	{
+		loadFlag = false;
+		Load(nextSceneNum);
+	}
+
+	if (backPaenlActiveFlag == true)
+	{
+		backPanel->SetIsBright(false);
+		backPanel->SetIsItemEffect(true);
+		backPanel->SetOpaicty(0);
+		backPaenlActiveFlag = false;
+	}
+
 }
 
 void MainScene::Render(HDC hdc)
 {
 	Scene::Render(hdc);
 	Debug();
-	
+
 }
 
 
@@ -147,12 +155,12 @@ void MainScene::Load(int loadIndex)
 		backPanel->Init();
 
 		//콜라이더, 트리거, 포탈 재정의
-		openFile >> *PhysicsManager::GetInstance(); 
+		openFile >> *PhysicsManager::GetInstance();
 	}
 
 
 
-	
+
 
 
 	if (isFirst && QuestManager::GetInstance()->GetQuest() == 10)
@@ -160,7 +168,7 @@ void MainScene::Load(int loadIndex)
 		isFirst = false;
 		GameManager::GetInstance()->SetPlayerPos({ 9 * 32, 9 * 32 });
 	}
-	
+
 	else
 	{
 		int prevScene = GameManager::GetInstance()->GetCurrScene();
@@ -219,4 +227,9 @@ void MainScene::Debug()
 		}
 
 	}
+}
+
+void MainScene::SetActiveBackPanelFlag(bool isActive)
+{
+	backPaenlActiveFlag = isActive;
 }

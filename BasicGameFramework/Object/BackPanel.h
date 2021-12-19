@@ -14,12 +14,17 @@ public:
 	virtual void Update() override;
 
 	void SetActive(bool active) { isActive = active; }
+	void SetIsItemEffect(bool active) { isItemEffect = active; }
+	void SetIsBright(bool isBright) { this->isBright = isBright; }
+	void SetOpaicty(float opacity) { panelOpacity = opacity; }
 	float GetPanelOpacity() { return panelOpacity; }
 private:
-	Sprite* backPanel= nullptr;
+	Sprite* backPanel = nullptr;
 
 	bool isBright = true;
 	bool isActive = true;
 	bool isFirst = true;
 	float panelOpacity = 1;
+	int rotationDelay = 0;
+	bool isItemEffect = false;
 };
