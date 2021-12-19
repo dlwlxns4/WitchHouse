@@ -16,7 +16,12 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 		break;
 	}
 	case ItemKinds::Scissors:
+	{
+		Scissors* scissors = new Scissors(_owner);
+		scissors->Init();
+		return scissors;
 		break;
+	}
 	default:
 		break;
 	}

@@ -29,28 +29,28 @@ private:
 	using Component::Component;
 	virtual ~TileSelectComponent();
 
-	class Sprite* sprite = ImageManager::GetInstance()->FindSprite(ImageManager::GetInstance()->GetSpriteName(0).c_str());
-	RECT spriteRect = {};
-	int sampleIndex = 0;
+	class Sprite*		sprite = ImageManager::GetInstance()->FindSprite(ImageManager::GetInstance()->GetSpriteName(0).c_str());
+	RECT				spriteRect = {};
+	int					sampleIndex = 0;
 	
-	pair<int, int> downPos;
-	pair<int, int> upPos;
+	pair<int, int>		downPos;
+	pair<int, int>		upPos;
 
-	POINT mousePos = {};
+	POINT				mousePos = {};
 	
-	vector<Layer*> mapData;
+	vector<Layer*>		mapData;
 
-	TileType tileType = TileType::tileObj;
+	TileType			tileType = TileType::tileObj;
 
-	Text* tileTypeTxt = nullptr;
-	Text* currLayerTxt = nullptr;
-	Text* triggerPosTxt= nullptr;
+	Text*				tileTypeTxt = nullptr;
+	Text*				currLayerTxt = nullptr;
+	Text*				triggerPosTxt= nullptr;
 
-	int currLayer = -1;
+	int					currLayer = -1;
 
-	bool isShowCollider = false;
+	bool				isShowCollider = false;
 
-	int num = 0;
+	int					num = 0;
 public:
 
 	virtual void Init() override;

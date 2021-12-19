@@ -100,21 +100,20 @@ void PhysicsManager::RemoveItem(int posX, int posY)
 	it->second.erase(posY);
 }
 
-INT PhysicsManager::GetItemId(int posX, int posY)
+int PhysicsManager::GetItemId(int posX, int posY)
 {
-	int id = 0;
-	auto it = chatObj.find(posX);
+	auto it = itemObj.find(posX);
 
 	if (it != itemObj.end())
 	{
 		auto itt = it->second.find(posY);
 		if (itt != it->second.end())
 		{
-			id = itt->second;
+			int id = itt->second;
+			return id;
 		}
 	}
-	cout << id << endl;
-	return id;
+	return -1;
 }
 
 void PhysicsManager::RemoveChat(int posX, int posY)

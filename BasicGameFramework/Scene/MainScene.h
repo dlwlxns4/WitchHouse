@@ -20,6 +20,8 @@ public:
 	void					Save(int saveIndex = 0);
 	void					Load(int loadIndex = 0);
 
+
+	void					Debug();
 private:
 	std::vector<Layer*>*	_layers;
 	int						num = 0;

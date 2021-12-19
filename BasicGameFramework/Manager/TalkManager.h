@@ -9,13 +9,6 @@ using namespace std;
 
 class TalkManager : public Singleton<TalkManager>
 {
-private:
-	unordered_map<int, vector<wstring>> talkData = {};
-
-	unordered_map<int, vector<wstring>> itemTalkData = {};
-	vector<wstring> vecTalkData = {};
-
-
 public:
 	TalkManager() = default;
 	~TalkManager() = default;
@@ -28,4 +21,16 @@ public:
 
 
 	//--------------------ItemTalk
+	void SaveItemTalkData(int referenceId);
+	vector<wstring> GetVecItemTalkData();
+	vector<wstring> GetItemTalkData(int referenceId);
+
+
+	//---
+	bool GetIsItem();
+private:
+	unordered_map<int, vector<wstring>> talkData = {};
+	unordered_map<int, vector<wstring>> itemTalkData = {};
+	vector<wstring> vecTalkData = {};
+	bool isItem = false;
 };

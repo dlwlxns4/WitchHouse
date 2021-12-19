@@ -9,6 +9,7 @@
 #include "../../Manager/PhysicsManager.h"
 #include "../../Manager/GameManager.h"
 #include "../../Manager/TalkManager.h"
+#include "../../Manager/ItemManager.h"
 
 #include "PlayerSpriteRenderer.h"
 void PlayerAction::Update()
@@ -25,8 +26,7 @@ void PlayerAction::Update()
 		{
 			GameManager::GetInstance()->SetState(State::Chat);
 			int chatId = PhysicsManager::GetInstance()->GetChatId(posX, posY);
-			//int itemid = PhysicsManager::GetInstance()->GetItemId(posX, posY);
-			int itemid = 0;
+			int itemid = PhysicsManager::GetInstance()->GetItemId(posX, posY);
 			DoChatting(chatId, itemid);
 		}
 
@@ -35,6 +35,12 @@ void PlayerAction::Update()
 
 void PlayerAction::DoChatting(int chatId, int itemid)
 {
+	if (itemid != -1)
+	{
+		TalkManager::GetInstance()->SaveItemTalkData(itemid);
+		ItemManager::GetInstance()->SetCurrFindItem(itemid);
+		return;
+	}
 
 	if (chatId != 0)
 	{

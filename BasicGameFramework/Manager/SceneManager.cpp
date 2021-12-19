@@ -29,7 +29,7 @@ void SceneManager::Init()
 	_scenes[L"TilemapTool"] = new TilemapToolScene();
 	_scenes[L"Main"] = new MainScene();
 
-	_currentScene = _scenes[L"TilemapTool"];
+	_currentScene = _scenes[L"Title"];
 	_currentScene->Init();
 }
 

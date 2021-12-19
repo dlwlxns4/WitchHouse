@@ -1,24 +1,26 @@
 #include "ItemManager.h"
 #include "../Object/Item.h"
-#include "../Object/ItemFactory.h"
 
 
 ItemManager::~ItemManager()
 {
+	Release();
 }
 
 void ItemManager::Init()
 {
 	itemFactory = new ItemFactory;
-	AddItem(itemFactory->CreateItem(ItemKinds::Letter));
+	AddItem(1);
 }
 
 void ItemManager::UseItem(int index)
 {
 }
 
-void ItemManager::AddItem(Item* item)
+void ItemManager::AddItem(int id)
 {
+	Item* item = itemFactory->CreateItem((ItemKinds)id);
+
 	for (auto it : inventory)
 	{
 		if (it->CompareId(item->GetId()))
@@ -32,6 +34,11 @@ void ItemManager::AddItem(Item* item)
 
 void ItemManager::Release()
 {
+	for (int i = 0; i < inventory.size(); ++i)
+	{
+		delete inventory[i];
+	}
+	delete itemFactory;
 }
 
 wstring ItemManager::GetItemName(int index)
@@ -50,6 +57,16 @@ int ItemManager::GetItemCount(int index)
 {
 	int count = inventory[index]->GetCount();
 	return count;
+}
+
+void ItemManager::SetCurrFindItem(int id)
+{
+	currFindItem = id;
+}
+
+int ItemManager::GetCurrFindItem()
+{
+	return currFindItem;
 }
 
 

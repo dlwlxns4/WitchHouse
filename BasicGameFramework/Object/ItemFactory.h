@@ -4,8 +4,8 @@
 
 enum class ItemKinds
 {
-	Letter=0,
-	Scissors=1
+	Scissors=0,
+	Letter=1
 };
 
 class ItemFactory

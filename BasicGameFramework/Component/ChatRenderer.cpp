@@ -3,6 +3,7 @@
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/TalkManager.h"
+#include "../Manager/ItemManager.h"
 
 #include "../Util/Sprite.h"
 #include "../Object/GameObject.h"
@@ -29,26 +30,81 @@ void ChatRenderer::Update()
 		slatePos += 8;
 		if (slatePos >= sprite->GetHeight() / 2)
 		{
+			data = TalkManager::GetInstance()->GetVecTalkData();
 			isOpen = true;
 			isTalk = true;
 		}
 	}
 
-	if (isOpen && Input::GetButtonDown('Z') || isClose)
+	if (GameManager::GetInstance()->GetState() == State::Chat)
 	{
-		slatePos -= 8;
-		isTalk = false;
-		isClose = true;
-		if (slatePos <= 0)
+		if (TalkManager::GetInstance()->GetIsItem() == false)
 		{
-			isOpen = false;
-			isClose = false;
-			chatEffect.clear();
-			slatePos = 0;
-			vecIndex = 0;
-			strIndex = 0;
-			GameManager::GetInstance()->SetState(State::None);
+			if (isOpen && Input::GetButtonDown('Z'))
+			{
+				isTalk = false;
+				isClose = true;
+			}
 		}
+		else
+		{
+			if (data.size() - 1 == vecIndex)
+			{
+				if (Input::GetButtonDown('Z'))
+				{
+					isTalk = false;
+					isClose = true;
+				}
+			}
+			else if (data.size() - 2 == vecIndex && data[vecIndex] == talkIndexStr)
+			{
+				ManageSelectPanel();
+
+				if (Input::GetButtonDown(VK_DOWN))
+				{
+					if (state == ApprovalState::Agree)
+					{
+						state = ApprovalState::Disagree;
+					}
+				}
+				else if (Input::GetButtonDown(VK_UP))
+				{
+					if (state == ApprovalState::Disagree)
+					{
+						state = ApprovalState::Agree;
+					}
+				}
+
+				if (Input::GetButtonDown('Z'))
+				{
+					if (state == ApprovalState::Agree)
+					{
+						int id = ItemManager::GetInstance()->GetCurrFindItem();
+						ItemManager::GetInstance()->AddItem(id);
+						vecIndex++;
+						talkIndexStr.clear();
+						strIndex = 0;
+						chatEffect.clear();
+					}
+					else
+					{
+						isTalk = false;
+						isClose = true;
+					}
+					isShowSelectPanel = false;
+				}
+			}
+			else
+			{
+				if (isOpen && Input::GetButtonDown('Z'))
+				{
+					vecIndex++;
+					talkIndexStr.clear();
+					strIndex = 0;
+				}
+			}
+		}
+		ClosePanel();
 	}
 }
 
@@ -63,11 +119,11 @@ void ChatRenderer::Render(HDC hdc)
 
 	if (GameManager::GetInstance()->GetState() == State::Chat && isTalk)
 	{
-		vector<wstring> data = TalkManager::GetInstance()->GetVecTalkData();
 		if (data.empty() == false)
 		{
-			if (data[vecIndex] != chatEffect)
+			if (data[vecIndex] != talkIndexStr)
 			{
+				talkIndexStr += data[vecIndex][strIndex];
 				chatEffect += data[vecIndex][strIndex++];
 			}
 		}
@@ -82,11 +138,20 @@ void ChatRenderer::Render(HDC hdc)
 			layoutRect,
 			ImageManager::GetInstance()->GetBrushWhite());
 	}
+
+	if (isShowSelectPanel)
+	{
+		selectPanel->Render(
+			TILE_SIZE / 2,
+			TILE_SIZE * 10 + TILE_SIZE / 2 + (int)state * TILE_SIZE,
+			selectPanelOpacity);
+	}
 }
 
-void ChatRenderer::SetSprite(const wchar_t* fileName)
+void ChatRenderer::SetSprite(const wchar_t* fileName, const wchar_t* selectPanelFileName)
 {
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
+	selectPanel = ImageManager::GetInstance()->FindSprite(selectPanelFileName);
 }
 
 void ChatRenderer::SetSlatePos(int pos)
@@ -97,5 +162,53 @@ void ChatRenderer::SetSlatePos(int pos)
 int ChatRenderer::GetSlatePos(int pos)
 {
 	return 0;
+}
+
+void ChatRenderer::ManageSelectPanel()
+{
+	if (isShowSelectPanel == false)
+	{
+		isShowSelectPanel = true;
+	}
+	else
+	{
+		if (isDecrease == true)
+		{
+			selectPanelOpacity -= 0.05;
+			if (selectPanelOpacity <= 0.5f)
+			{
+				isDecrease = false;
+			}
+		}
+		else
+		{
+			selectPanelOpacity += 0.05f;
+			if (selectPanelOpacity >= 1.0f)
+			{
+				isDecrease = true;
+			}
+		}
+	}
+}
+
+void ChatRenderer::ClosePanel()
+{
+	if (isClose)
+	{
+		slatePos -= 8;
+		if (slatePos <= 0)
+		{
+			isOpen = false;
+			isClose = false;
+			chatEffect.clear();
+			talkIndexStr.clear();
+			slatePos = 0;
+			vecIndex = 0;
+			strIndex = 0;
+			data.clear();
+			isShowSelectPanel = false;
+			GameManager::GetInstance()->SetState(State::None);
+		}
+	}
 }
 

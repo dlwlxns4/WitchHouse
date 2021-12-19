@@ -11,8 +11,8 @@ public:
 	virtual ~Item() = default;
 
 	virtual void		Init() = 0;
+
 	virtual void		UseItem() = 0;
-	virtual void		GetnerateChat() = 0;
 	void				AddCount() { count++; };
 	int					GetId() { return id; }
 	int					GetCount() { return count; }
@@ -20,10 +20,11 @@ public:
 	wstring				GetName();
 	wstring				GetInfo();
 protected:
-	int			id = 0;
-	GameObject* _owner=nullptr;
-	wstring		name = L"";
-	wstring		info = L"";
+	int					id = 0;
+	GameObject*			_owner = nullptr;
+	wstring				name = L"";
+	wstring				info = L"";
+	wstring				useString = L"";
 	int			count = 0;
 };
 
@@ -35,19 +36,18 @@ public:
 
 	virtual void Init()			 override;
 	virtual void UseItem()		 override;
-	virtual void GetnerateChat() override;
 
 protected:
-	int id = 1;
 };
 
-//class Scissors : public Item
-//{
-//public:
-//	using Item::Item;
-//	virtual ~Scissors() = default;
-//
-//	virtual void UseItem() override;
-//	virtual void GetnerateChat() = 0;
-//
-//};
+class Scissors : public Item
+{
+public:
+	using Item::Item;
+	virtual ~Scissors() = default;
+
+	virtual void Init()			 override;
+	virtual void UseItem() override;
+protected:
+
+};

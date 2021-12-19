@@ -67,7 +67,7 @@ public:
 	unordered_map<int, unordered_map<int, int>>* GetItemObj() { return &itemObj; }
 	void SetItem(int posX, int posY);
 	void RemoveItem(int posX, int posY);
-	INT  GetItemId(int posX, int posY);
+	int  GetItemId(int posX, int posY);
 
 
 	//Trigger

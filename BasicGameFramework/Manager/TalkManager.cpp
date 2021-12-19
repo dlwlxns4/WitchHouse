@@ -18,7 +18,10 @@ void TalkManager::Init()
 
 
 	//--------------------------------------------Item----------------
-	itemTalkData.emplace(1, vector<wstring>{L"녹이 슬은 날붙이가 떨어져 있다.", L"가져간다.", L"가져가지 않는다."});
+	itemTalkData.emplace(0, vector<wstring>{
+		L"녹이 슬은 날붙이가 떨어져 있다.\n\n", 
+		L"\t가져간다.\n\n\t가져가지 않는다.",
+		L"정원가위를 손에 넣었다."});
 }
 
 void TalkManager::SaveTalkData(int referenceId)
@@ -36,8 +39,36 @@ vector<wstring> TalkManager::GetTalkData(int referenceId)
 	auto data = talkData.find(referenceId);
 	if (data != talkData.end())
 	{
+		isItem = false;
 		return (data->second);
 	}
 	vector<wstring> empty;
 	return empty;
+}
+
+void TalkManager::SaveItemTalkData(int referenceId)
+{
+	vecTalkData = GetItemTalkData(referenceId);
+}
+
+vector<wstring> TalkManager::GetVecItemTalkData()
+{
+	return vecTalkData;
+}
+
+vector<wstring> TalkManager::GetItemTalkData(int referenceId)
+{
+	auto data = itemTalkData.find(referenceId);
+	if (data != itemTalkData.end())
+	{
+		isItem = true;
+		return (data->second);
+	}
+	vector<wstring> empty;
+	return empty;
+}
+
+bool TalkManager::GetIsItem()
+{
+	return isItem;
 }

@@ -14,7 +14,7 @@ void UIObj::Init()
 	this->SetPosition({ 0 ,START_PANEL_POS_Y });
 
 	ChatRenderer* sprite = new ChatRenderer(this, 1);
-	sprite->SetSprite(L"Image/UI/ChatPanel.png");
+	sprite->SetSprite(L"Image/UI/ChatPanel.png", L"Image/UI/SelectPanel_03.png");
 
 	UserInfoComponent* userInfo = new UserInfoComponent(this, 2);
 	userInfo->SetSprite(L"Image/UI/UserInfo_1.png", L"Image/UI/UserInfo_2.png");

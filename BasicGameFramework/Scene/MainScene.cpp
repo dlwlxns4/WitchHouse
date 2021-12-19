@@ -60,32 +60,8 @@ void MainScene::Update()
 void MainScene::Render(HDC hdc)
 {
 	Scene::Render(hdc);
-
-	if (isShowRect)
-	{
-		unordered_set<pair<int, int>, pair_hash>* collision = PhysicsManager::GetInstance()->GetCollisionObj();
-		for (auto pos : *collision)
-		{
-			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
-		}
-		unordered_map<int, unordered_map<int, int>>* chat = PhysicsManager::GetInstance()->GetChatObjs();
-		for (auto it : *chat)
-		{
-			for (auto itt : it.second)
-			{
-				ImageManager::GetInstance()->DrawColliderRectRed(it.first, itt.first, itt.second);
-			}
-		}
-		unordered_map<int, unordered_map<int, GameObject*>>* trigger = PhysicsManager::GetInstance()->GetTriggerObjs();
-		for (auto it : *trigger)
-		{
-			for (auto itt : it.second)
-			{
-				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
-			}
-		}
-
-	}
+	Debug();
+	
 }
 
 
@@ -179,6 +155,7 @@ void MainScene::Load(int loadIndex)
 		isFirst = false;
 		GameManager::GetInstance()->SetPlayerPos({ 9 * 32, 9 * 32 });
 	}
+	
 	else
 	{
 		int prevScene = GameManager::GetInstance()->GetCurrScene();
@@ -191,4 +168,41 @@ void MainScene::Load(int loadIndex)
 
 	openFile.close();
 
+}
+
+void MainScene::Debug()
+{
+	if (isShowRect)
+	{
+		unordered_set<pair<int, int>, pair_hash>* collision = PhysicsManager::GetInstance()->GetCollisionObj();
+		for (auto pos : *collision)
+		{
+			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
+		}
+		unordered_map<int, unordered_map<int, int>>* chat = PhysicsManager::GetInstance()->GetChatObjs();
+		for (auto it : *chat)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectRed(it.first, itt.first, itt.second);
+			}
+		}
+		unordered_map<int, unordered_map<int, GameObject*>>* trigger = PhysicsManager::GetInstance()->GetTriggerObjs();
+		for (auto it : *trigger)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
+			}
+		}
+		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
+		for (auto it : *item)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectOrange(it.first, itt.first, itt.second);
+			}
+		}
+
+	}
 }
