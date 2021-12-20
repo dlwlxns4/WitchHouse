@@ -187,7 +187,6 @@
     <ClInclude Include="Object\AkariObj.h" />
     <ClInclude Include="Object\BackPanel.h" />
     <ClInclude Include="Object\Cat.h" />
-    <ClInclude Include="Object\DoorObj.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemFactory.h" />
     <ClInclude Include="Object\PortalObj.h" />
@@ -267,7 +266,6 @@
     <ClCompile Include="Object\AkariObj.cpp" />
     <ClCompile Include="Object\BackPanel.cpp" />
     <ClCompile Include="Object\Cat.cpp" />
-    <ClCompile Include="Object\DoorObj.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemFactory.cpp" />
     <ClCompile Include="Object\PortalObj.cpp" />

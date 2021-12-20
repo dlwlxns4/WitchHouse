@@ -1,7 +1,7 @@
 #include "ItemManager.h"
 #include "../Object/Item.h"
 
-
+#include <iostream>
 ItemManager::~ItemManager()
 {
 	Release();
@@ -24,7 +24,7 @@ void ItemManager::AddItem(int id)
 
 	for (auto it : inventory)
 	{
-		if (it->CompareId(item->GetId()))
+		if (it->CompareId(id))
 		{
 			it->AddCount();
 			return;
@@ -70,6 +70,24 @@ void ItemManager::SetOwner(GameObject* owner)
 	for (int i = 0; i < inventory.size(); ++i)
 	{
 		inventory[i]->SetOwner(owner);
+	}
+}
+
+void ItemManager::RemoveItem(int id)
+{
+
+
+	for (auto it = inventory.begin(); it!= inventory.end(); ++it)
+	{
+		if ((*it)->CompareId(id))
+		{
+
+			if ((*it)->GetCount() == 0)
+			{
+				inventory.erase(it);
+				break;
+			}
+		}
 	}
 }
 

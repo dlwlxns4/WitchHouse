@@ -1,11 +1,11 @@
 #pragma once
 
-#include "GameObject.h"
+#include "TriggerObj.h"
 
-class PortalObj : public GameObject
+class PortalObj : public TriggerObj
 {
 public:
-	using GameObject::GameObject;
+	using TriggerObj::TriggerObj;
 	virtual ~PortalObj() = default;
 
 	/*virtual void	Init() override;
@@ -13,8 +13,8 @@ public:
 	virtual void	Render(HDC hdc) override;*/
 	virtual void	OnTrigger() override;
 
-	void			AddNextMapNum() { nextMapNum++; }
-	int				GetNextMap()	{ return nextMapNum; }
+	virtual void	AddNextMapNum() override{ nextMapNum++; };
+	virtual int		GetNextMap() override { return nextMapNum; } ;
 
 
 	virtual void	Write(std::ostream& os) const override;

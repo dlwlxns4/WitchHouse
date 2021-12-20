@@ -33,6 +33,9 @@ void PlayerMovement::Init()
 	InitialAction* initialAction = new InitialAction(this->_owner);
 	actions[2] = initialAction;
 
+	IntoHouseAction* intoHouseAction = new IntoHouseAction(this->_owner);
+	actions[3] = intoHouseAction;
+
 	_actionSterategy = actions[0];
 }
 
@@ -70,7 +73,7 @@ void PlayerMovement::Release()
 
 void PlayerMovement::TiggerHelper(int posX, int posY)
 {
-	GameObject* trigger =PhysicsManager::GetInstance()->GetTriggerObj(posX, posY);
+	GameObject* trigger = PhysicsManager::GetInstance()->GetTriggerObj(posX, posY);
 	if (trigger != nullptr)
 	{
 		trigger->OnTrigger();
@@ -174,6 +177,7 @@ void InitialAction::DoAction()
 #define RIGHT 0
 #define FRONT 1
 
+
 	motionDelay++;
 	if (motionDelay > 22)
 	{
@@ -206,5 +210,65 @@ void InitialAction::DoAction()
 			isMotionFinish = true;
 		}
 		motionDelay = 0;
+	}
+}
+
+void IntoHouseAction::DoAction()
+{
+	actionDelay++;
+	if (actionDelay >= 100)
+	{
+		motionDelay++;
+		if (motionDelay >= 10)
+		{
+			motionDelay = 0;
+			POINT pos = _obj->GetPosition();
+			POINT* camera = (CameraManager::GetInstance()->GetCameraPos());
+			Direction dir = _obj->GetComponent<PlayerSpriteRenderer>()->GetDirection();
+
+			int dx[] = { 0,-1,1,0 };
+			int dy[] = { 1,-0,0,-1 };
+
+			int tmpCameraPosX = camera->x + dx[(int)dir] * 32;
+			int tmpCameraPosY = camera->y + dy[(int)dir] * 32;
+
+			if (CameraManager::GetInstance()->CheckOutOfTileX(tmpCameraPosX) == false)
+			{
+				camera->x += dx[(int)dir] * 4;
+			}
+			if (CameraManager::GetInstance()->CheckOutOfTileY(tmpCameraPosY) == false)
+			{
+				camera->y += dy[(int)dir] * 4;
+			}
+
+			pos.x += dx[(int)dir] * 4;
+			pos.y += dy[(int)dir] * 4;
+
+			_obj->SetPosition(pos);
+			moveDistance += 4;
+			opacity -= 0.2f;
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetOpacity(opacity);
+
+
+			if (moveDistance >= 16)
+			{
+				_obj->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
+			}
+
+			if (moveDistance >= 32)
+			{
+				moveDistance = 0;
+				GameManager::GetInstance()->SetState(State::None);
+				_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
+				_obj->GetComponent<PlayerMovement>()->TiggerHelper(pos.x / 32, pos.y / 32);
+				motionCount++;
+				
+			}
+		}
+
+		if (motionCount >= 2)
+		{
+			
+		}
 	}
 }

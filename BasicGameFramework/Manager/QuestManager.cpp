@@ -1,6 +1,9 @@
 #include "QuestManager.h"
 #include "../Object/QuestObj.h"
 
+#include <iostream>
+using namespace std;
+
 void QuestManager::SetQuest(int quest)
 {
 	currQuest = quest;
@@ -9,6 +12,8 @@ void QuestManager::SetQuest(int quest)
 void QuestManager::NextQuest()
 {
 	currQuest++;
+	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
+
 }
 
 int QuestManager::GetQuest()
@@ -18,12 +23,20 @@ int QuestManager::GetQuest()
 
 int* QuestManager::GetQuestPtr()
 {
+
+
 	return &currQuest;
 }
 
 void QuestManager::Init()
 {
 	currQuest = 10;
+
+	questName[10] = "외딴 숲 속 한가운데";
+	questName[11] = "장미를 잘라라";
+	questName[12] = "마녀의 집에 들어가라";
+	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
+
 }
 
 GameObject* QuestManager::GetQuestObj(int posX, int posY)
@@ -34,7 +47,7 @@ GameObject* QuestManager::GetQuestObj(int posX, int posY)
 int QuestManager::GetQuestObjId(int posX, int posY)
 {
 	auto it = questObjMap.find(posX);
-	
+
 	if (it == questObjMap.end())
 	{
 		return -1;

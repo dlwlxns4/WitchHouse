@@ -47,7 +47,7 @@ void Sprite::Init(const wchar_t* fileName)
 
 }
 
-void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY)
+void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY, float opacity)
 {
 	if (pBitmap)
 	{
@@ -65,7 +65,7 @@ void Sprite::PlayerRender(int posX, int posY, int currFrameX, int currFrameY)
 				posX + imageOneFrameSize.width -  cameraPos->x,
 				posY + imageOneFrameSize.height -  cameraPos->y
 			),
-			1,
+			opacity,
 			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 			D2D1::RectF(currFrameX * imageOneFrameSize.width, currFrameY * imageOneFrameSize.height,
 				(currFrameX + 1) * imageOneFrameSize.width, (currFrameY + 1) * imageOneFrameSize.height));

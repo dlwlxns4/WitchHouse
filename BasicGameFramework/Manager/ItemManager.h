@@ -24,6 +24,7 @@ public:
 	int		GetCurrFindItem();
 	void	SetCurrFindItem(int id);
 	void	SetOwner(GameObject* owner);
+	void	RemoveItem(int id);
 
 	const vector<Item*>&	GetInventory() const;
 	int						GetInventorySize();

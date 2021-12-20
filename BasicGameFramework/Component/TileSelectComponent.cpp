@@ -38,6 +38,7 @@
 #include "../Object/TwinkleObj.h"
 #include "../Object/AkariObj.h"
 #include "../Object/QuestObj.h"
+#include "../Object/TriggerObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -125,12 +126,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Quest";
 			}
+			else if ((int)tileType == 1)
+			{
+				txt = L"TileType : Door";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 9)
+		if ((int)tileType < 10)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -174,6 +179,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 9)
 			{
 				txt = L"TileType : Quest";
+			}
+			else if ((int)tileType == 10)
+			{
+				txt = L"TileType : Door";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -329,7 +338,7 @@ void TileSelectComponent::Update()
 	}
 	if (Input::GetButtonDown('L'))
 	{
-		Load(num++);
+		Load(num);
 	}
 
 	if (Input::GetButtonDown('Q'))
@@ -420,7 +429,7 @@ void TileSelectComponent::Render(HDC hdc)
 		{
 			for (auto itt : it.second)
 			{
-				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
+				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((TriggerObj*)((itt.second)))->GetNextMap());
 			}
 		}
 		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
@@ -550,6 +559,14 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 				}
 			}
 		}
+	}
+	else if (tileType == TileType::Door)
+	{
+		DoorObj* door = new DoorObj(mapData[currLayer - 1], L"Door");
+		door->Init();
+		door->SetSpriteIndex(sampleIndex);
+		door->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
+		
 	}
 }
 

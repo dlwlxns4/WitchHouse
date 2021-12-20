@@ -108,9 +108,13 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/SelectPanel_03.png");
 	AddSprite(L"Image/UI/title.jpg");
 
-	//Particle
+	//-----------Obj
+	AddSprite(L"Image/Graphics/Obj/HouseDoor.png");
 	AddSprite(L"Image/Graphics/Obj/Twinkle.png");
 	AddSprite(L"Image/Graphics/Obj/Akari.png");
+
+	spritesName.push_back(L"Image/Graphics/Obj/HouseDoor.png");
+
 }
 
 void ImageManager::Release()

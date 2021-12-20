@@ -15,18 +15,17 @@ public:
 	void				SetOwner(GameObject* owner);
 	virtual void		UseItem() = 0;
 	void				AddCount() { count++; };
-	int					GetId() { return id; }
 	int					GetCount() { return count; }
-	bool				CompareId(int id) { if (this->id == id) return true; return false; }
 	wstring				GetName();
 	wstring				GetInfo();
+
+	virtual bool CompareId(int id) =0;
 protected:
-	int					id = 0;
 	GameObject*			_owner = nullptr;
 	wstring				name = L"";
 	wstring				info = L"";
 	wstring				useString = L"";
-	int			count = 0;
+	int					count = 0;
 };
 
 class Letter : public Item
@@ -37,8 +36,11 @@ public:
 
 	virtual void Init()			 override;
 	virtual void UseItem()		 override;
+	virtual bool CompareId(int id) override{ if (this->id == id) return true; return false; }
 
+	int GetId() { return id; }
 protected:
+	int id = 1;
 };
 
 class Scissors : public Item
@@ -49,6 +51,10 @@ public:
 
 	virtual void Init()			 override;
 	virtual void UseItem() override;
-protected:
+	virtual bool CompareId(int id) override { if (this->id == id) return true; return false; }
 
+	int GetId() { return id; }
+
+protected:
+	int id = 0;
 };

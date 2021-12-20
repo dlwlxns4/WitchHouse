@@ -16,6 +16,7 @@ public:
 
 
 	Direction	GetDirection();
+	void		SetOpacity(float opacity);
 	void		SetImage(const wchar_t* filePath);
 	void		SetDirection(int dir);
 	void		SetFeet(int feet);
@@ -27,6 +28,7 @@ private:
 
 	int frontFeet = 1;
 	int frameX = 1;
+	float opacity = 1.0f;
 
 	Direction		dir;
 	PlayerSpriteState state = PlayerSpriteState::Init;

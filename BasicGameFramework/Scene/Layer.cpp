@@ -10,6 +10,7 @@
 #include "../Object/TwinkleObj.h"
 #include "../Object/AkariObj.h"
 #include "../Object/QuestObj.h"
+#include "../Object/TriggerObj.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -188,6 +189,12 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 			{
 				QuestObj* quest = new QuestObj(&layer, L"Quest");
 				quest->Read(is);
+				break;
+			}
+			case 7:
+			{
+				DoorObj* door = new DoorObj(&layer, L"Door");
+				door->Read(is);
 				break;
 			}
 		}

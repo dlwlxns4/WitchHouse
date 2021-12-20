@@ -253,9 +253,6 @@
     <ClInclude Include="Object\ItemFactory.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Object\DoorObj.h">
-      <Filter>Object\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="Object\TwinkleObj.h">
       <Filter>Object\Graphic</Filter>
     </ClInclude>
@@ -453,9 +450,6 @@
     </ClCompile>
     <ClCompile Include="Object\ItemFactory.cpp">
       <Filter>Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\DoorObj.cpp">
-      <Filter>Object\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Object\TwinkleObj.cpp">
       <Filter>Object\Graphic</Filter>

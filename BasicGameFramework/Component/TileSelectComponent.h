@@ -24,7 +24,8 @@ private:
 		Item = 6,
 		Twinkle =7,
 		Akari = 8,
-		Quest =9
+		Quest =9,
+		Door = 10
 	};
 
 	using Component::Component;

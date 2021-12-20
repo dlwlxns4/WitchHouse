@@ -4,6 +4,7 @@
 #include "../Manager/QuestManager.h"
 #include "../Manager/TalkManager.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/ItemManager.h"
 
 #include "../Component/InvenComponent.h"
 #include "../Component/Player/PlayerSpriteRenderer.h"
@@ -37,7 +38,7 @@ void Letter::Init()
 	info = L"주머니에 들어있던 편지.";
 	name = L"편지";
 	count += 1;
-	id = 0;
+	id = 1;
 }
 
 void Letter::UseItem()
@@ -51,7 +52,7 @@ void Scissors::Init()
 	name = L"정원 가위";
 	useString = L"\t장미를자른다.\n\n\t그만둔다.";
 	count += 1;
-	id = 1;
+	id = 0;
 }
 
 void Scissors::UseItem()
@@ -81,5 +82,9 @@ void Scissors::UseItem()
 		ui->GetComponent<InvenComponent>()->Clear();
 
 		QuestManager::GetInstance()->SetOffQuestObj(0);
+		QuestManager::GetInstance()->NextQuest();
+
+		this->count--;
+		ItemManager::GetInstance()->RemoveItem(id);
 	}
 }

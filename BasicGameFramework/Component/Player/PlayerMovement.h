@@ -20,7 +20,8 @@ enum class PlayerActionState
 {
 	Null,
 	Input,
-	Initial
+	Initial,
+	IntoHouse
 };
 
 
@@ -45,7 +46,7 @@ private:
 	int				prevPosX = 0;
 	int				prevPosY = 0;
 
-	std::array<class IActionable*, 3> actions;
+	std::array<class IActionable*, 4> actions;
 	class IActionable* _actionSterategy = actions[0];
 };
 
@@ -104,4 +105,22 @@ private:
 	int			motionCount = 0;
 	bool		isFront = true;
 	bool		isMotionFinish = false;
+};
+
+class IntoHouseAction : public IActionable
+{
+public:
+	using		IActionable::IActionable;
+	virtual		~IntoHouseAction() = default;
+
+	void		DoAction();
+
+private:
+	float		opacity = 1.0f;
+	int			motionDelay = 0;
+	int			motionCount = 0;
+	bool		isFront = true;
+	bool		isMotionFinish = false;
+	int			moveDistance = 0;
+	int			actionDelay = 0;
 };

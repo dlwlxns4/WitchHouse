@@ -11,7 +11,7 @@ private:
 
 public:
 	void Init(const wchar_t* fileName);
-	void PlayerRender(int posX, int posY, int currFrameX, int currFrameY);
+	void PlayerRender(int posX, int posY, int currFrameX, int currFrameY, float opacity);
 	void SlateRender(int posX, int posY, int slatePos);
 	void Render(int posX, int posY, int currFrameX, int currFrameY, int maxFrameX, int maxFrameY, bool isSample);
 	void Render(int posX, int posY, int currFrameX, int currFrameY);

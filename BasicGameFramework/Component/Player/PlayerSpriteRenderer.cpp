@@ -16,7 +16,8 @@ void PlayerSpriteRenderer::Render(HDC hdc)
 		sprite->PlayerRender(_owner->GetPosition().x, 
 			_owner->GetPosition().y-16,
 			frontFeet,
-			MOVE+(int)dir
+			MOVE+(int)dir,
+			opacity
 		);
 	}
 	else if (state == PlayerSpriteState::Init)
@@ -24,7 +25,8 @@ void PlayerSpriteRenderer::Render(HDC hdc)
 		sprite->PlayerRender(_owner->GetPosition().x,
 			_owner->GetPosition().y - 16,
 			frameX,
-			NANAME
+			NANAME,
+			opacity
 		);
 	}
 }
@@ -42,6 +44,11 @@ void PlayerSpriteRenderer::SetDirection(int dir)
 Direction PlayerSpriteRenderer::GetDirection()
 {
 	return dir;
+}
+
+void PlayerSpriteRenderer::SetOpacity(float opacity)
+{
+	this->opacity = opacity;
 }
 
 void PlayerSpriteRenderer::SetFeet(int feet)

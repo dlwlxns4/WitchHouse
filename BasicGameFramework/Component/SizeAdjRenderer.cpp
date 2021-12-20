@@ -6,7 +6,8 @@
 #include "../Util/Sprite.h"
 void SizeAdjRenderer::Render(HDC hdc)
 {
-	sprite->Render(_owner->GetRenderPos().x,
+	sprite->Render(
+		_owner->GetRenderPos().x,
 		_owner->GetRenderPos().y,
 		frameX,
 		frameY,
@@ -35,6 +36,9 @@ void SizeAdjRenderer::Read(istream& is)
 		>> frameY
 		>> maxFrameX
 		>> maxFrameY;
+
+	wstring path =ImageManager::GetInstance()->GetSpriteName(spriteindex);
+	sprite = ImageManager::GetInstance()->FindSprite(path.c_str());
 }
 
 void SizeAdjRenderer::SetSprite(const wchar_t* fileName, int frameX, int frameY)
@@ -66,6 +70,11 @@ void SizeAdjRenderer::SetFrameX(int x)
 void SizeAdjRenderer::SetFrameY(int y)
 {
 	this->frameY = y;
+}
+
+void SizeAdjRenderer::SetIndex(int index)
+{
+	this->spriteindex = index;
 }
 
 void SizeAdjRenderer::SetMaxFrame(int x, int y)
