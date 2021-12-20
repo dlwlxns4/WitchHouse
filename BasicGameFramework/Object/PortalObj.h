@@ -13,8 +13,8 @@ public:
 	virtual void	Render(HDC hdc) override;*/
 	virtual void	OnTrigger() override;
 
-	virtual void	AddNextMapNum() override{ nextMapNum++; };
-	virtual int		GetNextMap() override { return nextMapNum; } ;
+	virtual void	AddMainId() override{ nextMapNum++; };
+	virtual int		GetMainId() override { return nextMapNum; } ;
 
 
 	virtual void	Write(std::ostream& os) const override;

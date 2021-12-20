@@ -1,6 +1,8 @@
 #include "TriggerObj.h"
 #include "../Component/SizeAdjRenderer.h"
 
+#include "../Scene/MainScene.h"
+
 #include "../Manager/GameManager.h"
 #include "../Manager/SceneManager.h"
 #include "../Manager/CameraManager.h"
@@ -31,14 +33,25 @@ void DoorObj::Init()
 {
 	SizeAdjRenderer* sr = new SizeAdjRenderer(this, 1);
 	sr->SetSprite(L"Image/Graphics/Obj/HouseDoor.png");
-	sr->SetMaxFrame(4, 1);
+	sr->SetMaxFrame(4, 4);
 	renderer = sr;
 }
 
 void DoorObj::OnTrigger()
 {
+	GameObject* player = GameManager::GetInstance()->GetPlayer();
 	isActable = true;
-	GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::IntoHouse);
+	player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::IntoHouse);
+	
+	if (QuestManager::GetInstance()->GetQuest() <= 12)
+	{
+		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(100,10);
+	}
+	else
+	{
+		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(2,3);
+	}
+	((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetNextScene(loadMap);
 }
 
 void DoorObj::Update()
@@ -66,6 +79,7 @@ void DoorObj::Write(std::ostream& os) const
 	os << frameX << "\t";
 	os << animDelay << "\t";
 	os << isActable << "\t";
+	os << loadMap << "\t";
 }
 
 void DoorObj::Read(std::istream& is)
@@ -73,8 +87,8 @@ void DoorObj::Read(std::istream& is)
 	GameObject::Read(is);
 	is >> frameX
 		>> animDelay
-		>> isActable;
-
+		>> isActable
+		>> loadMap;
 	this->renderer=this->GetComponent<SizeAdjRenderer>();
 	PhysicsManager::GetInstance()->SetTriggerObj(this->GetPosition().x / 32, this->GetPosition().y / 32 + 1, this);
 }
@@ -88,6 +102,22 @@ void DoorObj::SetSpriteIndex(int index)
 	renderer->SetIndex(index);
 }
 
+void TrapObj::OnTrigger()
+{
+	cout << "วิมค" << endl;
+	((MainScene*)(SceneManager::GetInstance()->GetCurrentScene()))->DoTrap(id);
+}
 
+void TrapObj::Write(std::ostream& os) const
+{
+	os << 8 << "\t";
+	GameObject::Write(os);
+	os << id << "\t";
+}
 
-
+void TrapObj::Read(std::istream& is)
+{
+	GameObject::Read(is);
+	is >> id;
+	PhysicsManager::GetInstance()->SetTriggerObj(this->GetPosition().x / 32, this->GetPosition().y / 32, this);
+}

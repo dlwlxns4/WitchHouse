@@ -12,6 +12,8 @@
 #include "../../Manager/PhysicsManager.h"
 #include "../../Manager/GameManager.h"
 #include "../../Manager/CameraManager.h"
+#include "../../Manager/SceneManager.h"
+#include "../../Scene/MainScene.h"
 
 #include "../../Util/AboutTile.h"
 #include <iostream>
@@ -57,6 +59,11 @@ float PlayerMovement::GetSpeed() const noexcept
 void PlayerMovement::SetActionStartegy(PlayerActionState action)
 {
 	_actionSterategy = actions[static_cast<int>(action)];
+}
+
+IActionable* PlayerMovement::GetActionStartegy()
+{
+	return _actionSterategy;
 }
 
 void PlayerMovement::Release()
@@ -161,6 +168,8 @@ void InputAction::DoAction()
 
 		if (moveDistance >= 32)
 		{
+			cout << "Player : " << pos.x / 32 << " " << pos.y / 32 << endl;
+			cout << "Camera : " << camera->x / 32 << " " << camera->y / 32 << endl;
 			moveDistance = 0;
 			GameManager::GetInstance()->SetState(State::None);
 			_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
@@ -216,10 +225,10 @@ void InitialAction::DoAction()
 void IntoHouseAction::DoAction()
 {
 	actionDelay++;
-	if (actionDelay >= 100)
+	if (actionDelay >= animLimitTime)
 	{
 		motionDelay++;
-		if (motionDelay >= 10)
+		if (motionDelay >= moitionLimitTime)
 		{
 			motionDelay = 0;
 			POINT pos = _obj->GetPosition();
@@ -229,17 +238,10 @@ void IntoHouseAction::DoAction()
 			int dx[] = { 0,-1,1,0 };
 			int dy[] = { 1,-0,0,-1 };
 
-			int tmpCameraPosX = camera->x + dx[(int)dir] * 32;
-			int tmpCameraPosY = camera->y + dy[(int)dir] * 32;
 
-			if (CameraManager::GetInstance()->CheckOutOfTileX(tmpCameraPosX) == false)
-			{
-				camera->x += dx[(int)dir] * 4;
-			}
-			if (CameraManager::GetInstance()->CheckOutOfTileY(tmpCameraPosY) == false)
-			{
-				camera->y += dy[(int)dir] * 4;
-			}
+
+			camera->x += dx[(int)dir] * 4;
+			camera->y += dy[(int)dir] * 4;
 
 			pos.x += dx[(int)dir] * 4;
 			pos.y += dy[(int)dir] * 4;
@@ -249,11 +251,7 @@ void IntoHouseAction::DoAction()
 			opacity -= 0.2f;
 			_obj->GetComponent<PlayerSpriteRenderer>()->SetOpacity(opacity);
 
-
-			if (moveDistance >= 16)
-			{
-				_obj->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
-			}
+			_obj->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
 
 			if (moveDistance >= 32)
 			{
@@ -262,13 +260,17 @@ void IntoHouseAction::DoAction()
 				_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
 				_obj->GetComponent<PlayerMovement>()->TiggerHelper(pos.x / 32, pos.y / 32);
 				motionCount++;
-				
+
 			}
 		}
 
 		if (motionCount >= 2)
 		{
-			
+			if (QuestManager::GetInstance()->GetQuest() <= 12)
+			{
+				QuestManager::GetInstance()->NextQuest();
+			}
+			((MainScene*)(SceneManager::GetInstance()->GetCurrentScene()))->TransMap(nextScene);
 		}
 	}
 }

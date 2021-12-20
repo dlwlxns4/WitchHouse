@@ -14,7 +14,7 @@ public:
 	virtual void			Update() override;
 	virtual void			Render(HDC hdc) override;
 
-	void					DoTrap();
+	void					DoTrap(int id);
 	void					TransMap(int mapNum);
 
 	void					Save(int saveIndex = 0);

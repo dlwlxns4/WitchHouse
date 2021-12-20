@@ -104,61 +104,7 @@ void TileSelectComponent::Update()
 			}
 			else if ((int)tileType == 4)
 			{
-				txt = L"TileType : Trigger";
-			}
-			else if ((int)tileType == 5)
-			{
-				txt = L"TileType : Portal";
-			}
-			else if ((int)tileType == 6)
-			{
-				txt = L"TileType : Item";
-			}
-			else if ((int)tileType == 7)
-			{
-				txt = L"TileType : Twinkle";
-			}
-			else if ((int)tileType == 8)
-			{
-				txt = L"TileType : Akari";
-			}
-			else if ((int)tileType == 9)
-			{
-				txt = L"TileType : Quest";
-			}
-			else if ((int)tileType == 1)
-			{
-				txt = L"TileType : Door";
-			}
-			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
-		}
-	}
-	else if (Input::GetButtonDown('4'))
-	{
-		if ((int)tileType < 10)
-		{
-			int curType = (int)tileType;
-			tileType = TileType(++curType);
-			wstring txt = {};
-			if ((int)tileType == 0)
-			{
-				txt = L"TileType : TileObj";
-			}
-			else if ((int)tileType == 1)
-			{
-				txt = L"TileType : PlayerObj";
-			}
-			else if ((int)tileType == 2)
-			{
-				txt = L"TileType : ParallaxObj";
-			}
-			else if ((int)tileType == 3)
-			{
-				txt = L"TileType : Collider";
-			}
-			else if ((int)tileType == 4)
-			{
-				txt = L"TileType : Trigger";
+				txt = L"TileType : Chat";
 			}
 			else if ((int)tileType == 5)
 			{
@@ -183,6 +129,68 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 10)
 			{
 				txt = L"TileType : Door";
+			}
+			else if ((int)tileType == 11)
+			{
+				txt = L"TileType : Trap";
+			}
+			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
+		}
+	}
+	else if (Input::GetButtonDown('4'))
+	{
+		if ((int)tileType < 11)
+		{
+			int curType = (int)tileType;
+			tileType = TileType(++curType);
+			wstring txt = {};
+			if ((int)tileType == 0)
+			{
+				txt = L"TileType : TileObj";
+			}
+			else if ((int)tileType == 1)
+			{
+				txt = L"TileType : PlayerObj";
+			}
+			else if ((int)tileType == 2)
+			{
+				txt = L"TileType : ParallaxObj";
+			}
+			else if ((int)tileType == 3)
+			{
+				txt = L"TileType : Collider";
+			}
+			else if ((int)tileType == 4)
+			{
+				txt = L"TileType : Chat";
+			}
+			else if ((int)tileType == 5)
+			{
+				txt = L"TileType : Portal";
+			}
+			else if ((int)tileType == 6)
+			{
+				txt = L"TileType : Item";
+			}
+			else if ((int)tileType == 7)
+			{
+				txt = L"TileType : Twinkle";
+			}
+			else if ((int)tileType == 8)
+			{
+				txt = L"TileType : Akari";
+			}
+			else if ((int)tileType == 9)
+			{
+				txt = L"TileType : Quest";
+			}
+			else if ((int)tileType == 10)
+			{
+				txt = L"TileType : Door";
+			}
+			else if ((int)tileType == 11)
+			{
+				txt = L"TileType : Trap";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -255,7 +263,7 @@ void TileSelectComponent::Update()
 			{
 				mapData[currLayer - 1]->RemoveObject(POINT{ mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE });
 			}
-			else if (tileType == TileType::Trigger)
+			else if (tileType == TileType::Chat)
 			{
 				PhysicsManager::GetInstance()->RemoveChat(mouseIndexX, mouseIndexY);
 			}
@@ -334,11 +342,22 @@ void TileSelectComponent::Update()
 
 	if (Input::GetButtonDown('K'))
 	{
-		Save();
+		Save(num);
 	}
 	if (Input::GetButtonDown('L'))
 	{
 		Load(num);
+	}
+
+	if (Input::GetButtonDown('9'))
+	{
+		num--;
+		cout << num << endl;
+	}
+	if (Input::GetButtonDown('0'))
+	{
+		num++;
+		cout << num << endl;
 	}
 
 	if (Input::GetButtonDown('Q'))
@@ -429,7 +448,7 @@ void TileSelectComponent::Render(HDC hdc)
 		{
 			for (auto itt : it.second)
 			{
-				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((TriggerObj*)((itt.second)))->GetNextMap());
+				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((TriggerObj*)((itt.second)))->GetMainId());
 			}
 		}
 		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
@@ -509,7 +528,7 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		PhysicsManager::GetInstance()->SetCollision(mouseIndexX, mouseIndexY);
 	}
-	else if (tileType == TileType::Trigger)
+	else if (tileType == TileType::Chat)
 	{
 		PhysicsManager::GetInstance()->SetChat(mouseIndexX, mouseIndexY);
 	}
@@ -554,8 +573,8 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 						posX,
 						posY
 					);
-				
-					QuestManager::GetInstance()->SetQuestObj(posX/32, posY/32, quest);
+
+					QuestManager::GetInstance()->SetQuestObj(posX / 32, posY / 32, quest);
 				}
 			}
 		}
@@ -566,7 +585,15 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 		door->Init();
 		door->SetSpriteIndex(sampleIndex);
 		door->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
-		
+		PhysicsManager::GetInstance()->SetTriggerObj(door->GetPosition().x / 32, door->GetPosition().y / 32 + 1, door);
+	}
+	else if (tileType == TileType::TrapObj)
+	{
+		TrapObj* trap = new TrapObj(mapData[currLayer - 1], L"Door");
+		trap->Init();
+		trap->SetPosition(mouseIndexX* TILE_SIZE, mouseIndexY* TILE_SIZE);
+		PhysicsManager::GetInstance()->SetTriggerObj(trap->GetPosition().x / 32, trap->GetPosition().y / 32, trap);
+
 	}
 }
 
@@ -610,6 +637,8 @@ void TileSelectComponent::Save(int saveIndex)
 void TileSelectComponent::Load(int loadIndex)
 {
 	string filePath = "Save/Tilemap/MapData" + to_string(loadIndex) + ".txt";
+
+	cout << filePath << endl;
 
 	ifstream openFile(filePath.data());
 

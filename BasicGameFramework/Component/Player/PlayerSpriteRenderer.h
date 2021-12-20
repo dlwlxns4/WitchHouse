@@ -3,7 +3,12 @@
 #include "../Component.h"
 
 enum class Direction { Down = 0, Left = 1, Right = 2, Up = 3 };
-enum class PlayerSpriteState{ Move=0, Init=1};
+enum class PlayerSpriteState
+{ 
+	Move=0, 
+	Init=1,
+	Door=2
+};
 
 class Sprite;
 class PlayerSpriteRenderer : public Component

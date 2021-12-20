@@ -197,6 +197,12 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 				door->Read(is);
 				break;
 			}
+			case 8:
+			{
+				TrapObj* trap = new TrapObj(&layer, L"Trap");
+				trap->Read(is);
+				break;
+			}
 		}
 	} while (objType != -1);
 	return is;

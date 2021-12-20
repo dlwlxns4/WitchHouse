@@ -35,6 +35,7 @@ void QuestManager::Init()
 	questName[10] = "외딴 숲 속 한가운데";
 	questName[11] = "장미를 잘라라";
 	questName[12] = "마녀의 집에 들어가라";
+	questName[13] = "쪽지를 읽어라";
 	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
 
 }

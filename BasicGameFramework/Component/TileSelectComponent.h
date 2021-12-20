@@ -19,13 +19,14 @@ private:
 		PlayerObj = 1,
 		parallaxObj = 2,
 		Collider = 3,
-		Trigger = 4,
+		Chat = 4,
 		Portal = 5,
 		Item = 6,
 		Twinkle =7,
 		Akari = 8,
 		Quest =9,
-		Door = 10
+		Door = 10,
+		TrapObj = 11
 	};
 
 	using Component::Component;

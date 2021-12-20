@@ -62,6 +62,12 @@
     <Filter Include="Object\Trap">
       <UniqueIdentifier>{83d0b278-282c-4fd5-95c9-de9bc38510bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Trapped">
+      <UniqueIdentifier>{43dfbef2-c3ef-43ff-b44e-f7d2490d9e4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Trap">
+      <UniqueIdentifier>{6ef46712-a30c-49ec-b391-0388b6e0bc3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -268,14 +274,17 @@
     <ClInclude Include="Object\Cat.h">
       <Filter>Object\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Object\TrapObj.h">
-      <Filter>Object\Trap</Filter>
-    </ClInclude>
     <ClInclude Include="Object\QuestObj.h">
       <Filter>Object\TilemapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="Object\PortalObj.h">
       <Filter>Object\TilemapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TrapActionObj.h">
+      <Filter>Object\Trapped</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\TrapActionable.h">
+      <Filter>Component\Trap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -466,14 +475,17 @@
     <ClCompile Include="Object\Cat.cpp">
       <Filter>Object\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Object\TrapObj.cpp">
-      <Filter>Object\Trap</Filter>
-    </ClCompile>
     <ClCompile Include="Object\QuestObj.cpp">
       <Filter>Object\TilemapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="Object\PortalObj.cpp">
       <Filter>Object\TilemapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TrapActionObj.cpp">
+      <Filter>Object\Trapped</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\TrapActionable.cpp">
+      <Filter>Component\Trap</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

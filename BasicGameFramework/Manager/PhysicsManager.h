@@ -1,9 +1,11 @@
 #pragma once
 
 #include "../Util/Singleton.h"
+
 #include <unordered_set>
 #include <unordered_map>
 #include "../Object/PortalObj.h"
+#include "../Object/TrapActionObj.h"
 
 using namespace std;
 
@@ -33,6 +35,7 @@ private:
 	unordered_map<int, unordered_map<int, int>> chatObj;		//ÁÂÇ¥, referenceId
 	unordered_map<int, unordered_map<int, int>> itemObj;
 	unordered_map<int, unordered_map<int, GameObject*>> triggerObj;
+	unordered_map<int, unordered_map<int, GameObject*>> trapActionObj;
 
 
 	virtual void Write(std::ostream& os) const;

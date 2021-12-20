@@ -51,7 +51,12 @@ bool CameraManager::CheckOutOfTileX(int x)
 
 bool CameraManager::CheckOutOfTileY(int y)
 {
-	if (y / 32 <= minPosY - 1 || y / 32 > (maxPosY + 1) - MAP_SIZE_Y)
+	int posY = minPosY;
+	if (GameManager::GetInstance()->GetCurrScene() == 2)
+	{
+		posY +=2;
+	}
+	if (y / 32 <= posY - 1 || y / 32 > (maxPosY + 1) - MAP_SIZE_Y)
 		return true;
 
 	return false;

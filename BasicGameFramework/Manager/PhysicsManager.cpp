@@ -145,7 +145,7 @@ void PhysicsManager::addPortalNum(int posX, int posY)
 	TriggerObj* portal = (TriggerObj*)(triggerObj[posX][posY]);
 	if (portal != nullptr)
 	{
-		portal->AddNextMapNum();
+		portal->AddMainId();
 	}
 }
 

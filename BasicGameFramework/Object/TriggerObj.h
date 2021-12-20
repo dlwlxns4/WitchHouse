@@ -11,11 +11,12 @@ public:
 	virtual void	 OnTrigger() override;
 	virtual void	 Render(HDC hdc) override;
 
-	virtual void	AddNextMapNum() = 0;
-	virtual	int		GetNextMap() = 0;
+
+	//Æ÷Å»¿ë
+	virtual void	AddMainId() = 0;
+	virtual	int		GetMainId() = 0;
 
 private:
-	
 };
 
 class SizeAdjRenderer;
@@ -32,15 +33,35 @@ public:
 	virtual void Write(std::ostream& os) const override;
 	virtual void Read(std::istream& is) override;
 
-	void		AddNextMapNum() { loadMap++; }
-	int			GetNextMap() { return loadMap; }
+	virtual void		AddMainId() { loadMap++; }
+	virtual int			GetMainId() { return loadMap; }
 
 	void SetLoadMap(int index);
 	void SetSpriteIndex(int index);
 private:
 	int frameX=0;
 	int animDelay = 0;
-	int loadMap = 3;
+	int animlimitTime = 0;
+	int loadMap = 0;
 	bool isActable = false;
 	SizeAdjRenderer* renderer = nullptr;
+};
+
+class TrapObj : public TriggerObj
+{
+public:
+	using TriggerObj::TriggerObj;
+	virtual ~TrapObj() noexcept = default;
+
+	virtual void	 OnTrigger() override;
+
+	virtual void Write(std::ostream& os) const override;
+	virtual void Read(std::istream& is) override;
+
+	//Æ÷Å»¿ë
+	virtual void		AddMainId() { id++; }
+	virtual int			GetMainId() { return id; }
+
+private:
+	int id = 0;
 };

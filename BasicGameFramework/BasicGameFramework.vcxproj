@@ -172,6 +172,7 @@
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TileSelectComponent.h" />
     <ClInclude Include="Component\TitleComp.h" />
+    <ClInclude Include="Component\TrapActionable.h" />
     <ClInclude Include="Component\UserInfoComponent.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
@@ -192,7 +193,7 @@
     <ClInclude Include="Object\PortalObj.h" />
     <ClInclude Include="Object\QuestObj.h" />
     <ClInclude Include="Object\TitleObj.h" />
-    <ClInclude Include="Object\TrapObj.h" />
+    <ClInclude Include="Object\TrapActionObj.h" />
     <ClInclude Include="Object\TwinkleObj.h" />
     <ClInclude Include="Object\UIObj.h" />
     <ClInclude Include="Object\GameObject.h">
@@ -253,6 +254,7 @@
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
     <ClCompile Include="Component\TitleComp.cpp" />
+    <ClCompile Include="Component\TrapActionable.cpp" />
     <ClCompile Include="Component\UserInfoComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Manager\CameraManager.cpp" />
@@ -271,7 +273,7 @@
     <ClCompile Include="Object\PortalObj.cpp" />
     <ClCompile Include="Object\QuestObj.cpp" />
     <ClCompile Include="Object\TitleObj.cpp" />
-    <ClCompile Include="Object\TrapObj.cpp" />
+    <ClCompile Include="Object\TrapActionObj.cpp" />
     <ClCompile Include="Object\TwinkleObj.cpp" />
     <ClCompile Include="Object\UIObj.cpp" />
     <ClCompile Include="Object\GameObject.cpp">

@@ -8,6 +8,7 @@
 
 #define MOVE 0
 #define NANAME 4
+#define DOOR  5
 
 void PlayerSpriteRenderer::Render(HDC hdc)
 {

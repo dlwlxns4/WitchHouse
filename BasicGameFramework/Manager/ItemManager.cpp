@@ -75,8 +75,6 @@ void ItemManager::SetOwner(GameObject* owner)
 
 void ItemManager::RemoveItem(int id)
 {
-
-
 	for (auto it = inventory.begin(); it!= inventory.end(); ++it)
 	{
 		if ((*it)->CompareId(id))

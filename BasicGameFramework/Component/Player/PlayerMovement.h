@@ -25,6 +25,7 @@ enum class PlayerActionState
 };
 
 
+class IActionable;
 class PlayerMovement : public Component
 {
 public:
@@ -37,6 +38,7 @@ public:
 	void			SetSpeed(float speed) noexcept;
 	float			GetSpeed() const noexcept;
 	void			SetActionStartegy(PlayerActionState action);
+	IActionable*	GetActionStartegy();
 	virtual void	Release() override;
 
 	//virtual void	OnTrigger() override;
@@ -114,13 +116,17 @@ public:
 	virtual		~IntoHouseAction() = default;
 
 	void		DoAction();
-
+	void		SetNextScene(int nextScene) { this->nextScene = nextScene; }
+	void		SetLimitTime(int actionLimit, int moitionLimit) { this->animLimitTime = actionLimit, this->moitionLimitTime = moitionLimit; }
 private:
 	float		opacity = 1.0f;
 	int			motionDelay = 0;
 	int			motionCount = 0;
 	bool		isFront = true;
-	bool		isMotionFinish = false;
 	int			moveDistance = 0;
 	int			actionDelay = 0;
+	int			nextScene = 0;
+	int			animLimitTime = 0;
+	int			moitionLimitTime = 0;
+
 };

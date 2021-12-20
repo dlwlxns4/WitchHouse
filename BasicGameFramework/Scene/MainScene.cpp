@@ -49,7 +49,10 @@ void MainScene::Update()
 	{
 		Load(num++);
 	}
-
+	if (Input::GetButtonDown('S'))
+	{
+		Load(num--);
+	}
 
 
 	if (loadFlag == true)
@@ -76,6 +79,18 @@ void MainScene::Render(HDC hdc)
 }
 
 
+
+void MainScene::DoTrap(int id)
+{
+	switch(id)
+	{
+	case 0:
+		GameObject * player = GameManager::GetInstance()->GetPlayer();
+		player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
+		
+		break;
+	}
+}
 
 void MainScene::TransMap(int mapNum)
 {
@@ -207,7 +222,7 @@ void MainScene::Debug()
 		{
 			for (auto itt : it.second)
 			{
-				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetNextMap());
+				ImageManager::GetInstance()->DrawColliderRectBlue(it.first, itt.first, ((PortalObj*)((itt.second)))->GetMainId());
 			}
 		}
 		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
