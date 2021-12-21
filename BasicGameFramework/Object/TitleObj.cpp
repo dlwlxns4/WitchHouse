@@ -21,5 +21,6 @@ void TitleObj::Init()
 	exit->SetPos({ 240,360 });
 
 	TitleComp* title = new TitleComp(this, 100);
+	title->Init();
 	title->SetSprite(L"Image/UI/SelectPanel_01.png");
 }

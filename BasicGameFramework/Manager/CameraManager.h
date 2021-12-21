@@ -7,13 +7,23 @@
 #include "../IBehaviour.h"
 
 #include "../Manager/QuestManager.h"
+#include "../Manager/SceneManager.h"
 
 #include <iostream>
+
+#include <array>
+
+enum class CameraActionState
+{
+	Null,
+	Shake,
+};
+
 class CameraManager : public Singleton<CameraManager>, IBehaviour
 {
 public:
 	CameraManager() = default;
-	~CameraManager() = default;
+	~CameraManager();
 
 	void SetCameraPos(POINT pos);
 	POINT* GetCameraPos() { return &cameraPos; }
@@ -28,8 +38,11 @@ public:
 
 	void Clear();
 
+	void SetActionStrategy(CameraActionState state);
+
 	virtual void Init() override;
 	virtual void Update() override;
+	virtual void Release() override;
 private:
 	POINT cameraPos = {};
 	int maxPosX = 0;
@@ -38,4 +51,92 @@ private:
 	int minPosY = 10000;
 
 	int cameraDelay = 0;
+
+
+	std::array<class ICameraAction*, 2> actions;
+	class ICameraAction* _actionSterategy = actions[0];
+};
+
+class ICameraAction abstract
+{
+public:
+	ICameraAction(CameraManager* camera)
+		:_owner{ camera }
+	{}
+	~ICameraAction() = default;
+
+	virtual void DoAction() = 0;
+
+protected:
+	CameraManager* _owner;
+};
+
+class CameraNullAction : public ICameraAction
+{
+public:
+	ICameraAction::ICameraAction;
+	virtual ~CameraNullAction() = default;
+
+	virtual void DoAction() override
+	{
+
+	}
+};
+
+class CameraShakeAction : public ICameraAction
+{
+#define LEFT 0
+#define RIGHT 1
+#define RESET 2
+#define END 3
+public:
+	ICameraAction::ICameraAction;
+	virtual ~CameraShakeAction() = default;
+
+	virtual void DoAction() override
+	{
+		POINT* pos = _owner->GetCameraPos();
+		if (dir == LEFT)
+		{
+			moveDistance += 16;
+			if (moveDistance >= 32)
+			{
+				moveDistance = 0;
+				dir++;
+			}
+			pos->x += 16;
+		}
+		else if (dir == RIGHT)
+		{
+			moveDistance += 32;
+			if (moveDistance >= 64)
+			{
+				moveDistance = 0;
+				dir++;
+			}
+			pos->x -= 32;
+		}
+		else if (dir == RESET)
+		{
+			moveDistance += 16;
+			if (moveDistance >= 32)
+			{
+				moveDistance = 0;
+				dir++;
+			}
+			pos->x += 16;
+		}
+		else if (dir == END)
+		{
+			moveDistance++;
+			if (moveDistance > 6)
+			{
+				_owner->SetActionStrategy(CameraActionState::Null);
+				SceneManager::GetInstance()->SetNextScene(L"Title");
+			}
+		}
+	}
+private:
+	int dir = 0;
+	int moveDistance = 0;
 };

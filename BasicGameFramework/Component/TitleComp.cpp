@@ -4,6 +4,18 @@
 #include "../Util/Input.h"
 #include "../Manager/SceneManager.h"
 
+void TitleComp::Init()
+{
+	Component::Init();
+	selectPanelOpacity = 1;
+	backPanelOpacity = 0;
+
+	isDecrease = true;
+
+	isSelect = false;
+	state = SelectState::StartOver;
+}
+
 void TitleComp::Update()
 {
 	if (isSelect == false)
@@ -60,12 +72,13 @@ void TitleComp::Update()
 			{
 			case SelectState::StartOver:
 				SceneManager::GetInstance()->SetNextScene(L"Main");
+				isSelect = false;
 				break;
 			case SelectState::Load:
 
 				break;
 			case SelectState::Exit:
-				
+				PostQuitMessage(0);
 				break;
 			}
 		}
@@ -81,7 +94,7 @@ void TitleComp::Render(HDC hdc)
 
 	if (isSelect)
 	{
-		backPanel->SizeRender(0, 0, 32*17, 32*13, backPanelOpacity);
+		backPanel->SizeRender(0, 0, 32 * 17, 32 * 13, backPanelOpacity);
 	}
 }
 

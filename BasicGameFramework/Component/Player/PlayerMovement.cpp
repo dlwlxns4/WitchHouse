@@ -68,15 +68,17 @@ IActionable* PlayerMovement::GetActionStartegy()
 
 void PlayerMovement::Release()
 {
-	for (size_t i = 0; i < actions.size(); ++i)
+	if (actions.empty() == false)
 	{
-		delete actions[i];
+		for (size_t i = 0; i < actions.size(); ++i)
+		{
+			delete actions[i];
+			actions[i] = nullptr;
+		}
 	}
 }
 
-//void PlayerMovement::OnTrigger()
-//{
-//}
+
 
 void PlayerMovement::TiggerHelper(int posX, int posY)
 {

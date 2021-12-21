@@ -1,6 +1,6 @@
 #include "TrapAction.h"
 #include "../Object/GameObject.h"
-
+#include "../Manager/CameraManager.h"
 TrapAction::~TrapAction()
 {
 	Release();
@@ -18,7 +18,7 @@ void TrapAction::Init()
 	ActionID1* actionID1 = new ActionID1(this->_owner);
 	actions[2] = actionID1;
 
-	_actionSterategy= nullAction;
+	_actionSterategy = nullAction;
 
 }
 
@@ -29,9 +29,13 @@ void TrapAction::Update()
 
 void TrapAction::Release()
 {
-	for (size_t i = 0; i < actions.size(); ++i)
+	if (actions.empty() == false)
 	{
-		delete actions[i];
+		for (size_t i = 0; i < actions.size(); ++i)
+		{
+			delete actions[i];
+			actions[i] = nullptr;
+		}
 	}
 }
 
@@ -55,7 +59,7 @@ void TrapAction::SetActionStartegy(TrapActionState action)
 void ActionID0::DoAction()
 {
 	moveDelay++;
-	if (moveDelay >= 5)
+	if (moveDelay >= 3)
 	{
 		POINT pos = _obj->GetPosition();
 		_obj->SetPosition(pos.x + 16, pos.y);
@@ -67,13 +71,12 @@ void ActionID0::DoAction()
 			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
 		}
 	}
-	
 }
 
 void ActionID1::DoAction()
 {
 	moveDelay++;
-	if (moveDelay >= 5)
+	if (moveDelay >= 3)
 	{
 		POINT pos = _obj->GetPosition();
 		_obj->SetPosition(pos.x - 16, pos.y);
@@ -83,6 +86,7 @@ void ActionID1::DoAction()
 		{
 			cycleCount = 0;
 			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
+			CameraManager::GetInstance()->SetActionStrategy(CameraActionState::Shake);
 		}
 	}
 }

@@ -31,6 +31,8 @@ private:
 	class ITrapActionable* _actionSterategy = actions[0];
 };
 
+
+
 class ITrapActionable abstract
 {
 public:

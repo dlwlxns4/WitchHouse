@@ -4,6 +4,11 @@
 #include "../Manager/GameManager.h"
 #include "../Component/Player/PlayerMovement.h"
 
+CameraManager::~CameraManager()
+{
+	Release();
+}
+
 void CameraManager::SetCameraPos(POINT pos)
 {
 	cameraPos = pos;
@@ -54,7 +59,7 @@ bool CameraManager::CheckOutOfTileY(int y)
 	int posY = minPosY;
 	if (GameManager::GetInstance()->GetCurrScene() == 2)
 	{
-		posY +=2;
+		posY += 2;
 	}
 	if (y / 32 <= posY - 1 || y / 32 > (maxPosY + 1) - MAP_SIZE_Y)
 		return true;
@@ -70,14 +75,31 @@ void CameraManager::Clear()
 	minPosY = 10000;
 }
 
+void CameraManager::SetActionStrategy(CameraActionState state)
+{
+	if (_actionSterategy != actions[static_cast<int>(state)])
+	{
+		_actionSterategy = actions[static_cast<int>(state)];
+	}
+}
+
 void CameraManager::Init()
 {
 	cameraPos.x = 32;
 	cameraPos.y = -96;
+
+	CameraNullAction* nullAction = new CameraNullAction(this);
+	actions[0] = nullAction;
+
+	CameraShakeAction* shakeAction = new CameraShakeAction(this);
+	actions[1] = shakeAction;
+
+	_actionSterategy = actions[0];
 }
 
 void CameraManager::Update()
 {
+	_actionSterategy->DoAction();
 	const int currQuest = QuestManager::GetInstance()->GetQuest();
 	if (currQuest == 10)
 	{
@@ -99,5 +121,13 @@ void CameraManager::Update()
 		{
 			cameraPos.y = 96;
 		}
+	}
+}
+
+void CameraManager::Release()
+{
+	for (size_t i = 0; i < actions.size(); ++i)
+	{
+		delete actions[i];
 	}
 }

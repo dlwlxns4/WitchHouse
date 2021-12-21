@@ -67,6 +67,7 @@ protected:
 	GameObject* _obj;
 };
 
+
 class NullAction : public IActionable
 {
 public:
