@@ -21,14 +21,26 @@ public:
 
 	unordered_map<int, unordered_map<int, GameObject*>>*	GetQuestObjMap() { return &questObjMap; }
 	GameObject*												GetQuestObj(int posX, int posY);
-	int GetQuestObjId(int posX, int posY);
+	int														GetQuestObjId(int posX, int posY);
 	void													SetQuestObj(int posX, int posY, GameObject* obj);
 	void													AddQuestId(int posX, int posY);
 	void													SetOffQuestObj(int id);
-	void													RemoveQuestObj(int posX, int posY);
+
+	unordered_map<int, unordered_map<int, GameObject*>>*	GetQuestActionObjMap() { return &questActionObjMap; }
+	GameObject*												GetQuestActionObj(int posX, int posY);
+	int														GetQuestActionObjId(int posX, int posY);
+	void													SetQuestActionObj(int posX, int posY, GameObject* obj);
+	void													AddQuestActionId(int posX, int posY);
+	void													SetOffQuestActionObj(int id);
+
+	void													SetTrapAction(int id);
+
 	void													Clear();
 private:
 	int currQuest=10;
-	unordered_map<int, unordered_map<int, GameObject*>>		questObjMap;
 	unordered_map<int, string>								questName;
+	
+	unordered_map<int, unordered_map<int, GameObject*>>		questObjMap;
+
+	unordered_map<int, unordered_map<int, GameObject*>>		questActionObjMap;
 };

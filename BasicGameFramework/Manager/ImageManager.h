@@ -29,6 +29,7 @@ private:
 	ID2D1SolidColorBrush*	pBrushBlue = nullptr;
 	ID2D1SolidColorBrush*	pBrushOrange = nullptr;
 	ID2D1SolidColorBrush*	pBrushPurple = nullptr;
+	ID2D1SolidColorBrush*	pBrushBrown = nullptr;
 
 	IDWriteTextFormat*		pTextFormat = nullptr;
 public:
@@ -52,12 +53,14 @@ public:
 	ID2D1SolidColorBrush*	GetBrushBlue() { return pBrushBlue; }
 	ID2D1SolidColorBrush*	GetBrushOrange() { return pBrushOrange; }
 	ID2D1SolidColorBrush*	GetBrushPurple() { return pBrushPurple; }
+	ID2D1SolidColorBrush*	GetBrushBrown() { return pBrushBrown; }
 	IDWriteTextFormat*		GetTextFormat() { return pTextFormat; }
 	
 	wstring GetSpriteName(int index) { return spritesName[index]; }
 	int GetSpritesNameVecSize() { return spritesName.size(); }
 	void DrawColliderRect(int posX, int posY);
 	void DrawColliderRectPurple(int posX, int posY, int id);
+	void DrawColliderRectBrown(int posX, int posY, int id);
 	void DrawColliderRectRed(int posX, int posY, int id);
 	void DrawColliderRectBlue(int posX, int posY, int num);
 	void DrawColliderRectOrange(int posX, int posY, int id);

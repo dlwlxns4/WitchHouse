@@ -87,7 +87,9 @@ void MainScene::DoTrap(int id)
 	case 0:
 		GameObject * player = GameManager::GetInstance()->GetPlayer();
 		player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
-		
+		QuestManager::GetInstance()->SetTrapAction(0);
+		QuestManager::GetInstance()->SetTrapAction(1);
+
 		break;
 	}
 }
@@ -239,6 +241,14 @@ void MainScene::Debug()
 			for (auto itt : it.second)
 			{
 				ImageManager::GetInstance()->DrawColliderRectPurple(it.first, itt.first, ((QuestObj*)((itt.second)))->GetId());
+			}
+		}
+		unordered_map<int, unordered_map<int, GameObject*>>* trapAction = QuestManager::GetInstance()->GetQuestActionObjMap();
+		for (auto it : *trapAction)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectBrown(it.first, itt.first, (((TrapActionObj*)(itt.second)))->GetId());
 			}
 		}
 

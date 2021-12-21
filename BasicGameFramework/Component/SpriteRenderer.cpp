@@ -57,6 +57,7 @@ void SpriteRenderer::SetSprite(const wchar_t* fileName)
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
 }
 
+
 void SpriteRenderer::SetFrameX(int x)
 {
 	this->frameX = x;

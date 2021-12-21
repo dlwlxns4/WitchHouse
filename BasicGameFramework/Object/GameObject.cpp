@@ -13,6 +13,7 @@
 #include "../Component/SpriteRenderer.h"
 #include "../Component/ParallaxSpriteRenderer.h"
 #include "../Component/SizeAdjRenderer.h"
+#include "../Component/TrapAction.h"
 
 GameObject::GameObject(Scene* scene, Layer* layer, const wstring& tag)
 	:
@@ -262,7 +263,6 @@ void GameObject::Read(std::istream& is)
 			sr->Read(is);
 			break;
 		}
-
 		case 101:
 		{
 			ParallaxSpriteRenderer* pr = new ParallaxSpriteRenderer(this, 1);
@@ -273,6 +273,14 @@ void GameObject::Read(std::istream& is)
 		{
 			SizeAdjRenderer* adj = new SizeAdjRenderer(this, 1);
 			adj->Read(is);
+			break;
+		}
+		case 103:
+		{
+			TrapAction* trapAction = new TrapAction(this, 1);
+			trapAction->Read(is);
+			trapAction->Init();
+			break;
 		}
 		default:
 			break;

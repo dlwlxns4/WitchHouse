@@ -11,6 +11,7 @@
 #include "../Object/AkariObj.h"
 #include "../Object/QuestObj.h"
 #include "../Object/TriggerObj.h"
+#include "../Object/TrapActionObj.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -201,6 +202,12 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 			{
 				TrapObj* trap = new TrapObj(&layer, L"Trap");
 				trap->Read(is);
+				break;
+			}
+			case 9:
+			{
+				TrapActionObj* trapAction = new TrapActionObj(&layer, L"TrapAction");
+				trapAction->Read(is);
 				break;
 			}
 		}

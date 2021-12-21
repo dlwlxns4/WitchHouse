@@ -39,6 +39,8 @@
 #include "../Object/AkariObj.h"
 #include "../Object/QuestObj.h"
 #include "../Object/TriggerObj.h"
+#include "../Object/TrapActionObj.h"
+#include "../Object/TrapActionObj.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -134,12 +136,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : Trap";
 			}
+			else if ((int)tileType == 12)
+			{
+				txt = L"TileType : TrapActionObj";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 11)
+		if ((int)tileType < 12)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -191,6 +197,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 11)
 			{
 				txt = L"TileType : Trap";
+			}
+			else if ((int)tileType == 12)
+			{
+				txt = L"TileType : TrapActionObj";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -364,7 +374,14 @@ void TileSelectComponent::Update()
 	{
 		int mouseIndexX = (mousePos.x - mainArea.left) / 32 + cameraPos->x / 32;
 		int mouseIndexY = mousePos.y / 32 + cameraPos->y / 32;
-		PhysicsManager::GetInstance()->addPortalNum(mouseIndexX, mouseIndexY);
+		if (tileType == TileType::Portal)
+		{
+			PhysicsManager::GetInstance()->addPortalNum(mouseIndexX, mouseIndexY);
+		}
+		else if (tileType == TileType::TrapActionObj)
+		{
+			QuestManager::GetInstance()->AddQuestActionId(mouseIndexX, mouseIndexY);
+		}
 	}
 
 	if (Input::GetButtonDown(VK_LSHIFT))
@@ -466,6 +483,14 @@ void TileSelectComponent::Render(HDC hdc)
 			for (auto itt : it.second)
 			{
 				ImageManager::GetInstance()->DrawColliderRectPurple(it.first, itt.first, ((QuestObj*)((itt.second)))->GetId());
+			}
+		}
+		unordered_map<int, unordered_map<int, GameObject*>>* trapAction = QuestManager::GetInstance()->GetQuestActionObjMap();
+		for (auto it : *trapAction)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectBrown(it.first, itt.first, (((TrapActionObj*)(itt.second)))->GetId() );
 			}
 		}
 
@@ -591,18 +616,25 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		TrapObj* trap = new TrapObj(mapData[currLayer - 1], L"Door");
 		trap->Init();
-		trap->SetPosition(mouseIndexX* TILE_SIZE, mouseIndexY* TILE_SIZE);
+		trap->SetPosition(mouseIndexX * TILE_SIZE, mouseIndexY * TILE_SIZE);
 		PhysicsManager::GetInstance()->SetTriggerObj(trap->GetPosition().x / 32, trap->GetPosition().y / 32, trap);
 
+	}
+	else if (tileType == TileType::TrapActionObj)
+	{
+		TrapActionObj* trapActionObj = new TrapActionObj(mapData[currLayer - 1], L"TrapActionObj");
+		trapActionObj->Init();
+		trapActionObj->SetPosition(mouseIndexX* TILE_SIZE, mouseIndexY* TILE_SIZE);
+		trapActionObj->GetComponent<SpriteRenderer>()->SetSprite(sampleIndex, downPos.first, downPos.second);
+		
+		QuestManager::GetInstance()->SetQuestActionObj(trapActionObj->GetPosition().x / 32, trapActionObj->GetPosition().y / 32, trapActionObj);
 	}
 }
 
 void TileSelectComponent::Release()
 {
 	delete tileTypeTxt;
-
 	delete currLayerTxt;
-
 	delete triggerPosTxt;
 
 	for (auto layer : mapData)

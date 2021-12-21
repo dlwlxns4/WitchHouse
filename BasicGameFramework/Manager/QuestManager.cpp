@@ -1,5 +1,8 @@
 #include "QuestManager.h"
 #include "../Object/QuestObj.h"
+#include "../Object/TrapActionObj.h"
+
+#include "../Component/TrapAction.h"
 
 #include <iostream>
 using namespace std;
@@ -43,6 +46,44 @@ void QuestManager::Init()
 GameObject* QuestManager::GetQuestObj(int posX, int posY)
 {
 	return nullptr;
+}
+
+int QuestManager::GetQuestActionObjId(int posX, int posY)
+{
+	return 0;
+}
+
+void QuestManager::SetQuestActionObj(int posX, int posY, GameObject* obj)
+{
+	questActionObjMap[posX][posY] = obj;
+}
+
+void QuestManager::AddQuestActionId(int posX, int posY)
+{
+	TrapActionObj* trapActionObj = (TrapActionObj*)(questActionObjMap[posX][posY]);
+	if (trapActionObj != nullptr)
+	{
+		trapActionObj->AddMainId();
+	}
+}
+
+void QuestManager::SetOffQuestActionObj(int id)
+{
+
+}
+
+void QuestManager::SetTrapAction(int id)
+{
+	for (auto it = questActionObjMap.begin(); it != questActionObjMap.end(); ++it)
+	{
+		for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+		{
+			if (((TrapActionObj*)(itt->second))->GetId() == id)
+			{
+				((TrapActionObj*)(itt->second))->GetComponent<TrapAction>()->SetActionStartegy((TrapActionState)(id+1));
+			}
+		}
+	}
 }
 
 int QuestManager::GetQuestObjId(int posX, int posY)

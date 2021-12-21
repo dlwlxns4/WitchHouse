@@ -39,6 +39,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(132/255.0f, 272/255.0f, 255/255.0f, 1), &pBrushBlue);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 1), &pBrushOrange);
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(139 / 255.0f, 0 / 255.0f, 255 / 255.0f, 1), &pBrushPurple);
+	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(155 / 255.0f, 103 / 255.0f, 60 / 255.0f, 1), &pBrushBrown);
 
 	//-------------Character
 	AddSprite(L"Image/Character/$vivi.png");
@@ -66,6 +67,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Tile/!$wall4L2.png");
 	AddSprite(L"Image/Tile/!$wall5.png");
 	AddSprite(L"Image/Tile/TileEdge.png");
+	AddSprite(L"Image/Tile/TileEdge2.png");
 
 	spritesName.push_back(L"Image/Tile/TileA1.png");
 	spritesName.push_back(L"Image/Tile/TileA2.png");
@@ -87,6 +89,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/!$wall4L2.png");
 	spritesName.push_back(L"Image/Tile/!$wall5.png");
 	spritesName.push_back(L"Image/Tile/TileEdge.png");
+	spritesName.push_back(L"Image/Tile/TileEdge2.png");
 
 	
 	//-------------------Parallax
@@ -200,6 +203,45 @@ void ImageManager::DrawColliderRectPurple(int posX, int posY, int id)
 					bottom
 				),
 				pBrushPurple, 10.0f
+			);
+
+			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
+				to_wstring(id).c_str(),
+				to_wstring(id).size(),
+				ImageManager::GetInstance()->GetTextFormat(),
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				ImageManager::GetInstance()->GetBrush()
+			);
+		}
+	}
+}
+
+void ImageManager::DrawColliderRectBrown(int posX, int posY, int id)
+{
+	POINT* camera = CameraManager::GetInstance()->GetCameraPos();
+
+	int left = posX * TILE_SIZE - camera->x + 2;
+	int right = (posX + 1) * TILE_SIZE - camera->x - 2;
+	int top = posY * TILE_SIZE - camera->y + 2;
+	int bottom = (posY + 1) * TILE_SIZE - camera->y - 2;
+
+	if (left >= 0 && right <= TILE_SIZE * MAP_SIZE_X)
+	{
+		if (top >= 0 && bottom <= TILE_SIZE * MAP_SIZE_Y)
+		{
+			ImageManager::GetInstance()->GetRenderTarget()->DrawRectangle(
+				D2D1::RectF(
+					left,
+					top,
+					right,
+					bottom
+				),
+				pBrushBrown, 10.0f
 			);
 
 			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
