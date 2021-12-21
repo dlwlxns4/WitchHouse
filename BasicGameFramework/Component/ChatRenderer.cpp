@@ -44,18 +44,27 @@ void ChatRenderer::Update()
 			{
 				if (isOpen && Input::GetButtonDown('Z'))
 				{
-					isTalk = false;
-					isClose = true;
+					if (data[vecIndex].size() == chatEffect.size())
+					{
+						cout << "!" << endl;
+						isTalk = false;
+						isClose = true;
+					}
 				}
+				//if length == vecIndex Quest와 ID 한번더 체크 그 후 동작하기 
 			}
 			else
 			{
 				if (Input::GetButtonDown('Z'))
 				{
-					vecIndex++;
-					chatEffect.clear();
-					talkIndexStr.clear();
-					strIndex = 0;
+					if (data[vecIndex].size() == chatEffect.size())
+					{
+						cout << "@" << endl;
+						vecIndex++;
+						chatEffect.clear();
+						talkIndexStr.clear();
+						strIndex = 0;
+					}
 				}
 			}
 		}
@@ -111,9 +120,12 @@ void ChatRenderer::Update()
 			{
 				if (isOpen && Input::GetButtonDown('Z'))
 				{
-					vecIndex++;
-					talkIndexStr.clear();
-					strIndex = 0;
+					if (data[vecIndex] == talkIndexStr)
+					{
+						vecIndex++;
+						talkIndexStr.clear();
+						strIndex = 0;
+					}
 				}
 			}
 		}
