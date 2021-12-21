@@ -283,7 +283,7 @@
     <ClInclude Include="Object\TrapActionObj.h">
       <Filter>Object\Trapped</Filter>
     </ClInclude>
-    <ClInclude Include="Component\TrapActionable.h">
+    <ClInclude Include="Component\TrapAction.h">
       <Filter>Component\Trap</Filter>
     </ClInclude>
   </ItemGroup>
@@ -484,7 +484,7 @@
     <ClCompile Include="Object\TrapActionObj.cpp">
       <Filter>Object\Trapped</Filter>
     </ClCompile>
-    <ClCompile Include="Component\TrapActionable.cpp">
+    <ClCompile Include="Component\TrapAction.cpp">
       <Filter>Component\Trap</Filter>
     </ClCompile>
   </ItemGroup>

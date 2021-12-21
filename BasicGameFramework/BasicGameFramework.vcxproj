@@ -172,7 +172,7 @@
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TileSelectComponent.h" />
     <ClInclude Include="Component\TitleComp.h" />
-    <ClInclude Include="Component\TrapActionable.h" />
+    <ClInclude Include="Component\TrapAction.h" />
     <ClInclude Include="Component\UserInfoComponent.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
@@ -254,7 +254,7 @@
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TileSelectComponent.cpp" />
     <ClCompile Include="Component\TitleComp.cpp" />
-    <ClCompile Include="Component\TrapActionable.cpp" />
+    <ClCompile Include="Component\TrapAction.cpp" />
     <ClCompile Include="Component\UserInfoComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Manager\CameraManager.cpp" />

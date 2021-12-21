@@ -36,7 +36,7 @@ void ChatRenderer::Update()
 		}
 	}
 
-	if (GameManager::GetInstance()->GetState() == State::Chat)
+	if (GameManager::GetInstance()->GetState() == State::Chat && isOpen)
 	{
 		if (TalkManager::GetInstance()->GetIsItem() == false)
 		{

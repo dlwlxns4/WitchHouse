@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-class TrapActionable;
+class ITrapActionable;
 class TrapActionObj : public GameObject
 {
 public:
