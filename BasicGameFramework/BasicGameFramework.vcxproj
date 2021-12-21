@@ -159,6 +159,7 @@
     </ClInclude>
     <ClInclude Include="Component\DesiredPosTextComp.h" />
     <ClInclude Include="Component\FullSizeRenderer.h" />
+    <ClInclude Include="Component\GameOverComp.h" />
     <ClInclude Include="Component\InvenComponent.h" />
     <ClInclude Include="Component\ChatRenderer.h" />
     <ClInclude Include="Component\MapFrameComponent.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Object\AkariObj.h" />
     <ClInclude Include="Object\BackPanel.h" />
     <ClInclude Include="Object\Cat.h" />
+    <ClInclude Include="Object\GameOverObj.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemFactory.h" />
     <ClInclude Include="Object\PortalObj.h" />
@@ -209,6 +211,7 @@
     <ClInclude Include="Object\TileObj.h" />
     <ClInclude Include="Object\TriggerObj.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="Scene\Layer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -241,6 +244,7 @@
     </ClCompile>
     <ClCompile Include="Component\DesiredPosTextComp.cpp" />
     <ClCompile Include="Component\FullSizeRenderer.cpp" />
+    <ClCompile Include="Component\GameOverComp.cpp" />
     <ClCompile Include="Component\InvenComponent.cpp" />
     <ClCompile Include="Component\ChatRenderer.cpp" />
     <ClCompile Include="Component\MapFrameComponent.cpp" />
@@ -268,6 +272,7 @@
     <ClCompile Include="Object\AkariObj.cpp" />
     <ClCompile Include="Object\BackPanel.cpp" />
     <ClCompile Include="Object\Cat.cpp" />
+    <ClCompile Include="Object\GameOverObj.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemFactory.cpp" />
     <ClCompile Include="Object\PortalObj.cpp" />
@@ -288,6 +293,7 @@
     <ClCompile Include="Object\Text.cpp" />
     <ClCompile Include="Object\TileObj.cpp" />
     <ClCompile Include="Object\TriggerObj.cpp" />
+    <ClCompile Include="Scene\GameOverScene.cpp" />
     <ClCompile Include="Scene\Layer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>

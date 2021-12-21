@@ -68,6 +68,12 @@
     <Filter Include="Component\Trap">
       <UniqueIdentifier>{6ef46712-a30c-49ec-b391-0388b6e0bc3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\GameOver">
+      <UniqueIdentifier>{85ef3228-a79b-47b5-a976-455cbadd366a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\GameOver">
+      <UniqueIdentifier>{cf4b22fd-c093-4086-83e9-352b8a183060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -286,6 +292,15 @@
     <ClInclude Include="Component\TrapAction.h">
       <Filter>Component\Trap</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\GameOverScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\GameOverComp.h">
+      <Filter>Component\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\GameOverObj.h">
+      <Filter>Object\GameOver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -486,6 +501,15 @@
     </ClCompile>
     <ClCompile Include="Component\TrapAction.cpp">
       <Filter>Component\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameOverScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\GameOverComp.cpp">
+      <Filter>Component\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\GameOverObj.cpp">
+      <Filter>Object\GameOver</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

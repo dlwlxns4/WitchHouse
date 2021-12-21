@@ -132,7 +132,7 @@ public:
 			if (moveDistance > 6)
 			{
 				_owner->SetActionStrategy(CameraActionState::Null);
-				SceneManager::GetInstance()->SetNextScene(L"Title");
+				SceneManager::GetInstance()->SetNextScene(L"GameOver");
 			}
 		}
 	}
