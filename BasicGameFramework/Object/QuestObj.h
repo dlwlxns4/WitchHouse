@@ -15,7 +15,7 @@ class QuestObj : public GameObject
 {
 public:
 	GameObject::GameObject;
-	virtual ~QuestObj() = default;
+	virtual ~QuestObj();
 
 	virtual void	Init();
 	void			SetSprite(int spriteIndex, int frameX, int frameY);
@@ -25,6 +25,7 @@ public:
 	
 	virtual	void	Update() override;
 	virtual void	Render(HDC hdc) override;
+	virtual void	Release() override;
 
 	virtual void	Write(std::ostream& os) const override;
 	virtual void	Read(std::istream& is) override;
@@ -45,7 +46,7 @@ public:
 	IQuestActionable(GameObject* owner)
 		:_owner{ owner }
 	{}
-	~IQuestActionable() = default;
+	virtual ~IQuestActionable() = default;
 
 	virtual void DoUpdate() = 0;
 
@@ -56,7 +57,7 @@ protected:
 class NullQuestAction : public IQuestActionable
 {
 public:
-	IQuestActionable::IQuestActionable;
+	using IQuestActionable::IQuestActionable;
 	virtual ~NullQuestAction() = default;
 
 	virtual void DoUpdate() override
@@ -68,7 +69,7 @@ public:
 class SetFrameAction : public IQuestActionable
 {
 public:
-	IQuestActionable::IQuestActionable;
+	using IQuestActionable::IQuestActionable;
 	virtual ~SetFrameAction() = default;
 
 	virtual void DoUpdate() override;

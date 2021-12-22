@@ -3,6 +3,11 @@
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/QuestManager.h"
 
+QuestObj::~QuestObj()
+{
+	Release();
+}
+
 void QuestObj::Init()
 {
 	SpriteRenderer* sr = new SpriteRenderer(this, 1);
@@ -49,6 +54,17 @@ void QuestObj::Render(HDC hdc)
 	}
 }
 
+void QuestObj::Release()
+{
+	if (_actions.empty() == false)
+	{
+		for (size_t i = 0; i < _actions.size(); ++i)
+		{
+			delete _actions[i];
+		}
+	}
+}
+
 void QuestObj::SetIsActable(bool isActive)
 {
 	this->isActable = isActive;
@@ -92,7 +108,7 @@ void SetFrameAction::DoUpdate()
 
 	currFrameX++;
 	animDelay++;
-	cout << currFrameX << " " <<maxFrameX << endl;
+	cout << currFrameX << " " << maxFrameX << endl;
 	if (animDelay >= 2)
 	{
 		animDelay = 0;
