@@ -77,8 +77,8 @@ bool Game::Init(HINSTANCE hInst)
 	}
 
 
-	//RECT cr = { 0, 0, _res.Width, _res.Height };
-	RECT cr = { 0, 0, 32*17, 32*13 };
+	RECT cr = { 0, 0, _res.Width, _res.Height };
+	//RECT cr = { 0, 0, 32*17, 32*13 };
 	AdjustWindowRect(&cr, WS_OVERLAPPEDWINDOW, FALSE);
 	SetWindowPos(_hWnd, HWND_TOPMOST, 100, 100, cr.right - cr.left, cr.bottom - cr.top, SWP_NOMOVE | SWP_NOZORDER);
 

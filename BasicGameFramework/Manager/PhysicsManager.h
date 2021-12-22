@@ -30,19 +30,6 @@ struct pair_hash {
 class GameObject;
 class PhysicsManager : public Singleton<PhysicsManager>
 {
-private:
-	unordered_set<pair<int, int>, pair_hash> collisionObj = {};
-	unordered_map<int, unordered_map<int, int>> chatObj;		//ÁÂÇ¥, referenceId
-	unordered_map<int, unordered_map<int, int>> itemObj;
-	unordered_map<int, unordered_map<int, GameObject*>> triggerObj;
-	unordered_map<int, unordered_map<int, GameObject*>> trapActionObj;
-
-
-	virtual void Write(std::ostream& os) const;
-	virtual void Read(std::istream& is);
-	friend std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager);
-	friend std::istream& operator>>(std::istream& is, PhysicsManager& physicManager);
-
 public:
 	PhysicsManager() = default;
 	~PhysicsManager() = default;
@@ -76,9 +63,23 @@ public:
 	//Trigger
 	unordered_map<int, unordered_map<int, GameObject*>>* GetTriggerObjs() { return &triggerObj; }
 	GameObject* GetTriggerObj(int posX, int posY);
+	GameObject* GetTriggerObj(int id);
 	void SetTriggerObj(int posX, int posY, GameObject* obj);
 	void addPortalNum(int posX, int posY);
 	void RemoveTriggerObj(int posX, int posY);
 
 	void AllClear();
+private:
+	unordered_set<pair<int, int>, pair_hash> collisionObj = {};
+	unordered_map<int, unordered_map<int, int>> chatObj;		//ÁÂÇ¥, referenceId
+	unordered_map<int, unordered_map<int, int>> itemObj;
+	unordered_map<int, unordered_map<int, GameObject*>> triggerObj;
+	unordered_map<int, unordered_map<int, GameObject*>> trapActionObj;
+
+
+	virtual void Write(std::ostream& os) const;
+	virtual void Read(std::istream& is);
+	friend std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager);
+	friend std::istream& operator>>(std::istream& is, PhysicsManager& physicManager);
+
 };

@@ -1,9 +1,10 @@
-#include "ChatRenderer.h"
+#include "InteractionComp.h"
 
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/TalkManager.h"
 #include "../Manager/ItemManager.h"
+#include "../Manager/QuestManager.h"
 
 #include "../Util/Sprite.h"
 #include "../Object/GameObject.h"
@@ -17,13 +18,13 @@
 
 
 
-void ChatRenderer::Init()
+void InteractionComp::Init()
 {
 	Component::Init();
 	slatePos = 0;
 }
 
-void ChatRenderer::Update()
+void InteractionComp::Update()
 {
 	if (GameManager::GetInstance()->GetState() == State::Chat && slatePos < sprite->GetHeight() / 2 && isOpen == false)
 	{
@@ -46,9 +47,11 @@ void ChatRenderer::Update()
 				{
 					if (data[vecIndex].size() == chatEffect.size())
 					{
-						cout << "!" << endl;
 						isTalk = false;
 						isClose = true;
+						int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
+						QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
+						
 					}
 				}
 				//if length == vecIndex Quest와 ID 한번더 체크 그 후 동작하기 
@@ -64,6 +67,7 @@ void ChatRenderer::Update()
 						chatEffect.clear();
 						talkIndexStr.clear();
 						strIndex = 0;
+
 					}
 				}
 			}
@@ -76,6 +80,9 @@ void ChatRenderer::Update()
 				{
 					isTalk = false;
 					isClose = true;
+					int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
+					QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
+
 				}
 			}
 			else if (data.size() - 2 == vecIndex && data[vecIndex] == talkIndexStr)
@@ -134,7 +141,7 @@ void ChatRenderer::Update()
 }
 
 
-void ChatRenderer::Render(HDC hdc)
+void InteractionComp::Render(HDC hdc)
 {
 
 	if (GameManager::GetInstance()->GetState() == State::Chat)
@@ -173,23 +180,23 @@ void ChatRenderer::Render(HDC hdc)
 	}
 }
 
-void ChatRenderer::SetSprite(const wchar_t* fileName, const wchar_t* selectPanelFileName)
+void InteractionComp::SetSprite(const wchar_t* fileName, const wchar_t* selectPanelFileName)
 {
 	sprite = ImageManager::GetInstance()->FindSprite(fileName);
 	selectPanel = ImageManager::GetInstance()->FindSprite(selectPanelFileName);
 }
 
-void ChatRenderer::SetSlatePos(int pos)
+void InteractionComp::SetSlatePos(int pos)
 {
 	slatePos = pos;
 }
 
-int ChatRenderer::GetSlatePos(int pos)
+int InteractionComp::GetSlatePos(int pos)
 {
 	return 0;
 }
 
-void ChatRenderer::ManageSelectPanel()
+void InteractionComp::ManageSelectPanel()
 {
 	if (isShowSelectPanel == false)
 	{
@@ -216,7 +223,7 @@ void ChatRenderer::ManageSelectPanel()
 	}
 }
 
-void ChatRenderer::ClosePanel()
+void InteractionComp::ClosePanel()
 {
 	if (isClose)
 	{
@@ -235,5 +242,9 @@ void ChatRenderer::ClosePanel()
 			GameManager::GetInstance()->SetState(State::None);
 		}
 	}
+}
+
+void InteractionComp::DoActivateObj(int id)
+{
 }
 

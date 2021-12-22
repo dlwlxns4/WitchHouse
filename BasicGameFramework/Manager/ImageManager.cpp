@@ -116,8 +116,10 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Graphics/Obj/HouseDoor.png");
 	AddSprite(L"Image/Graphics/Obj/Twinkle.png");
 	AddSprite(L"Image/Graphics/Obj/Akari.png");
+	AddSprite(L"Image/Graphics/Obj/Message.png");
 
 	spritesName.push_back(L"Image/Graphics/Obj/HouseDoor.png");
+	spritesName.push_back(L"Image/Graphics/Obj/Message.png");
 
 }
 

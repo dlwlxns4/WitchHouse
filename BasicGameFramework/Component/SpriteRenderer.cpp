@@ -67,3 +67,25 @@ void SpriteRenderer::SetFrameY(int y)
 {
 	this->frameY = y;
 }
+
+int SpriteRenderer::GetCurrFrameX()
+{
+	return frameX;
+}
+
+int SpriteRenderer::GetCurrFrameY()
+{
+	return frameY;
+}
+
+int SpriteRenderer::GetMaxFrameX()
+{
+	int max = sprite->GetWidth() / 32;
+	return max;
+}
+
+int SpriteRenderer::GetMaxFrameY()
+{
+	int max = sprite->GetHeight() / 32;
+	return max;
+}

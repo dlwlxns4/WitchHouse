@@ -220,7 +220,7 @@
     <ClInclude Include="Object\UIObj.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Component\ChatRenderer.h">
+    <ClInclude Include="Component\InteractionComp.h">
       <Filter>Component\UI</Filter>
     </ClInclude>
     <ClInclude Include="Component\UserInfoComponent.h">
@@ -433,7 +433,7 @@
     <ClCompile Include="Object\UIObj.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Component\ChatRenderer.cpp">
+    <ClCompile Include="Component\InteractionComp.cpp">
       <Filter>Component\UI</Filter>
     </ClCompile>
     <ClCompile Include="Component\UserInfoComponent.cpp">

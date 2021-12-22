@@ -95,6 +95,7 @@ void DoorObj::Read(std::istream& is)
 
 void DoorObj::SetLoadMap(int index)
 {
+	loadMap = index;
 }
 
 void DoorObj::SetSpriteIndex(int index)

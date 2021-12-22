@@ -1,5 +1,5 @@
 #include "UIObj.h"
-#include "../Component/ChatRenderer.h"
+#include "../Component/InteractionComp.h"
 #include "../Component/UserInfoComponent.h"
 #include "../Component/InvenComponent.h"
 
@@ -13,7 +13,7 @@ void UIObj::Init()
 {
 	this->SetPosition({ 0 ,START_PANEL_POS_Y });
 
-	ChatRenderer* sprite = new ChatRenderer(this, 1);
+	InteractionComp* sprite = new InteractionComp(this, 1);
 	sprite->SetSprite(L"Image/UI/ChatPanel.png", L"Image/UI/SelectPanel_03.png");
 
 	UserInfoComponent* userInfo = new UserInfoComponent(this, 3);

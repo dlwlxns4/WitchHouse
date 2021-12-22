@@ -30,9 +30,13 @@ public:
 	bool GetIsItem();
 	void SetIsItem(bool isItem);
 	void SetVecTalkTad(vector<wstring> data);
+
+	void SetCurrInteractId(int id);
+	int  GetCurrInteractId();
 private:
 	unordered_map<int, vector<wstring>> talkData = {};
 	unordered_map<int, vector<wstring>> itemTalkData = {};
 	vector<wstring> vecTalkData = {};
 	bool isItem = false;
+	int currInteractId = 0;
 };

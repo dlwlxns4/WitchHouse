@@ -1,8 +1,16 @@
 #pragma once
 
 #include "GameObject.h"
+#include <array>
+#include "../Component/SpriteRenderer.h"
 
-class SpriteRenderer;
+enum class QuestObjStrategy
+{
+	Null,
+	SetFrameAnim
+};
+
+class IQuestActionable;
 class QuestObj : public GameObject
 {
 public:
@@ -20,8 +28,50 @@ public:
 
 	virtual void	Write(std::ostream& os) const override;
 	virtual void	Read(std::istream& is) override;
+
+	void SetActionStrategy(QuestObjStrategy state);
+
+	IQuestActionable* _actionStrategy = nullptr;
+	std::array<IQuestActionable*, 2> _actions;
 private:
 	SpriteRenderer* renderer = nullptr;
 	int				id = 0;
 	bool			isActable = true;
+};
+
+class IQuestActionable abstract
+{
+public:
+	IQuestActionable(GameObject* owner)
+		:_owner{ owner }
+	{}
+	~IQuestActionable() = default;
+
+	virtual void DoUpdate() = 0;
+
+protected:
+	GameObject* _owner;
+};
+
+class NullQuestAction : public IQuestActionable
+{
+public:
+	IQuestActionable::IQuestActionable;
+	virtual ~NullQuestAction() = default;
+
+	virtual void DoUpdate() override
+	{
+
+	}
+};
+
+class SetFrameAction : public IQuestActionable
+{
+public:
+	IQuestActionable::IQuestActionable;
+	virtual ~SetFrameAction() = default;
+
+	virtual void DoUpdate() override;
+private:
+	int animDelay = 0;
 };

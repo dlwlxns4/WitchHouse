@@ -41,6 +41,7 @@ void PlayerAction::DoChatting(int chatId, int itemid)
 {
 	if (itemid != -1)
 	{
+		TalkManager::GetInstance()->SetCurrInteractId(itemid);
 		TalkManager::GetInstance()->SaveItemTalkData(itemid);
 		ItemManager::GetInstance()->SetCurrFindItem(itemid);
 		return;
@@ -48,6 +49,7 @@ void PlayerAction::DoChatting(int chatId, int itemid)
 
 	if (chatId != 0)
 	{
+		TalkManager::GetInstance()->SetCurrInteractId(chatId);
 		TalkManager::GetInstance()->SaveTalkData(chatId);
 	}
 }

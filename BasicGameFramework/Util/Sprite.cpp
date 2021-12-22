@@ -347,7 +347,6 @@ void Sprite::LoopRender(int posX, int posY, int renderPosX, int renderPosY)
 	}
 }
 
-
 void Sprite::Release()
 {
 	pBitmap->Release();

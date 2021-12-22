@@ -161,7 +161,7 @@
     <ClInclude Include="Component\FullSizeRenderer.h" />
     <ClInclude Include="Component\GameOverComp.h" />
     <ClInclude Include="Component\InvenComponent.h" />
-    <ClInclude Include="Component\ChatRenderer.h" />
+    <ClInclude Include="Component\InteractionComp.h" />
     <ClInclude Include="Component\MapFrameComponent.h" />
     <ClInclude Include="Component\ParallaxSpriteRenderer.h" />
     <ClInclude Include="Component\Player\PlayerAction.h" />
@@ -246,7 +246,7 @@
     <ClCompile Include="Component\FullSizeRenderer.cpp" />
     <ClCompile Include="Component\GameOverComp.cpp" />
     <ClCompile Include="Component\InvenComponent.cpp" />
-    <ClCompile Include="Component\ChatRenderer.cpp" />
+    <ClCompile Include="Component\InteractionComp.cpp" />
     <ClCompile Include="Component\MapFrameComponent.cpp" />
     <ClCompile Include="Component\ParallaxSpriteRenderer.cpp" />
     <ClCompile Include="Component\Player\PlayerAction.cpp" />

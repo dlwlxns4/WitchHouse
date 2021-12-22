@@ -35,6 +35,8 @@ public:
 
 	void													SetTrapAction(int id);
 
+	void													DoActivateQuestObj(int id);
+
 	void													Clear();
 private:
 	int currQuest=10;

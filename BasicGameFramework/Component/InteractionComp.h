@@ -6,11 +6,11 @@
 
 
 class Sprite;
-class ChatRenderer : public Component
+class InteractionComp : public Component
 {
 public:
 	using Component::Component;
-	virtual ~ChatRenderer() noexcept = default;
+	virtual ~InteractionComp() noexcept = default;
 
 	virtual void			Init()override;
 	virtual void			Update() override;
@@ -22,6 +22,7 @@ public:
 
 	void					ManageSelectPanel();
 	void					ClosePanel();
+	void					DoActivateObj(int id);
 private:
 	Sprite*					sprite = nullptr;
 	int						slatePos = 0;

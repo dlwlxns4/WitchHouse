@@ -162,6 +162,21 @@ GameObject* PhysicsManager::GetTriggerObj(int posX, int posY)
 
 }
 
+GameObject* PhysicsManager::GetTriggerObj(int id)
+{
+	for (auto it = triggerObj.begin(); it != triggerObj.end(); ++it)
+	{
+		for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+		{
+			if (((PortalObj*)(itt->second))->GetMainId() == id)
+			{
+				return itt->second;
+			}
+		}
+	}
+	return nullptr;
+}
+
 void PhysicsManager::RemoveTriggerObj(int posX, int posY)
 {
 

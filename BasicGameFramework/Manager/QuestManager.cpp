@@ -1,8 +1,11 @@
 #include "QuestManager.h"
 #include "../Object/QuestObj.h"
 #include "../Object/TrapActionObj.h"
+#include "../Object/PortalObj.h"
 
 #include "../Component/TrapAction.h"
+
+#include "../Manager/PhysicsManager.h"
 
 #include <iostream>
 using namespace std;
@@ -83,6 +86,30 @@ void QuestManager::SetTrapAction(int id)
 				((TrapActionObj*)(itt->second))->GetComponent<TrapAction>()->SetActionStartegy((TrapActionState)(id+1));
 			}
 		}
+	}
+}
+
+void QuestManager::DoActivateQuestObj(int id)
+{
+	switch (id)
+	{
+	case 10:
+		for (auto it = questObjMap.begin(); it != questObjMap.end(); ++it)
+		{
+			for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+			{
+				if (((QuestObj*)(itt->second))->GetId() == 1)
+				{
+					cout << "Ã£¾Ò´Ù." << endl;
+					((QuestObj*)(itt->second))->SetActionStrategy(QuestObjStrategy::SetFrameAnim);
+					TriggerObj* portal = (TriggerObj*)(PhysicsManager::GetInstance()->GetTriggerObj(3));
+					((DoorObj*)(portal))->SetLoadMap(5);
+					cout << portal->GetMainId() << endl;
+					break;
+				}
+			}
+		}
+		break;
 	}
 }
 

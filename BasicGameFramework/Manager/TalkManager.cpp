@@ -15,7 +15,9 @@ void TalkManager::Init()
 	talkData.emplace(GREEN_TREE_ID, vector<wstring>{L"ÆÄ¸©ÆÄ¸©ÇÏ°Ô ¿ì°ÅÁø Å« ³ª¹«°¡ ÀÖ´Ù."});
 
 
-
+	//Message
+	talkData.emplace(100, vector<wstring>{L"³ªÀÇ ¹æ±îÁö ¿À·Å."} );
+	//À§ °´Ã¼¶û Äù½ºÆ®¶û ¿«ÀÚ 
 
 	//--------------------------------------------Item----------------
 	itemTalkData.emplace(0, vector<wstring>{
@@ -81,4 +83,14 @@ void TalkManager::SetIsItem(bool isItem)
 void TalkManager::SetVecTalkTad(vector<wstring> data)
 {
 	vecTalkData = data;
+}
+
+void TalkManager::SetCurrInteractId(int id)
+{
+	currInteractId = id;
+}
+
+int TalkManager::GetCurrInteractId()
+{
+	return currInteractId;
 }

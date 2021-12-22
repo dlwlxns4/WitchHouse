@@ -37,6 +37,7 @@ void GameManager::GenerateCameraData()
 	cameraPosData[2][0] = { 0, 0 };
 	cameraPosData[2][3] = { 0, 160 };
 	cameraPosData[3][2] = { 0, -416 };
+	cameraPosData[4][3] = { 0,0 };
 }
 
 void GameManager::GeneratePlayerData()
@@ -48,6 +49,7 @@ void GameManager::GeneratePlayerData()
 	playerPosData[2][3] = { 8, 14 };
 	playerPosData[3][2] = { 8, -6 };
 	playerPosData[3][4] = { 8, 8 };
+	playerPosData[4][3] = { 8,7 };
 }
 void GameManager::SetUIObj(GameObject* ui)
 {
