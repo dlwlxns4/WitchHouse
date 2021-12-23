@@ -51,10 +51,9 @@ void InteractionComp::Update()
 						isClose = true;
 						int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
 						QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
-						
+
 					}
 				}
-				//if length == vecIndex Quest와 ID 한번더 체크 그 후 동작하기 
 			}
 			else
 			{
@@ -73,6 +72,7 @@ void InteractionComp::Update()
 		}
 		else
 		{
+
 			if (data.size() - 1 == vecIndex)
 			{
 				if (Input::GetButtonDown('Z'))
@@ -108,7 +108,10 @@ void InteractionComp::Update()
 					if (state == ApprovalState::Agree)
 					{
 						int id = ItemManager::GetInstance()->GetCurrFindItem();
-						ItemManager::GetInstance()->AddItem(id);
+						if (ItemManager::GetInstance()->CanObtainItem(id))
+						{
+							ItemManager::GetInstance()->AddItem(id);
+						}
 						vecIndex++;
 						talkIndexStr.clear();
 						strIndex = 0;
@@ -135,8 +138,10 @@ void InteractionComp::Update()
 				}
 			}
 		}
-		ClosePanel();
+
 	}
+	ClosePanel();
+
 }
 
 

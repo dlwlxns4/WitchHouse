@@ -6,7 +6,8 @@ enum class ItemKinds
 {
 	Scissors=0,
 	Letter=1,
-	TeddyBear=2
+	TeddyBear=2,
+	TeddyBearWithoutLimbs=3
 };
 
 class ItemFactory

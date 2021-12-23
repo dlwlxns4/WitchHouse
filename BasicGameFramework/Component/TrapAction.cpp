@@ -24,6 +24,12 @@ void TrapAction::Init()
 
 	ActionID2* actionID2 = new ActionID2(this->_owner);
 	actions[3] = actionID2;
+	
+	ActionID3* actionID3 = new ActionID3(this->_owner);
+	actions[4] = actionID3;
+
+	ActionID4* actionID4 = new ActionID4(this->_owner);
+	actions[5] = actionID4;
 
 	_actionSterategy = nullAction;
 
@@ -121,4 +127,32 @@ void ActionID2::DoAction()
 			GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Input);
 		}
 	}
+}
+
+void ActionID3::DoAction()
+{
+	if (cycleCount == 0)
+	{
+		cycleCount++;
+		int currFrameY = _obj->GetComponent<SpriteRenderer>()->GetCurrFrameY();
+		_obj->GetComponent<SpriteRenderer>()->SetFrameX(currFrameY + 1);
+	}
+	else
+	{
+		animDelay++;
+		if (animDelay >= 20)
+		{
+			cycleCount = 0;
+			animDelay = 0;
+			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
+			GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Input);
+		}
+	}
+}
+
+void ActionID4::DoAction()
+{
+	int currFrameX = _obj->GetComponent<SpriteRenderer>()->GetCurrFrameX();
+	_obj->GetComponent<SpriteRenderer>()->SetFrameX(currFrameX + 1);
+	_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
 }

@@ -74,3 +74,19 @@ public:
 protected:
 	int id = 2;
 };
+
+class TeddyBearWithoutLimbs :public Item
+{
+public:
+	using Item::Item;
+	virtual ~TeddyBearWithoutLimbs() = default;
+
+	virtual void Init()			 override;
+	virtual void UseItem() override;
+	virtual bool CompareId(int id) override { if (this->id == id) return true; return false; }
+
+	int GetId() { return id; }
+
+protected:
+	int id = 2;
+};

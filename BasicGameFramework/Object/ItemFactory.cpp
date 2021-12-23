@@ -29,6 +29,13 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 		return teddyBear;
 		break;
 	}
+	case ItemKinds::TeddyBearWithoutLimbs:
+	{
+		TeddyBearWithoutLimbs* teddyBearWithousLimbs = new TeddyBearWithoutLimbs(_owner);
+		teddyBearWithousLimbs->Init();
+		return teddyBearWithousLimbs;
+		break;
+	}
 	default:
 		break;
 	}

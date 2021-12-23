@@ -29,6 +29,11 @@ void TalkManager::Init()
 		L"선물 상자 더미에 곰인형이 기대어 있다.\n\n",
 			L"\t곰인형을 줍는다.\n\n\t아무것도 하지 않는다.",
 			L"곰인형을 손에 넣었다."});
+
+	itemTalkData.emplace(3, vector<wstring>{
+		L"작업대 위에 가위가 있다.\n\n",
+			L"\t가져간다.\n\n\t가져가지 않는다.",
+			L"쇠사슬에 걸려있어서 가져갈 수가 없다."});
 }
 
 void TalkManager::SaveTalkData(int referenceId)
@@ -94,6 +99,7 @@ void TalkManager::SetCurrInteractId(int id)
 {
 	currInteractId = id;
 }
+
 
 int TalkManager::GetCurrInteractId()
 {

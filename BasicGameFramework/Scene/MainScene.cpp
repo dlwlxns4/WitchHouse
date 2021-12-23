@@ -12,6 +12,7 @@
 #include "../Object/UIObj.h"
 #include "../Object/BackPanel.h"
 #include "../Object/QuestObj.h"
+#include "../Util/Timer.h"
 #define MAP1_CAMERA_X -96
 #define MAP1_CAMERA_Y 96
 
@@ -98,6 +99,15 @@ void MainScene::DoTrap(int id)
 			GameObject* player = GameManager::GetInstance()->GetPlayer();
 			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 			QuestManager::GetInstance()->SetTrapAction(2);
+			QuestManager::GetInstance()->NextQuest();
+		}	
+		break;
+	case 2:
+		if (QuestManager::GetInstance()->GetQuest() == 16)
+		{
+			GameObject* player = GameManager::GetInstance()->GetPlayer();
+			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
+			QuestManager::GetInstance()->SetTrapAction(3);
 			QuestManager::GetInstance()->NextQuest();
 		}
 		break;
@@ -286,3 +296,4 @@ void MainScene::SetActiveBackPanelFlag(bool isActive)
 {
 	backPaenlActiveFlag = isActive;
 }
+

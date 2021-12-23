@@ -89,6 +89,17 @@ void ItemManager::RemoveItem(int id)
 	}
 }
 
+bool ItemManager::CanObtainItem(int id)
+{
+	switch (id)
+	{
+	case 3:
+		return false;
+	default:
+		return true;
+	}
+}
+
 int ItemManager::GetCurrFindItem()
 {
 	return currFindItem;

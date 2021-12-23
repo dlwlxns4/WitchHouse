@@ -8,7 +8,8 @@ enum class TrapActionState
 	Null,
 	ID0,
 	ID1,
-	ID2
+	ID2,
+	ID3
 };
 
 class ITrapActionable;
@@ -27,7 +28,7 @@ public:
 	virtual void Read(istream& is) override;
 	void SetActionStartegy(TrapActionState action);
 private:
-	std::array<class ITrapActionable*, 4> actions;
+	std::array<class ITrapActionable*, 6> actions;
 	class ITrapActionable* _actionSterategy = actions[0];
 };
 
@@ -93,6 +94,30 @@ class ActionID2 : public ITrapActionable
 public:
 	using		ITrapActionable::ITrapActionable;
 	virtual		~ActionID2() = default;
+
+	void DoAction() override;
+private:
+	int animDelay = 0;
+	int cycleCount = 0;
+};
+
+class ActionID3 : public ITrapActionable
+{
+public:
+	using		ITrapActionable::ITrapActionable;
+	virtual		~ActionID3() = default;
+
+	void DoAction() override;
+private:
+	int animDelay = 0;
+	int cycleCount = 0;
+};
+
+class ActionID4 : public ITrapActionable
+{
+public:
+	using		ITrapActionable::ITrapActionable;
+	virtual		~ActionID4() = default;
 
 	void DoAction() override;
 private:

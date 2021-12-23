@@ -78,8 +78,8 @@ private:
 
 
 	virtual void Write(std::ostream& os) const;
-	virtual void Read(std::istream& is);
 	friend std::ostream& operator<<(std::ostream& os, const PhysicsManager& physicManager);
+	virtual void Read(std::istream& is);
 	friend std::istream& operator>>(std::istream& is, PhysicsManager& physicManager);
 
 };

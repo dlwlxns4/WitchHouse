@@ -23,6 +23,7 @@ public:
 
 	void					Debug();
 	void					SetActiveBackPanelFlag(bool isActive);
+	void					SetEffect(int id);
 private:
 	std::vector<Layer*>*	_layers;
 	int						num = 0;

@@ -61,24 +61,24 @@ void Scissors::UseItem()
 	int dy[] = { 1,-0,0,-1 };
 
 	int dir = (int)(_owner->GetComponent<PlayerSpriteRenderer>()->GetDirection());
-	
+
 	int posX = _owner->GetPosition().x / 32 + dx[dir];
 	int posY = _owner->GetPosition().y / 32 + dy[dir];
 
 	if (QuestManager::GetInstance()->GetQuestObjId(posX, posY) == 0)
 	{
 		((MainScene*)(SceneManager::GetInstance()->GetCurrentScene()))->SetActiveBackPanelFlag(true);
-		if (PhysicsManager::GetInstance()->GetCollider( posX, posY ) )
+		if (PhysicsManager::GetInstance()->GetCollider(posX, posY))
 		{
 			PhysicsManager::GetInstance()->RemoveCollider(posX, posY);
 		}
-		
-		vector<wstring> data = { L"지나갈수 있게 됐다.", L"정원의 가위는 부서져 버렸다."};
+
+		vector<wstring> data = { L"지나갈수 있게 됐다.", L"정원의 가위는 부서져 버렸다." };
 		TalkManager::GetInstance()->SetIsItem(false);
 		TalkManager::GetInstance()->SetVecTalkTad(data);
 		GameManager::GetInstance()->SetState(State::Chat);
 
-		GameObject* ui =GameManager::GetInstance()->GetUIObj();
+		GameObject* ui = GameManager::GetInstance()->GetUIObj();
 		ui->GetComponent<InvenComponent>()->Clear();
 
 		QuestManager::GetInstance()->SetOffQuestObj(0);
@@ -103,4 +103,67 @@ void TeddyBear::Init()
 
 void TeddyBear::UseItem()
 {
+	int dx[] = { 0,-1,1,0 };
+	int dy[] = { 1,-0,0,-1 };
+
+	int dir = (int)(_owner->GetComponent<PlayerSpriteRenderer>()->GetDirection());
+
+	int posX = _owner->GetPosition().x / 32 + dx[dir];
+	int posY = _owner->GetPosition().y / 32 + dy[dir];
+
+	if (PhysicsManager::GetInstance()->GetItemId(posX, posY) == 3)
+	{
+		vector<wstring> data = { L"곰인형의 손발을 잘랐다.", L"곰인형의 몸통을 얻었다." };
+		TalkManager::GetInstance()->SetIsItem(false);
+		TalkManager::GetInstance()->SetVecTalkTad(data);
+		GameManager::GetInstance()->SetState(State::Chat);
+
+		GameObject* ui = GameManager::GetInstance()->GetUIObj();
+		ui->GetComponent<InvenComponent>()->Clear();
+
+		QuestManager::GetInstance()->NextQuest();
+
+		this->count--;
+		ItemManager::GetInstance()->RemoveItem(id);
+		ItemManager::GetInstance()->AddItem(3);
+	}
+
+}
+
+void TeddyBearWithoutLimbs::Init()
+{
+	info = L"머리와 몸 밖에 없는 테디베어. 손발의 단면이 붉게 물들어있다.";
+	name = L"테디베어의 몸통";
+	useString = L"\t바구니에 넣는다.\n\n\t아무것도 하지 않는다.";
+	count += 1;
+	id = 3;
+	QuestManager::GetInstance()->RemoveQuestObj(2);
+}
+
+void TeddyBearWithoutLimbs::UseItem()
+{
+	int dx[] = { 0,-1,1,0 };
+	int dy[] = { 1,-0,0,-1 };
+
+	int dir = (int)(_owner->GetComponent<PlayerSpriteRenderer>()->GetDirection());
+
+	int posX = _owner->GetPosition().x / 32 + dx[dir];
+	int posY = _owner->GetPosition().y / 32 + dy[dir];
+
+	if (QuestManager::GetInstance()->GetQuestActionObjId(posX,posY) == 4)
+	{
+		vector<wstring> data = { L"곰인형의 몸통을 바구니 안에 밀어 넣었다.", L"어딘가에서 문이 열리는 소리가 났다."};
+		TalkManager::GetInstance()->SetIsItem(false);
+		TalkManager::GetInstance()->SetVecTalkTad(data);
+		GameManager::GetInstance()->SetState(State::Chat);
+
+		GameObject* ui = GameManager::GetInstance()->GetUIObj();
+		ui->GetComponent<InvenComponent>()->Clear();
+
+		QuestManager::GetInstance()->NextQuest();
+
+		this->count--;
+		ItemManager::GetInstance()->RemoveItem(id);
+		QuestManager::GetInstance()->SetTrapAction(4);
+	}
 }

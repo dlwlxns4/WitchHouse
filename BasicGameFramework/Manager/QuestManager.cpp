@@ -47,8 +47,12 @@ void QuestManager::Init()
 	questName[14] = "곰인형을 얻어라";
 	questName[15] = "선물상자 떨어지는 함정";
 	questName[16] = "곰인형의 팔을 짤라라";
+	questName[17] = "곰 발자국 함정";
+	questName[18] = "곰 인형을 바구니에 넣어라";
+	questName[19] = "A* 곰 함정";
+	questName[20] = "문이 열렸다. ";
 
-	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
+	cout << "id : " << currQuest+1 << "\"" << (questName[currQuest+1]) << "\"" << endl;
 
 }
 
@@ -59,7 +63,20 @@ GameObject* QuestManager::GetQuestObj(int posX, int posY)
 
 int QuestManager::GetQuestActionObjId(int posX, int posY)
 {
-	return 0;
+	auto it = questActionObjMap.find(posX);
+
+	if (it == questActionObjMap.end())
+	{
+		return -1;
+	}
+	auto itt = it->second.find(posY);
+
+	if (itt != it->second.end())
+	{
+		int id = ((TrapActionObj*)(itt->second))->GetId();
+		return id;
+	}
+	return -1;
 }
 
 void QuestManager::SetQuestActionObj(int posX, int posY, GameObject* obj)

@@ -25,11 +25,12 @@ public:
 	void	SetCurrFindItem(int id);
 	void	SetOwner(GameObject* owner);
 	void	RemoveItem(int id);
+	bool	CanObtainItem(int id);
 
 	const vector<Item*>&	GetInventory() const;
 	int						GetInventorySize();
 private:
-	vector<Item*>	inventory;
-	ItemFactory*	itemFactory;
+	vector<Item*>	inventory = {};
+	ItemFactory*	itemFactory = {};
 	int				currFindItem = -1;
 };
