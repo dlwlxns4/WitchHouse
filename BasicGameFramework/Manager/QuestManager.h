@@ -25,6 +25,7 @@ public:
 	void													SetQuestObj(int posX, int posY, GameObject* obj);
 	void													AddQuestId(int posX, int posY);
 	void													SetOffQuestObj(int id);
+	void													RemoveQuestObj(int id);
 
 	unordered_map<int, unordered_map<int, GameObject*>>*	GetQuestActionObjMap() { return &questActionObjMap; }
 	GameObject*												GetQuestActionObj(int posX, int posY);

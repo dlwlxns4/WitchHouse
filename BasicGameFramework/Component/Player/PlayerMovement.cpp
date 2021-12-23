@@ -268,10 +268,6 @@ void IntoHouseAction::DoAction()
 
 		if (motionCount >= 2)
 		{
-			if (QuestManager::GetInstance()->GetQuest() <= 12)
-			{
-				QuestManager::GetInstance()->NextQuest();
-			}
 			((MainScene*)(SceneManager::GetInstance()->GetCurrentScene()))->TransMap(nextScene);
 		}
 	}

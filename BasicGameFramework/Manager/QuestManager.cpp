@@ -13,6 +13,8 @@ using namespace std;
 void QuestManager::SetQuest(int quest)
 {
 	currQuest = quest;
+	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
+
 }
 
 void QuestManager::NextQuest()
@@ -42,6 +44,10 @@ void QuestManager::Init()
 	questName[11] = "장미를 잘라라";
 	questName[12] = "마녀의 집에 들어가라";
 	questName[13] = "쪽지를 읽어라";
+	questName[14] = "곰인형을 얻어라";
+	questName[15] = "선물상자 떨어지는 함정";
+	questName[16] = "곰인형의 팔을 짤라라";
+
 	cout << "id : " << currQuest << "\"" << (questName[currQuest]) << "\"" << endl;
 
 }
@@ -110,6 +116,33 @@ void QuestManager::DoActivateQuestObj(int id)
 			}
 		}
 		break;
+	case 11: // 곰돌이 얻었을 때 
+		//곰돌이 이미지 없애기 
+		for (auto it = questActionObjMap.begin(); it != questActionObjMap.end(); ++it)
+		{
+			for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+			{
+				if (((TrapActionObj*)(itt->second))->GetId() == 2)
+				{
+					int frameX = (itt->second)->GetComponent<SpriteRenderer>()->GetCurrFrameX();
+					(itt->second)->GetComponent<SpriteRenderer>()->SetFrameX(frameX-2);
+				}
+			}
+		}
+		break;
+	case 12:
+		//for (auto it = questActionObjMap.begin(); it != questActionObjMap.end(); ++it)
+		//{
+		//	for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+		//	{
+		//		if (((TrapActionObj*)(itt->second))->GetId() == 2)
+		//		{
+		//			int frameX = (itt->second)->GetComponent<SpriteRenderer>()->GetCurrFrameX();
+		//			(itt->second)->GetComponent<SpriteRenderer>()->SetFrameX(frameX - 2);
+		//		}
+		//	}
+		//}
+		break;
 	}
 }
 
@@ -155,6 +188,21 @@ void QuestManager::SetOffQuestObj(int id)
 			if (quest->GetId() == id)
 			{
 				quest->SetIsActable(false);
+			}
+		}
+	}
+}
+
+void QuestManager::RemoveQuestObj(int id)
+{
+	for (auto it = questObjMap.begin(); it != questObjMap.end(); ++it)
+	{
+		for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+		{
+			QuestObj* quest = ((QuestObj*)(itt->second));
+			if (quest->GetId() == id)
+			{
+				(it->second).erase(itt);
 			}
 		}
 	}

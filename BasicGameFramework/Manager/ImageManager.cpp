@@ -68,6 +68,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Tile/!$wall5.png");
 	AddSprite(L"Image/Tile/TileEdge.png");
 	AddSprite(L"Image/Tile/TileEdge2.png");
+	AddSprite(L"Image/Tile/DeskTile.png");
 
 	spritesName.push_back(L"Image/Tile/TileA1.png");
 	spritesName.push_back(L"Image/Tile/TileA2.png");
@@ -90,6 +91,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/!$wall5.png");
 	spritesName.push_back(L"Image/Tile/TileEdge.png");
 	spritesName.push_back(L"Image/Tile/TileEdge2.png");
+
 
 	
 	//-------------------Parallax
@@ -122,7 +124,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Graphics/Obj/HouseDoor.png");
 	spritesName.push_back(L"Image/Graphics/Obj/Message.png");
 	spritesName.push_back(L"Image/Graphics/Obj/Boxes.png");
-
+	spritesName.push_back(L"Image/Tile/DeskTile.png");
 
 }
 

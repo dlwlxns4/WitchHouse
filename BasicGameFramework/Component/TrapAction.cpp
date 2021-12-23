@@ -1,6 +1,10 @@
 #include "TrapAction.h"
 #include "../Object/GameObject.h"
 #include "../Manager/CameraManager.h"
+#include "../Manager/GameManager.h"
+
+#include "../Component/SpriteRenderer.h"
+#include "../Component/Player/PlayerMovement.h"
 TrapAction::~TrapAction()
 {
 	Release();
@@ -9,7 +13,7 @@ TrapAction::~TrapAction()
 
 void TrapAction::Init()
 {
-	NullAction* nullAction = new NullAction(this->_owner);
+	TrapNullAction* nullAction = new TrapNullAction(this->_owner);
 	actions[0] = nullAction;
 
 	ActionID0* actionID0 = new ActionID0(this->_owner);
@@ -17,6 +21,9 @@ void TrapAction::Init()
 
 	ActionID1* actionID1 = new ActionID1(this->_owner);
 	actions[2] = actionID1;
+
+	ActionID2* actionID2 = new ActionID2(this->_owner);
+	actions[3] = actionID2;
 
 	_actionSterategy = nullAction;
 
@@ -87,6 +94,31 @@ void ActionID1::DoAction()
 			cycleCount = 0;
 			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
 			CameraManager::GetInstance()->SetActionStrategy(CameraActionState::Shake);
+		}
+	}
+}
+
+void ActionID2::DoAction()
+{
+	animDelay++;
+	if (cycleCount <= 2)
+	{
+		if (animDelay >= 3)
+		{
+			animDelay = 0;
+			int currFrameY = _obj->GetComponent<SpriteRenderer>()->GetCurrFrameY();
+			_obj->GetComponent<SpriteRenderer>()->SetFrameY(currFrameY + 2);
+			cycleCount++;
+		}
+	}
+	else
+	{
+		if (animDelay >= 30)
+		{
+			animDelay = 0;
+			cycleCount = 0;
+			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
+			GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Input);
 		}
 	}
 }

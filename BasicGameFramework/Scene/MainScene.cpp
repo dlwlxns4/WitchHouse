@@ -82,14 +82,24 @@ void MainScene::Render(HDC hdc)
 
 void MainScene::DoTrap(int id)
 {
-	switch(id)
+	switch (id)
 	{
 	case 0:
-		GameObject * player = GameManager::GetInstance()->GetPlayer();
+	{
+		GameObject* player = GameManager::GetInstance()->GetPlayer();
 		player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 		QuestManager::GetInstance()->SetTrapAction(0);
 		QuestManager::GetInstance()->SetTrapAction(1);
-
+		break;
+	}
+	case 1:
+		if (QuestManager::GetInstance()->GetQuest() == 14)
+		{
+			GameObject* player = GameManager::GetInstance()->GetPlayer();
+			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
+			QuestManager::GetInstance()->SetTrapAction(2);
+			QuestManager::GetInstance()->NextQuest();
+		}
 		break;
 	}
 }
@@ -252,6 +262,23 @@ void MainScene::Debug()
 			}
 		}
 
+	}
+
+
+	if (Input::GetButtonDown('Q'))
+	{
+		QuestDebug = QuestDebug == true ? false : true;
+	}
+	if (QuestDebug)
+	{
+		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();
+		for (auto it : *item)
+		{
+			for (auto itt : it.second)
+			{
+				ImageManager::GetInstance()->DrawColliderRectOrange(it.first, itt.first, itt.second);
+			}
+		}
 	}
 }
 

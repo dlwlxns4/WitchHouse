@@ -96,6 +96,9 @@ void TeddyBear::Init()
 	useString = L"\t곰의 손발을 자른다.\n\n\t아무것도 하지 않는다.";
 	count += 1;
 	id = 2;
+	QuestManager::GetInstance()->RemoveQuestObj(2);
+	QuestManager::GetInstance()->NextQuest();
+	QuestManager::GetInstance()->DoActivateQuestObj(11);
 }
 
 void TeddyBear::UseItem()

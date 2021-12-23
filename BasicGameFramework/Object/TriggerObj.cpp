@@ -50,6 +50,11 @@ void DoorObj::OnTrigger()
 	else
 	{
 		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(2,3);
+
+	}
+	if (QuestManager::GetInstance()->GetQuest() <= 12)
+	{
+		QuestManager::GetInstance()->SetQuest(13);
 	}
 	((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetNextScene(loadMap);
 }

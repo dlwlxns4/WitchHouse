@@ -33,5 +33,7 @@ private:
 	bool					isFirst = true;
 	bool					backPaenlActiveFlag = false;
 
+	bool					QuestDebug = false;
 	BackPanel*				backPanel = nullptr;
+
 };

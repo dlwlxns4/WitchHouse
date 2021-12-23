@@ -62,7 +62,6 @@ void InteractionComp::Update()
 				{
 					if (data[vecIndex].size() == chatEffect.size())
 					{
-						cout << "@" << endl;
 						vecIndex++;
 						chatEffect.clear();
 						talkIndexStr.clear();

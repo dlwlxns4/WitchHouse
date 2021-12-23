@@ -62,6 +62,10 @@ public:
 	virtual void		AddMainId() { id++; }
 	virtual int			GetMainId() { return id; }
 
+	//bool GetIsActable() { return isActable; };
+	//void SetIsActable(bool isActable) { this->isActable = isActable; }
+
 private:
 	int id = 0;
+	//bool isActable = false;
 };

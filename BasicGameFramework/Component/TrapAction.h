@@ -27,7 +27,7 @@ public:
 	virtual void Read(istream& is) override;
 	void SetActionStartegy(TrapActionState action);
 private:
-	std::array<class ITrapActionable*, 3> actions;
+	std::array<class ITrapActionable*, 4> actions;
 	class ITrapActionable* _actionSterategy = actions[0];
 };
 
@@ -48,11 +48,11 @@ protected:
 	GameObject* _obj;
 };
 
-class NullAction : public ITrapActionable
+class TrapNullAction : public ITrapActionable
 {
 public:
 	using		ITrapActionable::ITrapActionable;
-	virtual		~NullAction() = default;
+	virtual		~TrapNullAction() = default;
 
 	void DoAction() override
 	{
@@ -85,5 +85,17 @@ public:
 	void DoAction() override;
 private:
 	int moveDelay = 0;
+	int cycleCount = 0;
+};
+
+class ActionID2 : public ITrapActionable
+{
+public:
+	using		ITrapActionable::ITrapActionable;
+	virtual		~ActionID2() = default;
+
+	void DoAction() override;
+private:
+	int animDelay = 0;
 	int cycleCount = 0;
 };
