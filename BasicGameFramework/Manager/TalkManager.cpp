@@ -23,7 +23,12 @@ void TalkManager::Init()
 	itemTalkData.emplace(0, vector<wstring>{
 		L"녹이 슬은 날붙이가 떨어져 있다.\n\n", 
 		L"\t가져간다.\n\n\t가져가지 않는다.",
-		L"정원가위를 손에 넣었다."});
+			L"정원가위를 손에 넣었다."});
+
+	itemTalkData.emplace(2, vector<wstring>{
+		L"선물 상자 더미에 곰인형이 기대어 있다.\n\n",
+			L"\t곰인형을 줍는다.\n\n\t아무것도 하지 않는다.",
+			L"곰인형을 손에 넣었다."});
 }
 
 void TalkManager::SaveTalkData(int referenceId)

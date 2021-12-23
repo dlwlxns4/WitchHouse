@@ -61,6 +61,7 @@ void QuestObj::Release()
 		for (size_t i = 0; i < _actions.size(); ++i)
 		{
 			delete _actions[i];
+			_actions[i] = nullptr;
 		}
 	}
 }

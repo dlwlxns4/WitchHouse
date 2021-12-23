@@ -22,6 +22,13 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 		return scissors;
 		break;
 	}
+	case ItemKinds::TeddyBear:
+	{
+		TeddyBear* teddyBear = new TeddyBear(_owner);
+		teddyBear->Init();
+		return teddyBear;
+		break;
+	}
 	default:
 		break;
 	}

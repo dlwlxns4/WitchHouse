@@ -58,3 +58,19 @@ public:
 protected:
 	int id = 0;
 };
+
+class TeddyBear : public Item
+{
+public:
+	using Item::Item;
+	virtual ~TeddyBear() = default;
+
+	virtual void Init()			 override;
+	virtual void UseItem() override;
+	virtual bool CompareId(int id) override { if (this->id == id) return true; return false; }
+
+	int GetId() { return id; }
+
+protected:
+	int id = 2;
+};

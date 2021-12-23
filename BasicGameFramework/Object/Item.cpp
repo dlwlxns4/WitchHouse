@@ -88,3 +88,16 @@ void Scissors::UseItem()
 		ItemManager::GetInstance()->RemoveItem(id);
 	}
 }
+
+void TeddyBear::Init()
+{
+	info = L"커다란 곰 인형.";
+	name = L"테디 베어";
+	useString = L"\t곰의 손발을 자른다.\n\n\t아무것도 하지 않는다.";
+	count += 1;
+	id = 2;
+}
+
+void TeddyBear::UseItem()
+{
+}
