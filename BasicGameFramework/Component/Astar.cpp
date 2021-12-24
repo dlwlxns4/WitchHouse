@@ -147,10 +147,54 @@ void Astar::DoAstar()
 		curr = path[curr.Y][curr.X];
 	}
 
-	if (delay >= 300)
+	if (delay >= 75)
 	{
+		int currFrameX = _owner->GetComponent<SizeAdjRenderer>()->GetFrameX();
+		if (isJump == true)
+		{
+			currFrameX++;
+			if (currFrameX > 2)
+			{
+				isJump = false;
+				currFrameX--;
+			}
+		}
+		else
+		{
+			currFrameX--;
+			if (currFrameX < 0)
+			{
+				isJump = true;
+				currFrameX++;
+			}
+		}
+		_owner->GetComponent<SizeAdjRenderer>()->SetFrameX(currFrameX);
+
+		POINT pos = _owner->GetPosition();
+		
+
+		int dir = 0;
+		if (pos.x > curr.X*32)
+		{
+			dir = 0;
+		}
+		else if (pos.x < curr.X*32)
+		{
+			dir = 1;
+		}
+		else if (pos.y > curr.Y*32)
+		{
+			dir = 2;
+		}
+		else if (pos.y < curr.Y*32)
+		{
+			dir = 3;
+		}
+
+		int dx[4] = { -1, 1,0,0 };
+		int dy[4] = { 0,0,-1,1 };
 		delay = 0;
-		_owner->SetPosition(curr.X * 32, curr.Y * 32);
+		_owner->SetPosition(pos.x + 16*dx[dir], pos.y + 16 * dy[dir]);
 	}
 
 	GameObject* player = GameManager::GetInstance()->GetPlayer();

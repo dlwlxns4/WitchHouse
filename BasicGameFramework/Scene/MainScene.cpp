@@ -289,6 +289,11 @@ void MainScene::Debug()
 	{
 		QuestDebug = QuestDebug == true ? false : true;
 	}
+
+	if (Input::GetButtonDown('T'))
+	{
+		QuestManager::GetInstance()->NextQuest();
+	}
 	if (QuestDebug)
 	{
 		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();

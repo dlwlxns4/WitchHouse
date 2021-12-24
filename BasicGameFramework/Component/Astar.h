@@ -44,5 +44,6 @@ private:
 
 	bool isFind = false;
 	bool isFinish = false;
+	bool isJump = true;
 };
 
