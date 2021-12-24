@@ -74,6 +74,12 @@
     <Filter Include="Object\GameOver">
       <UniqueIdentifier>{cf4b22fd-c093-4086-83e9-352b8a183060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\MovableObj">
+      <UniqueIdentifier>{f438fdf8-57e7-4fb6-9f32-68958cdd2eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Movable">
+      <UniqueIdentifier>{aaa66177-0bf2-4f69-ac4e-eaf4d77f3d91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">
@@ -301,6 +307,12 @@
     <ClInclude Include="Object\GameOverObj.h">
       <Filter>Object\GameOver</Filter>
     </ClInclude>
+    <ClInclude Include="Object\MovableObj.h">
+      <Filter>Object\MovableObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Astar.h">
+      <Filter>Component\Movable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -510,6 +522,12 @@
     </ClCompile>
     <ClCompile Include="Object\GameOverObj.cpp">
       <Filter>Object\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MovableObj.cpp">
+      <Filter>Object\MovableObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Astar.cpp">
+      <Filter>Component\Movable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

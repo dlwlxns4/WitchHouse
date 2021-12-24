@@ -122,6 +122,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Graphics/Obj/Boxes.png");
 	AddSprite(L"Image/Graphics/Obj/FootPrint.png");
 	AddSprite(L"Image/Graphics/Obj/TeddyBucket.png");
+	AddSprite(L"Image/Graphics/Obj/AstarTeddy.png");
+	AddSprite(L"Image/Graphics/Obj/AstarTeddy_Find.png");
 
 
 	spritesName.push_back(L"Image/Graphics/Obj/HouseDoor.png");

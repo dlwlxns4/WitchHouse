@@ -72,6 +72,11 @@ void SizeAdjRenderer::SetFrameY(int y)
 	this->frameY = y;
 }
 
+int SizeAdjRenderer::GetFrameX()
+{
+	return frameX;
+}
+
 void SizeAdjRenderer::SetIndex(int index)
 {
 	this->spriteindex = index;

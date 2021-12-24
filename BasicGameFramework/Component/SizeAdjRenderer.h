@@ -22,6 +22,7 @@ public:
 	void			SetSprite(const wchar_t* fileName);
 	void			SetFrameX(int x);
 	void			SetFrameY(int y);
+	int			GetFrameX();
 	void			SetIndex(int index);
 	void			SetMaxFrame(int x, int y);
 private:

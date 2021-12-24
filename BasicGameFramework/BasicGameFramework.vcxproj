@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h" />
+    <ClInclude Include="Component\Astar.h" />
     <ClInclude Include="Component\CircleComponent.h" />
     <ClInclude Include="Component\Component.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -192,6 +193,7 @@
     <ClInclude Include="Object\GameOverObj.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemFactory.h" />
+    <ClInclude Include="Object\MovableObj.h" />
     <ClInclude Include="Object\PortalObj.h" />
     <ClInclude Include="Object\QuestObj.h" />
     <ClInclude Include="Object\TitleObj.h" />
@@ -238,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicGameFramework.cpp" />
+    <ClCompile Include="Component\Astar.cpp" />
     <ClCompile Include="Component\CircleComponent.cpp" />
     <ClCompile Include="Component\Component.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -275,6 +278,7 @@
     <ClCompile Include="Object\GameOverObj.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemFactory.cpp" />
+    <ClCompile Include="Object\MovableObj.cpp" />
     <ClCompile Include="Object\PortalObj.cpp" />
     <ClCompile Include="Object\QuestObj.cpp" />
     <ClCompile Include="Object\TitleObj.cpp" />

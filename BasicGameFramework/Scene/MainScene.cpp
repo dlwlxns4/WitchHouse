@@ -12,6 +12,7 @@
 #include "../Object/UIObj.h"
 #include "../Object/BackPanel.h"
 #include "../Object/QuestObj.h"
+#include "../Object/MovableObj.h"
 #include "../Util/Timer.h"
 #define MAP1_CAMERA_X -96
 #define MAP1_CAMERA_Y 96
@@ -100,7 +101,7 @@ void MainScene::DoTrap(int id)
 			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 			QuestManager::GetInstance()->SetTrapAction(2);
 			QuestManager::GetInstance()->NextQuest();
-		}	
+		}
 		break;
 	case 2:
 		if (QuestManager::GetInstance()->GetQuest() == 16)
@@ -108,6 +109,15 @@ void MainScene::DoTrap(int id)
 			GameObject* player = GameManager::GetInstance()->GetPlayer();
 			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 			QuestManager::GetInstance()->SetTrapAction(3);
+			QuestManager::GetInstance()->NextQuest();
+		}
+		break;
+	case 3:
+		if (QuestManager::GetInstance()->GetQuest() == 18)
+		{
+			AstarTeddy* teddy = new AstarTeddy(this, (*_layers)[0], L"AStar");
+			teddy->SetPosition(32 * 3, 32 * 5);
+			teddy->Init();
 			QuestManager::GetInstance()->NextQuest();
 		}
 		break;
