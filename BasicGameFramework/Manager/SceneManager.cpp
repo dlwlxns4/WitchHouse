@@ -60,8 +60,8 @@ bool SceneManager::IsSetNextScene() const noexcept
 
 void SceneManager::SetNextScene(const wstring& name)
 {
-	ASSERT_CRASH(_nextScene == nullptr);
-	ASSERT_CRASH(_scenes.end() != _scenes.find(name));
+	//ASSERT_CRASH(_nextScene == nullptr);
+	//ASSERT_CRASH(_scenes.end() != _scenes.find(name));
 
 	_nextScene = _scenes[name];
 }
@@ -90,11 +90,3 @@ Scene* SceneManager::GetCurrentScene()
 	return _currentScene;
 }
 
-bool SceneManager::IsThatScene(wstring scene)
-{
-	if (_currentScene == _scenes[scene])
-	{
-		return true;
-	}
-	return false;
-}

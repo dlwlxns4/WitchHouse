@@ -9,8 +9,5 @@ public:
 	virtual ~TitleScene() noexcept = default;
 
 	virtual void Init() override;
-	virtual void Update() override;
 
-private:
-	float delay = 0;
 };

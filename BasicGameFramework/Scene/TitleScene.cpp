@@ -8,10 +8,8 @@
 #include "../Object/TitleObj.h"
 
 #include "../Scene/Layer.h"
-#include "../Util/Timer.h"
 void TitleScene::Init()
 {
-	delay = 0;
 	Layer* main = new Layer(this, L"Main", 1);
 
 	TitleObj* titleObj = new TitleObj(this, main, L"Title");
@@ -21,11 +19,3 @@ void TitleScene::Init()
 	Scene::Init();
 }
 
-void TitleScene::Update()
-{
-	delay += Timer::GetDeltaTime();
-	if (delay >= 1000.0f)
-	{
-		Scene::Update();
-	}
-}

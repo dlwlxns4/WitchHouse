@@ -11,7 +11,7 @@ class MainScene : public Scene, Singleton<MainScene>
 {
 public:
 	using					Scene::Scene;
-	virtual					~MainScene() noexcept = default;
+	virtual					~MainScene() = default;
 
 	virtual void			Init() override;
 	virtual void			Update() override;
@@ -28,7 +28,6 @@ public:
 	void					Debug();
 	void					SetActiveBackPanelFlag(bool isActive);
 	vector<Layer*>*			GetMapData() { return _layers; }
-	void					SetEffect(int id);
 private:
 	vector<Layer*>*	_layers;
 	vector<Layer*>*	_CopyLayer;

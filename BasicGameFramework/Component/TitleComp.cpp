@@ -7,6 +7,7 @@
 #include "../Manager/GameManager.h"
 #include "../Manager/QuestManager.h"
 #include "../Manager/ItemManager.h"
+#include "../Manager/CameraManager.h"
 
 
 void TitleComp::Init()
@@ -19,82 +20,82 @@ void TitleComp::Init()
 
 	isSelect = false;
 	state = SelectState::StartOver;
+	this->SetActive(true);
 }
 
 void TitleComp::Update()
 {
-	if (SceneManager::GetInstance()->IsThatScene(L"Title"))
+
+	if (isSelect == false)
 	{
-		if (isSelect == false)
+		if (Input::GetButtonDown(VK_DOWN))
 		{
-			if (Input::GetButtonDown(VK_DOWN))
+			if ((int)state < 2)
 			{
-				if ((int)state < 2)
-				{
-					int tmp = (int)state;
-					state = (SelectState)(++tmp);
-				}
-			}
-			else if (Input::GetButtonDown(VK_UP))
-			{
-				if ((int)state > 0)
-				{
-					int tmp = (int)state;
-					state = (SelectState)(--tmp);
-				}
-			}
-
-			if (Input::GetButtonDown('Z'))
-			{
-				isSelect = true;
-			}
-
-
-		}
-		if (isDecrease == true)
-		{
-			selectPanelOpacity -= 0.05;
-			if (selectPanelOpacity <= 0.5f)
-			{
-				isDecrease = false;
+				int tmp = (int)state;
+				state = (SelectState)(++tmp);
 			}
 		}
-		else
+		else if (Input::GetButtonDown(VK_UP))
 		{
-			selectPanelOpacity += 0.05f;
-			if (selectPanelOpacity >= 1.0f)
+			if ((int)state > 0)
 			{
-				isDecrease = true;
+				int tmp = (int)state;
+				state = (SelectState)(--tmp);
 			}
 		}
 
-		if (isSelect)
+		if (Input::GetButtonDown('Z'))
 		{
-			backPanelOpacity += 0.01;
+			isSelect = true;
+		}
 
-			//상태 실행 부분
-			if (backPanelOpacity >= 1.1)
+
+	}
+	if (isDecrease == true)
+	{
+		selectPanelOpacity -= 0.05;
+		if (selectPanelOpacity <= 0.5f)
+		{
+			isDecrease = false;
+		}
+	}
+	else
+	{
+		selectPanelOpacity += 0.05f;
+		if (selectPanelOpacity >= 1.0f)
+		{
+			isDecrease = true;
+		}
+	}
+
+	if (isSelect)
+	{
+		backPanelOpacity += 0.01;
+
+		//상태 실행 부분
+		if (backPanelOpacity >= 1.1)
+		{
+			switch (state)
 			{
-				switch (state)
-				{
-				case SelectState::StartOver:
-					MapCopy();
-					state = SelectState::None;
-					SceneManager::GetInstance()->SetNextScene(L"Main");
-					GameManager::GetInstance()->SetCurrScene(0);
-					QuestManager::GetInstance()->SetQuest(10);
-					ItemManager::GetInstance()->Clear();
-					ItemManager::GetInstance()->Init();
-					break;
-				case SelectState::Load:
+			case SelectState::StartOver:
+				MapCopy();
+				SceneManager::GetInstance()->SetNextScene(L"Main");
+				state = SelectState::None;
+				GameManager::GetInstance()->SetCurrScene(0);
+				QuestManager::GetInstance()->SetQuest(10);
+				ItemManager::GetInstance()->Clear();
+				ItemManager::GetInstance()->Init();
+				CameraManager::GetInstance()->Init();
+				break;
+			case SelectState::Load:
 
-					break;
-				case SelectState::Exit:
-					PostQuitMessage(0);
-					break;
-				default:
-					break;
-				}
+				break;
+			case SelectState::Exit:
+				PostQuitMessage(0);
+				break;
+			default:
+				break;
 			}
 		}
 	}
