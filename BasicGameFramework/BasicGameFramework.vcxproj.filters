@@ -80,6 +80,9 @@
     <Filter Include="Component\Movable">
       <UniqueIdentifier>{aaa66177-0bf2-4f69-ac4e-eaf4d77f3d91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Cat">
+      <UniqueIdentifier>{6ef05167-8e2d-427a-9891-5b770a5a78cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicGameFramework.h">

@@ -116,16 +116,17 @@ void QuestManager::DoActivateQuestObj(int id)
 {
 	switch (id)
 	{
-	case 10:
+	case 100:
 		for (auto it = questObjMap.begin(); it != questObjMap.end(); ++it)
 		{
 			for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
 			{
 				if (((QuestObj*)(itt->second))->GetId() == 1)
 				{
-					cout << "찾았다." << endl;
 					((QuestObj*)(itt->second))->SetActionStrategy(QuestObjStrategy::SetFrameAnim);
 					TriggerObj* portal = (TriggerObj*)(PhysicsManager::GetInstance()->GetTriggerObj(3));
+					PhysicsManager::GetInstance()->RemoveChat(itt->second->GetPosition().x/32, itt->second->GetPosition().y / 32);
+					it->second.erase(itt);
 					((DoorObj*)(portal))->SetLoadMap(5);
 					cout << portal->GetMainId() << endl;
 					break;
@@ -159,6 +160,10 @@ void QuestManager::DoActivateQuestObj(int id)
 		//		}
 		//	}
 		//}
+		break;
+	case 1000:
+		cout << "고양이";
+
 		break;
 	}
 }
@@ -232,4 +237,10 @@ void QuestManager::Clear()
 		it.second.clear();
 	}
 	questObjMap.clear();
+
+	for (auto it : questActionObjMap)
+	{
+		it.second.clear();
+	}
+	questActionObjMap.clear();
 }

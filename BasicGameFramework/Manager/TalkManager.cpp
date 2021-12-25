@@ -13,10 +13,19 @@ void TalkManager::Init()
 	//----------------Tree
 	talkData.emplace(WITHER_TREE_ID, vector<wstring>{L"시들어버린 큰 나무가 있다."});
 	talkData.emplace(GREEN_TREE_ID, vector<wstring>{L"파릇파릇하게 우거진 큰 나무가 있다."});
+	//----------------Rose
+	talkData.emplace(SMALL_ROSE_ID, vector<wstring>{L"작은 나무가 길을 막고 있다."});
+	talkData.emplace(HUGE_ROSE_ID, vector<wstring>{L"겁이 날 정도로 거대한 장미가 길을 막고 있다."});
+	talkData.emplace(POT_ROSE_ID, vector<wstring>{L"장미꽃으로 장식되어 있다."});
+	//----------------Candle
+	talkData.emplace(CANDLE_ID, vector<wstring>{L"양초의 불꽃이 묘하게 일렁이고 있다."});
+	//----------------Clock
+	talkData.emplace(WALL_CLOCK_ID, vector<wstring>{L"커다란 괘종시계가있다.\n\n시계는 소리와 함께 시간을 가르키고 있다."});
+
 
 
 	//Message
-	talkData.emplace(100, vector<wstring>{L"나의 방까지 오렴."} );
+	talkData.emplace(WELCOME_MESSAGE_ID, vector<wstring>{L"나의 방까지 오렴."} );
 	//위 객체랑 퀘스트랑 엮자 
 
 	//--------------------------------------------Item----------------

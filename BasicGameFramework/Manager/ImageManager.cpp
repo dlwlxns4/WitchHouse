@@ -124,6 +124,7 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/Graphics/Obj/TeddyBucket.png");
 	AddSprite(L"Image/Graphics/Obj/AstarTeddy.png");
 	AddSprite(L"Image/Graphics/Obj/AstarTeddy_Find.png");
+	AddSprite(L"Image/Graphics/Obj/Cat.png");
 
 
 	spritesName.push_back(L"Image/Graphics/Obj/HouseDoor.png");
@@ -132,6 +133,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	spritesName.push_back(L"Image/Tile/DeskTile.png");
 	spritesName.push_back(L"Image/Graphics/Obj/FootPrint.png");
 	spritesName.push_back(L"Image/Graphics/Obj/TeddyBucket.png");
+	spritesName.push_back(L"Image/Graphics/Obj/Cat.png");
+
 
 }
 
