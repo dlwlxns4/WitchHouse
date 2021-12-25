@@ -71,8 +71,8 @@ void TitleComp::Update()
 			switch (state)
 			{
 			case SelectState::StartOver:
+				MapCopty();
 				SceneManager::GetInstance()->SetNextScene(L"Main");
-				isSelect = false;
 				break;
 			case SelectState::Load:
 
@@ -87,7 +87,6 @@ void TitleComp::Update()
 
 void TitleComp::Render(HDC hdc)
 {
-
 	SelectPanel->Render(230,
 		293 + (int)state * 30,
 		selectPanelOpacity);
@@ -102,4 +101,19 @@ void TitleComp::SetSprite(const wchar_t* fileName)
 {
 	SelectPanel = ImageManager::GetInstance()->FindSprite(fileName);
 	backPanel = ImageManager::GetInstance()->FindSprite(L"Image/UI/OpacityPanel.png");
+}
+
+
+void TitleComp::MapCopty()
+{
+
+	for (int i = 0; i <= 9; ++i)
+	{
+		wstring loadPath = L"Save/MapData" + to_wstring(i) + L".txt";
+		wstring savePath = L"Map/MapData" + to_wstring(i) + L".txt";
+		CopyFile(
+			loadPath.c_str(),
+			savePath.c_str(),
+			false);
+	}
 }

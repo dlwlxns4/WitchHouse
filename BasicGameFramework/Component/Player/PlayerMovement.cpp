@@ -255,7 +255,7 @@ void IntoHouseAction::DoAction()
 
 			_obj->GetComponent<PlayerSpriteRenderer>()->SetAlternateWalk();
 
-			if (moveDistance >= 32)
+			if (moveDistance >= limitMoveDistance)
 			{
 				moveDistance = 0;
 				GameManager::GetInstance()->SetState(State::None);

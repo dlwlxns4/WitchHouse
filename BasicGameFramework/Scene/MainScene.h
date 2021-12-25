@@ -26,8 +26,10 @@ public:
 	void					SetEffect(int id);
 private:
 	std::vector<Layer*>*	_layers;
+	std::vector<Layer*>*	_CopyLayer;
 	int						num = 0;
 	bool					isShowRect = false;
+	bool					isShowCollider = false;
 
 	int						nextSceneNum = 0;
 	bool					loadFlag = false;

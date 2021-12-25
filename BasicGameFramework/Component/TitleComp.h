@@ -15,6 +15,8 @@ public:
 	virtual void Render(HDC hdc) override;
 	void		 SetSprite(const wchar_t* fileName);
 
+	void MapCopty();
+
 private:
 	enum class SelectState
 	{

@@ -139,7 +139,13 @@ std::ostream& operator<<(std::ostream& os, const Layer& layer)
 
 	for (size_t i = 0; i < layer._objects.size(); ++i)
 	{
-		os << *(layer._objects[i]) << endl;
+
+
+		if (!(((*(layer._objects[i])).GetTag() == L"Player") || ((*(layer._objects[i])).GetTag() == L"BackPanel") || ((*(layer._objects[i])).GetTag() == L"UI")))
+		{
+			os << *(layer._objects[i]) << endl;
+
+		}
 	}
 
 	return os;

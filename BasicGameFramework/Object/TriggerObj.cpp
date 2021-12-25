@@ -42,14 +42,16 @@ void DoorObj::OnTrigger()
 	GameObject* player = GameManager::GetInstance()->GetPlayer();
 	isActable = true;
 	player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::IntoHouse);
-	
+
 	if (QuestManager::GetInstance()->GetQuest() <= 12)
 	{
-		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(100,10);
+		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(100,10,32);
+		animlimitTime = 15;
 	}
 	else
 	{
-		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(2,3);
+		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(2,3,8);
+		animlimitTime = 2;
 
 	}
 	if (QuestManager::GetInstance()->GetQuest() <= 12)
@@ -64,7 +66,7 @@ void DoorObj::Update()
 	if (isActable)
 	{
 		animDelay++;
-		if (animDelay >= 20)
+		if (animDelay >= animlimitTime)
 		{
 			animDelay = 0;
 			frameX++;
@@ -95,6 +97,11 @@ void DoorObj::Read(std::istream& is)
 		>> isActable
 		>> loadMap;
 	this->renderer=this->GetComponent<SizeAdjRenderer>();
+	cout << frameX << endl;
+	this->frameX = 0;
+	this->animDelay = 0;
+	this->isActable = false;
+	renderer->SetFrameX(0);
 	PhysicsManager::GetInstance()->SetTriggerObj(this->GetPosition().x / 32, this->GetPosition().y / 32 + 1, this);
 }
 

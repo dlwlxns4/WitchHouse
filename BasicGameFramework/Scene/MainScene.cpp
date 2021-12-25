@@ -60,6 +60,11 @@ void MainScene::Update()
 	if (loadFlag == true)
 	{
 		loadFlag = false;
+		GameObject* obj = PhysicsManager::GetInstance()->GetTriggerObj(nextSceneNum);
+		PhysicsManager::GetInstance()->RemoveCollider(obj->GetPosition().x / 32, obj->GetPosition().y / 32);
+		PhysicsManager::GetInstance()->RemoveCollider(obj->GetPosition().x / 32, obj->GetPosition().y / 32+1);
+		Save(GameManager::GetInstance()->GetCurrScene());
+		
 		Load(nextSceneNum);
 	}
 
@@ -133,11 +138,31 @@ void MainScene::TransMap(int mapNum)
 
 void MainScene::Save(int saveIndex)
 {
+	string filePath = "Map/MapData" + to_string(saveIndex) + ".txt";
+
+	ofstream writeFile(filePath.data());
+	POINT pos = GameManager::GetInstance()->GetPlayer()->GetPosition();
+	PhysicsManager::GetInstance()->RemoveCollider(pos.x / 32, pos.y / 32);
+
+	if (writeFile.is_open())
+	{
+		writeFile << (*_layers).size() << endl;
+		for (size_t i = 0; i < (*_layers).size(); ++i)
+		{
+			writeFile << (*((*_layers)[i])) << endl;
+			writeFile << -1 << endl;
+		}
+		writeFile << *PhysicsManager::GetInstance();
+	}
+
+
+	cout << "세이브 완료" << endl;
+	writeFile.close();
 }
 
 void MainScene::Load(int loadIndex)
 {
-	string filePath = "Save/MapData" + to_string(loadIndex) + ".txt";
+	string filePath = "Map/MapData" + to_string(loadIndex) + ".txt";
 
 	cout << filePath << endl;
 
@@ -205,7 +230,6 @@ void MainScene::Load(int loadIndex)
 		//콜라이더, 트리거, 포탈 재정의
 		openFile >> *PhysicsManager::GetInstance();
 	}
-
 
 
 
@@ -294,6 +318,19 @@ void MainScene::Debug()
 	{
 		QuestManager::GetInstance()->NextQuest();
 	}
+	if (Input::GetButtonDown('W'))
+	{
+		isShowCollider = isShowCollider == true ? false : true;
+	}
+	if (isShowCollider)
+	{
+		unordered_set<pair<int, int>, pair_hash>* collision = PhysicsManager::GetInstance()->GetCollisionObj();
+		for (auto pos : *collision)
+		{
+			ImageManager::GetInstance()->DrawColliderRect(pos.first, pos.second);
+		}
+	}
+
 	if (QuestDebug)
 	{
 		unordered_map<int, unordered_map<int, int>>* item = PhysicsManager::GetInstance()->GetItemObj();

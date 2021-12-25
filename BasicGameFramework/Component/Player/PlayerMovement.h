@@ -118,13 +118,14 @@ public:
 
 	void		DoAction();
 	void		SetNextScene(int nextScene) { this->nextScene = nextScene; }
-	void		SetLimitTime(int actionLimit, int moitionLimit) { this->animLimitTime = actionLimit, this->moitionLimitTime = moitionLimit; }
+	void		SetLimitTime(int actionLimit, int moitionLimit, int distanceLimit) { this->animLimitTime = actionLimit, this->moitionLimitTime = moitionLimit, limitMoveDistance = distanceLimit; }
 private:
 	float		opacity = 1.0f;
 	int			motionDelay = 0;
 	int			motionCount = 0;
 	bool		isFront = true;
 	int			moveDistance = 0;
+	int			limitMoveDistance = 32;
 	int			actionDelay = 0;
 	int			nextScene = 0;
 	int			animLimitTime = 0;
