@@ -27,6 +27,8 @@ public:
 	void	RemoveItem(int id);
 	bool	CanObtainItem(int id);
 
+	void	Clear();
+
 	const vector<Item*>&	GetInventory() const;
 	int						GetInventorySize();
 

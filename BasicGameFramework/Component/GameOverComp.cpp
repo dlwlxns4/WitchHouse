@@ -8,5 +8,4 @@ void GameOverComp::Update()
 	{
 		SceneManager::GetInstance()->SetNextScene(L"Title");
 	}
-
 }

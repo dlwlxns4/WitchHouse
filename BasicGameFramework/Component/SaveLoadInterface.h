@@ -29,4 +29,5 @@ private:
 	bool isDecrease = true;
 
 	int isSave = true;
+	float delay = 0;
 };

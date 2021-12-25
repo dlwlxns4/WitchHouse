@@ -2,7 +2,12 @@
 #include "../Manager/ImageManager.h"
 #include "../Util/Sprite.h"
 #include "../Util/Input.h"
+#include "../Scene/Scene.h"
 #include "../Manager/SceneManager.h"
+#include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
+#include "../Manager/ItemManager.h"
+
 
 void TitleComp::Init()
 {
@@ -18,68 +23,78 @@ void TitleComp::Init()
 
 void TitleComp::Update()
 {
-	if (isSelect == false)
+	if (SceneManager::GetInstance()->IsThatScene(L"Title"))
 	{
-		if (Input::GetButtonDown(VK_DOWN))
+		if (isSelect == false)
 		{
-			if ((int)state < 2)
+			if (Input::GetButtonDown(VK_DOWN))
 			{
-				int tmp = (int)state;
-				state = (SelectState)(++tmp);
+				if ((int)state < 2)
+				{
+					int tmp = (int)state;
+					state = (SelectState)(++tmp);
+				}
+			}
+			else if (Input::GetButtonDown(VK_UP))
+			{
+				if ((int)state > 0)
+				{
+					int tmp = (int)state;
+					state = (SelectState)(--tmp);
+				}
+			}
+
+			if (Input::GetButtonDown('Z'))
+			{
+				isSelect = true;
+			}
+
+
+		}
+		if (isDecrease == true)
+		{
+			selectPanelOpacity -= 0.05;
+			if (selectPanelOpacity <= 0.5f)
+			{
+				isDecrease = false;
 			}
 		}
-		else if (Input::GetButtonDown(VK_UP))
+		else
 		{
-			if ((int)state > 0)
+			selectPanelOpacity += 0.05f;
+			if (selectPanelOpacity >= 1.0f)
 			{
-				int tmp = (int)state;
-				state = (SelectState)(--tmp);
+				isDecrease = true;
 			}
 		}
 
-		if (Input::GetButtonDown('Z'))
+		if (isSelect)
 		{
-			isSelect = true;
-		}
+			backPanelOpacity += 0.01;
 
-
-	}
-	if (isDecrease == true)
-	{
-		selectPanelOpacity -= 0.05;
-		if (selectPanelOpacity <= 0.5f)
-		{
-			isDecrease = false;
-		}
-	}
-	else
-	{
-		selectPanelOpacity += 0.05f;
-		if (selectPanelOpacity >= 1.0f)
-		{
-			isDecrease = true;
-		}
-	}
-
-	if (isSelect)
-	{
-		backPanelOpacity += 0.01;
-
-		//상태 실행 부분
-		if (backPanelOpacity >= 1.1)
-		{
-			switch (state)
+			//상태 실행 부분
+			if (backPanelOpacity >= 1.1)
 			{
-			case SelectState::StartOver:
-				MapCopty();
-				SceneManager::GetInstance()->SetNextScene(L"Main");
-				break;
-			case SelectState::Load:
+				switch (state)
+				{
+				case SelectState::StartOver:
+					MapCopy();
+					state = SelectState::None;
+					SceneManager::GetInstance()->SetNextScene(L"Main");
+					GameManager::GetInstance()->SetCurrScene(0);
+					QuestManager::GetInstance()->SetQuest(10);
+					ItemManager::GetInstance()->Clear();
+					ItemManager::GetInstance()->Init();
+					break;
+				case SelectState::Load:
 
-				break;
-			case SelectState::Exit:
-				PostQuitMessage(0);
-				break;
+					break;
+				case SelectState::Exit:
+					PostQuitMessage(0);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -104,7 +119,7 @@ void TitleComp::SetSprite(const wchar_t* fileName)
 }
 
 
-void TitleComp::MapCopty()
+void TitleComp::MapCopy()
 {
 
 	for (int i = 0; i <= 9; ++i)

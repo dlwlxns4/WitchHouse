@@ -89,3 +89,12 @@ Scene* SceneManager::GetCurrentScene()
 {
 	return _currentScene;
 }
+
+bool SceneManager::IsThatScene(wstring scene)
+{
+	if (_currentScene == _scenes[scene])
+	{
+		return true;
+	}
+	return false;
+}

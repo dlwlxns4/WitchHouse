@@ -8,8 +8,10 @@
 #include "../Object/TitleObj.h"
 
 #include "../Scene/Layer.h"
+#include "../Util/Timer.h"
 void TitleScene::Init()
 {
+	delay = 0;
 	Layer* main = new Layer(this, L"Main", 1);
 
 	TitleObj* titleObj = new TitleObj(this, main, L"Title");
@@ -21,10 +23,9 @@ void TitleScene::Init()
 
 void TitleScene::Update()
 {
-	Scene::Update();
-
-	if (Input::GetButtonDown(VK_SPACE))
+	delay += Timer::GetDeltaTime();
+	if (delay >= 1000.0f)
 	{
-		SceneManager::GetInstance()->SetNextScene(L"Temp");
+		Scene::Update();
 	}
 }

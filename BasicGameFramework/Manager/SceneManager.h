@@ -3,12 +3,10 @@
 #include <Windows.h>
 #include <string>
 #include <unordered_map>
-
 #include "../Util/Singleton.h"
 #include "../IBehaviour.h"
 
 class Scene;
-
 class SceneManager : public Singleton<SceneManager>, IBehaviour
 {
 public:
@@ -26,6 +24,7 @@ public:
 	void				ChangeScene();
 	bool				IsMainScene();
 	Scene*				GetCurrentScene();
+	bool				IsThatScene(std::wstring scene);
 private:
 	Scene*							_currentScene = nullptr;
 	Scene*							_nextScene = nullptr;

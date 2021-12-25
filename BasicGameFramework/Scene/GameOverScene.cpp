@@ -4,7 +4,7 @@
 
 void GameOverScene::Init()
 {
-	Layer* main = new Layer(this, L"Main", 1);
+	Layer* main = new Layer(this, L"Main", 100);
 
 	GameOverObj* gameOverObj = new GameOverObj(this, main, L"GameOver");
 	

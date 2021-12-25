@@ -100,6 +100,11 @@ bool ItemManager::CanObtainItem(int id)
 	}
 }
 
+void ItemManager::Clear()
+{
+	inventory.clear();
+}
+
 int ItemManager::GetCurrFindItem()
 {
 	return currFindItem;

@@ -21,8 +21,10 @@
 void MainScene::Init()
 {
 
+	isFirst = true;
 	_layers = this->GetLayer();
 	Load(GameManager::GetInstance()->GetCurrScene());
+
 
 	BackPanel* backPanel = new BackPanel(this, (*_layers)[(*_layers).size() - 1], L"BackPanel");
 	backPanel->Init();

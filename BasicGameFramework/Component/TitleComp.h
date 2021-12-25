@@ -15,14 +15,15 @@ public:
 	virtual void Render(HDC hdc) override;
 	void		 SetSprite(const wchar_t* fileName);
 
-	void MapCopty();
+	void MapCopy();
 
 private:
 	enum class SelectState
 	{
 		StartOver=0,
 		Load =1,
-		Exit =2
+		Exit =2,
+		None =3
 	};
 
 	Sprite* SelectPanel = nullptr;

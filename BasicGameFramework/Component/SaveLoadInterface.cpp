@@ -15,6 +15,7 @@
 
 #include "../Object/GameObject.h"
 #include "../Scene/Layer.h"
+#include "../Util/Timer.h"
 
 #include <d2d1.h>
 #include <dwrite.h>
@@ -31,63 +32,67 @@ void SaveLoadInterface::SetSprite(const wchar_t* infoName, const wchar_t* PanelN
 
 void SaveLoadInterface::Update()
 {
-	if (Input::GetButtonDown('X'))
+	delay += Timer::GetDeltaTime();
+	if (delay >= 50.0f)
 	{
-		if (isSave)
+		if (Input::GetButtonDown('X'))
 		{
-			this->SetActive(false);
-			GameManager::GetInstance()->SetState(State::None);
-			GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActive(true);
-			GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerAction>()->SetActive(true);
+			if (isSave)
+			{
+				this->SetActive(false);
+				GameManager::GetInstance()->SetState(State::None);
+				GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActive(true);
+				GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerAction>()->SetActive(true);
+			}
+			else
+			{
+				this->SetActive(false);
+				isSave = true;
+				_owner->GetComponent<UserInfoComponent>()->SetActive(true);
+			}
+			delay = 0;
+		}
 
+		if (Input::GetButtonDown('Z'))
+		{
+			if (isSave)
+			{
+				Save(currSelect);
+			}
+			else
+			{
+				Load(currSelect);
+			}
+		}
+
+		if (isDecrease == true)
+		{
+			selectPanelOpacity -= 0.05;
+			if (selectPanelOpacity <= 0.5f)
+			{
+				isDecrease = false;
+			}
 		}
 		else
 		{
-			this->SetActive(false);
-			isSave = true;
-			_owner->GetComponent<UserInfoComponent>()->SetActive(true);
+			selectPanelOpacity += 0.05f;
+			if (selectPanelOpacity >= 1.0f)
+			{
+				isDecrease = true;
+			}
 		}
-	}
 
-	if (Input::GetButtonDown('Z'))
-	{
-		if (isSave)
+		if (Input::GetButtonDown(VK_UP))
 		{
-			Save(currSelect);
+			if (currSelect > 0)
+				currSelect--;
 		}
-		else
+		else if (Input::GetButtonDown(VK_DOWN))
 		{
-			Load(currSelect);
-		}
-	}
+			if (currSelect < 3)
+				currSelect++;
 
-	if (isDecrease == true)
-	{
-		selectPanelOpacity -= 0.05;
-		if (selectPanelOpacity <= 0.5f)
-		{
-			isDecrease = false;
 		}
-	}
-	else
-	{
-		selectPanelOpacity += 0.05f;
-		if (selectPanelOpacity >= 1.0f)
-		{
-			isDecrease = true;
-		}
-	}
-
-	if (Input::GetButtonDown(VK_UP))
-	{
-		if (currSelect > 0)
-			currSelect--;
-	}
-	else if (Input::GetButtonDown(VK_DOWN))
-	{
-		if (currSelect < 3)
-			currSelect++;
-
 	}
 }
 
