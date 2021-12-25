@@ -116,3 +116,44 @@ int ItemManager::GetInventorySize()
 	int size = inventory.size();
 	return size;
 }
+
+void ItemManager::Write(std::ostream& os) const
+{
+	os << inventory.size() << "\n";
+	for (int i = 0; i < inventory.size(); ++i)
+	{
+		os << inventory[i]->GetId() << "\t";
+		os << inventory[i]->GetCount() << "\n";
+	}
+}
+
+void ItemManager::Read(std::istream& is)
+{
+	inventory.clear();
+	int size;
+	is >> size;
+	for(int i=0; i<size; ++i)
+	{
+		int id = 0;
+		is >> id;
+		inventory.push_back(itemFactory->CreateItem((ItemKinds)id));
+		int count = 0;
+		is >> count;
+		for (int i = 0; i < count - 1; ++i)
+		{
+			inventory.push_back(itemFactory->CreateItem((ItemKinds)id));
+		}
+	}
+}
+
+std::ostream& operator<<(std::ostream& os, const ItemManager& itemManager)
+{
+	itemManager.Write(os);
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, ItemManager& itemManager)
+{
+	itemManager.Read(is);
+	return is;
+}

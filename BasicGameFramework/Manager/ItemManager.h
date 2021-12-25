@@ -29,6 +29,11 @@ public:
 
 	const vector<Item*>&	GetInventory() const;
 	int						GetInventorySize();
+
+	virtual void Write(std::ostream& os) const;
+	friend std::ostream& operator<<(std::ostream& os, const ItemManager& itemManager);
+	virtual void Read(std::istream& is);
+	friend std::istream& operator>>(std::istream& is, ItemManager& itemManager);
 private:
 	vector<Item*>	inventory = {};
 	ItemFactory*	itemFactory = {};

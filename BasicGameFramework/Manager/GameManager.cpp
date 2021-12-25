@@ -88,6 +88,20 @@ POINT GameManager::GetCameraData(int prevScene, int mapNum)
 	return POINT({ tmp.x, tmp.y });
 }
 
+void GameManager::Write(std::ostream& os) const
+{
+	os << currScene << "\t";
+	os << player->GetPosition().x << "\t";
+	os << player->GetPosition().y << "\t";
+}
+
+void GameManager::Read(std::istream& is)
+{
+	is >> currScene;
+	is >> playerPos.x;
+	is >> playerPos.y;
+}
+
 
 
 POINT GameManager::GetPlayerData(int prevScene, int mapNum)
@@ -97,4 +111,16 @@ POINT GameManager::GetPlayerData(int prevScene, int mapNum)
 
 
 	return POINT({ tmp.x, tmp.y });
+}
+
+std::ostream& operator<<(std::ostream& os, const GameManager& gameManager)
+{
+	gameManager.Write(os);
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, GameManager& gameManager)
+{
+	gameManager.Read(is);
+	return is;
 }

@@ -131,3 +131,27 @@ void CameraManager::Release()
 		delete actions[i];
 	}
 }
+
+void CameraManager::Write(std::ostream& os) const
+{
+	os << cameraPos.x << "\t";
+	os << cameraPos.y << "\t";
+}
+
+void CameraManager::Read(std::istream& is)
+{
+	is >> cameraPos.x
+		>> cameraPos.y;
+}
+
+std::ostream& operator<<(std::ostream& os, const CameraManager& cameraManager)
+{
+	cameraManager.Write(os);
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, CameraManager& cameraManager)
+{
+	cameraManager.Read(is);
+	return is;
+}

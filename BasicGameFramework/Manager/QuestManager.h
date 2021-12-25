@@ -39,6 +39,11 @@ public:
 	void													DoActivateQuestObj(int id);
 
 	void													Clear();
+
+	virtual void Write(std::ostream& os) const;
+	friend std::ostream& operator<<(std::ostream& os, const QuestManager& questManager);
+	virtual void Read(std::istream& is);
+	friend std::istream& operator>>(std::istream& is, QuestManager& questManager);
 private:
 	int currQuest=10;
 	unordered_map<int, string>								questName;

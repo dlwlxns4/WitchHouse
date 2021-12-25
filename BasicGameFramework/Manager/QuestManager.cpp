@@ -4,8 +4,11 @@
 #include "../Object/PortalObj.h"
 
 #include "../Component/TrapAction.h"
+#include "../Component/SaveLoadInterface.h"
+#include "../Component/Player/PlayerAction.h"
 
 #include "../Manager/PhysicsManager.h"
+#include "../Manager/GameManager.h"
 
 #include <iostream>
 using namespace std;
@@ -166,9 +169,10 @@ void QuestManager::DoActivateQuestObj(int id)
 		PhysicsManager::GetInstance()->addId_1(pos.x, pos.y);
 		break;
 	case 1001:
-		 pos = PhysicsManager::GetInstance()->GetChatObj(id);
-		 PhysicsManager::GetInstance()->RemoveChat(pos.x, pos.y);
-
+		GameObject* UI = GameManager::GetInstance()->GetUIObj();
+		UI->GetComponent<SaveLoadInterface>()->SetActive(true);
+		GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerMovement>()->SetActive(false);
+		GameManager::GetInstance()->GetPlayer()->GetComponent<PlayerAction>()->SetActive(false);
 		//세이브창 키기 
 		break;
 	}
@@ -249,4 +253,26 @@ void QuestManager::Clear()
 		it.second.clear();
 	}
 	questActionObjMap.clear();
+}
+
+void QuestManager::Write(std::ostream& os) const
+{
+	os << currQuest << "\t";
+}
+
+void QuestManager::Read(std::istream& is)
+{
+	is >> currQuest;
+}
+
+std::ostream& operator<<(std::ostream& os, const QuestManager& questManager)
+{
+	questManager.Write(os);
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, QuestManager& questManager)
+{
+	questManager.Read(is);
+	return is;
 }

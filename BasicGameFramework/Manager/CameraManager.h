@@ -43,6 +43,11 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Release() override;
+
+	virtual void Write(std::ostream& os) const;
+	friend std::ostream& operator<<(std::ostream& os, const CameraManager& cameraManager);
+	virtual void Read(std::istream& is);
+	friend std::istream& operator>>(std::istream& is, CameraManager& cameraManager);
 private:
 	POINT cameraPos = {};
 	int maxPosX = 0;

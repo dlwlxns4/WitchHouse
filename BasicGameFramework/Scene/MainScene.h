@@ -2,6 +2,9 @@
 
 #include "Scene.h"
 #include "../Util/Singleton.h"
+#include <vector>
+
+using namespace std;
 
 class BackPanel;
 class MainScene : public Scene, Singleton<MainScene>
@@ -16,6 +19,7 @@ public:
 
 	void					DoTrap(int id);
 	void					TransMap(int mapNum);
+	void					DataLoad(int mapNum);
 
 	void					Save(int saveIndex = 0);
 	void					Load(int loadIndex = 0);
@@ -23,16 +27,19 @@ public:
 
 	void					Debug();
 	void					SetActiveBackPanelFlag(bool isActive);
+	vector<Layer*>*			GetMapData() { return _layers; }
 	void					SetEffect(int id);
 private:
-	std::vector<Layer*>*	_layers;
-	std::vector<Layer*>*	_CopyLayer;
+	vector<Layer*>*	_layers;
+	vector<Layer*>*	_CopyLayer;
 	int						num = 0;
 	bool					isShowRect = false;
 	bool					isShowCollider = false;
 
 	int						nextSceneNum = 0;
 	bool					loadFlag = false;
+	bool					dataLoadFlag = false;
+	bool					isDataLoad = false;
 	bool					isFirst = true;
 	bool					backPaenlActiveFlag = false;
 

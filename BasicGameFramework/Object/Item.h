@@ -18,6 +18,7 @@ public:
 	int					GetCount() { return count; }
 	wstring				GetName();
 	wstring				GetInfo();
+	int					GetId() { return id; }
 
 	virtual bool CompareId(int id) =0;
 protected:
@@ -26,6 +27,7 @@ protected:
 	wstring				info = L"";
 	wstring				useString = L"";
 	int					count = 0;
+	int					id = 0;
 };
 
 class Letter : public Item
@@ -40,7 +42,6 @@ public:
 
 	int GetId() { return id; }
 protected:
-	int id = 1;
 };
 
 class Scissors : public Item
@@ -56,7 +57,6 @@ public:
 	int GetId() { return id; }
 
 protected:
-	int id = 0;
 };
 
 class TeddyBear : public Item
@@ -72,7 +72,6 @@ public:
 	int GetId() { return id; }
 
 protected:
-	int id = 2;
 };
 
 class TeddyBearWithoutLimbs :public Item
@@ -88,5 +87,4 @@ public:
 	int GetId() { return id; }
 
 protected:
-	int id = 2;
 };

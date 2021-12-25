@@ -15,11 +15,18 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	void SetIsSave(bool isSave) { this->isSave = isSave; }
+
+	void Save(int currSelect);
+	void Load(int currSelect);
 private:
 	Sprite* saveLoadInfo = nullptr;
 	Sprite* saveLoadPanel[4] = {nullptr};
-
+	Sprite* selectPanel = nullptr;
+	Sprite* portrait = nullptr;
 	int currSelect = 0;
+
+	float selectPanelOpacity = 1;
+	bool isDecrease = true;
 
 	int isSave = true;
 };

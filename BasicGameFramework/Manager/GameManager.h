@@ -63,6 +63,11 @@ public:
 	POINT GetCameraData(int prevScene, int mapNum);
 	GameObject* GetPlayer() { return player; };
 
+
+	void Write(std::ostream& os) const;
+	friend std::ostream& operator<<(std::ostream& os, const GameManager& gameManager);
+	void Read(std::istream& is);
+	friend std::istream& operator>>(std::istream& is, GameManager& gameManager);
 private:
 	State state = State::None;
 

@@ -68,6 +68,12 @@ void MainScene::Update()
 		Load(nextSceneNum);
 	}
 
+	if (dataLoadFlag == true)
+	{
+		dataLoadFlag = false;
+		Load(nextSceneNum);
+	}
+
 	if (backPaenlActiveFlag == true)
 	{
 		backPanel->SetIsBright(false);
@@ -134,6 +140,13 @@ void MainScene::TransMap(int mapNum)
 	loadFlag = true;
 	nextSceneNum = mapNum;
 	backPanel->SetActive(true);
+}
+
+void MainScene::DataLoad(int mapNum)
+{
+	nextSceneNum = mapNum;
+	isDataLoad = true;
+	dataLoadFlag = true;
 }
 
 void MainScene::Save(int saveIndex)
@@ -251,6 +264,12 @@ void MainScene::Load(int loadIndex)
 		GameManager::GetInstance()->SetCurrScene(loadIndex);
 	}
 
+	if (isDataLoad)
+	{
+		isDataLoad = false;
+		POINT pos = GameManager::GetInstance()->GetPlayerPos();
+		GameManager::GetInstance()->SetPlayerPos(pos);
+	}
 
 	openFile.close();
 

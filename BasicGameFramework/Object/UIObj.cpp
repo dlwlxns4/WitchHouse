@@ -17,10 +17,10 @@ void UIObj::Init()
 	InteractionComp* sprite = new InteractionComp(this, 1);
 	sprite->SetSprite(L"Image/UI/ChatPanel.png", L"Image/UI/SelectPanel_03.png");
 
-	UserInfoComponent* userInfo = new UserInfoComponent(this, 2);
+	UserInfoComponent* userInfo = new UserInfoComponent(this, 4);
 	userInfo->SetSprite(L"Image/UI/UserInfo_1.png", L"Image/UI/UserInfo_2.png");
 
-	InvenComponent* inven = new InvenComponent(this, 4);
+	InvenComponent* inven = new InvenComponent(this, 2);
 	inven->SetActive(false);
 	inven->SetSprite(L"Image/UI/InventoryPanel.png", L"Image/UI/ItemInfoPanel.png", L"Image/UI/SelectPanel_02.png");
 
