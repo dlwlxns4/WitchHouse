@@ -41,6 +41,7 @@
 #include "../Object/TriggerObj.h"
 #include "../Object/TrapActionObj.h"
 #include "../Object/TrapActionObj.h"
+#include "../Object/Cat.h"
 
 TileSelectComponent::~TileSelectComponent()
 {
@@ -140,12 +141,16 @@ void TileSelectComponent::Update()
 			{
 				txt = L"TileType : TrapActionObj";
 			}
+			else if ((int)tileType == 13)
+			{
+				txt = L"TileType : TrapActionObj";
+			}
 			tileTypeTxt->GetComponent<TextComponent>()->SetText(txt);
 		}
 	}
 	else if (Input::GetButtonDown('4'))
 	{
-		if ((int)tileType < 12)
+		if ((int)tileType < 13)
 		{
 			int curType = (int)tileType;
 			tileType = TileType(++curType);
@@ -201,6 +206,10 @@ void TileSelectComponent::Update()
 			else if ((int)tileType == 12)
 			{
 				txt = L"TileType : TrapActionObj";
+			}
+			else if ((int)tileType == 13)
+			{
+				txt = L"TileType : Cat";
 			}
 			tileTypeTxt->GetComponent< TextComponent>()->SetText(txt);
 		}
@@ -382,6 +391,7 @@ void TileSelectComponent::Update()
 		{
 			QuestManager::GetInstance()->AddQuestActionId(mouseIndexX, mouseIndexY);
 		}
+
 	}
 
 	if (Input::GetButtonDown(VK_LSHIFT))
@@ -490,7 +500,7 @@ void TileSelectComponent::Render(HDC hdc)
 		{
 			for (auto itt : it.second)
 			{
-				ImageManager::GetInstance()->DrawColliderRectBrown(it.first, itt.first, (((TrapActionObj*)(itt.second)))->GetId() );
+				ImageManager::GetInstance()->DrawColliderRectBrown(it.first, itt.first, (((TrapActionObj*)(itt.second)))->GetId());
 			}
 		}
 
@@ -624,10 +634,17 @@ void TileSelectComponent::SetObject(int mouseIndexX, int mouseIndexY)
 	{
 		TrapActionObj* trapActionObj = new TrapActionObj(mapData[currLayer - 1], L"TrapActionObj");
 		trapActionObj->Init();
-		trapActionObj->SetPosition(mouseIndexX* TILE_SIZE, mouseIndexY* TILE_SIZE);
 		trapActionObj->GetComponent<SpriteRenderer>()->SetSprite(sampleIndex, downPos.first, downPos.second);
-		
+
 		QuestManager::GetInstance()->SetQuestActionObj(trapActionObj->GetPosition().x / 32, trapActionObj->GetPosition().y / 32, trapActionObj);
+	}
+	else if (tileType == TileType::Cat)
+	{
+		Cat* cat = new Cat(mapData[currLayer - 1], L"Cat");
+		cat->SetPosition(mouseIndexX* TILE_SIZE, mouseIndexY* TILE_SIZE);
+		cat->Init();
+		cat->SetId(num);
+		cat->GetComponent<SpriteRenderer>()->SetSprite(sampleIndex, downPos.first, downPos.second);
 	}
 }
 

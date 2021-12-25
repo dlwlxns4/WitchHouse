@@ -22,6 +22,9 @@ void TalkManager::Init()
 	//----------------Clock
 	talkData.emplace(WALL_CLOCK_ID, vector<wstring>{L"커다란 괘종시계가있다.\n\n시계는 소리와 함께 시간을 가르키고 있다."});
 
+	//---------------Cat
+	talkData.emplace(ID0_CAT, vector<wstring>{L"검은고양이\n\n\t\"정신은 차렸어?\""});
+	talkData.emplace(ID0_CAT_SAVE, vector<wstring>{L"검은고양이\n\n\t\"인간이 여기에 있으면 위험해!\""});
 
 
 	//Message

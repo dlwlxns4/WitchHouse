@@ -161,9 +161,15 @@ void QuestManager::DoActivateQuestObj(int id)
 		//	}
 		//}
 		break;
-	case 1000:
-		cout << "고양이";
+	case 1000 :
+		POINT pos = PhysicsManager::GetInstance()->GetChatObj(id);
+		PhysicsManager::GetInstance()->addId_1(pos.x, pos.y);
+		break;
+	case 1001:
+		 pos = PhysicsManager::GetInstance()->GetChatObj(id);
+		 PhysicsManager::GetInstance()->RemoveChat(pos.x, pos.y);
 
+		//세이브창 키기 
 		break;
 	}
 }

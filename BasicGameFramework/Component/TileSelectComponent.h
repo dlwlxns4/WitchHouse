@@ -27,7 +27,8 @@ private:
 		Quest =9,
 		Door = 10,
 		TrapObj = 11,
-		TrapActionObj = 12
+		TrapActionObj = 12,
+		Cat = 13
 	};
 
 	using Component::Component;

@@ -169,6 +169,7 @@
     <ClInclude Include="Component\Player\PlayerMovement.h" />
     <ClInclude Include="Component\Player\PlayerSpriteRenderer.h" />
     <ClInclude Include="Component\RectComponent.h" />
+    <ClInclude Include="Component\SaveLoadInterface.h" />
     <ClInclude Include="Component\SizeAdjRenderer.h" />
     <ClInclude Include="Component\SpriteRenderer.h" />
     <ClInclude Include="Component\TextComponent.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="Component\Player\PlayerMovement.cpp" />
     <ClCompile Include="Component\Player\PlayerSpriteRenderer.cpp" />
     <ClCompile Include="Component\RectComponent.cpp" />
+    <ClCompile Include="Component\SaveLoadInterface.cpp" />
     <ClCompile Include="Component\SizeAdjRenderer.cpp" />
     <ClCompile Include="Component\SpriteRenderer.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />

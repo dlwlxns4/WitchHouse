@@ -28,3 +28,7 @@
 
 //----------------------Message
 #define WELCOME_MESSAGE_ID 100
+
+//----------------------Cat
+#define ID0_CAT 1000
+#define ID0_CAT_SAVE 1001

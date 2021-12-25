@@ -82,6 +82,22 @@ int PhysicsManager::GetChatId(int posX, int posY)
 	return id;
 }
 
+POINT PhysicsManager::GetChatObj(int id)
+{
+	for (auto it = chatObj.begin(); it != chatObj.end(); ++it)
+	{
+		for (auto itt = it->second.begin(); itt != it->second.end(); ++itt)
+		{
+			if ((itt->second) == id)
+			{
+				POINT pos = { it->first,itt->first };
+				return pos;
+			}
+		}
+	}
+	return { 0, 0 };
+}
+
 void PhysicsManager::SetItem(int posX, int posY)
 {
 

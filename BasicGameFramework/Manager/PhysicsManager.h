@@ -52,6 +52,7 @@ public:
 	void SetChat(int posX, int posY);
 	void RemoveChat(int posX, int posY);
 	int  GetChatId(int posX, int posY);
+	POINT GetChatObj(int id);
 
 	//Item
 	unordered_map<int, unordered_map<int, int>>* GetItemObj() { return &itemObj; }

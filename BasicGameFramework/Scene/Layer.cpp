@@ -12,6 +12,7 @@
 #include "../Object/QuestObj.h"
 #include "../Object/TriggerObj.h"
 #include "../Object/TrapActionObj.h"
+#include "../Object/Cat.h"
 
 Layer::Layer(Scene* scene, const std::wstring& tag, INT32 zOrder)
 	:
@@ -215,6 +216,11 @@ std::istream& operator>>(std::istream& is, Layer& layer)
 				TrapActionObj* trapAction = new TrapActionObj(&layer, L"TrapAction");
 				trapAction->Read(is);
 				break;
+			}
+			case 10:
+			{
+				Cat* cat = new Cat(&layer, L"Cat");
+				cat->Read(is);
 			}
 		}
 	} while (objType != -1);

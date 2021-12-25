@@ -113,6 +113,8 @@ void ImageManager::Init(HWND hWnd, HINSTANCE hInstance, IWICImagingFactory* pIma
 	AddSprite(L"Image/UI/SelectPanel_03.png");
 	AddSprite(L"Image/UI/title.jpg");
 	AddSprite(L"Image/UI/GameOver.png");
+	AddSprite(L"Image/UI/SaveLoadInfo.png");
+	AddSprite(L"Image/UI/SaveLoadPanel.png");
 
 	//-----------Obj
 	AddSprite(L"Image/Graphics/Obj/HouseDoor.png");

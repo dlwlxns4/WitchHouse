@@ -6,6 +6,7 @@
 #include "../Util/AboutTile.h"
 
 #include "../Component/InvenComponent.h"
+#include "../Component/SaveLoadInterface.h"
 
 #include "../Object/GameObject.h"
 
@@ -84,6 +85,12 @@ void UserInfoComponent::Update()
 			if (selectState == SelectUI::Inven)
 			{
 				_owner->GetComponent<InvenComponent>()->SetActive(true);
+				this->SetActive(false);
+			}
+			else if (selectState == SelectUI::Load)
+			{
+				_owner->GetComponent<SaveLoadInterface>()->SetActive(true);
+				_owner->GetComponent<SaveLoadInterface>()->SetIsSave(false);
 				this->SetActive(false);
 			}
 		}

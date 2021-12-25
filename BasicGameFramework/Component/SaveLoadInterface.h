@@ -1,0 +1,25 @@
+#pragma once
+
+#include "Component.h"
+
+class Sprite;
+class SaveLoadInterface : public Component
+{
+public:
+	using Component::Component;
+	virtual ~SaveLoadInterface() = default;
+
+	void SetSprite(const wchar_t* infoName, const wchar_t* PanelName);
+
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
+
+	void SetIsSave(bool isSave) { this->isSave = isSave; }
+private:
+	Sprite* saveLoadInfo = nullptr;
+	Sprite* saveLoadPanel[4] = {nullptr};
+
+	int currSelect = 0;
+
+	int isSave = true;
+};
