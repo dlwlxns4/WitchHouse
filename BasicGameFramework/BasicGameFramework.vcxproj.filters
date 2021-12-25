@@ -316,6 +316,12 @@
     <ClInclude Include="Component\SaveLoadInterface.h">
       <Filter>Component\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Util\CSound.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SoundManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicGameFramework.rc">
@@ -534,6 +540,12 @@
     </ClCompile>
     <ClCompile Include="Component\SaveLoadInterface.cpp">
       <Filter>Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\CSound.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\SoundManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

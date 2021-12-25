@@ -78,6 +78,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -125,7 +128,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -187,6 +190,7 @@
     <ClInclude Include="Manager\PhysicsManager.h" />
     <ClInclude Include="Manager\QuestManager.h" />
     <ClInclude Include="Manager\SceneManager.h" />
+    <ClInclude Include="Manager\SoundManager.h" />
     <ClInclude Include="Manager\TalkManager.h" />
     <ClInclude Include="Object\AkariObj.h" />
     <ClInclude Include="Object\BackPanel.h" />
@@ -230,6 +234,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Util\AboutTile.h" />
     <ClInclude Include="Util\Camera.h" />
+    <ClInclude Include="Util\CSound.h" />
     <ClInclude Include="Util\Input.h" />
     <ClInclude Include="Util\Macro.h" />
     <ClInclude Include="Util\Pivot.h" />
@@ -273,6 +278,7 @@
     <ClCompile Include="Manager\PhysicsManager.cpp" />
     <ClCompile Include="Manager\QuestManager.cpp" />
     <ClCompile Include="Manager\SceneManager.cpp" />
+    <ClCompile Include="Manager\SoundManager.cpp" />
     <ClCompile Include="Manager\TalkManager.cpp" />
     <ClCompile Include="Object\AkariObj.cpp" />
     <ClCompile Include="Object\BackPanel.cpp" />
@@ -316,6 +322,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Util\CSound.cpp" />
     <ClCompile Include="Util\Input.cpp" />
     <ClCompile Include="Util\Pivot.cpp" />
     <ClCompile Include="Util\Sprite.cpp" />

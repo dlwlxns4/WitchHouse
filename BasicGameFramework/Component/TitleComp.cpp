@@ -8,7 +8,7 @@
 #include "../Manager/QuestManager.h"
 #include "../Manager/ItemManager.h"
 #include "../Manager/CameraManager.h"
-
+#include "../Manager/SoundManager.h"
 
 void TitleComp::Init()
 {
@@ -80,6 +80,7 @@ void TitleComp::Update()
 			{
 			case SelectState::StartOver:
 				MapCopy();
+				SoundManager::GetInstance()->StopSound(L"Title");
 				SceneManager::GetInstance()->SetNextScene(L"Main");
 				state = SelectState::None;
 				GameManager::GetInstance()->SetCurrScene(0);

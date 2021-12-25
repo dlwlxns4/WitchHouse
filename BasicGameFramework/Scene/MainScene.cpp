@@ -8,6 +8,8 @@
 #include "../Manager/CameraManager.h"
 #include "../Manager/QuestManager.h"
 #include "../Manager/ItemManager.h"
+#include "../Manager/SoundManager.h"
+
 #include "../Object/Player.h"
 #include "../Object/UIObj.h"
 #include "../Object/BackPanel.h"
@@ -274,6 +276,29 @@ void MainScene::Load(int loadIndex)
 	}
 
 	openFile.close();
+
+
+	switch (GameManager::GetInstance()->GetCurrScene())
+	{
+	case 0:
+	case 1:
+	case 2:
+	case 3:
+		SoundManager::GetInstance()->StopSound(L"House");
+		SoundManager::GetInstance()->startSound(L"Wind");
+		SoundManager::GetInstance()->fadeUpSound(L"Wind");
+		break;
+	case 4:
+	case 5:
+	case 6:
+	case 7:
+	case 8:
+	case 9:
+		SoundManager::GetInstance()->StopSound(L"Wind");
+		SoundManager::GetInstance()->startSound(L"House");
+		SoundManager::GetInstance()->fadeUpSound(L"House");
+		break;
+	}
 
 }
 

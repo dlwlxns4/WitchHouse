@@ -8,6 +8,7 @@
 #include "Manager/CameraManager.h"
 #include "Manager/GameManager.h"
 #include "Manager/ItemManager.h"
+#include "Manager/SoundManager.h"
 
 //--------------------------d2d
 
@@ -135,6 +136,7 @@ bool Game::Init(HINSTANCE hInst)
 	SceneManager::GetInstance()->Init();
 	GameManager::GetInstance()->Init();
 	ItemManager::GetInstance()->Init();
+	SoundManager::GetInstance()->Init();
 
 	return true;
 }
@@ -204,6 +206,7 @@ void Game::processInput()
 
 void Game::update()
 {
+	SoundManager::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 	if (SceneManager::GetInstance()->IsMainScene())
 	{

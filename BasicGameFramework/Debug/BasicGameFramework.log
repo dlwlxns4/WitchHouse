@@ -1,0 +1,164 @@
+﻿  stdafx.cpp
+  BasicGameFramework.cpp
+  Astar.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\Astar.cpp(253,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  CircleComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\CircleComponent.cpp(11,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Component.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\Component.cpp(63,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  DesiredPosTextComp.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\DesiredPosTextComp.cpp(40,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  FullSizeRenderer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\FullSizeRenderer.cpp(18,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  GameOverComp.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\GameOverComp.cpp(12,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  InvenComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\InvenComponent.cpp(164,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  InteractionComp.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\InteractionComp.cpp(255,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  MapFrameComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\MapFrameComponent.cpp(23,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  ParallaxSpriteRenderer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\ParallaxSpriteRenderer.cpp(81,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  PlayerAction.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\Player\PlayerAction.cpp(57,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  PlayerMovement.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\Player\PlayerMovement.cpp(275,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  PlayerSpriteRenderer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\Player\PlayerSpriteRenderer.cpp(69,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  RectComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\RectComponent.cpp(27,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SaveLoadInterface.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\SaveLoadInterface.cpp(252,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SizeAdjRenderer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\SizeAdjRenderer.cpp(91,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SpriteRenderer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\SpriteRenderer.cpp(92,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TextComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\TextComponent.cpp(40,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TileSelectComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\TileSelectComponent.cpp(726,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  TitleComp.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\TitleComp.cpp(136,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TrapAction.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\TrapAction.cpp(159,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  UserInfoComponent.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\UserInfoComponent.cpp(43,1): warning C4005: 'HELTHBAR_POSY': 매크로 재정의
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\UserInfoComponent.cpp(37): message : 'HELTHBAR_POSY'의 이전 정의를 참조하십시오.
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Component\UserInfoComponent.cpp(214,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Game.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(50,54): warning C4099: 'IDWriteTextFormat': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\ImageManager.h(12): message : 'IDWriteTextFormat' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(1279,94): warning C4099: 'ID2D1SolidColorBrush': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(1279): message : 'ID2D1SolidColorBrush' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(3262,95): warning C4099: 'ID2D1HwndRenderTarget': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(3262): message : 'ID2D1HwndRenderTarget' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(283,56): warning C4099: 'IWICImagingFactory': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\ImageManager.h(9): message : 'IWICImagingFactory' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(6274,24): warning C4099: 'IWICImagingFactory': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(6274): message : 'IWICImagingFactory' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dwrite.h(1299,25): warning C4099: 'IDWriteFactory': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Game.h(8): message : 'IDWriteFactory' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dwrite.h(2049,94): warning C4099: 'IDWriteTextFormat': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dwrite.h(2049): message : 'IDWriteTextFormat' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dwrite.h(4700,91): warning C4099: 'IDWriteFactory': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dwrite.h(4700): message : 'IDWriteFactory' 선언을 참조하십시오.
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\Sprite.h(4,18): warning C4099: 'ID2D1Bitmap': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d2d1.h(1105): message : 'ID2D1Bitmap' 선언을 참조하십시오.
+  CameraManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\CameraManager.cpp(158,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  GameManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\GameManager.cpp(127,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  ImageManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\ImageManager.cpp(401,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  ItemManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\ItemManager.cpp(165,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  PhysicsManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\PhysicsManager.cpp(313,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  QuestManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\QuestManager.cpp(279,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SceneManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\SceneManager.cpp(93,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SoundManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\SoundManager.cpp(30,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TalkManager.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Manager\TalkManager.cpp(120,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  AkariObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\AkariObj.cpp(39,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  BackPanel.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\BackPanel.cpp(100,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Cat.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\Cat.cpp(35,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  GameOverObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\GameOverObj.cpp(13,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Item.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\Item.cpp(170,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  ItemFactory.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\ItemFactory.cpp(45,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  MovableObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\MovableObj.cpp(16,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  PortalObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\PortalObj.cpp(30,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  QuestObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\QuestObj.cpp(126,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TitleObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\TitleObj.cpp(27,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TrapActionObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\TrapActionObj.cpp(32,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TwinkleObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\TwinkleObj.cpp(39,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  UIObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\UIObj.cpp(32,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  GameObject.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\GameObject.cpp(313,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  MapData.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\MapData.cpp(29,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  MapFrame.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\MapFrame.cpp(9,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Obstacle.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\Obstacle.cpp(13,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  ParallaxObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\ParallaxObj.cpp(15,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Player.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\Player.cpp(38,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  SampleSprite.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\SampleSprite.cpp(11,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Text.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\Text.cpp(4,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TileObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\TileObj.cpp(35,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TriggerObj.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Object\TriggerObj.cpp(137,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  GameOverScene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\GameOverScene.cpp(13,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Layer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\Layer.cpp(229,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  MainScene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\MainScene.cpp(373,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Scene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\Scene.cpp(89,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  TempScene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\TempScene.cpp(20,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TilemapToolScene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\TilemapToolScene.cpp(21,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  TitleScene.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\TitleScene.cpp(22,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  UILayer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Scene\UILayer.cpp(1,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  CSound.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\CSound.cpp(90,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Input.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\Input.cpp(78,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Pivot.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\Pivot.cpp(12,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Sprite.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\Sprite.cpp(368,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  Timer.cpp
+C:\Users\ChangMin\WitchHouse\BasicGameFramework\Util\Timer.cpp(49,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+  코드를 생성하고 있습니다...
