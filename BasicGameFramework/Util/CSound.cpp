@@ -35,15 +35,22 @@ void CSound::Release() {
 }
 
 
-void CSound::play() {
+bool CSound::play() {
 
 	if (isPlay == false)
 	{
 		isPlay = true;
 		FMOD_System_PlaySound(g_sound_system, m_sound, nullptr, false, &m_channel);
+		return true;
 	}
-
+	return false;
 }
+
+void CSound::InfPlay()
+{
+	FMOD_System_PlaySound(g_sound_system, m_sound, nullptr, false, &m_channel);
+}
+
 
 void CSound::pause() {
 	FMOD_Channel_SetPaused(m_channel, true);

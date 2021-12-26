@@ -5,6 +5,7 @@
 #include "../Manager/TalkManager.h"
 #include "../Manager/ItemManager.h"
 #include "../Manager/QuestManager.h"
+#include "../Manager/SoundManager.h"
 
 #include "../Util/Sprite.h"
 #include "../Object/GameObject.h"
@@ -51,7 +52,7 @@ void InteractionComp::Update()
 						isClose = true;
 						int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
 						QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
-
+						SoundManager::GetInstance()->startInfSound(L"Click");
 					}
 				}
 			}
@@ -65,6 +66,7 @@ void InteractionComp::Update()
 						chatEffect.clear();
 						talkIndexStr.clear();
 						strIndex = 0;
+						SoundManager::GetInstance()->startInfSound(L"Click");
 
 					}
 				}
@@ -81,7 +83,11 @@ void InteractionComp::Update()
 					isClose = true;
 					int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
 					QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
-
+					int id = ItemManager::GetInstance()->GetCurrFindItem();
+					if (ItemManager::GetInstance()->CanObtainItem(id))
+					{
+						SoundManager::GetInstance()->startInfSound(L"Item");
+					}
 				}
 			}
 			else if (data.size() - 2 == vecIndex && data[vecIndex] == talkIndexStr)
@@ -94,6 +100,8 @@ void InteractionComp::Update()
 					{
 						state = ApprovalState::Disagree;
 					}
+					SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 				}
 				else if (Input::GetButtonDown(VK_UP))
 				{
@@ -101,6 +109,8 @@ void InteractionComp::Update()
 					{
 						state = ApprovalState::Agree;
 					}
+					SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 				}
 
 				if (Input::GetButtonDown('Z'))
@@ -123,6 +133,8 @@ void InteractionComp::Update()
 						isClose = true;
 					}
 					isShowSelectPanel = false;
+					SoundManager::GetInstance()->startInfSound(L"Click");
+
 				}
 			}
 			else
@@ -134,7 +146,9 @@ void InteractionComp::Update()
 						vecIndex++;
 						talkIndexStr.clear();
 						strIndex = 0;
+						SoundManager::GetInstance()->startInfSound(L"Click");
 					}
+
 				}
 			}
 		}

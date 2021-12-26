@@ -5,6 +5,7 @@
 #include "../Manager/ItemManager.h"
 #include "../Manager/SceneManager.h"
 #include "../Manager/CameraManager.h"
+#include "../Manager/SoundManager.h"
 
 #include "../Scene/MainScene.h"
 
@@ -50,6 +51,8 @@ void SaveLoadInterface::Update()
 				isSave = true;
 				_owner->GetComponent<UserInfoComponent>()->SetActive(true);
 			}
+
+			SoundManager::GetInstance()->startInfSound(L"Click");
 			delay = 0;
 		}
 
@@ -63,6 +66,7 @@ void SaveLoadInterface::Update()
 			{
 				Load(currSelect);
 			}
+			SoundManager::GetInstance()->startInfSound(L"Save");
 		}
 
 		if (isDecrease == true)
@@ -86,12 +90,15 @@ void SaveLoadInterface::Update()
 		{
 			if (currSelect > 0)
 				currSelect--;
+
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
 		}
 		else if (Input::GetButtonDown(VK_DOWN))
 		{
 			if (currSelect < 3)
 				currSelect++;
 
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
 		}
 	}
 }

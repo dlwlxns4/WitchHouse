@@ -134,7 +134,7 @@ public:
 		else if (dir == END)
 		{
 			moveDistance++;
-			if (moveDistance > 6)
+			if (moveDistance > 30)
 			{
 				_owner->SetActionStrategy(CameraActionState::Null);
 				SceneManager::GetInstance()->SetNextScene(L"GameOver");

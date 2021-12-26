@@ -10,6 +10,7 @@
 #include "../../Manager/GameManager.h"
 #include "../../Manager/TalkManager.h"
 #include "../../Manager/ItemManager.h"
+#include "../../Manager/SoundManager.h"
 
 #include "PlayerSpriteRenderer.h"
 void PlayerAction::Update()

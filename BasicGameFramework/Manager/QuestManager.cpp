@@ -7,6 +7,7 @@
 #include "../Component/SaveLoadInterface.h"
 #include "../Component/Player/PlayerAction.h"
 
+#include "../Manager/SoundManager.h"
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/GameManager.h"
 
@@ -137,6 +138,10 @@ void QuestManager::DoActivateQuestObj(int id)
 			}
 		}
 		break;
+	case 0:
+		POINT pos = PhysicsManager::GetInstance()->GetItemPos(0);
+		PhysicsManager::GetInstance()->RemoveItem(pos.x, pos.y);
+		break;
 	case 11: // 곰돌이 얻었을 때 
 		//곰돌이 이미지 없애기 
 		for (auto it = questActionObjMap.begin(); it != questActionObjMap.end(); ++it)
@@ -150,6 +155,8 @@ void QuestManager::DoActivateQuestObj(int id)
 				}
 			}
 		}
+		pos = PhysicsManager::GetInstance()->GetItemPos(2);
+		PhysicsManager::GetInstance()->RemoveItem(pos.x, pos.y);
 		break;
 	case 12:
 		//for (auto it = questActionObjMap.begin(); it != questActionObjMap.end(); ++it)
@@ -165,7 +172,7 @@ void QuestManager::DoActivateQuestObj(int id)
 		//}
 		break;
 	case 1000 :
-		POINT pos = PhysicsManager::GetInstance()->GetChatObj(id);
+		pos = PhysicsManager::GetInstance()->GetChatObj(id);
 		PhysicsManager::GetInstance()->addId_1(pos.x, pos.y);
 		break;
 	case 1001:

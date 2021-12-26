@@ -19,7 +19,9 @@ public:
 	void Release();
 
 	void StopSound(wstring sound);
-	void startSound(wstring sound);
+	bool startSound(wstring sound);
+
+	void startInfSound(wstring sound);
 
 	void fadeUpSound(wstring sound);
 

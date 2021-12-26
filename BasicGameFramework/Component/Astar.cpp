@@ -10,6 +10,7 @@
 #include "../Manager/PhysicsManager.h"
 #include "../Manager/ImageManager.h"
 #include "../Manager/SceneManager.h"
+#include "../Manager/SoundManager.h"
 
 #include "../Util/Timer.h"
 
@@ -201,6 +202,8 @@ void Astar::DoAstar()
 	POINT playerPos = player->GetPosition();
 	if (_owner->GetPosition().x == playerPos.x && _owner->GetPosition().y == playerPos.y)
 	{
+		SoundManager::GetInstance()->startInfSound(L"PressTeddy");
+		SoundManager::GetInstance()->StopSound(L"Chaser");
 		isFind = true;
 		player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 		_owner->GetComponent<SizeAdjRenderer>()->SetSprite(L"Image/Graphics/Obj/AstarTeddy_Find.png");
@@ -212,7 +215,7 @@ void Astar::DoAstar()
 
 void Astar::PressPlayer()
 {
-		delay += Timer::GetDeltaTime();
+	delay += Timer::GetDeltaTime();
 	if (isFinish == false)
 	{
 		if (delay > 100.0f)

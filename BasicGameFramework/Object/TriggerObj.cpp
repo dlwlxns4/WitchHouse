@@ -7,6 +7,7 @@
 #include "../Manager/SceneManager.h"
 #include "../Manager/CameraManager.h"
 #include "../Manager/PhysicsManager.h"
+#include "../Manager/SoundManager.h"
 
 void TriggerObj::Init()
 {
@@ -47,18 +48,21 @@ void DoorObj::OnTrigger()
 	{
 		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(100,10,32);
 		animlimitTime = 15;
+		SoundManager::GetInstance()->startSound(L"Kisimi");
 	}
 	else
 	{
 		((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetLimitTime(2,3,8);
 		animlimitTime = 2;
-
+		SoundManager::GetInstance()->startInfSound(L"Door");
 	}
 	if (QuestManager::GetInstance()->GetQuest() <= 12)
 	{
 		QuestManager::GetInstance()->SetQuest(13);
 	}
 	((IntoHouseAction*)(player->GetComponent<PlayerMovement>()->GetActionStartegy()))->SetNextScene(loadMap);
+
+
 }
 
 void DoorObj::Update()

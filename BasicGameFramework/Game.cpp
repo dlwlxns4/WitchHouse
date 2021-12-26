@@ -133,10 +133,10 @@ bool Game::Init(HINSTANCE hInst)
 	TalkManager::GetInstance()->Init();
 	QuestManager::GetInstance()->Init();
 	CameraManager::GetInstance()->Init();
+	SoundManager::GetInstance()->Init();
 	SceneManager::GetInstance()->Init();
 	GameManager::GetInstance()->Init();
 	ItemManager::GetInstance()->Init();
-	SoundManager::GetInstance()->Init();
 
 	return true;
 }

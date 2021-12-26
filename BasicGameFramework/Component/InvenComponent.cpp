@@ -3,6 +3,7 @@
 #include "../Manager/ItemManager.h"
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/SoundManager.h"
 #include "../Util/Sprite.h"
 #include "../Util/AboutTile.h"
 
@@ -20,10 +21,12 @@ void InvenComponent::Update()
 		SetActive(false);
 		_owner->GetComponent<UserInfoComponent>()->SetActive(true);
 		panelOpacity = 0;
+		SoundManager::GetInstance()->startInfSound(L"Click");
 	}
 	else if (Input::GetButtonDown('Z'))
 	{
 		ItemManager::GetInstance()->UseItem(selectInvenItem);
+		SoundManager::GetInstance()->startInfSound(L"Click");
 	}
 
 	if (panelOpacity <= 1)
@@ -36,13 +39,18 @@ void InvenComponent::Update()
 		if (selectInvenItem > 0)
 		{
 			selectInvenItem--;
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
+
 	}
 	else if (Input::GetButtonDown(VK_RIGHT))
 	{
 		if (selectInvenItem < ItemManager::GetInstance()->GetInventorySize() - 1)
 		{
 			selectInvenItem++;
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
 	}
 	else if (Input::GetButtonDown(VK_UP))
@@ -50,6 +58,8 @@ void InvenComponent::Update()
 		if (selectInvenItem - 2 > 0)
 		{
 			selectInvenItem -= 2;
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
 	}
 	else if (Input::GetButtonDown(VK_DOWN))
@@ -57,6 +67,8 @@ void InvenComponent::Update()
 		if (selectInvenItem + 2 < ItemManager::GetInstance()->GetInventorySize() - 1)
 		{
 			selectInvenItem += 2;
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
 	}
 

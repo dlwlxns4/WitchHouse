@@ -66,9 +66,9 @@ void MainScene::Update()
 		loadFlag = false;
 		GameObject* obj = PhysicsManager::GetInstance()->GetTriggerObj(nextSceneNum);
 		PhysicsManager::GetInstance()->RemoveCollider(obj->GetPosition().x / 32, obj->GetPosition().y / 32);
-		PhysicsManager::GetInstance()->RemoveCollider(obj->GetPosition().x / 32, obj->GetPosition().y / 32+1);
+		PhysicsManager::GetInstance()->RemoveCollider(obj->GetPosition().x / 32, obj->GetPosition().y / 32 + 1);
 		Save(GameManager::GetInstance()->GetCurrScene());
-		
+
 		Load(nextSceneNum);
 	}
 
@@ -101,6 +101,7 @@ void MainScene::DoTrap(int id)
 {
 	switch (id)
 	{
+	//Press
 	case 0:
 	{
 		GameObject* player = GameManager::GetInstance()->GetPlayer();
@@ -112,6 +113,7 @@ void MainScene::DoTrap(int id)
 	case 1:
 		if (QuestManager::GetInstance()->GetQuest() == 14)
 		{
+			SoundManager::GetInstance()->startInfSound(L"Kinzoku");
 			GameObject* player = GameManager::GetInstance()->GetPlayer();
 			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 			QuestManager::GetInstance()->SetTrapAction(2);
@@ -121,6 +123,7 @@ void MainScene::DoTrap(int id)
 	case 2:
 		if (QuestManager::GetInstance()->GetQuest() == 16)
 		{
+			SoundManager::GetInstance()->startInfSound(L"BearFoot");
 			GameObject* player = GameManager::GetInstance()->GetPlayer();
 			player->GetComponent<PlayerMovement>()->SetActionStartegy(PlayerActionState::Null);
 			QuestManager::GetInstance()->SetTrapAction(3);
@@ -130,6 +133,9 @@ void MainScene::DoTrap(int id)
 	case 3:
 		if (QuestManager::GetInstance()->GetQuest() == 18)
 		{
+			SoundManager::GetInstance()->startInfSound(L"Teddy");
+			SoundManager::GetInstance()->startInfSound(L"Chaser");
+			SoundManager::GetInstance()->StopSound(L"House");
 			AstarTeddy* teddy = new AstarTeddy(this, (*_layers)[0], L"AStar");
 			teddy->SetPosition(32 * 3, 32 * 5);
 			teddy->Init();
@@ -248,16 +254,40 @@ void MainScene::Load(int loadIndex)
 		openFile >> *PhysicsManager::GetInstance();
 	}
 
+	openFile.close();
 
 
-
+	switch (loadIndex)
+	{
+	case 0:
+	case 1:
+	case 2:
+		SoundManager::GetInstance()->StopSound(L"House");
+		SoundManager::GetInstance()->startSound(L"Wind");
+		SoundManager::GetInstance()->fadeUpSound(L"Wind");
+		if (isFirst == false && GameManager::GetInstance()->GetCurrScene()!=3)
+		{
+			SoundManager::GetInstance()->startInfSound(L"Forest");
+		}
+		break;
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+	case 7:
+	case 8:
+	case 9:
+		SoundManager::GetInstance()->StopSound(L"Wind");
+		SoundManager::GetInstance()->startSound(L"House");
+		SoundManager::GetInstance()->fadeUpSound(L"House");
+		break;
+	}
 
 	if (isFirst && QuestManager::GetInstance()->GetQuest() == 10)
 	{
 		isFirst = false;
 		GameManager::GetInstance()->SetPlayerPos({ 9 * 32, 9 * 32 });
 	}
-
 	else
 	{
 		int prevScene = GameManager::GetInstance()->GetCurrScene();
@@ -274,32 +304,6 @@ void MainScene::Load(int loadIndex)
 		POINT pos = GameManager::GetInstance()->GetPlayerPos();
 		GameManager::GetInstance()->SetPlayerPos(pos);
 	}
-
-	openFile.close();
-
-
-	switch (GameManager::GetInstance()->GetCurrScene())
-	{
-	case 0:
-	case 1:
-	case 2:
-		SoundManager::GetInstance()->StopSound(L"House");
-		SoundManager::GetInstance()->startSound(L"Wind");
-		SoundManager::GetInstance()->fadeUpSound(L"Wind");
-		break;
-	case 3:
-	case 4:
-	case 5:
-	case 6:
-	case 7:
-	case 8:
-	case 9:
-		SoundManager::GetInstance()->StopSound(L"Wind");
-		SoundManager::GetInstance()->startSound(L"House");
-		SoundManager::GetInstance()->fadeUpSound(L"House");
-		break;
-	}
-
 }
 
 void MainScene::Debug()

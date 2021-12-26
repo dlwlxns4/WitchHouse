@@ -20,6 +20,8 @@ void TitleComp::Init()
 
 	isSelect = false;
 	state = SelectState::StartOver;
+
+	SoundManager::GetInstance()->startSound(L"Title");
 	this->SetActive(true);
 }
 
@@ -35,6 +37,8 @@ void TitleComp::Update()
 				int tmp = (int)state;
 				state = (SelectState)(++tmp);
 			}
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
 		else if (Input::GetButtonDown(VK_UP))
 		{
@@ -43,11 +47,14 @@ void TitleComp::Update()
 				int tmp = (int)state;
 				state = (SelectState)(--tmp);
 			}
+			SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 		}
 
 		if (Input::GetButtonDown('Z'))
 		{
 			isSelect = true;
+			SoundManager::GetInstance()->startInfSound(L"Click");
 		}
 
 

@@ -260,7 +260,6 @@ void IntoHouseAction::DoAction()
 				moveDistance = 0;
 				GameManager::GetInstance()->SetState(State::None);
 				_obj->GetComponent<PlayerSpriteRenderer>()->SetFeet(1);
-				_obj->GetComponent<PlayerMovement>()->TiggerHelper(pos.x / 32, pos.y / 32);
 				motionCount++;
 
 			}

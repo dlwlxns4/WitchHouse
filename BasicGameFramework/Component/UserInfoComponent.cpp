@@ -2,6 +2,8 @@
 
 #include "../Manager/ImageManager.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/SoundManager.h"
+
 #include "../Util/Sprite.h"
 #include "../Util/AboutTile.h"
 
@@ -56,7 +58,7 @@ void UserInfoComponent::Update()
 			isShow = false;
 			panelOpacity = 0;
 		}
-
+		SoundManager::GetInstance()->startInfSound(L"Click");
 	}
 	if (GameManager::GetInstance()->GetState() == State::UserInfo && panelOpacity<1.0f && isShow)
 	{
@@ -70,6 +72,8 @@ void UserInfoComponent::Update()
 			if (selectState == SelectUI::Inven)
 			{
 				selectState = SelectUI::Load;
+				SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 			}
 		}
 		if (Input::GetButtonDown(VK_UP))
@@ -77,6 +81,8 @@ void UserInfoComponent::Update()
 			if (selectState == SelectUI::Load)
 			{
 				selectState = SelectUI::Inven;
+				SoundManager::GetInstance()->startInfSound(L"Cursor");
+
 			}
 		}
 
@@ -93,6 +99,8 @@ void UserInfoComponent::Update()
 				_owner->GetComponent<SaveLoadInterface>()->SetIsSave(false);
 				this->SetActive(false);
 			}
+			SoundManager::GetInstance()->startInfSound(L"Click");
+
 		}
 
 		if (isDecrease == true)

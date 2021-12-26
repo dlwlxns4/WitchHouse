@@ -2,6 +2,7 @@
 #include "../Object/GameObject.h"
 #include "../Manager/CameraManager.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/SoundManager.h"
 
 #include "../Component/SpriteRenderer.h"
 #include "../Component/Player/PlayerMovement.h"
@@ -37,6 +38,7 @@ void TrapAction::Init()
 
 void TrapAction::Update()
 {
+
 	_actionSterategy->DoAction();
 }
 
@@ -78,9 +80,15 @@ void ActionID0::DoAction()
 		_obj->SetPosition(pos.x + 16, pos.y);
 		moveDelay = 0;
 		cycleCount++;
+
+		SoundManager::GetInstance()->startInfSound(L"Otosu");
+
+		
 		if (cycleCount >= 11)
 		{
 			cycleCount = 0;
+			SoundManager::GetInstance()->startInfSound(L"Click");
+
 			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
 		}
 	}
@@ -95,11 +103,14 @@ void ActionID1::DoAction()
 		_obj->SetPosition(pos.x - 16, pos.y);
 		moveDelay = 0;
 		cycleCount++;
+
+
 		if (cycleCount >= 11)
 		{
 			cycleCount = 0;
 			_obj->GetComponent<TrapAction>()->SetActionStartegy(TrapActionState::Null);
 			CameraManager::GetInstance()->SetActionStrategy(CameraActionState::Shake);
+			SoundManager::GetInstance()->startInfSound(L"Press");
 		}
 	}
 }

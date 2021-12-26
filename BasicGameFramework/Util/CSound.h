@@ -31,7 +31,8 @@ public:
     static void
         Release();
 
-    void play();
+    bool play();
+    void InfPlay();
     void pause();
     void resume();
     void stop();
