@@ -12,10 +12,11 @@ class SoundManager : public Singleton<SoundManager>
 {
 public:
 	SoundManager() = default;
-	~SoundManager() = default;
+	~SoundManager();
 
 	void Init();
 	void Update();
+	void Release();
 
 	void StopSound(wstring sound);
 	void startSound(wstring sound);

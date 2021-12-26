@@ -1,6 +1,11 @@
 #include "SoundManager.h"
 #include "../Util/CSound.h"
 
+SoundManager::~SoundManager()
+{
+	Release();
+}
+
 void SoundManager::Init()
 {
 	CSound::Init();
@@ -28,6 +33,18 @@ void SoundManager::Update()
 	{
 		sound->Update();
 	}
+}
+
+void SoundManager::Release()
+{
+	CSound::Release();
+	for (auto it : playList)
+	{
+		delete it;
+		it = nullptr;
+	}
+	playList.clear();
+	soundMap.clear();
 }
 
 void SoundManager::StopSound(wstring sound)

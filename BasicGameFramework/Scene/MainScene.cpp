@@ -283,11 +283,11 @@ void MainScene::Load(int loadIndex)
 	case 0:
 	case 1:
 	case 2:
-	case 3:
 		SoundManager::GetInstance()->StopSound(L"House");
 		SoundManager::GetInstance()->startSound(L"Wind");
 		SoundManager::GetInstance()->fadeUpSound(L"Wind");
 		break;
+	case 3:
 	case 4:
 	case 5:
 	case 6:
