@@ -12,7 +12,7 @@ class ItemManager : public Singleton<ItemManager>
 {
 public:
 	ItemManager() = default;
-	~ItemManager();
+	virtual ~ItemManager();
 
 	void Init();
 	void UseItem(int index);
@@ -24,7 +24,7 @@ public:
 	int		GetCurrFindItem();
 	void	SetCurrFindItem(int id);
 	void	SetOwner(GameObject* owner);
-	void	RemoveItem(int id);
+	bool	RemoveItem(int id);
 	bool	CanObtainItem(int id);
 
 	void	Clear();
@@ -38,6 +38,6 @@ public:
 	friend std::istream& operator>>(std::istream& is, ItemManager& itemManager);
 private:
 	vector<Item*>	inventory = {};
-	ItemFactory*	itemFactory = {};
+	ItemFactory*	itemFactory = nullptr;
 	int				currFindItem = -1;
 };

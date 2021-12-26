@@ -23,7 +23,7 @@ class CameraManager : public Singleton<CameraManager>, IBehaviour
 {
 public:
 	CameraManager() = default;
-	~CameraManager();
+	virtual ~CameraManager();
 
 	void SetCameraPos(POINT pos);
 	POINT* GetCameraPos() { return &cameraPos; }
@@ -58,7 +58,7 @@ private:
 	int cameraDelay = 0;
 
 
-	std::array<class ICameraAction*, 2> actions;
+	std::array<class ICameraAction*, 2> actions = {nullptr};
 	class ICameraAction* _actionSterategy = actions[0];
 };
 
@@ -68,7 +68,7 @@ public:
 	ICameraAction(CameraManager* camera)
 		:_owner{ camera }
 	{}
-	~ICameraAction() = default;
+	virtual ~ICameraAction() = default;
 
 	virtual void DoAction() = 0;
 

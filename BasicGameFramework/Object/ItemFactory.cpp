@@ -2,6 +2,7 @@
 #include "../Manager/ItemManager.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/SoundManager.h"
+#include "../Manager/QuestManager.h"
 #include "../Object/GameObject.h"
 Item* ItemFactory::CreateItem(ItemKinds item)
 {
@@ -30,7 +31,6 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 		TeddyBear* teddyBear = new TeddyBear(_owner);
 		teddyBear->Init();
 		SoundManager::GetInstance()->startInfSound(L"Item");
-
 		return teddyBear;
 		break;
 	}

@@ -5,6 +5,7 @@
 
 QuestObj::~QuestObj()
 {
+	GameObject::Release();
 	Release();
 }
 
@@ -56,6 +57,7 @@ void QuestObj::Render(HDC hdc)
 
 void QuestObj::Release()
 {
+	GameObject::Release();
 	if (_actions.empty() == false)
 	{
 		for (size_t i = 0; i < _actions.size(); ++i)

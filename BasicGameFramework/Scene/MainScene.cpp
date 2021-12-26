@@ -28,8 +28,8 @@ void MainScene::Init()
 	Load(GameManager::GetInstance()->GetCurrScene());
 
 
-	BackPanel* backPanel = new BackPanel(this, (*_layers)[(*_layers).size() - 1], L"BackPanel");
-	backPanel->Init();
+	//BackPanel* backPanel = new BackPanel(this, (*_layers)[(*_layers).size() - 1], L"BackPanel");
+	//backPanel->Init();
 }
 
 void MainScene::Update()
@@ -92,7 +92,16 @@ void MainScene::Render(HDC hdc)
 {
 	Scene::Render(hdc);
 	Debug();
+}
 
+void MainScene::Release()
+{
+	for (auto layer : *_layers)
+	{
+		delete layer;
+	}
+
+	(*_layers).clear();
 }
 
 

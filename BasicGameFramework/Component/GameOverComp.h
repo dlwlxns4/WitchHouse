@@ -6,7 +6,7 @@ class GameOverComp : public Component
 {
 public:
 	using Component::Component;
-	virtual ~GameOverComp() = default;
+	virtual ~GameOverComp() = default;;
 
 	virtual void Update() override;
 };

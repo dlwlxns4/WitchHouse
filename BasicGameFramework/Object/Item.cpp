@@ -97,7 +97,6 @@ void TeddyBear::Init()
 	useString = L"\t곰의 손발을 자른다.\n\n\t아무것도 하지 않는다.";
 	count += 1;
 	id = 2;
-	QuestManager::GetInstance()->RemoveQuestObj(2);
 	QuestManager::GetInstance()->NextQuest();
 	QuestManager::GetInstance()->DoActivateQuestObj(11);
 }
@@ -125,8 +124,8 @@ void TeddyBear::UseItem()
 		QuestManager::GetInstance()->NextQuest();
 
 		this->count--;
-		ItemManager::GetInstance()->RemoveItem(id);
 		ItemManager::GetInstance()->AddItem(3);
+		ItemManager::GetInstance()->RemoveItem(id);
 	}
 
 }
@@ -138,7 +137,6 @@ void TeddyBearWithoutLimbs::Init()
 	useString = L"\t바구니에 넣는다.\n\n\t아무것도 하지 않는다.";
 	count += 1;
 	id = 3;
-	QuestManager::GetInstance()->RemoveQuestObj(2);
 }
 
 void TeddyBearWithoutLimbs::UseItem()
@@ -164,7 +162,7 @@ void TeddyBearWithoutLimbs::UseItem()
 		QuestManager::GetInstance()->NextQuest();
 
 		this->count--;
-		ItemManager::GetInstance()->RemoveItem(id);
 		QuestManager::GetInstance()->SetTrapAction(4);
+		ItemManager::GetInstance()->RemoveItem(id);
 	}
 }

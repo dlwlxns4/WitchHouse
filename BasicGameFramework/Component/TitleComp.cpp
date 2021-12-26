@@ -87,9 +87,9 @@ void TitleComp::Update()
 			{
 			case SelectState::StartOver:
 				MapCopy();
+				state = SelectState::None;
 				SoundManager::GetInstance()->StopSound(L"Title");
 				SceneManager::GetInstance()->SetNextScene(L"Main");
-				state = SelectState::None;
 				GameManager::GetInstance()->SetCurrScene(0);
 				QuestManager::GetInstance()->SetQuest(10);
 				ItemManager::GetInstance()->Clear();

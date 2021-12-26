@@ -38,8 +38,10 @@ void ItemManager::Release()
 	for (int i = 0; i < inventory.size(); ++i)
 	{
 		delete inventory[i];
+		inventory[i] = nullptr;
 	}
 	delete itemFactory;
+	itemFactory = nullptr;
 }
 
 wstring ItemManager::GetItemName(int index)
@@ -73,7 +75,7 @@ void ItemManager::SetOwner(GameObject* owner)
 	}
 }
 
-void ItemManager::RemoveItem(int id)
+bool ItemManager::RemoveItem(int id)
 {
 	for (auto it = inventory.begin(); it!= inventory.end(); ++it)
 	{
@@ -82,11 +84,13 @@ void ItemManager::RemoveItem(int id)
 
 			if ((*it)->GetCount() == 0)
 			{
+				delete (*it);
 				inventory.erase(it);
-				break;
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
 bool ItemManager::CanObtainItem(int id)
@@ -102,7 +106,12 @@ bool ItemManager::CanObtainItem(int id)
 
 void ItemManager::Clear()
 {
+	for (auto it = inventory.begin(); it != inventory.end(); ++it)
+	{
+		delete *it;
+	}
 	inventory.clear();
+	delete itemFactory;
 }
 
 int ItemManager::GetCurrFindItem()

@@ -1,6 +1,9 @@
 #include "GameOverComp.h"
 #include "../Util/Input.h"
 #include "../Manager/SceneManager.h"
+#include "../Manager/CameraManager.h"
+#include "../Manager/QuestManager.h"
+#include "../Manager/ItemManager.h"
 
 void GameOverComp::Update()
 {

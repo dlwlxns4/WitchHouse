@@ -11,11 +11,12 @@ class MainScene : public Scene, Singleton<MainScene>
 {
 public:
 	using					Scene::Scene;
-	virtual					~MainScene() = default;
+	virtual					~MainScene()= default;
 
 	virtual void			Init() override;
 	virtual void			Update() override;
 	virtual void			Render(HDC hdc) override;
+	virtual void			Release() override;
 
 	void					DoTrap(int id);
 	void					TransMap(int mapNum);
@@ -29,8 +30,8 @@ public:
 	void					SetActiveBackPanelFlag(bool isActive);
 	vector<Layer*>*			GetMapData() { return _layers; }
 private:
-	vector<Layer*>*	_layers;
-	vector<Layer*>*	_CopyLayer;
+	vector<Layer*>*			_layers;
+	vector<Layer*>*			_CopyLayer;
 	int						num = 0;
 	bool					isShowRect = false;
 	bool					isShowCollider = false;

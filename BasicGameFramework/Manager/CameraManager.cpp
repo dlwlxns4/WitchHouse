@@ -88,11 +88,15 @@ void CameraManager::Init()
 	cameraPos.x = 32;
 	cameraPos.y = -96;
 
-	CameraNullAction* nullAction = new CameraNullAction(this);
-	actions[0] = nullAction;
+	if (actions[0] == nullptr)
+	{
+		CameraNullAction* nullAction = new CameraNullAction(this);
+		actions[0] = (nullAction);
 
-	CameraShakeAction* shakeAction = new CameraShakeAction(this);
-	actions[1] = shakeAction;
+		CameraShakeAction* shakeAction = new CameraShakeAction(this);
+		actions[1] = (shakeAction);
+	}
+
 
 	_actionSterategy = actions[0];
 }
@@ -126,10 +130,11 @@ void CameraManager::Update()
 
 void CameraManager::Release()
 {
-	for (size_t i = 0; i < actions.size(); ++i)
+	for (auto it = actions.begin(); it != actions.end(); ++it)
 	{
-		delete actions[i];
+		delete* it;
 	}
+	_actionSterategy = nullptr;
 }
 
 void CameraManager::Write(std::ostream& os) const
