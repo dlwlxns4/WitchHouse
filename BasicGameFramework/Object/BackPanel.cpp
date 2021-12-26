@@ -5,6 +5,8 @@
 #include "../Manager/ImageManager.h"
 #include "../Manager/CameraManager.h"
 #include "../Manager/QuestManager.h"
+#include "../Manager/GameManager.h"
+#include "../Component/InvenComponent.h"
 
 #include <iostream> //
 void BackPanel::Init()
@@ -73,9 +75,13 @@ void BackPanel::Update()
 			panelOpacity -= 0.1;
 			if (panelOpacity <= 0)
 			{
+				GameManager::GetInstance()->SetState(State::Chat);
+				GameObject* ui = GameManager::GetInstance()->GetUIObj();
+				ui->GetComponent<InvenComponent>()->Clear();
 				isItemEffect = false;
 				isBright = true;
 				isActive = false;
+
 			}
 		}
 	}

@@ -142,7 +142,7 @@ std::ostream& operator<<(std::ostream& os, const Layer& layer)
 	{
 
 
-		if (!(((*(layer._objects[i])).GetTag() == L"Player") || ((*(layer._objects[i])).GetTag() == L"BackPanel") || ((*(layer._objects[i])).GetTag() == L"UI")))
+		if (!(((*(layer._objects[i])).GetTag() == L"Player") || ((*(layer._objects[i])).GetTag() == L"BackPanel") || ((*(layer._objects[i])).GetTag() == L"UI") || ((*(layer._objects[i])).GetTag() == L"AStar")))
 		{
 			os << *(layer._objects[i]) << endl;
 

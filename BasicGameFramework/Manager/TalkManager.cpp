@@ -26,9 +26,15 @@ void TalkManager::Init()
 	talkData.emplace(ID0_CAT, vector<wstring>{L"검은고양이\n\n\t\"정신은 차렸어?\""});
 	talkData.emplace(ID0_CAT_SAVE, vector<wstring>{L"검은고양이\n\n\t\"인간이 여기에 있으면 위험해!\""});
 
+	//---------------Lamp
+	talkData.emplace(LIGHT_OFF_LAMP_ID, vector<wstring>{L"불빛이 꺼져있다."});
+
+	//--------------Cabinet
+	talkData.emplace(NORMAL_CABINET_ID, vector<wstring>{L"\"집이 원래대로 돌아오면 열어\"\n\n라고 써져있다."});
 
 	//Message
 	talkData.emplace(WELCOME_MESSAGE_ID, vector<wstring>{L"나의 방까지 오렴."} );
+	talkData.emplace(TEDDY_MESSAGE_ID, vector<wstring>{L"곰을 바구니에."});
 	//위 객체랑 퀘스트랑 엮자 
 
 	//--------------------------------------------Item----------------

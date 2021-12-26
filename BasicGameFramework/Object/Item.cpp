@@ -76,7 +76,8 @@ void Scissors::UseItem()
 		vector<wstring> data = { L"지나갈수 있게 됐다.", L"정원의 가위는 부서져 버렸다." };
 		TalkManager::GetInstance()->SetIsItem(false);
 		TalkManager::GetInstance()->SetVecTalkTad(data);
-		GameManager::GetInstance()->SetState(State::Chat);
+
+		//GameManager::GetInstance()->SetState(State::Chat);
 
 		GameObject* ui = GameManager::GetInstance()->GetUIObj();
 		ui->GetComponent<InvenComponent>()->Clear();

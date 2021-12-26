@@ -84,10 +84,7 @@ void InteractionComp::Update()
 					int thidObjId = TalkManager::GetInstance()->GetCurrInteractId();
 					QuestManager::GetInstance()->DoActivateQuestObj(thidObjId);
 					int id = ItemManager::GetInstance()->GetCurrFindItem();
-					if (ItemManager::GetInstance()->CanObtainItem(id))
-					{
-						SoundManager::GetInstance()->startInfSound(L"Item");
-					}
+
 				}
 			}
 			else if (data.size() - 2 == vecIndex && data[vecIndex] == talkIndexStr)

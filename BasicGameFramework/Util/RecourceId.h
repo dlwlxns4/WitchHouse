@@ -26,8 +26,15 @@
 //----------------------
 #define WALL_CLOCK_ID 60
 
+//----------------------Lamp
+#define LIGHT_OFF_LAMP_ID 70
+
+//---------------------Cabinet
+#define NORMAL_CABINET_ID 80
+
 //----------------------Message
 #define WELCOME_MESSAGE_ID 100
+#define TEDDY_MESSAGE_ID 101
 
 //----------------------Cat
 #define ID0_CAT 1000

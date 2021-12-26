@@ -1,8 +1,8 @@
 #include "ItemFactory.h"
 #include "../Manager/ItemManager.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/SoundManager.h"
 #include "../Object/GameObject.h"
-
 Item* ItemFactory::CreateItem(ItemKinds item)
 {
 	GameObject* _owner = GameManager::GetInstance()->GetPlayer();
@@ -12,6 +12,7 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 	{
 		Letter* letter = new Letter(_owner);
 		letter->Init();
+
 		return letter;
 		break;
 	}
@@ -19,6 +20,8 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 	{
 		Scissors* scissors = new Scissors(_owner);
 		scissors->Init();
+		SoundManager::GetInstance()->startInfSound(L"Item");
+
 		return scissors;
 		break;
 	}
@@ -26,6 +29,8 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 	{
 		TeddyBear* teddyBear = new TeddyBear(_owner);
 		teddyBear->Init();
+		SoundManager::GetInstance()->startInfSound(L"Item");
+
 		return teddyBear;
 		break;
 	}
@@ -33,6 +38,8 @@ Item* ItemFactory::CreateItem(ItemKinds item)
 	{
 		TeddyBearWithoutLimbs* teddyBearWithousLimbs = new TeddyBearWithoutLimbs(_owner);
 		teddyBearWithousLimbs->Init();
+		SoundManager::GetInstance()->startInfSound(L"Item");
+
 		return teddyBearWithousLimbs;
 		break;
 	}

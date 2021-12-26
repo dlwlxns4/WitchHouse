@@ -280,6 +280,7 @@ void MainScene::Load(int loadIndex)
 		SoundManager::GetInstance()->StopSound(L"Wind");
 		SoundManager::GetInstance()->startSound(L"House");
 		SoundManager::GetInstance()->fadeUpSound(L"House");
+		SoundManager::GetInstance()->StopSound(L"Chaser");
 		break;
 	}
 
