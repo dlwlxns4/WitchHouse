@@ -108,12 +108,12 @@ void SaveLoadInterface::Render(HDC hdc)
 	saveLoadInfo->Render(0, 0, 1);
 	for (int i = 0; i < 4; ++i)
 	{
-		saveLoadPanel[i]->Render(0, 64 + (32 * 3) * i, 1);
+		saveLoadPanel[i]->Render(0, 60 + (30 * 3) * i, 1);
 		wstring str = L"ÆÄÀÏ" + to_wstring(i + 1);
 		ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
 			str.c_str(), str.size(),
 			ImageManager::GetInstance()->GetTextFormat(),
-			D2D1::RectF(20, 85 + 22 + (32 * 3) * i, 544, 85 + (32 * 3) * i),
+			D2D1::RectF(20, 85 + 22 + (30 * 3) * i, 544, 85 + (30 * 3) * i),
 			ImageManager::GetInstance()->GetBrushWhite()
 		);
 	}
@@ -159,18 +159,18 @@ void SaveLoadInterface::Render(HDC hdc)
 		}
 		if (read)
 		{
-			portrait->Render(120, 80 + (32 * 3) * i, 1.0f);
+			portrait->Render(120, 69 + (30 * 3) * i, 1.0f);
 			ImageManager::GetInstance()->GetRenderTarget()->DrawTextW(
 				currSceneName.c_str(), currSceneName.size(),
 				ImageManager::GetInstance()->GetTextFormat(),
-				D2D1::RectF(400, 80 + (32 * 3) * i, 544, 80 + (32 * 3) * i),
+				D2D1::RectF(400, 80 + (30 * 3) * i, 544, 80 + (30 * 3) * i),
 				ImageManager::GetInstance()->GetBrushWhite()
 			);
 		}
 
 	}
 
-	selectPanel->Render(18, 77 + (32 * 3) * currSelect, selectPanelOpacity);
+	selectPanel->Render(18, 77 + (30 * 3) * currSelect, selectPanelOpacity);
 }
 
 void SaveLoadInterface::Save(int currSelect)
