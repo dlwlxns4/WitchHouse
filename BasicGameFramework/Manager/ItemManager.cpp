@@ -13,6 +13,11 @@ void ItemManager::Init()
 	AddItem(1);
 }
 
+void ItemManager::LoadInit()
+{
+	itemFactory = new ItemFactory;
+}
+
 void ItemManager::UseItem(int index)
 {
 	inventory[index]->UseItem();

@@ -15,6 +15,7 @@ public:
 	virtual ~ItemManager();
 
 	void Init();
+	void LoadInit();
 	void UseItem(int index);
 	void AddItem(int id);
 	void Release();

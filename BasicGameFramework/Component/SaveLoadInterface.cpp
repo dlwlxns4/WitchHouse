@@ -228,7 +228,7 @@ void SaveLoadInterface::Save(int currSelect)
 void SaveLoadInterface::Load(int currSelect)
 {
 	ItemManager::GetInstance()->Clear();
-
+	ItemManager::GetInstance()->LoadInit();
 	for (int i = 0; i <= 9; ++i)
 	{
 		wstring loadPath = L"Save/Data/" + to_wstring(currSelect + 1) + L"/MapData" + to_wstring(i) + L".txt";
