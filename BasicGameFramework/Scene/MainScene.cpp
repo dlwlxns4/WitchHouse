@@ -40,25 +40,25 @@ void MainScene::Update()
 		isShowRect = isShowRect == false ? true : false;
 	}
 
-	if (Input::GetButtonDown('O'))
-	{
-		for (auto layer : *_layers)
-		{
-			delete layer;
-		}
+	//if (Input::GetButtonDown('O'))
+	//{
+	//	for (auto layer : *_layers)
+	//	{
+	//		delete layer;
+	//	}
 
-		(*_layers).clear();
-		SceneManager::GetInstance()->SetNextScene(L"TilemapTool");
-		PhysicsManager::GetInstance()->AllClear();
-	}
-	if (Input::GetButtonDown('A'))
-	{
-		Load(num++);
-	}
-	if (Input::GetButtonDown('S'))
-	{
-		Load(num--);
-	}
+	//	(*_layers).clear();
+	//	SceneManager::GetInstance()->SetNextScene(L"TilemapTool");
+	//	PhysicsManager::GetInstance()->AllClear();
+	//}
+	//if (Input::GetButtonDown('A'))
+	//{
+	//	Load(num++);
+	//}
+	//if (Input::GetButtonDown('S'))
+	//{
+	//	Load(num--);
+	//}
 
 
 	if (loadFlag == true)
@@ -374,10 +374,7 @@ void MainScene::Debug()
 		QuestDebug = QuestDebug == true ? false : true;
 	}
 
-	if (Input::GetButtonDown('T'))
-	{
-		QuestManager::GetInstance()->NextQuest();
-	}
+
 	if (Input::GetButtonDown('W'))
 	{
 		isShowCollider = isShowCollider == true ? false : true;

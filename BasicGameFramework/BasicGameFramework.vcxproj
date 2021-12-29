@@ -84,6 +84,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\ChangMin\WitchHouse\fmod\core\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\ChangMin\WitchHouse\fmod\core\lib\x64;$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\Users\ChangMin\WitchHouse\fmod\core\inc;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,7 +144,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>C:\Users\ChangMin\Downloads\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -150,8 +153,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\ChangMin\Downloads\opencv\build\x64\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <DelayLoadDLLs>opencv_world330d.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

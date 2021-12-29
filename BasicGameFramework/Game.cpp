@@ -135,6 +135,7 @@ bool Game::Init(HINSTANCE hInst)
 	SoundManager::GetInstance()->Init();
 	SceneManager::GetInstance()->Init();
 	GameManager::GetInstance()->Init();
+	CameraManager::GetInstance()->Init();
 
 	return true;
 }

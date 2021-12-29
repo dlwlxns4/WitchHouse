@@ -103,7 +103,9 @@ void CameraManager::Init()
 
 void CameraManager::Update()
 {
-	_actionSterategy->DoAction();
+ 	_actionSterategy->DoAction();
+
+
 	const int currQuest = QuestManager::GetInstance()->GetQuest();
 	if (currQuest == 10)
 	{

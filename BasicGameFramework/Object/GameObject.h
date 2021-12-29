@@ -42,6 +42,7 @@ public:
 				return static_cast<T*>(comp);
 			}
 		}
+		return nullptr;
 	}
 
 	POINT			GetRenderPos() const noexcept;

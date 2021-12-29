@@ -6,6 +6,7 @@ class Sprite
 {
 private:
 	ID2D1Bitmap* pBitmap = nullptr;
+
 	int maxFrameX = 0;
 	int maxFrameY = 0;
 
